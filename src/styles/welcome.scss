@@ -37,8 +37,16 @@
     font-size: 48px;
     line-height: 56px;
     margin-top: 0;
-    margin-bottom: $spacing-md;
+    margin-bottom: $spacing-sm;
     color: $heading-color;
+    display: flex;
+    align-items: center;
+    
+    .raven-logo {
+      height: 55px;
+      margin-right: $spacing-sm;
+      vertical-align: middle;
+    }
   }
   
   h4 {
