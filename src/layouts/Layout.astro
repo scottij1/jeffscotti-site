@@ -1,3 +1,7 @@
+---
+import Header from '../components/Header.astro';
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -10,10 +14,13 @@
 		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Jeff Scotti - Senior Front End Engineer, Senior UI/UX Designer</title>
+		<!-- Font Awesome for icons -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 	</head>
 	<body>
 		<div class="lm-animated-bg"></div>
 		<div class="page-container">
+			<Header />
 			<slot />
 		</div>
 	</body>
