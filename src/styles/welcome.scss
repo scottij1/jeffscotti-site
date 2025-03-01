@@ -1,0 +1,64 @@
+@import 'variables';
+
+.welcome-container {
+  font-family: $font-family;
+  height: 100vh;
+  width: 100%;
+  color: $text-color;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-section {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  justify-content: center;
+  padding: $spacing-md;
+  
+  h1 {
+    font-size: 48px;
+    line-height: 56px;
+    margin-top: 0;
+    margin-bottom: $spacing-sm;
+    color: $heading-color;
+    display: flex;
+    align-items: center;
+    
+    .raven-logo {
+      height: 55px;
+      margin-right: $spacing-sm;
+      vertical-align: middle;
+    }
+  }
+  
+  h4 {
+    font-size: 16px;
+    color: #aaa;
+    font-weight: 300;
+    margin-bottom: $spacing-sm;
+  }
+}
+
+// Media queries
+@media screen and (max-width: 768px) {
+  .welcome-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-section {
+    display: block;
+    padding-top: 10%;
+    
+    h1 {
+      line-height: 1.5;
+    }
+  }
+}
