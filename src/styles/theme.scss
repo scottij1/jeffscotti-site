@@ -1,8 +1,18 @@
 // Theme definitions using CSS custom properties
 // This file demonstrates how to create and switch between themes
 
-// Default theme is already defined in variables.scss
-// Here we define an alternate light theme
+// Dark theme (default)
+.theme-dark {
+  // Colors
+  --primary-color: #007ced; // Blue
+  --secondary-color: #ff9800; // Orange
+  --background-color: #222; // Dark gray
+  --container-bg-color: #333; // Slightly lighter gray for containers
+  --text-color: #d5d5d5; // Light gray for main text
+  --heading-color: #f5f5f5; // Almost white for headings
+  --border-color: #444; // Medium gray for borders
+  --link-hover-color: #ff9800; // Orange for link hover
+}
 
 // Light theme
 .theme-light {
@@ -17,6 +27,7 @@
   --link-hover-color: #e67e00; // Darker orange
 }
 
+/* Removed unused themes
 // High contrast theme
 .theme-high-contrast {
   // Colors
@@ -42,3 +53,4 @@
   --border-color: #233554; // Medium blue
   --link-hover-color: #ff9800; // Orange
 }
+*/

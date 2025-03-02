@@ -18,26 +18,26 @@
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme) {
       document.body.classList.add(savedTheme);
-      updateToggleIcon(savedTheme);
+    } else {
+      // Set dark theme as default
+      document.body.classList.add("theme-dark");
+      localStorage.setItem("theme", "theme-dark");
     }
+    
+    // Update icon based on current theme
+    updateToggleIcon(document.body.classList.contains("theme-light") ? "theme-light" : "theme-dark");
 
     if (themeToggle) {
       themeToggle.addEventListener("click", () => {
         const body = document.body;
 
-        // Cycle through themes
+        // Toggle between dark and light themes
         if (body.classList.contains("theme-light")) {
           body.classList.remove("theme-light");
-          body.classList.add("theme-dark-blue");
-          saveTheme("theme-dark-blue");
-        } else if (body.classList.contains("theme-dark-blue")) {
-          body.classList.remove("theme-dark-blue");
-          body.classList.add("theme-high-contrast");
-          saveTheme("theme-high-contrast");
-        } else if (body.classList.contains("theme-high-contrast")) {
-          body.classList.remove("theme-high-contrast");
-          saveTheme("");
+          body.classList.add("theme-dark");
+          saveTheme("theme-dark");
         } else {
+          body.classList.remove("theme-dark");
           body.classList.add("theme-light");
           saveTheme("theme-light");
         }
@@ -56,11 +56,13 @@
       if (!lightIcon || !darkIcon) {
         return;
       }
-      
+
       if (theme === "theme-light") {
+        // In light mode, show the moon icon (to switch to dark)
         lightIcon.style.display = "none";
         darkIcon.style.display = "inline-block";
       } else {
+        // In dark mode, show the sun icon (to switch to light)
         lightIcon.style.display = "inline-block";
         darkIcon.style.display = "none";
       }
@@ -112,8 +114,8 @@
     background-color: rgba(0, 0, 0, 0.05);
   }
 
-  .theme-high-contrast .theme-toggle {
-    border-width: 2px;
+  .theme-dark .theme-toggle {
+    background-color: rgba(255, 255, 255, 0.05);
   }
 
   @media (max-width: 768px) {
