@@ -44,15 +44,19 @@
       });
     }
 
-    function saveTheme(theme) {
+    function saveTheme(theme: string) {
       localStorage.setItem("theme", theme);
       updateToggleIcon(theme);
     }
 
-    function updateToggleIcon(theme) {
-      const lightIcon = document.querySelector(".light-icon");
-      const darkIcon = document.querySelector(".dark-icon");
+    function updateToggleIcon(theme: string) {
+      const lightIcon = document.querySelector<HTMLElement>(".light-icon");
+      const darkIcon = document.querySelector<HTMLElement>(".dark-icon");
 
+      if (!lightIcon || !darkIcon) {
+        return;
+      }
+      
       if (theme === "theme-light") {
         lightIcon.style.display = "none";
         darkIcon.style.display = "inline-block";
