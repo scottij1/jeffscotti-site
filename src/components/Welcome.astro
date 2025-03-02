@@ -1,6 +1,7 @@
 ---
 import jsHeadshot from "../assets/js-headshot.png";
 import resumePdf from "../assets/jeffscotti_resume.pdf";
+import Testimonials from "./Testimonials.astro";
 ---
 
 <div class="welcome-container">
@@ -53,18 +54,27 @@ import resumePdf from "../assets/jeffscotti_resume.pdf";
       </div>
     </div>
   </main>
+  
+  <div class="testimonials-section">
+    <Testimonials title="What People Say" />
+  </div>
 </div>
 
 <style>
   .welcome-container {
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: column;
   }
 
+  .testimonials-section {
+    padding: 60px 0;
+    width: 100%;
+  }
+
   .main-content {
-    height: 100%;
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
