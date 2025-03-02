@@ -1,6 +1,5 @@
 @import 'variables';
 
-// Header styles
 .header {
   display: block;
   width: 100%;
@@ -31,7 +30,6 @@
   }
 }
 
-// Logo styles
 .site-logo {
   display: flex;
   align-items: center;
@@ -48,7 +46,6 @@
   }
 }
 
-// Navigation styles
 .site-nav {
   display: flex;
   align-items: center;
@@ -198,7 +195,6 @@
   }
 }
 
-// Media queries for responsive design
 @media only screen and (max-width: 991px) {
   .header {
     position: fixed;
@@ -220,18 +216,18 @@
   
   .site-nav {
     position: fixed;
-    height: calc(100vh - 68px); // Full viewport height minus header height
+    height: calc(100vh - 68px);
     width: 100%;
     background-color: rgba($background-color, 0.95);
     backdrop-filter: blur(5px);
-    top: 68px; // Header height
+    top: 68px;
     left: 0;
     right: 0;
     bottom: 0;
     z-index: 999;
-    overflow: hidden; // No scrolling
-    transform: translateX(100%); // Start off-screen to the right
-    transition: transform 0.3s ease-in-out;
+    overflow: hidden; 
+    transform: translateX(100%);
+    transition: transform 0.2s ease-in-out;
     
     &.open {
       transform: translateX(0); // Slide in from right
