@@ -54,6 +54,7 @@ Example usage in a component:
 ## Best Practices
 
 1. **Use global styles for**:
+
    - Reset and base styles
    - Typography
    - Color schemes
@@ -61,12 +62,14 @@ Example usage in a component:
    - Utility classes
 
 2. **Use component styles for**:
+
    - Component-specific layout
    - Component-specific variations
    - Interactive states
    - Component-specific responsive adjustments
 
 3. **When to use which**:
+
    - If a style is used across multiple components, put it in a global file
    - If a style is specific to a single component, use scoped styles
    - Use CSS variables for any value that might need to be changed globally

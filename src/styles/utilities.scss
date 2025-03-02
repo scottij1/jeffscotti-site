@@ -1,4 +1,4 @@
-@import 'variables';
+@import "variables";
 
 // Utility classes
 .text-center {
@@ -67,7 +67,7 @@
   color: #fff;
   background-color: #333;
   border: 2px solid #333;
-  
+
   &:hover {
     background-color: $primary-color;
     color: #fff;
@@ -79,7 +79,7 @@
   @extend .btn-base;
   background-color: $primary-color;
   border-color: $primary-color;
-  
+
   &:hover {
     background-color: $primary-color;
     color: #fff;
@@ -91,7 +91,7 @@
   @extend .btn-base;
   background-color: $text-color;
   border-color: $text-color;
-  
+
   &:hover {
     background-color: $primary-color;
     color: #fff;

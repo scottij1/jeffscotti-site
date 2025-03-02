@@ -1,6 +1,6 @@
 ---
-import jsHeadshot from '../assets/js-headshot.png';
-import resumePdf from '../assets/jeffscotti_resume.pdf';
+import jsHeadshot from "../assets/js-headshot.png";
+import resumePdf from "../assets/jeffscotti_resume.pdf";
 ---
 
 <div class="welcome-container">
@@ -9,29 +9,45 @@ import resumePdf from '../assets/jeffscotti_resume.pdf';
       <div class="two-column-layout">
         <div class="image-column">
           <div class="home-photo">
-            <div class="hp-inner" style={`background-image: url(${jsHeadshot.src});`}></div>
+            <div
+              class="hp-inner"
+              style={`background-image: url(${jsHeadshot.src});`}
+            >
+            </div>
           </div>
         </div>
 
         <div class="text-column">
-            <h4 class="job-title">Senior Front End Engineer & Senior UI/UX Designer</h4>
-              
-            <h1 class="name">Jeff Scotti</h1>
-            <p class="bio">I build intuitive, high-performance web applications by combining clean, efficient code with thoughtful design. With 15+ years of experience, I specialize in crafting scalable user interfaces, leading technical projects, and enhancing digital experiences through modern web technologies, front-end frameworks, and UX best practices.</p>
-                 
-            <div class="home-buttons">
-              <a href={resumePdf} class="btn" target="_blank">
-               <i class="fa-solid fa-file-pdf"></i> Resume
-              </a>
-              <a href="https://linkedin.com/in/jeffscotti" target="_blank" class="btn">
-                <i class="fab fa-linkedin"></i> LinkedIn
-              </a>
-              <a href="https://github.com/scottij1" target="_blank" class="btn">
-                <i class="fab fa-github"></i> GitHub
-              </a>
-              <a href="/contact" class="btn">
-                <i class="fas fa-envelope"></i> Contact
-              </a>
+          <h1 class="name">Jeff Scotti</h1>
+          <h4 class="job-title">
+            Senior Front End Engineer & Senior UI/UX Designer
+          </h4>
+          <p class="bio">
+            I build intuitive, high-performance web applications by combining
+            clean, efficient code with thoughtful design. With 15+ years of
+            experience, I specialize in crafting scalable user interfaces,
+            leading technical projects, and enhancing digital experiences
+            through modern web technologies, front-end frameworks, and UX best
+            practices.
+          </p>
+
+          <div class="home-buttons">
+            <a href={resumePdf} class="btn" target="_blank">
+              <i class="fa-solid fa-file-pdf"></i> Resume
+            </a>
+            <a
+              href="https://linkedin.com/in/jeffscotti"
+              target="_blank"
+              class="btn"
+            >
+              <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+            <a href="https://github.com/scottij1" target="_blank" class="btn">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="/contact" class="btn">
+              <i class="fas fa-envelope"></i> Contact
+            </a>
           </div>
         </div>
       </div>
@@ -103,9 +119,8 @@ import resumePdf from '../assets/jeffscotti_resume.pdf';
   }
 
   .job-title {
-    font-size: 18px;
-    color: #007bff;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: 400;
     margin-bottom: 10px;
   }
 
@@ -113,13 +128,13 @@ import resumePdf from '../assets/jeffscotti_resume.pdf';
     font-size: 48px;
     line-height: 56px;
     margin-top: 0;
-    margin-bottom: 10px;
-    font-weight: normal;
+    font-weight: 600;
+    margin-bottom: 0;
   }
 
   .bio {
     font-size: 16px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     line-height: 1.75;
     padding: 10px 10% 10px 0;
   }
@@ -173,13 +188,16 @@ import resumePdf from '../assets/jeffscotti_resume.pdf';
       max-width: 100%;
     }
 
-
     .home-buttons {
       justify-content: center;
     }
 
-      .bio { 
-        padding-right: 0;
-      }
+    .btn {
+      width: 100%;
+    }
+
+    .bio {
+      padding-right: 0;
+    }
   }
 </style>

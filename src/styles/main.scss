@@ -1,10 +1,11 @@
-@import 'variables';
+@import "variables";
 
 // Import Google fonts
-@import url('https://fonts.googleapis.com/css?family=Poppins:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i');
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i");
 
 // Reset and base styles
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -19,7 +20,12 @@ html, body {
 }
 
 // Typography
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: $font-family;
   color: $heading-color;
   line-height: 1.2em;
@@ -63,12 +69,12 @@ a {
   text-decoration: none;
   outline: none;
   transition: all 0.3s ease-in-out;
-  
+
   &:hover {
     color: $link-hover-color;
     text-decoration: none;
   }
-  
+
   &:focus {
     outline: 0;
     text-decoration: none;
@@ -110,7 +116,7 @@ a {
   color: #fff;
   background-color: #333;
   border: 2px solid #333;
-  
+
   &:hover {
     background-color: $primary-color;
     color: #fff;
@@ -122,7 +128,7 @@ a {
   @extend .btn-base;
   background-color: $primary-color;
   border-color: $primary-color;
-  
+
   &:hover {
     background-color: $primary-color;
     color: #fff;
@@ -134,7 +140,7 @@ a {
   @extend .btn-base;
   background-color: $text-color;
   border-color: $text-color;
-  
+
   &:hover {
     background-color: $primary-color;
     color: #fff;
@@ -154,7 +160,7 @@ a {
   outline: none;
   font-family: $font-family;
   transition: all 0.3s ease-in-out;
-  
+
   &:focus {
     border-color: $primary-color;
   }

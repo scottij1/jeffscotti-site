@@ -11,54 +11,54 @@
 </button>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const themeToggle = document.getElementById('theme-toggle');
-    
+  document.addEventListener("DOMContentLoaded", () => {
+    const themeToggle = document.getElementById("theme-toggle");
+
     // Check for saved theme preference or use default
-    const savedTheme = localStorage.getItem('theme');
+    const savedTheme = localStorage.getItem("theme");
     if (savedTheme) {
       document.body.classList.add(savedTheme);
       updateToggleIcon(savedTheme);
     }
-    
+
     if (themeToggle) {
-      themeToggle.addEventListener('click', () => {
+      themeToggle.addEventListener("click", () => {
         const body = document.body;
-        
+
         // Cycle through themes
-        if (body.classList.contains('theme-light')) {
-          body.classList.remove('theme-light');
-          body.classList.add('theme-dark-blue');
-          saveTheme('theme-dark-blue');
-        } else if (body.classList.contains('theme-dark-blue')) {
-          body.classList.remove('theme-dark-blue');
-          body.classList.add('theme-high-contrast');
-          saveTheme('theme-high-contrast');
-        } else if (body.classList.contains('theme-high-contrast')) {
-          body.classList.remove('theme-high-contrast');
-          saveTheme('');
+        if (body.classList.contains("theme-light")) {
+          body.classList.remove("theme-light");
+          body.classList.add("theme-dark-blue");
+          saveTheme("theme-dark-blue");
+        } else if (body.classList.contains("theme-dark-blue")) {
+          body.classList.remove("theme-dark-blue");
+          body.classList.add("theme-high-contrast");
+          saveTheme("theme-high-contrast");
+        } else if (body.classList.contains("theme-high-contrast")) {
+          body.classList.remove("theme-high-contrast");
+          saveTheme("");
         } else {
-          body.classList.add('theme-light');
-          saveTheme('theme-light');
+          body.classList.add("theme-light");
+          saveTheme("theme-light");
         }
       });
     }
-    
+
     function saveTheme(theme) {
-      localStorage.setItem('theme', theme);
+      localStorage.setItem("theme", theme);
       updateToggleIcon(theme);
     }
-    
+
     function updateToggleIcon(theme) {
-      const lightIcon = document.querySelector('.light-icon');
-      const darkIcon = document.querySelector('.dark-icon');
-      
-      if (theme === 'theme-light') {
-        lightIcon.style.display = 'none';
-        darkIcon.style.display = 'inline-block';
+      const lightIcon = document.querySelector(".light-icon");
+      const darkIcon = document.querySelector(".dark-icon");
+
+      if (theme === "theme-light") {
+        lightIcon.style.display = "none";
+        darkIcon.style.display = "inline-block";
       } else {
-        lightIcon.style.display = 'inline-block';
-        darkIcon.style.display = 'none';
+        lightIcon.style.display = "inline-block";
+        darkIcon.style.display = "none";
       }
     }
   });
@@ -78,50 +78,50 @@
     transition: all 0.3s ease;
     margin-left: 15px;
   }
-  
+
   .theme-toggle:hover {
     background-color: var(--primary-color);
     color: #fff;
     border-color: var(--primary-color);
   }
-  
+
   .theme-toggle-icon {
     margin-right: 6px;
     font-size: 14px;
   }
-  
+
   .theme-toggle-text {
     font-size: 12px;
     font-weight: 500;
   }
-  
+
   .light-icon {
     display: inline-block;
   }
-  
+
   .dark-icon {
     display: none;
   }
-  
+
   /* Theme-specific styles */
   .theme-light .theme-toggle {
     background-color: rgba(0, 0, 0, 0.05);
   }
-  
+
   .theme-high-contrast .theme-toggle {
     border-width: 2px;
   }
-  
+
   @media (max-width: 768px) {
     .theme-toggle-text {
       display: none;
     }
-    
+
     .theme-toggle {
       padding: 8px;
       margin-left: 10px;
     }
-    
+
     .theme-toggle-icon {
       margin-right: 0;
     }

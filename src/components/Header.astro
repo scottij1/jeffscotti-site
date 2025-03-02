@@ -1,13 +1,13 @@
 ---
-import Logo from './Logo.astro';
-import ThemeToggle from './ThemeToggle.astro';
+import Logo from "./Logo.astro";
+import ThemeToggle from "./ThemeToggle.astro";
 
 // Get the current path to determine active menu item
 const { pathname } = Astro.url;
 
 const isPathActive = (path: string) => {
-  if (path === '/' && pathname === '/') return true;
-  if (path !== '/' && pathname.startsWith(path)) return true;
+  if (path === "/" && pathname === "/") return true;
+  if (path !== "/" && pathname.startsWith(path)) return true;
   return false;
 };
 ---
@@ -25,19 +25,25 @@ const isPathActive = (path: string) => {
     <!-- Navigation -->
     <div class="site-nav">
       <ul class="site-main-menu">
-        <li class={`menu-item ${isPathActive('/') ? 'current-menu-item' : ''}`}>
+        <li class={`menu-item ${isPathActive("/") ? "current-menu-item" : ""}`}>
           <a href="/">Home</a>
         </li>
 
-        <li class={`menu-item ${isPathActive('/about') ? 'current-menu-item' : ''}`}>
+        <li
+          class={`menu-item ${isPathActive("/about") ? "current-menu-item" : ""}`}
+        >
           <a href="/about">About</a>
         </li>
 
-        <li class={`menu-item ${isPathActive('/projects') ? 'current-menu-item' : ''}`}>
+        <li
+          class={`menu-item ${isPathActive("/projects") ? "current-menu-item" : ""}`}
+        >
           <a href="/projects">Projects</a>
         </li>
-    
-        <li class={`menu-item ${isPathActive('/contact') ? 'current-menu-item' : ''}`}>
+
+        <li
+          class={`menu-item ${isPathActive("/contact") ? "current-menu-item" : ""}`}
+        >
           <a href="/contact">Contact</a>
         </li>
       </ul>
@@ -47,7 +53,7 @@ const isPathActive = (path: string) => {
     <!-- Theme Toggle -->
     <div class="header-actions">
       <ThemeToggle />
-      
+
       <!-- Mobile Menu Toggle -->
       <a class="menu-toggle">
         <span class="hamburger-line line-1"></span>
@@ -60,52 +66,56 @@ const isPathActive = (path: string) => {
 </header>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const siteNav = document.querySelector('.site-nav') as HTMLElement | null;
-const menuToggle = document.querySelector('.menu-toggle') as HTMLElement | null;
+  document.addEventListener("DOMContentLoaded", () => {
+    const siteNav = document.querySelector(".site-nav") as HTMLElement | null;
+    const menuToggle = document.querySelector(
+      ".menu-toggle",
+    ) as HTMLElement | null;
 
-  if (menuToggle && siteNav) {
-    menuToggle.addEventListener('click', () => {
-      siteNav.classList.toggle('open');
-      menuToggle.classList.toggle('open');
-    });
-  }
-
-  // Debounce resize events
-  let resizeTimer: number | undefined;
-  window.addEventListener('resize', () => {
-    if (!siteNav || !menuToggle) { 
-      return;
+    if (menuToggle && siteNav) {
+      menuToggle.addEventListener("click", () => {
+        siteNav.classList.toggle("open");
+        menuToggle.classList.toggle("open");
+      });
     }
 
-    // Immediately remove any transition to prevent animation during resize
-    siteNav.style.transition = 'none';
-    menuToggle.style.transition = 'none';
-    siteNav.classList.remove('open');
-    menuToggle.classList.remove('open');
-
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      // Restore the original transitions after resize is finished
-      siteNav.style.transition = '';
-      menuToggle.style.transition = '';
-    }, 200);
-  });
-
-  // Handle submenu toggles for mobile
-  const menuItemsWithChildren = document.querySelectorAll('.menu-item-has-children > a');
-  menuItemsWithChildren.forEach(item => {
-    item.addEventListener('click', (e) => {
-      if (window.innerWidth <= 991) {
-        e.preventDefault();
-        const subMenu = item.parentElement?.querySelector('.sub-menu');
-        if (subMenu) {
-          subMenu?.classList.toggle('open');
-        }
+    // Debounce resize events
+    let resizeTimer: number | undefined;
+    window.addEventListener("resize", () => {
+      if (!siteNav || !menuToggle) {
+        return;
       }
+
+      // Immediately remove any transition to prevent animation during resize
+      siteNav.style.transition = "none";
+      menuToggle.style.transition = "none";
+      siteNav.classList.remove("open");
+      menuToggle.classList.remove("open");
+
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        // Restore the original transitions after resize is finished
+        siteNav.style.transition = "";
+        menuToggle.style.transition = "";
+      }, 200);
+    });
+
+    // Handle submenu toggles for mobile
+    const menuItemsWithChildren = document.querySelectorAll(
+      ".menu-item-has-children > a",
+    );
+    menuItemsWithChildren.forEach((item) => {
+      item.addEventListener("click", (e) => {
+        if (window.innerWidth <= 991) {
+          e.preventDefault();
+          const subMenu = item.parentElement?.querySelector(".sub-menu");
+          if (subMenu) {
+            subMenu?.classList.toggle("open");
+          }
+        }
+      });
     });
   });
-});
 </script>
 
 <style>
@@ -134,7 +144,7 @@ const menuToggle = document.querySelector('.menu-toggle') as HTMLElement | null;
   .header.scrolled {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   }
-  
+
   .header.scrolled .header-content {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -144,14 +154,14 @@ const menuToggle = document.querySelector('.menu-toggle') as HTMLElement | null;
     display: flex;
     align-items: center;
   }
-  
+
   .site-logo a {
     display: flex;
     align-items: center;
     text-decoration: none;
     outline: 0;
   }
-  
+
   .site-logo a:focus {
     outline: 0;
   }
@@ -169,34 +179,34 @@ const menuToggle = document.querySelector('.menu-toggle') as HTMLElement | null;
     z-index: 99;
     display: flex;
   }
-  
+
   .site-main-menu li {
     display: inline-block;
     position: relative;
     margin-right: 40px;
   }
-  
+
   .site-main-menu li:last-child {
     margin-right: 0;
   }
-  
+
   .site-main-menu li a {
     color: #f5f5f5;
     text-decoration: none;
     line-height: 50px;
     font-size: 14px;
-    opacity: .55;
+    opacity: 0.55;
     transition: all 0.3s ease-in-out;
   }
-  
+
   .site-main-menu li a:hover {
     opacity: 1;
   }
-  
+
   .site-main-menu li.current-menu-item > a {
     opacity: 1;
   }
-  
+
   .site-main-menu .sub-menu {
     display: none;
     position: absolute;
@@ -207,37 +217,37 @@ const menuToggle = document.querySelector('.menu-toggle') as HTMLElement | null;
     margin: 0;
     padding: 20px 13px;
     border-radius: 5px;
-    box-shadow: 0px 0px 20px 0px rgba(0,0,0,.1);
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
     opacity: 0;
     visibility: hidden;
     transition: all 0.25s ease-in-out;
   }
-  
+
   .site-main-menu .sub-menu li {
     display: block;
     margin: 0 0 12px;
     padding: 0;
   }
-  
+
   .site-main-menu .sub-menu li:last-child {
     margin-bottom: 0;
   }
-  
+
   .site-main-menu .sub-menu li a {
     display: block;
-    opacity: .5;
+    opacity: 0.5;
     line-height: 1.6em;
   }
-  
+
   .site-main-menu .sub-menu li a:hover {
     opacity: 1;
   }
-  
+
   .site-main-menu li:hover > .sub-menu {
     visibility: visible;
     opacity: 1;
   }
-  
+
   .site-main-menu .menu-item-has-children > a:after {
     content: "\f107";
     display: inline-block;
@@ -245,9 +255,9 @@ const menuToggle = document.querySelector('.menu-toggle') as HTMLElement | null;
     font-style: normal;
     font-weight: 700;
     margin-left: 5px;
-    opacity: .3;
+    opacity: 0.3;
   }
-  
+
   /* Header actions */
   .header-actions {
     display: flex;
@@ -264,7 +274,7 @@ const menuToggle = document.querySelector('.menu-toggle') as HTMLElement | null;
     cursor: pointer;
     position: relative;
   }
-  
+
   /* Hamburger lines */
   .hamburger-line {
     display: block;
@@ -278,30 +288,30 @@ const menuToggle = document.querySelector('.menu-toggle') as HTMLElement | null;
     transform: rotate(0deg);
     transition: all 0.3s ease-in-out;
   }
-  
+
   .hamburger-line.line-1 {
     top: 16px;
   }
-  
+
   .hamburger-line.line-2 {
     top: 24px;
   }
-  
+
   .hamburger-line.line-3 {
     top: 32px;
   }
-  
+
   /* Animation for open state */
   .menu-toggle.open .hamburger-line.line-1 {
     top: 24px;
     transform: rotate(45deg);
   }
-  
+
   .menu-toggle.open .hamburger-line.line-2 {
     opacity: 0;
     width: 0;
   }
-  
+
   .menu-toggle.open .hamburger-line.line-3 {
     top: 24px;
     transform: rotate(-45deg);
@@ -314,18 +324,18 @@ const menuToggle = document.querySelector('.menu-toggle') as HTMLElement | null;
       left: 0;
       z-index: 999;
       padding: 0;
-      box-shadow: 0px 0px 10px 0px rgba(0,0,0,.08);
+      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.08);
     }
-    
+
     .header-content {
       background-color: #222;
       padding: 10px 20px;
     }
-    
+
     .menu-toggle {
       display: flex;
     }
-    
+
     .site-nav {
       position: fixed;
       height: calc(100vh - 68px);
@@ -337,15 +347,15 @@ const menuToggle = document.querySelector('.menu-toggle') as HTMLElement | null;
       right: 0;
       bottom: 0;
       z-index: 999;
-      overflow: hidden; 
+      overflow: hidden;
       transform: translateX(100%);
       transition: transform 0.2s ease-in-out;
     }
-    
+
     .site-nav.open {
       transform: translateX(0); /* Slide in from right */
     }
-    
+
     .site-main-menu {
       flex-direction: column;
       padding: 20px;
@@ -355,13 +365,13 @@ const menuToggle = document.querySelector('.menu-toggle') as HTMLElement | null;
       text-align: left;
       margin-top: 10px;
     }
-    
+
     .site-main-menu li {
       display: block;
       margin: 0;
       width: 100%;
     }
-    
+
     .site-main-menu li a {
       display: block;
       padding: 10px 0;
@@ -369,11 +379,11 @@ const menuToggle = document.querySelector('.menu-toggle') as HTMLElement | null;
       font-weight: 500;
       opacity: 0.8;
     }
-    
+
     .site-main-menu li a:hover {
       opacity: 1;
     }
-    
+
     .site-main-menu .sub-menu {
       position: relative;
       left: 0;
@@ -383,7 +393,7 @@ const menuToggle = document.querySelector('.menu-toggle') as HTMLElement | null;
       padding: 0 0 0 20px;
       display: none;
     }
-    
+
     .site-main-menu .sub-menu.open {
       display: block;
     }
