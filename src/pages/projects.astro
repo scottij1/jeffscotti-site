@@ -1,0 +1,349 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../styles/main.scss';
+---
+
+<Layout title="Projects | Jeff Scotti">
+  <div id="main" class="site-main">
+    <div id="main-content" class="single-page-content">
+      <div id="primary" class="content-area">
+        <div class="page-title">
+          <h1>Portfolio</h1>
+          <div class="page-subtitle">
+            <h4>My Work</h4>
+          </div>
+        </div>
+
+        <div id="content" class="page-content site-content single-post" role="main">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12">
+              <!-- Portfolio Filters -->
+              <ul class="portfolio-filters">
+                <li class="active">
+                  <a class="filter btn btn-sm btn-link" data-group="all">All</a>
+                </li>
+                <li>
+                  <a class="filter btn btn-sm btn-link" data-group="web-development">Web Development</a>
+                </li>
+                <li>
+                  <a class="filter btn btn-sm btn-link" data-group="ui-design">UI Design</a>
+                </li>
+                <li>
+                  <a class="filter btn btn-sm btn-link" data-group="mobile-apps">Mobile Apps</a>
+                </li>
+              </ul>
+
+              <!-- Portfolio Grid -->
+              <div class="portfolio-grid">
+                <!-- Portfolio Item 1 -->
+                <figure class="item" data-groups='["all", "web-development"]'>
+                  <div class="portfolio-item-img">
+                    <div class="portfolio-item-preview"></div>
+                    <a href="#" class="project-link"></a>
+                  </div>
+                  <i class="far fa-file-alt"></i>
+                  <h4 class="name">E-Commerce Website</h4>
+                  <span class="category">A responsive e-commerce platform built with modern web technologies.</span>
+                  <div class="project-tags">
+                    <span>React</span>
+                    <span>Node.js</span>
+                    <span>MongoDB</span>
+                  </div>
+                </figure>
+                
+                <!-- Portfolio Item 2 -->
+                <figure class="item" data-groups='["all", "ui-design"]'>
+                  <div class="portfolio-item-img">
+                    <div class="portfolio-item-preview"></div>
+                    <a href="#" class="project-link"></a>
+                  </div>
+                  <i class="far fa-file-alt"></i>
+                  <h4 class="name">Portfolio Template</h4>
+                  <span class="category">A customizable portfolio template for creative professionals.</span>
+                  <div class="project-tags">
+                    <span>HTML5</span>
+                    <span>CSS3</span>
+                    <span>JavaScript</span>
+                  </div>
+                </figure>
+                
+                <!-- Portfolio Item 3 -->
+                <figure class="item" data-groups='["all", "web-development", "ui-design"]'>
+                  <div class="portfolio-item-img">
+                    <div class="portfolio-item-preview"></div>
+                    <a href="#" class="project-link"></a>
+                  </div>
+                  <i class="far fa-file-alt"></i>
+                  <h4 class="name">Weather App</h4>
+                  <span class="category">A weather application with real-time data and forecast visualization.</span>
+                  <div class="project-tags">
+                    <span>Vue.js</span>
+                    <span>API Integration</span>
+                    <span>CSS Grid</span>
+                  </div>
+                </figure>
+                
+                <!-- Portfolio Item 4 -->
+                <figure class="item" data-groups='["all", "mobile-apps"]'>
+                  <div class="portfolio-item-img">
+                    <div class="portfolio-item-preview"></div>
+                    <a href="#" class="project-link"></a>
+                  </div>
+                  <i class="far fa-file-alt"></i>
+                  <h4 class="name">Task Management App</h4>
+                  <span class="category">A productivity tool for organizing and tracking tasks and projects.</span>
+                  <div class="project-tags">
+                    <span>React</span>
+                    <span>Firebase</span>
+                    <span>Material UI</span>
+                  </div>
+                </figure>
+                
+                <!-- Portfolio Item 5 -->
+                <figure class="item" data-groups='["all", "web-development"]'>
+                  <div class="portfolio-item-img">
+                    <div class="portfolio-item-preview"></div>
+                    <a href="#" class="project-link"></a>
+                  </div>
+                  <i class="far fa-file-alt"></i>
+                  <h4 class="name">Blog Platform</h4>
+                  <span class="category">A modern blogging platform with content management system.</span>
+                  <div class="project-tags">
+                    <span>Next.js</span>
+                    <span>GraphQL</span>
+                    <span>Tailwind CSS</span>
+                  </div>
+                </figure>
+                
+                <!-- Portfolio Item 6 -->
+                <figure class="item" data-groups='["all", "ui-design"]'>
+                  <div class="portfolio-item-img">
+                    <div class="portfolio-item-preview"></div>
+                    <a href="#" class="project-link"></a>
+                  </div>
+                  <i class="far fa-file-alt"></i>
+                  <h4 class="name">Dashboard UI</h4>
+                  <span class="category">A comprehensive dashboard interface for data visualization.</span>
+                  <div class="project-tags">
+                    <span>Figma</span>
+                    <span>UI/UX</span>
+                    <span>Data Visualization</span>
+                  </div>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  /* Page structure */
+  #main {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    padding-top: 70px;
+  }
+
+  #main-content {
+    position: relative;
+    padding: 0;
+    max-width: 1280px;
+    min-height: 80vh;
+    margin: 0 auto;
+    padding: 0 30px;
+  }
+
+  /* Page title */
+  .page-title {
+    padding: 50px 0;
+    text-align: center;
+  }
+
+  .page-title h1 {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--heading-color);
+    margin: 0 0 10px;
+  }
+
+  .page-subtitle h4 {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-color);
+    margin: 0;
+  }
+
+  /* Portfolio filters */
+  .portfolio-filters {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px;
+    text-align: center;
+  }
+
+  .portfolio-filters li {
+    display: inline-block;
+    margin: 0 2px;
+  }
+
+  .portfolio-filters li a {
+    display: inline-block;
+    color: var(--text-color);
+    padding: 5px 12px;
+    font-size: 12px;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .portfolio-filters li.active a,
+  .portfolio-filters li a:hover {
+    color: #fff;
+    background-color: var(--primary-color);
+  }
+
+  /* Portfolio grid */
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+  }
+
+  .item {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(30, 30, 30, 0.7);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .portfolio-item-img {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .portfolio-item-preview {
+    width: 100%;
+    height: 100%;
+    background-color: #2a2a2a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+    font-size: 1.2rem;
+  }
+
+  .portfolio-item-preview::after {
+    content: "Project Image";
+  }
+
+  .project-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .item i {
+    display: none;
+  }
+
+  .item h4.name {
+    padding: 15px 15px 5px;
+    font-size: 16px;
+    color: var(--heading-color);
+    margin: 0;
+  }
+
+  .item span.category {
+    display: block;
+    padding: 0 15px 15px;
+    font-size: 12px;
+    color: var(--text-color);
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 0 15px 15px;
+  }
+
+  .project-tags span {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #aaa;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+  }
+
+  /* Layout */
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px 30px;
+  }
+
+  .col-xs-12 {
+    width: 100%;
+    padding: 0 15px;
+  }
+
+  @media (max-width: 768px) {
+    .portfolio-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    #main-content {
+      padding: 0 15px;
+    }
+  }
+</style>
+
+<script>
+  // Simple portfolio filtering
+  document.addEventListener('DOMContentLoaded', () => {
+    const filters = document.querySelectorAll('.filter');
+    const items = document.querySelectorAll('.item');
+    
+    filters.forEach(filter => {
+      filter.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Remove active class from all filters
+        filters.forEach(f => f.parentElement.classList.remove('active'));
+        
+        // Add active class to clicked filter
+        filter.parentElement.classList.add('active');
+        
+        const group = filter.getAttribute('data-group');
+        
+        // Show/hide items based on filter
+        items.forEach(item => {
+          const groups = JSON.parse(item.getAttribute('data-groups').replace(/'/g, '"'));
+          
+          if (group === 'all' || groups.includes(group)) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>
