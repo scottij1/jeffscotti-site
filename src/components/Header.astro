@@ -37,7 +37,9 @@ import Logo from './Logo.astro';
 
     <!-- Mobile Menu Toggle -->
     <a class="menu-toggle">
-      <i class="fa fa-bars"></i>
+      <span class="hamburger-line line-1"></span>
+      <span class="hamburger-line line-2"></span>
+      <span class="hamburger-line line-3"></span>
     </a>
     <!-- /Mobile Menu Toggle -->
   </div>
@@ -52,6 +54,7 @@ import Logo from './Logo.astro';
     if (menuToggle && siteNav) {
       menuToggle.addEventListener('click', () => {
         siteNav.classList.toggle('open');
+        menuToggle.classList.toggle('open');
       });
     }
     
