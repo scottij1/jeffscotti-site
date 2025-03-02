@@ -1,6 +1,16 @@
 ---
 import '../styles/header.scss';
 import Logo from './Logo.astro';
+
+// Get the current path to determine active menu item
+const { pathname } = Astro.url;
+
+// Function to check if a path is active
+const isActive = (path) => {
+  if (path === '/' && pathname === '/') return true;
+  if (path !== '/' && pathname.startsWith(path)) return true;
+  return false;
+};
 ---
 
 <header id="site_header" class="header">
@@ -16,19 +26,19 @@ import Logo from './Logo.astro';
     <!-- Navigation -->
     <div class="site-nav">
       <ul class="site-main-menu">
-        <li class="menu-item current-menu-item">
+        <li class={`menu-item ${isActive('/') ? 'current-menu-item' : ''}`}>
           <a href="/">Home</a>
         </li>
 
-        <li class="menu-item">
+        <li class={`menu-item ${isActive('/about') ? 'current-menu-item' : ''}`}>
           <a href="/about">About</a>
         </li>
 
-        <li class="menu-item">
+        <li class={`menu-item ${isActive('/projects') ? 'current-menu-item' : ''}`}>
           <a href="/projects">Projects</a>
         </li>
     
-        <li class="menu-item">
+        <li class={`menu-item ${isActive('/contact') ? 'current-menu-item' : ''}`}>
           <a href="/contact">Contact</a>
         </li>
       </ul>

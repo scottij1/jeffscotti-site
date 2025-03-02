@@ -15,85 +15,78 @@ import '../styles/main.scss';
         </div>
 
         <div id="content" class="page-content site-content single-post" role="main">
-          <div class="row">
-            <div class="col-xs-12 col-sm-4">
-              <div class="info-list">
-                <div class="info-block">
-                  <div class="ci-icon">
-                    <i class="fas fa-envelope"></i>
-                  </div>
-                  <div class="ci-text">
-                    <h4>Email</h4>
-                    <p>hello@jeffscotti.com</p>
-                    <p>Have a project in mind? Let's discuss it.</p>
-                  </div>
-                </div>
-
-                <div class="info-block">
-                  <div class="ci-icon">
-                    <i class="fas fa-phone"></i>
-                  </div>
-                  <div class="ci-text">
-                    <h4>Phone</h4>
-                    <p>(555) 123-4567</p>
-                    <p>Available Monday-Friday, 9am-5pm PST.</p>
-                  </div>
-                </div>
-                
-                <div class="info-block">
-                  <div class="ci-icon">
-                    <i class="fas fa-map-marker-alt"></i>
-                  </div>
-                  <div class="ci-text">
-                    <h4>Location</h4>
-                    <p>San Francisco, CA</p>
-                    <p>Available for remote work worldwide.</p>
-                  </div>
-                </div>
-
-                <div class="social-links">
-                  <a href="#" class="social-link" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                  <a href="#" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
-                  <a href="#" class="social-link" title="Twitter"><i class="fab fa-twitter"></i></a>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-8">
+          <div class="contact-section">
+            <!-- Contact Form -->
+            <div class="contact-form-container">
               <div class="block-title">
                 <h2>How Can I Help You?</h2>
               </div>
 
               <form id="contact_form" class="contact-form">
-                <div class="controls two-columns">
-                  <div class="fields clearfix">
-                    <div class="left-column">
-                      <div class="form-group">
-                        <input id="form_name" type="text" name="name" class="form-control" placeholder="Full Name" required="required">
-                        <div class="form-control-border"></div>
-                      </div>
+                <div class="form-group">
+                  <input id="form_name" type="text" name="name" class="form-control" placeholder="Full Name" required="required">
+                </div>
 
-                      <div class="form-group">
-                        <input id="form_email" type="email" name="email" class="form-control" placeholder="Email Address" required="required">
-                        <div class="form-control-border"></div>
-                      </div>
+                <div class="form-group">
+                  <input id="form_email" type="email" name="email" class="form-control" placeholder="Email Address" required="required">
+                </div>
 
-                      <div class="form-group">
-                        <input id="form_subject" type="text" name="subject" class="form-control" placeholder="Subject" required="required">
-                        <div class="form-control-border"></div>
-                      </div>
+                <div class="form-group">
+                  <input id="form_subject" type="text" name="subject" class="form-control" placeholder="Subject" required="required">
+                </div>
+
+                <div class="form-group">
+                  <textarea id="form_message" name="message" class="form-control" placeholder="Message" rows="7" required="required"></textarea>
+                </div>
+    
+                <button type="submit" class="btn-primary">Send Message</button>
+              </form>
+            </div>
+            
+            <!-- Contact Info -->
+            <div class="contact-info-container">
+              <div class="contact-info">
+                <div class="block-title">
+                  <h2>Contact Information</h2>
+                </div>
+                
+                <div class="info-list">
+                  <div class="info-block">
+                    <div class="ci-icon">
+                      <i class="fas fa-envelope"></i>
                     </div>
-                    <div class="right-column">
-                      <div class="form-group">
-                        <textarea id="form_message" name="message" class="form-control" placeholder="Message" rows="7" required="required"></textarea>
-                        <div class="form-control-border"></div>
+                    <div class="ci-text">
+                      <h4>Email</h4>
+                      <p>hello@jeffscotti.com</p>
+                      <p>Have a project in mind? Let's discuss it.</p>
+                    </div>
+                  </div>
+                  
+                  <div class="info-block">
+                    <div class="ci-icon">
+                      <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="ci-text">
+                      <h4>Location</h4>
+                      <p>San Diego, CA</p>
+                      <p>Available for remote work worldwide.</p>
+                    </div>
+                  </div>
+
+                  <div class="info-block">
+                    <div class="ci-icon">
+                      <i class="fas fa-users"></i>
+                    </div>
+                    <div class="ci-text">
+                      <h4>Connect With Me</h4>
+                      <div class="social-links">
+                        <a href="#" class="social-link" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
                       </div>
                     </div>
                   </div>
-    
-                  <button type="submit" class="btn-primary">Send Message</button>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
@@ -155,6 +148,31 @@ import '../styles/main.scss';
     margin: 0;
   }
 
+  /* Contact section layout */
+  .contact-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+
+  .contact-form-container {
+    flex: 1 1 60%;
+    min-width: 300px;
+  }
+
+  .contact-info-container {
+    flex: 1 1 30%;
+    min-width: 250px;
+  }
+
+  /* Contact info */
+  .contact-info {
+    background-color: rgba(40, 40, 40, 0.5);
+    border-radius: 8px;
+    padding: 25px;
+    height: 100%;
+  }
+  
   /* Info list */
   .info-list {
     margin-bottom: 30px;
@@ -196,45 +214,35 @@ import '../styles/main.scss';
 
   /* Social links */
   .social-links {
-    margin-top: 30px;
+    margin-top: 10px;
     text-align: left;
+    display: flex;
+    gap: 10px;
   }
 
   .social-link {
-    display: inline-block;
-    width: 36px;
-    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
     background-color: rgba(255, 255, 255, 0.1);
     color: var(--text-color);
     text-align: center;
-    line-height: 36px;
+    font-size: 18px;
     border-radius: 50%;
-    margin-right: 10px;
     transition: all 0.3s ease-in-out;
   }
 
   .social-link:hover {
     background-color: var(--primary-color);
     color: #fff;
+    transform: translateY(-3px);
   }
 
   /* Contact form */
   .contact-form {
     margin-bottom: 30px;
-  }
-
-  .two-columns {
-    margin-bottom: 30px;
-  }
-
-  .fields {
-    display: flex;
-    margin: 0 -15px 20px;
-  }
-
-  .left-column, .right-column {
-    width: 50%;
-    padding: 0 15px;
   }
 
   .form-group {
@@ -257,26 +265,12 @@ import '../styles/main.scss';
 
   textarea.form-control {
     height: auto;
-    min-height: 100%;
+    min-height: 150px;
   }
 
   .form-control:focus {
     border-color: var(--primary-color);
-  }
-
-  .form-control-border {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 2px;
-    background-color: var(--primary-color);
-    transform: scaleX(0);
-    transition: all 0.3s ease-in-out;
-  }
-
-  .form-control:focus + .form-control-border {
-    transform: scaleX(1);
+    outline: none;
   }
 
   /* Button */
@@ -298,38 +292,14 @@ import '../styles/main.scss';
     color: var(--primary-color);
   }
 
-  /* Layout */
-  .row {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 -15px 30px;
-  }
-
-  .col-xs-12 {
-    width: 100%;
-    padding: 0 15px;
-  }
-
-  .col-sm-4 {
-    width: 33.333333%;
-    padding: 0 15px;
-  }
-
-  .col-sm-8 {
-    width: 66.666667%;
-    padding: 0 15px;
-  }
-
+  /* Responsive */
   @media (max-width: 768px) {
-    .col-sm-4, .col-sm-8 {
-      width: 100%;
-    }
-    
-    .fields {
+    .contact-section {
       flex-direction: column;
     }
     
-    .left-column, .right-column {
+    .contact-form-container,
+    .contact-info-container {
       width: 100%;
     }
     
