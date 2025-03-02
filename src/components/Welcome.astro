@@ -1,7 +1,5 @@
 ---
 import ravenLogo from '../assets/raven-logo-sm.png';
-import '../styles/main.scss';
-import '../styles/welcome.scss';
 ---
 
 <div class="welcome-container">
@@ -15,3 +13,65 @@ import '../styles/welcome.scss';
 		</section>
 	</main>
 </div>
+
+<style>
+  .welcome-container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .main-content {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-section {
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .hero-section h1 {
+    font-size: 48px;
+    line-height: 56px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .hero-section .raven-logo {
+    height: 55px;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  
+  .hero-section h4 {
+    font-size: 16px;
+    color: #aaa;
+    font-weight: 300;
+    margin-bottom: 10px;
+  }
+
+  /* Media queries */
+  @media screen and (max-width: 768px) {
+    .welcome-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero-section {
+      display: block;
+      padding-top: 10%;
+    }
+    
+    .hero-section h1 {
+      line-height: 1.5;
+    }
+  }
+</style>

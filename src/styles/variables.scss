@@ -1,27 +1,56 @@
-// Colors
-$primary-color: #007ced;      // Blue
-$secondary-color: #FF9800;    // Orange
-$background-color: #222;      // Dark gray
-$container-bg-color: #333;    // Slightly lighter gray for containers
-$text-color: #d5d5d5;         // Light gray for main text
-$heading-color: #f5f5f5;      // Almost white for headings
-$border-color: #444;          // Medium gray for borders
-$link-hover-color: #FF9800;   // Orange for link hover
+// Define CSS custom properties for global use
+:root {
+  // Colors
+  --primary-color: #007ced;      // Blue
+  --secondary-color: #FF9800;    // Orange
+  --background-color: #222;      // Dark gray
+  --container-bg-color: #333;    // Slightly lighter gray for containers
+  --text-color: #d5d5d5;         // Light gray for main text
+  --heading-color: #f5f5f5;      // Almost white for headings
+  --border-color: #444;          // Medium gray for borders
+  --link-hover-color: #FF9800;   // Orange for link hover
 
-// Fonts
-$font-family: 'Poppins', Helvetica, sans-serif;
-$font-size-base: 14px;
-$font-weight-normal: 400;
-$font-weight-bold: 600;
+  // Fonts
+  --font-family: 'Poppins', Helvetica, sans-serif;
+  --font-size-base: 14px;
+  --font-weight-normal: 400;
+  --font-weight-bold: 600;
 
-// Spacing
-$spacing-sm: 10px;
-$spacing-md: 20px;
-$spacing-lg: 30px;
-$spacing-xl: 40px;
+  // Spacing
+  --spacing-sm: 10px;
+  --spacing-md: 20px;
+  --spacing-lg: 30px;
+  --spacing-xl: 40px;
 
-// Border
-$border-radius-sm: 5px;
-$border-radius-md: 10px;
-$border-radius-lg: 15px;
-$border-radius-xl: 40px;
+  // Border
+  --border-radius-sm: 5px;
+  --border-radius-md: 10px;
+  --border-radius-lg: 15px;
+  --border-radius-xl: 40px;
+}
+
+// SCSS variables that map to CSS custom properties for use in SCSS files
+// This provides backward compatibility with existing SCSS
+$primary-color: var(--primary-color);
+$secondary-color: var(--secondary-color);
+$background-color: var(--background-color);
+$container-bg-color: var(--container-bg-color);
+$text-color: var(--text-color);
+$heading-color: var(--heading-color);
+$border-color: var(--border-color);
+$link-hover-color: var(--link-hover-color);
+
+$font-family: var(--font-family);
+$font-size-base: var(--font-size-base);
+$font-weight-normal: var(--font-weight-normal);
+$font-weight-bold: var(--font-weight-bold);
+
+$spacing-sm: var(--spacing-sm);
+$spacing-md: var(--spacing-md);
+$spacing-lg: var(--spacing-lg);
+$spacing-xl: var(--spacing-xl);
+
+$border-radius-sm: var(--border-radius-sm);
+$border-radius-md: var(--border-radius-md);
+$border-radius-lg: var(--border-radius-lg);
+$border-radius-xl: var(--border-radius-xl);

@@ -1,0 +1,94 @@
+@import 'variables';
+
+// Import Google fonts
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i');
+
+// Reset and base styles
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  font-family: $font-family;
+  font-size: $font-size-base;
+  font-weight: $font-weight-normal;
+  color: $text-color;
+  background-color: $background-color;
+  line-height: 1.65em;
+  overflow-x: hidden;
+}
+
+// Typography
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family;
+  color: $heading-color;
+  line-height: 1.2em;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-weight: $font-weight-bold;
+}
+
+h1 {
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 27px;
+}
+
+h3 {
+  font-size: 21px;
+}
+
+h4 {
+  font-size: 18px;
+}
+
+h5 {
+  font-size: 16px;
+}
+
+h6 {
+  font-size: 14px;
+}
+
+p {
+  margin: 0 0 10px;
+  font-size: $font-size-base;
+  color: $text-color;
+}
+
+a {
+  color: $primary-color;
+  text-decoration: none;
+  outline: none;
+  transition: all 0.3s ease-in-out;
+  
+  &:hover {
+    color: $link-hover-color;
+    text-decoration: none;
+  }
+  
+  &:focus {
+    outline: 0;
+    text-decoration: none;
+  }
+}
+
+// Form elements
+.form-control {
+  height: 42px;
+  border: 2px solid $border-color;
+  border-radius: $border-radius-sm;
+  padding: 10px 25px 10px 12px;
+  color: $text-color;
+  background: transparent;
+  box-shadow: none;
+  outline: none;
+  font-family: $font-family;
+  transition: all 0.3s ease-in-out;
+  
+  &:focus {
+    border-color: $primary-color;
+  }
+}
