@@ -18,22 +18,6 @@ html, body {
   overflow-x: hidden;
 }
 
-// Body Animated Background
-.lm-animated-bg {
-  position: absolute;
-  width: auto;
-  height: auto;
-  top: -18px;
-  left: -18px;
-  right: -18px;
-  bottom: -18px;
-  background-image: url('../assets/main_bg.png');
-  background-position: center center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  z-index: -1;
-}
-
 // Typography
 h1, h2, h3, h4, h5, h6 {
   font-family: $font-family;
