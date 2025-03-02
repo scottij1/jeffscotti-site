@@ -90,39 +90,55 @@ a {
 }
 
 // Buttons
-.btn-primary {
+.btn-base {
   display: inline-block;
   position: relative;
-  padding: 0.8em 2.1em;
+  padding: 0.8em 1.5em;
   margin-bottom: 0.75em;
   margin-right: 0.25em;
-  font-size: 1em;
+  font-size: 15px;
+  font-weight: 400;
   line-height: 1.2;
-  border: 0;
-  outline: 0;
-  border: 2px solid $primary-color;
-  color: #fff;
-  text-shadow: none;
-  background-color: $background-color;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
   border-radius: 30px;
-  font-family: $font-family;
   transition: all 0.3s ease-in-out;
-  box-shadow: 0px 10px 10px -8px rgba(0, 0, 0, 0.78);
+  box-shadow: 0 10px 10px -8px rgba(0, 0, 0, 0.22);
+  text-decoration: none;
+  color: #fff;
+  background-color: #333;
+  border: 2px solid #333;
   
   &:hover {
     background-color: $primary-color;
     color: #fff;
+    border-color: $primary-color;
+  }
+}
+
+.btn-primary {
+  @extend .btn-base;
+  background-color: $primary-color;
+  border-color: $primary-color;
+  
+  &:hover {
+    background-color: $primary-color;
+    color: #fff;
+    border-color: $primary-color;
   }
 }
 
 .btn-secondary {
-  @extend .btn-primary;
+  @extend .btn-base;
+  background-color: $text-color;
   border-color: $text-color;
   
   &:hover {
-    color: $background-color;
-    border-color: $text-color;
-    background-color: $text-color;
+    background-color: $primary-color;
+    color: #fff;
+    border-color: $primary-color;
   }
 }
 

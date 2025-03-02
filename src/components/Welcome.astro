@@ -1,17 +1,44 @@
 ---
-import ravenLogo from '../assets/raven-logo-sm.png';
+import jsHeadshot from '../assets/js-headshot.png';
+import resumePdf from '../assets/jeffscotti_resume.pdf';
 ---
 
 <div class="welcome-container">
-	<main class="main-content">
-		<section class="hero-section">
-			<h1>
-				<img src={ravenLogo.src} alt="Raven Logo" class="raven-logo" />
-				J. Scotti
-			</h1>
-			<h4>Front End Engineer & UI/UX Designer</h4>
-		</section>
-	</main>
+  <main class="main-content">
+    <div class="home-content">
+      <div class="two-column-layout">
+        <div class="image-column">
+          <div class="home-photo">
+            <div class="hp-inner" style={`background-image: url(${jsHeadshot.src});`}></div>
+          </div>
+        </div>
+
+        <div class="text-column">
+          <div class="home-text">
+            <h4 class="job-title">Front End Engineer & UI/UX Designer</h4>
+              
+            <h1 class="name">Jeff Scotti</h1>
+            <p class="bio">Passionate about creating intuitive and engaging user experiences through clean, efficient code and thoughtful design.</p>
+                 
+            <div class="home-buttons">
+              <a href={resumePdf.src} class="btn github-style" download>
+               <i class="fa-solid fa-file-pdf"></i> Resume
+              </a>
+              <a href="https://linkedin.com/in/jeffscotti" target="_blank" class="btn github-style linkedin-btn">
+                <i class="fab fa-linkedin"></i> LinkedIn
+              </a>
+              <a href="https://github.com/scottij1" target="_blank" class="btn github-style github-btn">
+                <i class="fab fa-github"></i> GitHub
+              </a>
+              <a href="/contact" class="btn github-style">
+                <i class="fas fa-envelope"></i> Contact
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 </div>
 
 <style>
@@ -26,52 +53,157 @@ import ravenLogo from '../assets/raven-logo-sm.png';
     height: 100%;
     display: flex;
     justify-content: center;
-  }
-
-  .hero-section {
-    display: flex;
-    align-items: start;
-    flex-direction: column;
-    justify-content: center;
+    align-items: center;
     padding: 20px;
   }
-  
-  .hero-section h1 {
+
+  .home-content {
+    width: 100%;
+    max-width: 1200px;
+  }
+
+  /* Two-column layout */
+  .two-column-layout {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .image-column {
+    flex: 0 0 30%;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .text-column {
+    flex: 0 0 70%;
+    padding: 15px;
+  }
+
+  .home-photo {
+    display: block;
+    position: relative;
+    width: 262px;
+    height: 262px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #444;
+    border: 18px solid #444;
+  }
+
+  .hp-inner {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .home-text {
+    padding: 10px 0;
+  }
+
+  .job-title {
+    font-size: 18px;
+    color: #007bff;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .name {
     font-size: 48px;
     line-height: 56px;
     margin-top: 0;
     margin-bottom: 10px;
-    display: flex;
-    align-items: center;
   }
-  
-  .hero-section .raven-logo {
-    height: 55px;
-    margin-right: 10px;
-    vertical-align: middle;
-  }
-  
-  .hero-section h4 {
+
+  .bio {
     font-size: 16px;
-    color: #aaa;
-    font-weight: 300;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
+    line-height: 1.75;
+  }
+
+  .home-buttons {
+    margin-top: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  /* Common button style based on GitHub button */
+  .btn {
+    display: inline-block;
+    position: relative;
+    padding: 0.8em 1.5em;
+    margin-bottom: 0.75em;
+    margin-right: 0.25em;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.2;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 10px 10px -8px rgba(0, 0, 0, 0.22);
+    text-decoration: none;
+    color: #fff;
+    border: 2px solid;
+  }
+
+  .github-style {
+    background-color: #333;
+    border-color: #333;
+  }
+
+  .github-style:hover {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+  }
+
+  .github-btn {
+    background-color: #333;
+    border-color: #333;
+  }
+
+  .linkedin-btn {
+    background-color: #333;
+    border-color: #333;
+  }
+
+  .github-btn:hover,
+  .linkedin-btn:hover {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
   }
 
   /* Media queries */
   @media screen and (max-width: 768px) {
-    .welcome-container {
-      display: flex;
+    .two-column-layout {
       flex-direction: column;
     }
 
-    .hero-section {
-      display: block;
-      padding-top: 10%;
+    .image-column,
+    .text-column {
+      flex: 0 0 100%;
+      max-width: 100%;
     }
-    
-    .hero-section h1 {
-      line-height: 1.5;
+
+    .home-text {
+      text-align: center;
+    }
+
+    .home-buttons {
+      justify-content: center;
     }
   }
 </style>
