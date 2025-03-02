@@ -5,8 +5,7 @@ import ThemeToggle from './ThemeToggle.astro';
 // Get the current path to determine active menu item
 const { pathname } = Astro.url;
 
-// Function to check if a path is active
-const isActive = (path) => {
+const isPathActive = (path: string) => {
   if (path === '/' && pathname === '/') return true;
   if (path !== '/' && pathname.startsWith(path)) return true;
   return false;
@@ -26,19 +25,19 @@ const isActive = (path) => {
     <!-- Navigation -->
     <div class="site-nav">
       <ul class="site-main-menu">
-        <li class={`menu-item ${isActive('/') ? 'current-menu-item' : ''}`}>
+        <li class={`menu-item ${isPathActive('/') ? 'current-menu-item' : ''}`}>
           <a href="/">Home</a>
         </li>
 
-        <li class={`menu-item ${isActive('/about') ? 'current-menu-item' : ''}`}>
+        <li class={`menu-item ${isPathActive('/about') ? 'current-menu-item' : ''}`}>
           <a href="/about">About</a>
         </li>
 
-        <li class={`menu-item ${isActive('/projects') ? 'current-menu-item' : ''}`}>
+        <li class={`menu-item ${isPathActive('/projects') ? 'current-menu-item' : ''}`}>
           <a href="/projects">Projects</a>
         </li>
     
-        <li class={`menu-item ${isActive('/contact') ? 'current-menu-item' : ''}`}>
+        <li class={`menu-item ${isPathActive('/contact') ? 'current-menu-item' : ''}`}>
           <a href="/contact">Contact</a>
         </li>
       </ul>
@@ -62,8 +61,8 @@ const isActive = (path) => {
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const menuToggle = document.querySelector('.menu-toggle');
-  const siteNav = document.querySelector('.site-nav');
+  const siteNav = document.querySelector('.site-nav') as HTMLElement | null;
+const menuToggle = document.querySelector('.menu-toggle') as HTMLElement | null;
 
   if (menuToggle && siteNav) {
     menuToggle.addEventListener('click', () => {
@@ -73,8 +72,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Debounce resize events
-  let resizeTimer;
+  let resizeTimer: number | undefined;
   window.addEventListener('resize', () => {
+    if (!siteNav || !menuToggle) { 
+      return;
+    }
+
     // Immediately remove any transition to prevent animation during resize
     siteNav.style.transition = 'none';
     menuToggle.style.transition = 'none';
@@ -95,10 +98,9 @@ document.addEventListener('DOMContentLoaded', () => {
     item.addEventListener('click', (e) => {
       if (window.innerWidth <= 991) {
         e.preventDefault();
-        const parent = item.parentElement;
-        const subMenu = parent.querySelector('.sub-menu');
+        const subMenu = item.parentElement?.querySelector('.sub-menu');
         if (subMenu) {
-          subMenu.classList.toggle('open');
+          subMenu?.classList.toggle('open');
         }
       }
     });

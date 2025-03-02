@@ -14,26 +14,24 @@ import resumePdf from '../assets/jeffscotti_resume.pdf';
         </div>
 
         <div class="text-column">
-          <div class="home-text">
-            <h4 class="job-title">Front End Engineer & UI/UX Designer</h4>
+            <h4 class="job-title">Senior Front End Engineer & Senior UI/UX Designer</h4>
               
             <h1 class="name">Jeff Scotti</h1>
-            <p class="bio">Passionate about creating intuitive and engaging user experiences through clean, efficient code and thoughtful design.</p>
+            <p class="bio">I build intuitive, high-performance web applications by combining clean, efficient code with thoughtful design. With 15+ years of experience, I specialize in crafting scalable user interfaces, leading technical projects, and enhancing digital experiences through modern web technologies, front-end frameworks, and UX best practices.</p>
                  
             <div class="home-buttons">
-              <a href={resumePdf.src} class="btn github-style" download>
+              <a href={resumePdf} class="btn" target="_blank">
                <i class="fa-solid fa-file-pdf"></i> Resume
               </a>
-              <a href="https://linkedin.com/in/jeffscotti" target="_blank" class="btn github-style linkedin-btn">
+              <a href="https://linkedin.com/in/jeffscotti" target="_blank" class="btn">
                 <i class="fab fa-linkedin"></i> LinkedIn
               </a>
-              <a href="https://github.com/scottij1" target="_blank" class="btn github-style github-btn">
+              <a href="https://github.com/scottij1" target="_blank" class="btn">
                 <i class="fab fa-github"></i> GitHub
               </a>
-              <a href="/contact" class="btn github-style">
+              <a href="/contact" class="btn">
                 <i class="fas fa-envelope"></i> Contact
               </a>
-            </div>
           </div>
         </div>
       </div>
@@ -62,7 +60,6 @@ import resumePdf from '../assets/jeffscotti_resume.pdf';
     max-width: 1200px;
   }
 
-  /* Two-column layout */
   .two-column-layout {
     display: flex;
     flex-direction: row;
@@ -105,10 +102,6 @@ import resumePdf from '../assets/jeffscotti_resume.pdf';
     right: 0;
   }
 
-  .home-text {
-    padding: 10px 0;
-  }
-
   .job-title {
     font-size: 18px;
     color: #007bff;
@@ -121,12 +114,14 @@ import resumePdf from '../assets/jeffscotti_resume.pdf';
     line-height: 56px;
     margin-top: 0;
     margin-bottom: 10px;
+    font-weight: normal;
   }
 
   .bio {
     font-size: 16px;
     margin-bottom: 30px;
     line-height: 1.75;
+    padding: 10px 10% 10px 0;
   }
 
   .home-buttons {
@@ -156,31 +151,11 @@ import resumePdf from '../assets/jeffscotti_resume.pdf';
     text-decoration: none;
     color: #fff;
     border: 2px solid;
-  }
-
-  .github-style {
     background-color: #333;
     border-color: #333;
   }
 
-  .github-style:hover {
-    background-color: #007bff;
-    color: #fff;
-    border-color: #007bff;
-  }
-
-  .github-btn {
-    background-color: #333;
-    border-color: #333;
-  }
-
-  .linkedin-btn {
-    background-color: #333;
-    border-color: #333;
-  }
-
-  .github-btn:hover,
-  .linkedin-btn:hover {
+  .btn:hover {
     background-color: #007bff;
     color: #fff;
     border-color: #007bff;
@@ -198,12 +173,13 @@ import resumePdf from '../assets/jeffscotti_resume.pdf';
       max-width: 100%;
     }
 
-    .home-text {
-      text-align: center;
-    }
 
     .home-buttons {
       justify-content: center;
     }
+
+      .bio { 
+        padding-right: 0;
+      }
   }
 </style>
