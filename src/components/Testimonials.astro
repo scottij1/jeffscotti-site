@@ -1,33 +1,39 @@
 ---
-import TestimonialItem from './TestimonialItem.astro';
-import { testimonials } from '../data/testimonials';
+import TestimonialItem from "./TestimonialItem.astro";
+import { testimonials } from "../data/testimonials";
 
 interface Props {
   title?: string;
   subtitle?: string;
 }
 
-const { 
-  title = "Testimonials", 
-} = Astro.props;
+const { title = "Testimonials" } = Astro.props;
 
-const testimonialsToShow = (testimonials).filter(testimonial => 
-  testimonial.visible !== false
+const testimonialsToShow = testimonials.filter(
+  (testimonial) => testimonial.visible !== false,
 );
 ---
 
 <!-- Import Owl Carousel CSS -->
-<link rel="stylesheet" href="/styles/owl.carousel.css" type="text/css">
+<link rel="stylesheet" href="/styles/owl.carousel.css" type="text/css" />
 
 <div class="testimonials-container">
   <div class="block-title">
     <h2>{title}</h2>
   </div>
 
-<div id="testimonials_1" class="testimonials owl-carousel" data-mobile-items="1" data-tablet-items="2" data-items="2">
-    {testimonialsToShow.map(testimonial => (
-      <TestimonialItem testimonial={testimonial} />
-    ))}
+  <div
+    id="testimonials_1"
+    class="testimonials owl-carousel"
+    data-mobile-items="1"
+    data-tablet-items="2"
+    data-items="2"
+  >
+    {
+      testimonialsToShow.map((testimonial) => (
+        <TestimonialItem testimonial={testimonial} />
+      ))
+    }
   </div>
 </div>
 
@@ -38,8 +44,8 @@ const testimonialsToShow = (testimonials).filter(testimonial =>
 <script>
   declare const jQuery: any;
 
-  window.addEventListener('load', () => {
-    if (typeof jQuery !== 'undefined') {
+  window.addEventListener("load", () => {
+    if (typeof jQuery !== "undefined") {
       jQuery(document).ready(() => {
         jQuery("#testimonials_1").owlCarousel({
           nav: false, // Hide next/prev buttons
@@ -47,23 +53,23 @@ const testimonialsToShow = (testimonials).filter(testimonial =>
           loop: true, // Infinity loop
           navText: false,
           margin: 25,
-          responsive : {
+          responsive: {
             // breakpoint from 0 up
-            0 : {
+            0: {
               items: 1,
             },
             // breakpoint from 480 up
-            480 : {
+            480: {
               items: 1,
             },
             // breakpoint from 768 up
-            768 : {
+            768: {
               items: 2,
             },
-            1200 : {
+            1200: {
               items: 2,
-            }
-          }
+            },
+          },
         });
       });
     }
@@ -90,11 +96,11 @@ const testimonialsToShow = (testimonials).filter(testimonial =>
     background-color: var(--container-bg-color);
     border-radius: var(--border-radius-md);
     border: 2px solid var(--border-color);
-    -webkit-transition: all .25s ease-in-out;
-    -moz-transition: all .25s ease-in-out;
-    -o-transition: all .25s ease-in-out;
-    -ms-transition: all .25s ease-in-out;
-    transition: all .25s ease-in-out;
+    -webkit-transition: all 0.25s ease-in-out;
+    -moz-transition: all 0.25s ease-in-out;
+    -o-transition: all 0.25s ease-in-out;
+    -ms-transition: all 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
   }
 
   .testimonial-picture {
@@ -178,11 +184,11 @@ const testimonialsToShow = (testimonials).filter(testimonial =>
     border-radius: 3px;
     margin: 4px;
     width: 20px;
-    -webkit-transition: all .25s ease-in-out;
-    -moz-transition: all .25s ease-in-out;
-    -o-transition: all .25s ease-in-out;
-    -ms-transition: all .25s ease-in-out;
-    transition: all .25s ease-in-out;
+    -webkit-transition: all 0.25s ease-in-out;
+    -moz-transition: all 0.25s ease-in-out;
+    -o-transition: all 0.25s ease-in-out;
+    -ms-transition: all 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
   }
 
   .testimonials.owl-carousel .owl-dot.active span,
@@ -211,7 +217,7 @@ const testimonialsToShow = (testimonials).filter(testimonial =>
   .block-title h2:after {
     display: block;
     position: absolute;
-    content: '';
+    content: "";
     width: 30px;
     background-color: var(--primary-color);
     height: 2px;
@@ -221,9 +227,10 @@ const testimonialsToShow = (testimonials).filter(testimonial =>
   .block-title h2:before {
     display: block;
     position: absolute;
-    content: '';
+    content: "";
     width: 100%;
     background-color: var(--border-color);
     height: 2px;
     bottom: 0;
   }
+</style>

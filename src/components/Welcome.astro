@@ -22,9 +22,11 @@ import Testimonials from "./Testimonials.astro";
         <div class="text-column">
           <h1 class="name">Jeff Scotti</h1>
           <h4 class="job-title">
-            {' Senior Front End Engineer & Senior UI/UX Designer'.split('').map((char) => (
-            <span class="char">{char}</span>
-          ))}
+            {
+              " Senior Front End Engineer & Senior UI/UX Designer"
+                .split("")
+                .map((char) => <span class="char">{char}</span>)
+            }
           </h4>
           <p class="bio">
             I build intuitive, high-performance web applications by combining
@@ -226,7 +228,7 @@ import Testimonials from "./Testimonials.astro";
 
   /* Bridge element to maintain hover */
   .dropdown::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 100%;
     left: 0;
@@ -279,18 +281,17 @@ import Testimonials from "./Testimonials.astro";
 </style>
 
 <script>
-  import anime from 'animejs';
+  import anime from "animejs";
 
-document.addEventListener('DOMContentLoaded', () => {
-  anime({
-    targets: '.job-title .char',
-    opacity: [0, 1],
-    translateY: [30, 0],
-    scale: [0.5, 1], 
-    duration: 500, 
-    delay: anime.stagger(80), 
-    easing: 'easeOutQuart' 
+  document.addEventListener("DOMContentLoaded", () => {
+    anime({
+      targets: ".job-title .char",
+      opacity: [0, 1],
+      translateY: [50, 0],
+      scale: [0.3, 1],
+      easing: "easeOutExpo",
+      duration: 500,
+      delay: (el, i) => 50 * i,
+    });
   });
-});
-
 </script>
