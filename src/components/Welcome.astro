@@ -1,6 +1,7 @@
 ---
 import jsHeadshot from "../assets/js-headshot.png";
 import resumePdf from "../assets/jeffscotti_resume.pdf";
+import resumeDocx from "../assets/jeffscotti_resume.docx?url";
 import Testimonials from "./Testimonials.astro";
 ---
 
@@ -33,9 +34,23 @@ import Testimonials from "./Testimonials.astro";
           </p>
 
           <div class="home-buttons">
-            <a href={resumePdf} class="btn" target="_blank">
-              <i class="fa-solid fa-file-pdf"></i> Resume
-            </a>
+            <div class="dropdown">
+              <button class="btn dropdown-toggle">
+                <i class="fa-solid fa-file"></i>
+                <span>Resume</span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </button>
+              <div class="dropdown-menu">
+                <a href={resumePdf} class="dropdown-item" target="_blank">
+                  <i class="fa-solid fa-file-pdf"></i>
+                  <span>PDF Version</span>
+                </a>
+                <a href={resumeDocx} class="dropdown-item" target="_blank">
+                  <i class="fa-solid fa-file-word"></i>
+                  <span>Word Version</span>
+                </a>
+              </div>
+            </div>
             <a
               href="https://linkedin.com/in/jeffscotti"
               target="_blank"
@@ -180,6 +195,59 @@ import Testimonials from "./Testimonials.astro";
     background-color: #007bff;
     color: #fff;
     border-color: #007bff;
+  }
+
+  /* Dropdown styles */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px); /* Fixed distance from button */
+    left: 0;
+    min-width: 200px;
+    background-color: #333;
+    border-radius: 8px;
+    padding: 8px 0;
+    z-index: 1000;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Bridge element to maintain hover */
+  .dropdown::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 8px; /* Same as gap to dropdown menu */
+  }
+
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.2s;
+  }
+
+  .dropdown-item:hover {
+    background-color: #007bff;
   }
 
   /* Media queries */
