@@ -1,5 +1,5 @@
 ---
-import type { Testimonial } from '../data/testimonials';
+import type { Testimonial } from "../data/testimonials";
 
 interface Props {
   testimonial: Testimonial;
@@ -13,8 +13,8 @@ const { testimonial } = Astro.props;
   <div class="testimonial-content">
     <!-- Picture -->
     <div class="testimonial-picture">
-      <img src={testimonial.image} alt={testimonial.name}/>
-    </div>              
+      <img src={testimonial.image} alt={testimonial.name} />
+    </div>
     <!-- /Picture -->
 
     <!-- Testimonial Text -->

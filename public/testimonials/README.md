@@ -14,6 +14,7 @@ This directory is for storing testimonial profile images. The images should be:
 3. Make sure the image path in the testimonial data matches the filename in this directory
 
 Example:
+
 ```typescript
 {
   id: 4,
@@ -27,6 +28,7 @@ Example:
 ## Image Sources
 
 You can use real client photos or placeholder images from services like:
+
 - https://randomuser.me/
 - https://placekitten.com/
 - https://picsum.photos/

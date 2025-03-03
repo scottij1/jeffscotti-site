@@ -5,23 +5,19 @@ import { testimonials } from '../data/testimonials';
 interface Props {
   title?: string;
   subtitle?: string;
-  customTestimonials?: typeof testimonials;
 }
 
 const { 
   title = "Testimonials", 
-  customTestimonials
 } = Astro.props;
 
-// Use custom testimonials if provided, otherwise use the default ones
-// Filter out testimonials where visible is false
-const testimonialsToShow = (customTestimonials || testimonials).filter(testimonial => 
-  testimonial.visible !== false // Show testimonials where visible is true or undefined
+const testimonialsToShow = (testimonials).filter(testimonial => 
+  testimonial.visible !== false
 );
 ---
 
 <!-- Import Owl Carousel CSS -->
-<link rel="stylesheet" href="/template/css/owl.carousel.css" type="text/css">
+<link rel="stylesheet" href="/styles/owl.carousel.css" type="text/css">
 
 <div class="testimonials-container">
   <div class="block-title">
@@ -35,38 +31,42 @@ const testimonialsToShow = (customTestimonials || testimonials).filter(testimoni
   </div>
 </div>
 
-<!-- Import jQuery and Owl Carousel JS -->
-<script is:inline src="/template/js/jquery-3.5.1.min.js"></script>
-<script is:inline src="/template/js/owl.carousel.min.js"></script>
+<!-- Import jQuery and Owl Carousel JS from CDN -->
+<script is:inline src="/js/jquery-3.5.1.min.js"></script>
+<script is:inline src="/js/owl.carousel.min.js"></script>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // Initialize Owl Carousel
-    // @ts-ignore
-    $("#testimonials_1").owlCarousel({
-      nav: false, // Hide next/prev buttons
-      items: 2, // The number of items you want to see on the screen
-      loop: true, // Infinity loop
-      navText: false,
-      margin: 25,
-      responsive : {
-        // breakpoint from 0 up
-        0 : {
-          items: 1,
-        },
-        // breakpoint from 480 up
-        480 : {
-          items: 1,
-        },
-        // breakpoint from 768 up
-        768 : {
-          items: 2,
-        },
-        1200 : {
-          items: 2,
-        }
-      }
-    });
+  declare const jQuery: any;
+
+  window.addEventListener('load', () => {
+    if (typeof jQuery !== 'undefined') {
+      jQuery(document).ready(() => {
+        jQuery("#testimonials_1").owlCarousel({
+          nav: false, // Hide next/prev buttons
+          items: 2, // The number of items you want to see on the screen
+          loop: true, // Infinity loop
+          navText: false,
+          margin: 25,
+          responsive : {
+            // breakpoint from 0 up
+            0 : {
+              items: 1,
+            },
+            // breakpoint from 480 up
+            480 : {
+              items: 1,
+            },
+            // breakpoint from 768 up
+            768 : {
+              items: 2,
+            },
+            1200 : {
+              items: 2,
+            }
+          }
+        });
+      });
+    }
   });
 </script>
 
@@ -187,7 +187,7 @@ const testimonialsToShow = (customTestimonials || testimonials).filter(testimoni
 
   .testimonials.owl-carousel .owl-dot.active span,
   .testimonials.owl-carousel .owl-dot:hover span {
-    background-color: var(--primary-color);
+    background-color: #007ced;
   }
 
   .testimonials.owl-carousel .owl-dot.active span {
@@ -227,4 +227,3 @@ const testimonialsToShow = (customTestimonials || testimonials).filter(testimoni
     height: 2px;
     bottom: 0;
   }
-</style>
