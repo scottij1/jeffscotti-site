@@ -2,9 +2,7 @@
 import Logo from "./Logo.astro";
 import ThemeToggle from "./ThemeToggle.astro";
 
-// Get the current path to determine active menu item
 const { pathname } = Astro.url;
-
 const isPathActive = (path: string) => {
   if (path === "/" && pathname === "/") return true;
   if (path !== "/" && pathname.startsWith(path)) return true;
@@ -14,15 +12,13 @@ const isPathActive = (path: string) => {
 
 <header id="site_header" class="header">
   <div class="header-content">
-    <!-- Logo -->
+
     <div class="site-logo">
       <a href="/">
         <Logo />
       </a>
     </div>
-    <!-- /Logo -->
 
-    <!-- Navigation -->
     <div class="site-nav">
       <ul class="site-main-menu">
         <li class={`menu-item ${isPathActive("/") ? "current-menu-item" : ""}`}>
@@ -34,13 +30,6 @@ const isPathActive = (path: string) => {
         >
           <a href="/about">About</a>
         </li>
-
-        <li
-          class={`menu-item ${isPathActive("/projects") ? "current-menu-item" : ""}`}
-        >
-          <a href="/projects">Projects</a>
-        </li>
-
         <li
           class={`menu-item ${isPathActive("/contact") ? "current-menu-item" : ""}`}
         >
@@ -48,19 +37,14 @@ const isPathActive = (path: string) => {
         </li>
       </ul>
     </div>
-    <!-- /Navigation -->
 
-    <!-- Theme Toggle -->
     <div class="header-actions">
       <ThemeToggle />
-
-      <!-- Mobile Menu Toggle -->
       <a class="menu-toggle">
         <span class="hamburger-line line-1"></span>
         <span class="hamburger-line line-2"></span>
         <span class="hamburger-line line-3"></span>
       </a>
-      <!-- /Mobile Menu Toggle -->
     </div>
   </div>
 </header>
