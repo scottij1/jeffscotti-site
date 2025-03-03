@@ -64,7 +64,7 @@ const isPathActive = (path: string) => {
     }
 
     // Debounce resize events
-    let resizeTimer: number | undefined;
+    let resizeTimer: ReturnType<typeof setTimeout> | undefined;
     window.addEventListener("resize", () => {
       if (!siteNav || !menuToggle) {
         return;
