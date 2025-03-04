@@ -9,8 +9,16 @@
   p {
     margin-bottom: 15px;
     color: $text-color;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.75;
+  }
+}
+
+ul {
+  padding: 0 30px;
+  li {
+    margin: 15px 0;
+    list-style: none;
   }
 }
 

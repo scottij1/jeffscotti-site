@@ -1,24 +1,27 @@
----
-// VantaBackground.astro - No imports needed for client-side script
----
-
-<!-- Background div -->
-<div id="vanta-bg" style="width: 100vw; height: 100vh; position: absolute; top: 0; left: 0; z-index: -1;"></div>
+<div
+  id="vanta-bg"
+  style="width: 100vw; height: 100vh; position: absolute; top: 0; left: 0; z-index: -1;"
+>
+</div>
 
 <!-- Load Three.js and Vanta.js from CDN -->
-<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.155.0/three.min.js"></script>
-<script is:inline src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.dots.min.js"></script>
+<script
+  is:inline
+  src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.155.0/three.min.js"
+></script>
+<script
+  is:inline
+  src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.dots.min.js"
+></script>
 
 <!-- Initialize Vanta -->
 <script>
-  window.addEventListener('load', () => {
+  window.addEventListener("load", () => {
     const element = document.getElementById("vanta-bg");
     if (!element) {
       console.error("Background element not found");
       return;
     }
-
-    // Initialize Vanta DOTS
     VANTA.DOTS({
       el: element,
       mouseControls: true,
@@ -28,13 +31,11 @@
       minWidth: 200.0,
       scale: 1.0,
       scaleMobile: 1.0,
-      color: 0xffffff,
-      backgroundColor: 0x000000,
+      color: 0xcccccc,
+      backgroundColor: 0x222222,
       size: 1.0,
       spacing: 35.0,
-      showLines: false
+      showLines: false,
     });
-    
-    console.log('VANTA initialized successfully');
   });
 </script>
