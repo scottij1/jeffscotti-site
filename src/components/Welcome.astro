@@ -189,36 +189,6 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
     gap: 10px;
   }
 
-  /* Common button style based on GitHub button */
-  .btn {
-    display: inline-block;
-    position: relative;
-    padding: 0.8em 1.5em;
-    margin-bottom: 0.75em;
-    margin-right: 0.25em;
-    font-size: 15px;
-    font-weight: 400;
-    line-height: 1.2;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    cursor: pointer;
-    border-radius: 30px;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 10px 10px -8px rgba(0, 0, 0, 0.22);
-    text-decoration: none;
-    color: #fff;
-    border: 2px solid;
-    background-color: #333;
-    border-color: #333;
-  }
-
-  .btn:hover {
-    background-color: #007bff;
-    color: #fff;
-    border-color: #007bff;
-  }
-
   /* Dropdown styles */
   .dropdown {
     position: relative;
@@ -234,7 +204,7 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
   .dropdown-menu {
     display: none;
     position: absolute;
-    top: calc(100% + 8px); /* Fixed distance from button */
+    top: calc(100% + 8px);
     left: 0;
     min-width: 200px;
     background-color: #333;
@@ -345,7 +315,12 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
       text-align: center;
     }
 
-    /* Mobile dropdown menu styles */
+    /* Hide chevron icon on mobile */
+    .dropdown-toggle .fa-chevron-down {
+      display: none;
+    }
+
+    /* Mobile dropdown menu styles - matching site-nav */
     .dropdown-menu {
       display: none;
       position: fixed;
@@ -353,13 +328,14 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
       left: 0;
       width: 100%;
       height: 100vh;
-      background-color: #333;
+      background-color: rgba(var(--bg-color-rgb, 17, 17, 17), 0.95);
+      backdrop-filter: blur(5px);
       z-index: 2000;
       padding: 0;
       border-radius: 0;
       box-shadow: none;
-      transform: translateX(-100%);
-      transition: transform 0.3s ease-in-out;
+      transform: translateX(100%);
+      transition: transform 0.2s ease-in-out;
       flex-direction: column;
       overflow-y: auto;
     }
@@ -417,6 +393,7 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
     const dropdownToggle = document.querySelector(".dropdown-toggle") as HTMLButtonElement | null;
     const dropdownMenu = document.querySelector(".dropdown-menu") as HTMLDivElement | null;
     const closeButton = document.querySelector(".mobile-close-btn") as HTMLButtonElement | null;
+    const menuItems = document.querySelectorAll(".dropdown-item") as NodeListOf<HTMLAnchorElement>;
 
     // Function to handle menu opening
     const openMobileMenu = (e: Event) => {
@@ -452,7 +429,7 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
             dropdownMenu.style.display = "none";
             document.body.style.overflow = ""; // Restore scrolling
           }
-        }, 300); // Match the transition duration
+        }, 200); // Match the site-nav transition duration (0.2s)
       }
     };
 
@@ -461,6 +438,28 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
       // Use click instead of hover for mobile
       dropdownToggle.addEventListener("click", openMobileMenu);
       closeButton.addEventListener("click", closeMobileMenu);
+
+      // Close menu when an option is clicked
+      menuItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          if (isMobile()) {
+            // We don't prevent default here to allow the link to work
+            // Just close the menu after the link is clicked
+            if (dropdownMenu && dropdownMenu.classList.contains("active")) {
+              dropdownMenu.classList.add("closing");
+              dropdownMenu.classList.remove("active");
+
+              setTimeout(() => {
+                if (dropdownMenu) {
+                  dropdownMenu.classList.remove("closing");
+                  dropdownMenu.style.display = "none";
+                  document.body.style.overflow = ""; // Restore scrolling
+                }
+              }, 200); // Match the site-nav transition duration (0.2s)
+            }
+          }
+        });
+      });
 
       // Handle window resize
       window.addEventListener("resize", () => {
