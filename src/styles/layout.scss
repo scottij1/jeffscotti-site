@@ -9,29 +9,26 @@
   height: 100vh;
   margin: 0;
   padding: 0;
-  //background-color: $background-color;
   box-shadow: none;
   border-radius: 0;
 }
 
-// Page structure
+
 #main {
   position: relative;
   height: 100%;
   width: 100%;
-  padding-top: 70px;
+  padding-top: 30px;
 }
 
 #main-content {
   position: relative;
   padding: 0;
   max-width: 1280px;
-  min-height: 80vh;
   margin: 0 auto;
   padding: 0 30px;
 }
 
-// Page title
 .page-title {
   padding: 50px 0;
   text-align: center;
@@ -51,7 +48,6 @@
   margin: 0;
 }
 
-// Content blocks
 .page-content {
   padding-bottom: 50px;
 }
@@ -66,7 +62,6 @@
   margin: 0;
 }
 
-// Layout grid
 .row {
   display: flex;
   flex-wrap: wrap;
@@ -84,7 +79,6 @@
   padding: 0 15px;
 }
 
-// Responsive adjustments
 @media (max-width: 768px) {
   .col-sm-6 {
     width: 100%;

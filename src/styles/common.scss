@@ -1,0 +1,42 @@
+@import "variables";
+
+// Common styles that are used across multiple pages but aren't already in layout.scss
+// This file should only contain styles that are repeated in multiple pages
+
+.text-block {
+  margin-bottom: 30px;
+
+  p {
+    margin-bottom: 15px;
+    color: $text-color;
+    font-size: 14px;
+    line-height: 1.75;
+  }
+}
+
+.social-links {
+  margin-top: 10px;
+  text-align: left;
+  display: flex;
+  gap: 10px;
+
+  .social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: $text-color;
+    text-align: center;
+    font-size: 18px;
+    border-radius: 50%;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      background-color: $primary-color;
+      color: #fff;
+      transform: translateY(-3px);
+    }
+  }
+}

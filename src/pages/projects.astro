@@ -169,43 +169,6 @@ import Layout from "../layouts/Layout.astro";
 </Layout>
 
 <style>
-  /* Page structure */
-  #main {
-    position: relative;
-    height: 100%;
-    width: 100%;
-    padding-top: 70px;
-  }
-
-  #main-content {
-    position: relative;
-    padding: 0;
-    max-width: 1280px;
-    min-height: 80vh;
-    margin: 0 auto;
-    padding: 0 30px;
-  }
-
-  /* Page title */
-  .page-title {
-    padding: 50px 0;
-    text-align: center;
-  }
-
-  .page-title h1 {
-    font-size: 32px;
-    font-weight: 600;
-    color: var(--heading-color);
-    margin: 0 0 10px;
-  }
-
-  .page-subtitle h4 {
-    font-size: 16px;
-    font-weight: 400;
-    color: var(--text-color);
-    margin: 0;
-  }
-
   /* Portfolio filters */
   .portfolio-filters {
     list-style: none;
@@ -323,25 +286,10 @@ import Layout from "../layouts/Layout.astro";
     font-size: 10px;
   }
 
-  /* Layout */
-  .row {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 -15px 30px;
-  }
-
-  .col-xs-12 {
-    width: 100%;
-    padding: 0 15px;
-  }
-
+  /* Responsive adjustments */
   @media (max-width: 768px) {
     .portfolio-grid {
       grid-template-columns: 1fr;
-    }
-
-    #main-content {
-      padding: 0 15px;
     }
   }
 </style>
