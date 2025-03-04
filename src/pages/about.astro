@@ -29,7 +29,7 @@ import Layout from "../layouts/Layout.astro";
         >
           <div class="row">
             <!-- Who I Am Section -->
-            <div class="col-xs-12 col-sm-6">
+            <div class="col-xs-12 col-sm-6 about-section">
               <div class="block-title">
                 <h2>Who I Am</h2>
               </div>
@@ -53,7 +53,7 @@ import Layout from "../layouts/Layout.astro";
                 </p>
               </div>
             </div>
-            <div class="col-xs-12 col-sm-6">
+            <div class="col-xs-12 col-sm-6 about-section">
               <div class="block-title">
                 <h2>What Drives Me</h2>
               </div>
@@ -69,7 +69,7 @@ import Layout from "../layouts/Layout.astro";
             </div>
 
             <!-- My Skills & Experience Section -->
-            <div class="col-xs-12 col-sm-6">
+            <div class="col-xs-12 col-sm-6 about-section">
               <div class="block-title">
                 <h2>My Journey & Skills</h2>
               </div>
@@ -133,95 +133,7 @@ import Layout from "../layouts/Layout.astro";
 </Layout>
 
 <style>
-  .skills-info {
-    margin-bottom: 30px;
-  }
-
-  .skill-container {
-    position: relative;
-    margin-bottom: 20px;
-  }
-
-  .skill-container h4 {
-    font-size: 16px;
-    color: var(--heading-color);
-    margin: 0 0 5px;
-  }
-
-  .skill-percentage {
-    position: relative;
-    height: 10px;
-    background-color: var(--primary-color);
-    border-radius: 5px;
-  }
-
-  .timeline {
-    position: relative;
-    margin: 30px 0;
-  }
-
-  .timeline-item {
-    position: relative;
-    margin-bottom: 30px;
-    padding-left: 60px;
-  }
-
-  .timeline-item:before {
-    content: "";
-    position: absolute;
-    left: 20px;
-    top: 0;
-    width: 1px;
-    height: 100%;
-    background-color: var(--border-color);
-  }
-
-  .timeline-item:after {
-    content: "";
-    position: absolute;
-    left: 15px;
-    top: 5px;
-    width: 10px;
-    height: 10px;
-    background-color: var(--primary-color);
-    border-radius: 50%;
-  }
-
-  .timeline-item:last-child:before {
-    height: 15px;
-  }
-
-  .item-period {
-    margin: 0 0 5px;
-    font-size: 16px;
-    color: var(--primary-color);
-    font-weight: 500;
-  }
-
-  .item-company {
-    display: block;
-    margin: 0 0 5px;
-    font-size: 16px;
-    color: var(--text-color);
-  }
-
-  .item-title {
-    font-size: 16px;
-    margin: 0 0 10px;
-    color: var(--heading-color);
-  }
-
-  @media (max-width: 768px) {
-    .timeline-item {
-      padding-left: 40px;
-    }
-
-    .timeline-item:before {
-      left: 10px;
-    }
-
-    .timeline-item:after {
-      left: 5px;
-    }
+  .about-section {
+    margin: 15px 0;
   }
 </style>
