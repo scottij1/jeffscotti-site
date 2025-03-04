@@ -122,33 +122,3 @@ a {
     border-color: $primary-color;
   }
 }
-
-// Global button styles based on GitHub button
-.btn {
-  display: inline-block;
-  position: relative;
-  padding: 0.8em 1.5em;
-  margin-bottom: 0.75em;
-  margin-right: 0.25em;
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 1.2;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  cursor: pointer;
-  border-radius: 30px;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0 10px 10px -8px rgba(0, 0, 0, 0.22);
-  text-decoration: none;
-  color: $heading-color;
-  border: 2px solid;
-  background-color: $container-bg-color;
-  border-color: $container-bg-color;
-
-  &:hover {
-    background-color: $primary-color;
-    color: $heading-color;
-    border-color: $primary-color;
-  }
-}

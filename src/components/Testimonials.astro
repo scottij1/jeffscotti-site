@@ -51,6 +51,7 @@ const testimonialsToShow = testimonials.filter((testimonial) => testimonial.visi
   window.addEventListener("load", () => {
     if (typeof jQuery !== "undefined") {
       jQuery(document).ready(() => {
+        // Initialize Owl Carousel
         jQuery("#testimonials_1").owlCarousel({
           nav: false, // Hide next/prev buttons
           items: 2, // The number of items you want to see on the screen
@@ -75,12 +76,89 @@ const testimonialsToShow = testimonials.filter((testimonial) => testimonial.visi
             },
           },
         });
+
+        // Add read more / show less functionality
+        setupReadMoreLinks();
       });
     }
   });
+
+  // Function to set up read more and show less links
+  function setupReadMoreLinks() {
+    // Get all read more links
+    const readMoreLinks = document.querySelectorAll(".read-more-link");
+    const showLessLinks = document.querySelectorAll(".show-less-link");
+
+    // Add click event listeners to read more links
+    readMoreLinks.forEach((link) => {
+      link.addEventListener("click", function (this: HTMLElement, e: Event) {
+        e.preventDefault();
+
+        // Get the parent testimonial item
+        const testimonialText = this.closest(".testimonial-text") as HTMLElement;
+        if (!testimonialText) return;
+
+        // Show the hidden text
+        const hiddenText = testimonialText.querySelector(".hidden-text") as HTMLElement;
+        if (hiddenText) hiddenText.style.display = "inline";
+
+        // Hide read more link
+        const readMoreContainer = testimonialText.querySelector(
+          ".read-more-container",
+        ) as HTMLElement;
+        if (readMoreContainer) readMoreContainer.style.display = "none";
+
+        // Show show less link
+        const showLessContainer = testimonialText.querySelector(
+          ".show-less-container",
+        ) as HTMLElement;
+        if (showLessContainer) showLessContainer.style.display = "inline";
+      });
+    });
+
+    // Add click event listeners to show less links
+    showLessLinks.forEach((link) => {
+      link.addEventListener("click", function (this: HTMLElement, e: Event) {
+        e.preventDefault();
+
+        // Get the parent testimonial item
+        const testimonialText = this.closest(".testimonial-text") as HTMLElement;
+        if (!testimonialText) return;
+
+        // Hide the hidden text
+        const hiddenText = testimonialText.querySelector(".hidden-text") as HTMLElement;
+        if (hiddenText) hiddenText.style.display = "none";
+
+        // Show read more link
+        const readMoreContainer = testimonialText.querySelector(
+          ".read-more-container",
+        ) as HTMLElement;
+        if (readMoreContainer) readMoreContainer.style.display = "inline";
+
+        // Hide show less link
+        const showLessContainer = testimonialText.querySelector(
+          ".show-less-container",
+        ) as HTMLElement;
+        if (showLessContainer) showLessContainer.style.display = "none";
+      });
+    });
+  }
 </script>
 
 <style is:global>
+  /* Read more / show less styles */
+  .read-more-link,
+  .show-less-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  .read-more-link:hover,
+  .show-less-link:hover {
+    text-decoration: underline;
+  }
   .testimonials-container {
     width: 100%;
     max-width: 1200px;
@@ -89,7 +167,7 @@ const testimonialsToShow = testimonials.filter((testimonial) => testimonial.visi
   }
 
   .testimonial-item {
-    padding: 30px 30px 0 30px;
+    padding: 30px;
     margin-bottom: 10px;
   }
 
@@ -230,5 +308,11 @@ const testimonialsToShow = testimonials.filter((testimonial) => testimonial.visi
     background-color: var(--border-color);
     height: 2px;
     bottom: 0;
+  }
+
+  @media (max-width: 768px) {
+    .testimonial-content {
+      margin-right: 30px;
+    }
   }
 </style>

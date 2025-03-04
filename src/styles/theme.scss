@@ -1,9 +1,5 @@
-// Theme definitions using CSS custom properties
-// This file demonstrates how to create and switch between themes
-
-// Dark theme (default)
+// (default)
 .theme-dark {
-  // Colors
   --primary-color: #007ced; // Blue
   --secondary-color: #ff9800; // Orange
   --background-color: #222; // Dark gray
@@ -14,9 +10,7 @@
   --link-hover-color: #ff9800; // Orange for link hover
 }
 
-// Light theme
 .theme-light {
-  // Colors
   --primary-color: #0066cc; // Darker blue
   --secondary-color: #e67e00; // Darker orange
   --background-color: #f5f5f5; // Light gray

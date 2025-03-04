@@ -3,9 +3,18 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Contact | Jeff Scotti">
-  <div id="main" class="site-main">
-    <div id="main-content" class="single-page-content">
-      <div id="primary" class="content-area">
+  <div
+    id="main"
+    class="site-main"
+  >
+    <div
+      id="main-content"
+      class="single-page-content"
+    >
+      <div
+        id="primary"
+        class="content-area"
+      >
         <div class="page-title">
           <h1>Contact</h1>
           <div class="page-subtitle">
@@ -21,7 +30,10 @@ import Layout from "../layouts/Layout.astro";
           <div class="contact-section">
             <!-- Contact Form -->
             <div class="contact-form-container">
-              <form id="contact_form" class="contact-form">
+              <form
+                id="contact_form"
+                class="contact-form"
+              >
                 <div class="form-group form-group-with-icon">
                   <input
                     id="form_name"
@@ -51,10 +63,15 @@ import Layout from "../layouts/Layout.astro";
                     class="form-control"
                     placeholder="Message"
                     rows="7"
-                    required></textarea>
+                    required
+                  ></textarea>
                 </div>
 
-                <button type="submit" class="button btn-send">Submit</button>
+                <button
+                  type="submit"
+                  class="button btn-send"
+                  >Submit</button
+                >
               </form>
             </div>
 
@@ -89,10 +106,16 @@ import Layout from "../layouts/Layout.astro";
                     <div class="ci-text">
                       <h4>Connect With Me</h4>
                       <div class="social-links">
-                        <a href="#" class="social-link" title="LinkedIn"
+                        <a
+                          href="#"
+                          class="social-link"
+                          title="LinkedIn"
                           ><i class="fab fa-linkedin-in"></i></a
                         >
-                        <a href="#" class="social-link" title="GitHub"
+                        <a
+                          href="#"
+                          class="social-link"
+                          title="GitHub"
                           ><i class="fab fa-github"></i></a
                         >
                       </div>
@@ -115,36 +138,36 @@ import Layout from "../layouts/Layout.astro";
     flex-wrap: wrap;
     gap: 30px;
   }
-  
+
   .contact-form-container {
     flex: 1 1 60%;
     min-width: 300px;
     box-sizing: border-box;
   }
-  
+
   .contact-info-container {
     flex: 1 1 30%;
     min-width: 250px;
   }
-  
+
   /* Contact info */
   .contact-info {
     background-color: rgba(40, 40, 40, 0.5);
     border-radius: 8px;
     padding: 25px;
   }
-  
+
   /* Info list */
   .info-list {
     margin-bottom: 30px;
   }
-  
+
   .info-block {
     position: relative;
     margin-bottom: 30px;
     padding-left: 50px;
   }
-  
+
   .ci-icon {
     position: absolute;
     left: 0;
@@ -155,42 +178,42 @@ import Layout from "../layouts/Layout.astro";
     font-size: 20px;
     color: var(--primary-color);
   }
-  
+
   .ci-icon i {
     position: relative;
     top: 5px;
   }
-  
+
   .ci-text h4 {
     font-size: 16px;
     color: var(--heading-color);
     margin: 0 0 5px;
   }
-  
+
   .ci-text p {
     font-size: 14px;
     color: var(--text-color);
     margin: 0 0 5px;
   }
-  
+
   /* Contact form */
   .contact-form {
     margin-bottom: 30px;
     width: 100%;
     box-sizing: border-box;
   }
-  
+
   .form-group {
     position: relative;
     margin-bottom: 20px;
     width: 100%;
     box-sizing: border-box;
   }
-  
+
   .form-group-with-icon {
     position: relative;
   }
-  
+
   /* Input and textarea styling */
   .form-control {
     display: block;
@@ -204,18 +227,18 @@ import Layout from "../layouts/Layout.astro";
     transition: border-color 0.3s ease-in-out;
     font-size: 16px;
   }
-  
+
   /* On focus, change the border color to blue */
   .form-control:focus {
     outline: none;
     border-color: var(--primary-color);
   }
-  
+
   textarea.form-control {
     height: auto;
     min-height: 150px;
   }
-  
+
   /* Button */
   .button.btn-send {
     display: inline-block;
@@ -232,18 +255,17 @@ import Layout from "../layouts/Layout.astro";
     font-family: var(--font-family);
     transition: all 0.3s ease-in-out;
   }
-  
+
   .button.btn-send:hover {
     background-color: var(--primary-color);
     color: #fff;
   }
-  
-  /* Responsive */
+
   @media (max-width: 768px) {
     .contact-section {
       flex-direction: column;
     }
-    
+
     .contact-form-container,
     .contact-info-container {
       width: 100%;
@@ -257,9 +279,7 @@ import Layout from "../layouts/Layout.astro";
 
     fields.forEach((id) => {
       const input = document.getElementById(id);
-      const borderDiv = document.getElementById(
-        id.replace("form_", "") + "-border",
-      );
+      const borderDiv = document.getElementById(id.replace("form_", "") + "-border");
       if (input && borderDiv) {
         input.addEventListener("focus", () => {
           borderDiv.style.opacity = "1";
