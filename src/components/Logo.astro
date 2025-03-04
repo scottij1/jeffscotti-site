@@ -1,9 +1,19 @@
 ---
-import ravenLogo from "../assets/raven-logo-sm.png";
+import ravenLogoWhite from "../assets/raven-logo-sm.png";
+import ravenLogoBlack from "../assets/raven-logo-sm-blk.png";
 ---
 
 <div class="logo-lockup">
-  <img src={ravenLogo.src} alt="Raven Logo" class="raven-logo" />
+  <img
+    src={ravenLogoWhite.src}
+    alt="Raven Logo"
+    class="raven-logo white-logo"
+  />
+  <img
+    src={ravenLogoBlack.src}
+    alt="Raven Logo"
+    class="raven-logo black-logo"
+  />
   <span class="logo-text"><strong>Jeff</strong> Scotti</span>
 </div>
 
@@ -21,6 +31,52 @@ import ravenLogo from "../assets/raven-logo-sm.png";
 
   .logo-text {
     font-size: 17pt;
-    color: #f5f5f5;
+    color: var(--heading-color);
+  }
+
+  /* Hide both logos by default */
+  .white-logo,
+  .black-logo {
+    display: none;
+  }
+
+  /* Show white logo in dark theme */
+  .theme-dark .white-logo {
+    display: block;
+  }
+
+  /* Show black logo in light theme */
+  .theme-light .black-logo {
+    display: block;
+  }
+
+  /* Default to white logo if no theme class is present */
+  :root:not(.theme-light):not(.theme-dark) .white-logo {
+    display: block;
   }
 </style>
+
+<script>
+  // Function to update logo visibility based on current theme
+  function updateLogoVisibility() {
+    const isLightTheme = document.body.classList.contains("theme-light");
+    const whiteLogo = document.querySelector(".white-logo") as HTMLElement | null;
+    const blackLogo = document.querySelector(".black-logo") as HTMLElement | null;
+
+    if (whiteLogo && blackLogo) {
+      if (isLightTheme) {
+        whiteLogo.style.display = "none";
+        blackLogo.style.display = "block";
+      } else {
+        whiteLogo.style.display = "block";
+        blackLogo.style.display = "none";
+      }
+    }
+  }
+
+  // Update logo visibility when the page loads
+  document.addEventListener("DOMContentLoaded", updateLogoVisibility);
+
+  // Update logo visibility when theme changes
+  document.addEventListener("themeChanged", updateLogoVisibility);
+</script>

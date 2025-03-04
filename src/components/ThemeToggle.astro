@@ -2,7 +2,11 @@
 // A simple theme toggle component that demonstrates the use of CSS variables for theming
 ---
 
-<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+<button
+  id="theme-toggle"
+  class="theme-toggle"
+  aria-label="Toggle theme"
+>
   <span class="theme-toggle-icon">
     <i class="fas fa-sun light-icon"></i>
     <i class="fas fa-moon dark-icon"></i>
@@ -26,9 +30,7 @@
 
     // Update icon based on current theme
     updateToggleIcon(
-      document.body.classList.contains("theme-light")
-        ? "theme-light"
-        : "theme-dark",
+      document.body.classList.contains("theme-light") ? "theme-light" : "theme-dark",
     );
 
     if (themeToggle) {
@@ -51,6 +53,9 @@
     function saveTheme(theme: string) {
       localStorage.setItem("theme", theme);
       updateToggleIcon(theme);
+
+      // Dispatch a custom event for other components to listen for theme changes
+      document.dispatchEvent(new CustomEvent("themeChanged", { detail: { theme } }));
     }
 
     function updateToggleIcon(theme: string) {
@@ -81,7 +86,7 @@
     justify-content: center;
     background: transparent;
     border: none;
-    color: #f5f5f5;
+    color: var(--heading-color);
     padding: 8px 12px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
@@ -117,7 +122,7 @@
   /* Theme-specific styles */
   .theme-light .theme-toggle,
   .theme-dark .theme-toggle {
-    color: #f5f5f5;
+    color: var(--heading-color);
   }
 
   @media (max-width: 768px) {

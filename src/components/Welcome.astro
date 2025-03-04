@@ -146,8 +146,8 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
     height: 262px;
     border-radius: 50%;
     overflow: hidden;
-    background-color: #444;
-    border: 10px solid #444;
+    background-color: var(--border-color);
+    border: 10px solid var(--border-color);
   }
 
   .hp-inner {
@@ -207,7 +207,7 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
     top: calc(100% + 8px);
     left: 0;
     min-width: 200px;
-    background-color: #333;
+    background-color: var(--container-bg-color);
     border-radius: 8px;
     padding: 8px 0;
     z-index: 1000;
@@ -231,7 +231,7 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
   .mobile-close-btn {
     background: none;
     border: none;
-    color: #fff;
+    color: var(--heading-color);
     font-size: 20px;
     cursor: pointer;
     padding: 5px;
@@ -242,7 +242,7 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
   }
 
   .mobile-close-btn:hover {
-    color: #007bff;
+    color: var(--primary-color);
   }
 
   /* Bridge element to maintain hover */
@@ -264,13 +264,13 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
     align-items: center;
     gap: 8px;
     padding: 8px 16px;
-    color: #fff;
+    color: var(--heading-color);
     text-decoration: none;
     transition: background-color 0.2s;
   }
 
   .dropdown-item:hover {
-    background-color: #007bff;
+    background-color: var(--primary-color);
   }
 
   /* Media queries */
@@ -353,7 +353,7 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
       display: flex;
       position: sticky;
       top: 0;
-      background-color: #333;
+      background-color: var(--container-bg-color);
       z-index: 10;
     }
 

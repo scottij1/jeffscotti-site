@@ -22,7 +22,9 @@
       console.error("Background element not found");
       return;
     }
-    VANTA.DOTS({
+
+    // Initialize with dark theme colors
+    let effect = VANTA.DOTS({
       el: element,
       mouseControls: true,
       touchControls: true,
@@ -31,11 +33,40 @@
       minWidth: 200.0,
       scale: 1.0,
       scaleMobile: 1.0,
-      color: 0xcccccc,
-      backgroundColor: 0x222222,
+      color: 0xd5d5d5, // Light gray dots (--text-color in dark theme)
+      backgroundColor: 0x222222, // Dark gray background (--background-color in dark theme)
       size: 1.0,
       spacing: 35.0,
       showLines: false,
+    });
+
+    // Listen for theme changes
+    document.addEventListener("themeChanged", (e) => {
+      // Get the current theme
+      const isLightTheme = document.body.classList.contains("theme-light");
+
+      // Destroy the current effect
+      if (effect && typeof effect.destroy === "function") {
+        effect.destroy();
+      }
+
+      // Create a new effect with the appropriate colors
+      effect = VANTA.DOTS({
+        el: element,
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: true,
+        minHeight: 200.0,
+        minWidth: 200.0,
+        scale: 1.0,
+        scaleMobile: 1.0,
+        // Use light theme colors if light theme is active, otherwise use dark theme colors
+        color: isLightTheme ? 0x333333 : 0xd5d5d5, // Dots color
+        backgroundColor: isLightTheme ? 0xf5f5f5 : 0x222222, // Background color
+        size: 1.0,
+        spacing: 35.0,
+        showLines: false,
+      });
     });
   });
 </script>

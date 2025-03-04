@@ -141,14 +141,14 @@ a {
   transition: all 0.3s ease-in-out;
   box-shadow: 0 10px 10px -8px rgba(0, 0, 0, 0.22);
   text-decoration: none;
-  color: #fff;
+  color: $heading-color;
   border: 2px solid;
-  background-color: #333;
-  border-color: #333;
+  background-color: $container-bg-color;
+  border-color: $container-bg-color;
 
   &:hover {
     background-color: $primary-color;
-    color: #fff;
+    color: $heading-color;
     border-color: $primary-color;
   }
 }

@@ -43,7 +43,7 @@ ul {
 
     &:hover {
       background-color: $primary-color;
-      color: #fff;
+      color: $heading-color;
       transform: translateY(-3px);
     }
   }

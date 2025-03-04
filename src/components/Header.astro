@@ -12,7 +12,10 @@ const isPathActive = (path: string) => {
 };
 ---
 
-<header id="site_header" class="header">
+<header
+  id="site_header"
+  class="header"
+>
   <div class="header-content">
     <!-- Logo -->
     <div class="site-logo">
@@ -29,15 +32,11 @@ const isPathActive = (path: string) => {
           <a href="/">Home</a>
         </li>
 
-        <li
-          class={`menu-item ${isPathActive("/about") ? "current-menu-item" : ""}`}
-        >
+        <li class={`menu-item ${isPathActive("/about") ? "current-menu-item" : ""}`}>
           <a href="/about">About</a>
         </li>
 
-        <li
-          class={`menu-item ${isPathActive("/contact") ? "current-menu-item" : ""}`}
-        >
+        <li class={`menu-item ${isPathActive("/contact") ? "current-menu-item" : ""}`}>
           <a href="mailto:jeff@jeffscotti.net">Contact</a>
         </li>
       </ul>
@@ -62,9 +61,7 @@ const isPathActive = (path: string) => {
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const siteNav = document.querySelector(".site-nav") as HTMLElement | null;
-    const menuToggle = document.querySelector(
-      ".menu-toggle",
-    ) as HTMLElement | null;
+    const menuToggle = document.querySelector(".menu-toggle") as HTMLElement | null;
 
     if (menuToggle && siteNav) {
       menuToggle.addEventListener("click", () => {
@@ -95,9 +92,7 @@ const isPathActive = (path: string) => {
     });
 
     // Handle submenu toggles for mobile
-    const menuItemsWithChildren = document.querySelectorAll(
-      ".menu-item-has-children > a",
-    );
+    const menuItemsWithChildren = document.querySelectorAll(".menu-item-has-children > a");
     menuItemsWithChildren.forEach((item) => {
       item.addEventListener("click", (e) => {
         if (window.innerWidth <= 991) {
@@ -185,7 +180,7 @@ const isPathActive = (path: string) => {
   }
 
   .site-main-menu li a {
-    color: #f5f5f5;
+    color: var(--heading-color);
     text-decoration: none;
     line-height: 50px;
     font-size: 16px;
@@ -204,7 +199,7 @@ const isPathActive = (path: string) => {
   .site-main-menu .sub-menu {
     display: none;
     position: absolute;
-    background-color: #333;
+    background-color: var(--container-bg-color);
     left: -23px;
     top: 100%;
     width: auto;
@@ -275,7 +270,7 @@ const isPathActive = (path: string) => {
     position: absolute;
     height: 3px;
     width: 24px;
-    background-color: #f5f5f5;
+    background-color: var(--heading-color);
     border-radius: 3px;
     opacity: 1;
     left: 12px;
@@ -322,7 +317,7 @@ const isPathActive = (path: string) => {
     }
 
     .header-content {
-      background-color: #222;
+      background-color: var(--background-color);
       padding: 10px 20px;
     }
 
@@ -334,7 +329,7 @@ const isPathActive = (path: string) => {
       position: fixed;
       height: calc(100vh - 68px);
       width: 100%;
-      background-color: rgba(34, 34, 34, 0.95);
+      background-color: var(--background-color);
       backdrop-filter: blur(5px);
       top: 68px;
       left: 0;
