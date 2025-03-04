@@ -2,7 +2,6 @@
 import jsHeadshot from "../assets/js-headshot.png";
 import resumePdf from "../assets/jeffscotti_resume.pdf";
 import resumeDocx from "../assets/jeffscotti_resume.docx?url";
-import Testimonials from "./Testimonials.astro";
 ---
 
 <div class="welcome-container">
@@ -29,12 +28,10 @@ import Testimonials from "./Testimonials.astro";
             }
           </h4>
           <p class="bio">
-            I build intuitive, high-performance web applications by combining
-            clean, efficient code with thoughtful design. With 15+ years of
-            experience, I specialize in crafting scalable user interfaces,
-            leading technical projects, and enhancing digital experiences
-            through modern web technologies, front-end frameworks, and UX best
-            practices.
+            I build intuitive, high-performance web applications by combining clean, efficient code
+            with thoughtful design. With 15+ years of experience, I specialize in crafting scalable
+            user interfaces, leading technical projects, and enhancing digital experiences through
+            modern web technologies, front-end frameworks, and UX best practices.
           </p>
 
           <div class="home-buttons">
@@ -45,11 +42,25 @@ import Testimonials from "./Testimonials.astro";
                 <i class="fa-solid fa-chevron-down"></i>
               </button>
               <div class="dropdown-menu">
-                <a href={resumePdf} class="dropdown-item" target="_blank">
+                <div class="mobile-menu-header">
+                  <h3>Resume Options</h3>
+                  <button class="mobile-close-btn">
+                    <i class="fa-solid fa-times"></i>
+                  </button>
+                </div>
+                <a
+                  href={resumePdf}
+                  class="dropdown-item"
+                  target="_blank"
+                >
                   <i class="fa-solid fa-file-pdf"></i>
                   <span>PDF Version</span>
                 </a>
-                <a href={resumeDocx} class="dropdown-item" target="_blank">
+                <a
+                  href={resumeDocx}
+                  class="dropdown-item"
+                  target="_blank"
+                >
                   <i class="fa-solid fa-file-word"></i>
                   <span>Word Version</span>
                 </a>
@@ -62,10 +73,17 @@ import Testimonials from "./Testimonials.astro";
             >
               <i class="fab fa-linkedin"></i> LinkedIn
             </a>
-            <a href="https://github.com/scottij1" target="_blank" class="btn">
+            <a
+              href="https://github.com/scottij1"
+              target="_blank"
+              class="btn"
+            >
               <i class="fab fa-github"></i> GitHub
             </a>
-            <a href="mailto:jeff@jeffscotti.net" class="btn">
+            <a
+              href="mailto:jeff@jeffscotti.net"
+              class="btn"
+            >
               <i class="fas fa-envelope"></i> Contact
             </a>
           </div>
@@ -129,7 +147,7 @@ import Testimonials from "./Testimonials.astro";
     border-radius: 50%;
     overflow: hidden;
     background-color: #444;
-    border: 18px solid #444;
+    border: 10px solid #444;
   }
 
   .hp-inner {
@@ -226,6 +244,37 @@ import Testimonials from "./Testimonials.astro";
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   }
 
+  .mobile-menu-header {
+    display: none;
+    padding: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .mobile-menu-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .mobile-close-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+  }
+
+  .mobile-close-btn:hover {
+    color: #007bff;
+  }
+
   /* Bridge element to maintain hover */
   .dropdown::after {
     content: "";
@@ -277,6 +326,74 @@ import Testimonials from "./Testimonials.astro";
     .bio {
       padding-right: 0;
     }
+
+    .name,
+    .job-title {
+      text-align: center;
+    }
+
+    .name {
+      margin-bottom: 10px;
+    }
+
+    .dropdown {
+      width: 100%;
+    }
+
+    .dropdown-toggle {
+      justify-content: center;
+      text-align: center;
+    }
+
+    /* Mobile dropdown menu styles */
+    .dropdown-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: #333;
+      z-index: 2000;
+      padding: 0;
+      border-radius: 0;
+      box-shadow: none;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-in-out;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .dropdown-menu.active {
+      display: flex;
+      transform: translateX(0);
+    }
+
+    .dropdown-menu.closing {
+      transform: translateX(100%);
+    }
+
+    .mobile-menu-header {
+      display: flex;
+      position: sticky;
+      top: 0;
+      background-color: #333;
+      z-index: 10;
+    }
+
+    .dropdown-item {
+      padding: 16px;
+      font-size: 18px;
+    }
+
+    /* Override hover behavior on mobile */
+    .dropdown:hover .dropdown-menu {
+      display: none;
+    }
+
+    .dropdown::after {
+      display: none;
+    }
   }
 </style>
 
@@ -284,6 +401,7 @@ import Testimonials from "./Testimonials.astro";
   import anime from "animejs";
 
   document.addEventListener("DOMContentLoaded", () => {
+    // Job title animation
     anime({
       targets: ".job-title .char",
       opacity: [0, 1],
@@ -293,5 +411,65 @@ import Testimonials from "./Testimonials.astro";
       duration: 500,
       delay: (el, i) => 50 * i,
     });
+
+    // Mobile menu functionality
+    const isMobile = () => window.innerWidth <= 768;
+    const dropdownToggle = document.querySelector(".dropdown-toggle") as HTMLButtonElement | null;
+    const dropdownMenu = document.querySelector(".dropdown-menu") as HTMLDivElement | null;
+    const closeButton = document.querySelector(".mobile-close-btn") as HTMLButtonElement | null;
+
+    // Function to handle menu opening
+    const openMobileMenu = (e: Event) => {
+      if (isMobile() && dropdownMenu) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // First set display to flex, then add active class for animation
+        dropdownMenu.style.display = "flex";
+
+        // Force a reflow to ensure the display change takes effect before adding the class
+        void dropdownMenu.offsetWidth;
+
+        dropdownMenu.classList.add("active");
+        document.body.style.overflow = "hidden"; // Prevent scrolling when menu is open
+      }
+    };
+
+    // Function to handle menu closing
+    const closeMobileMenu = (e: Event) => {
+      if (isMobile() && dropdownMenu && dropdownMenu.classList.contains("active")) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Add closing class for slide-out animation
+        dropdownMenu.classList.add("closing");
+        dropdownMenu.classList.remove("active");
+
+        // Wait for animation to complete before hiding
+        setTimeout(() => {
+          if (dropdownMenu) {
+            dropdownMenu.classList.remove("closing");
+            dropdownMenu.style.display = "none";
+            document.body.style.overflow = ""; // Restore scrolling
+          }
+        }, 300); // Match the transition duration
+      }
+    };
+
+    // Add event listeners for mobile
+    if (dropdownToggle && dropdownMenu && closeButton) {
+      // Use click instead of hover for mobile
+      dropdownToggle.addEventListener("click", openMobileMenu);
+      closeButton.addEventListener("click", closeMobileMenu);
+
+      // Handle window resize
+      window.addEventListener("resize", () => {
+        if (!isMobile() && dropdownMenu && dropdownMenu.classList.contains("active")) {
+          dropdownMenu.classList.remove("active", "closing");
+          dropdownMenu.style.display = "";
+          document.body.style.overflow = "";
+        }
+      });
+    }
   });
 </script>
