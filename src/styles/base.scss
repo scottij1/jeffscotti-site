@@ -40,6 +40,30 @@ h1 {
 
 h2 {
   font-size: 27px;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 7px;
+  margin-bottom: 20px;
+  
+  &:after {
+    display: block;
+    position: absolute;
+    content: "";
+    width: 30px;
+    background-color: $primary-color;
+    height: 2px;
+    bottom: 0;
+  }
+
+  &:before {
+    display: block;
+    position: absolute;
+    content: "";
+    width: 100%;
+    background-color: $border-color;
+    height: 2px;
+    bottom: 0;
+  }
 }
 
 h3 {
