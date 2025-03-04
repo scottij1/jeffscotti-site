@@ -5,6 +5,7 @@ import "../styles/base.scss";
 import "../styles/utilities.scss";
 import "../styles/layout.scss";
 import "../styles/theme.scss";
+import VantaBackground from "../components/VantaBackground.astro";
 ---
 
 <!doctype html>
@@ -35,7 +36,9 @@ import "../styles/theme.scss";
       crossorigin="anonymous"></script>
   </head>
   <body>
+    <VantaBackground />
     <div class="page-container">
+      
       <Header />
       <slot />
     </div>

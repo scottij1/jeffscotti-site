@@ -1,0 +1,41 @@
+---
+// VantaBackground.astro - No imports needed for client-side script
+---
+
+<!-- Background div -->
+<div id="vanta-bg" style="width: 100vw; height: 100vh; position: absolute; top: 0; left: 0; z-index: -1;"></div>
+
+<!-- Client-side script using Astro's client:load directive -->
+<script>
+  // Import Three.js and Vanta.NET properly for Vite/Astro
+  import * as THREE from 'three';
+  import VANTA_NET from 'vanta/dist/vanta.net.min';
+  
+  window.addEventListener('load', () => {
+    const element = document.querySelector("#vanta-bg") as HTMLElement;
+    if (!element) {
+      console.error("Background element not found");
+      return;
+    }
+
+    // Initialize Vanta.NET with THREE
+    VANTA_NET({
+      THREE: THREE,
+      el: element,
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.0,
+      minWidth: 200.0,
+      scale: 1.0,
+      scaleMobile: 1.0,
+      color: 0x0077ff,
+      backgroundColor: 0x000000,
+      points: 10,
+      maxDistance: 20,
+      spacing: 15,
+    });
+    
+    console.log('VANTA initialized successfully');
+  });
+</script>
