@@ -59,7 +59,7 @@ import ravenLogoBlack from "../assets/raven-logo-sm-blk.png";
 <script>
   // Function to update logo visibility based on current theme
   function updateLogoVisibility() {
-    const isLightTheme = document.body.classList.contains("theme-light");
+    const isLightTheme = document.documentElement.classList.contains("theme-light");
     const whiteLogo = document.querySelector(".white-logo") as HTMLElement | null;
     const blackLogo = document.querySelector(".black-logo") as HTMLElement | null;
 
