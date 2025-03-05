@@ -17,6 +17,18 @@ import VantaBackground from "../components/VantaBackground.astro";
       name="viewport"
       content="width=device-width"
     />
+    <!-- Apply theme from localStorage before page renders to prevent flash -->
+    <script is:inline>
+      // Check for saved theme preference or use default
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) {
+        document.documentElement.classList.add(savedTheme);
+      } else {
+        // Set dark theme as default
+        document.documentElement.classList.add("theme-dark");
+        localStorage.setItem("theme", "theme-dark");
+      }
+    </script>
     <link
       rel="icon"
       type="image/ico"

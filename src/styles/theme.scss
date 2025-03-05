@@ -1,5 +1,5 @@
-// (default)
-.theme-dark {
+// Theme classes applied to the html element
+html.theme-dark {
   --primary-color: #007ced; // Blue
   --secondary-color: #ff9800; // Orange
   --background-color: #222; // Dark gray
@@ -10,7 +10,7 @@
   --link-hover-color: #ff9800; // Orange for link hover
 }
 
-.theme-light {
+html.theme-light {
   --primary-color: #0066cc; // Darker blue
   --secondary-color: #e67e00; // Darker orange
   --background-color: #f5f5f5; // Light gray

@@ -17,34 +17,23 @@
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const themeToggle = document.getElementById("theme-toggle");
-
-    // Check for saved theme preference or use default
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-      document.body.classList.add(savedTheme);
-    } else {
-      // Set dark theme as default
-      document.body.classList.add("theme-dark");
-      localStorage.setItem("theme", "theme-dark");
-    }
+    const html = document.documentElement;
 
     // Update icon based on current theme
-    updateToggleIcon(
-      document.body.classList.contains("theme-light") ? "theme-light" : "theme-dark",
-    );
+    updateToggleIcon(html.classList.contains("theme-light") ? "theme-light" : "theme-dark");
 
     if (themeToggle) {
       themeToggle.addEventListener("click", () => {
-        const body = document.body;
+        const html = document.documentElement;
 
         // Toggle between dark and light themes
-        if (body.classList.contains("theme-light")) {
-          body.classList.remove("theme-light");
-          body.classList.add("theme-dark");
+        if (html.classList.contains("theme-light")) {
+          html.classList.remove("theme-light");
+          html.classList.add("theme-dark");
           saveTheme("theme-dark");
         } else {
-          body.classList.remove("theme-dark");
-          body.classList.add("theme-light");
+          html.classList.remove("theme-dark");
+          html.classList.add("theme-light");
           saveTheme("theme-light");
         }
       });
