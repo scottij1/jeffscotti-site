@@ -49,7 +49,11 @@ const canonicalURLObj =
     <meta name="viewport" content="width=device-width" />
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content={description} />
+    <meta
+      name="description"
+      content={description ||
+        "Jeff Scotti is a Senior Front End Engineer and UI/UX Designer with 15+ years of experience building intuitive, high-performance web applications."}
+    />
     <meta name="keywords" content={keywords.join(", ")} />
     <meta name="author" content="Jeff Scotti" />
     <link rel="canonical" href={canonicalURLObj} />
@@ -58,7 +62,11 @@ const canonicalURLObj =
     <meta property="og:type" content={type} />
     <meta property="og:url" content={canonicalURLObj} />
     <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta
+      property="og:description"
+      content={description ||
+        "Jeff Scotti is a Senior Front End Engineer and UI/UX Designer with 15+ years of experience building intuitive, high-performance web applications."}
+    />
     <meta property="og:image" content={image} />
     <meta property="og:site_name" content="Jeff Scotti" />
 
@@ -66,7 +74,11 @@ const canonicalURLObj =
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURLObj} />
     <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
+    <meta
+      property="twitter:description"
+      content={description ||
+        "Jeff Scotti is a Senior Front End Engineer and UI/UX Designer with 15+ years of experience building intuitive, high-performance web applications."}
+    />
     <meta property="twitter:image" content={image} />
 
     <!-- Preconnect to external domains -->
