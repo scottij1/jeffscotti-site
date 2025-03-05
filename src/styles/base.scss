@@ -16,7 +16,6 @@ body {
   color: $text-color;
   line-height: 1.65em;
   overflow-x: hidden;
-  
 }
 
 // Typography
@@ -44,7 +43,7 @@ h2 {
   display: inline-block;
   padding-bottom: 7px;
   margin-bottom: 20px;
-  
+
   &:after {
     display: block;
     position: absolute;

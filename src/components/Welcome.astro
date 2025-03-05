@@ -10,11 +10,7 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
       <div class="two-column-layout">
         <div class="image-column">
           <div class="home-photo">
-            <div
-              class="hp-inner"
-              style={`background-image: url(${jsHeadshot.src});`}
-            >
-            </div>
+            <div class="hp-inner" style={`background-image: url(${jsHeadshot.src});`}></div>
           </div>
         </div>
 
@@ -25,10 +21,7 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
                 char === " " ? (
                   <span data-key={index}>&nbsp;</span>
                 ) : (
-                  <span
-                    data-key={index}
-                    class="char"
-                  >
+                  <span data-key={index} class="char">
                     {char}
                   </span>
                 ),
@@ -61,42 +54,23 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
                     <i class="fa-solid fa-times"></i>
                   </button>
                 </div>
-                <a
-                  href={resumePdf}
-                  class="dropdown-item"
-                  target="_blank"
-                >
+                <a href={resumePdf} class="dropdown-item" target="_blank">
                   <i class="fa-solid fa-file-pdf"></i>
                   <span>PDF Version</span>
                 </a>
-                <a
-                  href={resumeDocx}
-                  class="dropdown-item"
-                  target="_blank"
-                >
+                <a href={resumeDocx} class="dropdown-item" target="_blank">
                   <i class="fa-solid fa-file-word"></i>
                   <span>Word Version</span>
                 </a>
               </div>
             </div>
-            <a
-              href="https://linkedin.com/in/jeffscotti"
-              target="_blank"
-              class="btn"
-            >
+            <a href="https://linkedin.com/in/jeffscotti" target="_blank" class="btn">
               <i class="fab fa-linkedin"></i> LinkedIn
             </a>
-            <a
-              href="https://github.com/scottij1"
-              target="_blank"
-              class="btn"
-            >
+            <a href="https://github.com/scottij1" target="_blank" class="btn">
               <i class="fab fa-github"></i> GitHub
             </a>
-            <a
-              href="mailto:jeff@jeffscotti.net"
-              class="btn"
-            >
+            <a href="mailto:jeff@jeffscotti.net" class="btn">
               <i class="fas fa-envelope"></i> Contact
             </a>
           </div>

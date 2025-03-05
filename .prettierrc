@@ -4,14 +4,20 @@
   "tabWidth": 2,
   "semi": true,
   "singleQuote": false,
-  "bracketSameLine": false,
-  "htmlWhitespaceSensitivity": "css",
-  "singleAttributePerLine": true,
+  "bracketSameLine": true,
+  "htmlWhitespaceSensitivity": "ignore",
+  "singleAttributePerLine": false,
   "overrides": [
     {
       "files": "*.astro",
       "options": {
-        "parser": "astro"
+        "parser": "astro",
+        "bracketSameLine": true,
+        "singleAttributePerLine": false,
+        "htmlWhitespaceSensitivity": "ignore",
+        "bracketSpacing": false,
+        "embeddedLanguageFormatting": "auto",
+        "vueIndentScriptAndStyle": false
       }
     }
   ]

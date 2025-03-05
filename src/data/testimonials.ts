@@ -35,8 +35,7 @@ export const testimonials: Testimonial[] = [
   {
     id: 4,
     name: "Greg Lamb",
-    company:
-      "Principle, Architecture and Development at Launch Consulting Group",
+    company: "Principle, Architecture and Development at Launch Consulting Group",
     image: "/testimonials/headshot_greg_lamb.jpg",
     text: "I had the pleasure of working with Jeff while on contract at MediaAMP. As user interface ideas were discussed, I was impressed by Jeff's design experience and his ability to bring them to life quickly. With his strong JavaScript and CSS skills, Jeff would be a great asset to any team.",
     visible: true,

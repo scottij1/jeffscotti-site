@@ -61,7 +61,7 @@
 
   .dropdown {
     position: relative;
-    
+
     .dropdown-toggle {
       cursor: pointer;
     }
@@ -149,12 +149,12 @@
 @media only screen and (max-width: 480px) {
   .footer-links {
     li {
-      margin-right: $spacing-md; 
+      margin-right: $spacing-md;
     }
 
     a {
       span {
-        display: none; 
+        display: none;
       }
 
       i:not(.chevron-icon) {

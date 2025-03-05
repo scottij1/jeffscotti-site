@@ -6,10 +6,7 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
 const currentYear = new Date().getFullYear();
 ---
 
-<footer
-  id="site_footer"
-  class="footer"
->
+<footer id="site_footer" class="footer">
   <div class="footer-content">
     <div class="copyright">
       &copy; {currentYear} Jeff Scotti. All rights reserved.
@@ -18,47 +15,30 @@ const currentYear = new Date().getFullYear();
     <div class="footer-links">
       <ul>
         <li class="dropdown">
-          <a
-            href="#"
-            class="dropdown-toggle"
-          >
+          <a href="#" class="dropdown-toggle">
             <i class="fa-solid fa-file-invoice"></i>
             <span>Resume</span>
             <i class="fa-solid fa-chevron-up chevron-icon"></i>
           </a>
           <div class="dropdown-menu">
-            <a
-              href={resumePdf}
-              class="dropdown-item"
-              target="_blank"
-            >
+            <a href={resumePdf} class="dropdown-item" target="_blank">
               <i class="fa-solid fa-file-pdf"></i>
               <span>PDF Version</span>
             </a>
-            <a
-              href={resumeDocx}
-              class="dropdown-item"
-              target="_blank"
-            >
+            <a href={resumeDocx} class="dropdown-item" target="_blank">
               <i class="fa-solid fa-file-word"></i>
               <span>Word Version</span>
             </a>
           </div>
         </li>
         <li>
-          <a
-            href="https://www.linkedin.com/in/jeffscotti"
-            target="_blank"
-          >
+          <a href="https://www.linkedin.com/in/jeffscotti" target="_blank">
             <i class="fab fa-linkedin"></i>
             <span>LinkedIn</span>
           </a>
         </li>
         <li>
-          <a
-            href="https://github.com/jeffscotti"
-            target="_blank"
-          >
+          <a href="https://github.com/jeffscotti" target="_blank">
             <i class="fab fa-github"></i>
             <span>GitHub</span>
           </a>

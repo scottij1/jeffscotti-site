@@ -28,10 +28,7 @@ const { displayText, hiddenText, needsReadMore } = limitWords(testimonial.text, 
 <div class="testimonial-item">
   <div class="testimonial-content">
     <div class="testimonial-picture">
-      <img
-        src={testimonial.image}
-        alt={testimonial.name}
-      />
+      <img src={testimonial.image} alt={testimonial.name} />
     </div>
 
     <div class="testimonial-text">
@@ -40,28 +37,16 @@ const { displayText, hiddenText, needsReadMore } = limitWords(testimonial.text, 
         {
           needsReadMore && (
             <>
-              <span
-                class="hidden-text"
-                style="display: none;"
-              >
+              <span class="hidden-text" style="display: none;">
                 {hiddenText}
               </span>
               <span class="read-more-container">
-                <a
-                  href="#"
-                  class="read-more-link"
-                >
+                <a href="#" class="read-more-link">
                   ...read more
                 </a>
               </span>
-              <span
-                class="show-less-container"
-                style="display: none;"
-              >
-                <a
-                  href="#"
-                  class="show-less-link"
-                >
+              <span class="show-less-container" style="display: none;">
+                <a href="#" class="show-less-link">
                   show less
                 </a>
               </span>

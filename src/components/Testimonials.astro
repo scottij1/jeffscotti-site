@@ -13,11 +13,7 @@ const testimonialsToShow = testimonials.filter((testimonial) => testimonial.visi
 ---
 
 <!-- Import Owl Carousel CSS -->
-<link
-  rel="stylesheet"
-  href="/styles/owl.carousel.css"
-  type="text/css"
-/>
+<link rel="stylesheet" href="/styles/owl.carousel.css" type="text/css" />
 
 <div class="testimonials-container">
   <div class="block-title">
@@ -29,21 +25,14 @@ const testimonialsToShow = testimonials.filter((testimonial) => testimonial.visi
     class="testimonials owl-carousel"
     data-mobile-items="1"
     data-tablet-items="2"
-    data-items="2"
-  >
+    data-items="2">
     {testimonialsToShow.map((testimonial) => <TestimonialItem testimonial={testimonial} />)}
   </div>
 </div>
 
 <!-- Import jQuery and Owl Carousel JS from CDN -->
-<script
-  is:inline
-  src="/js/jquery-3.5.1.min.js"
-></script>
-<script
-  is:inline
-  src="/js/owl.carousel.min.js"
-></script>
+<script is:inline src="/js/jquery-3.5.1.min.js"></script>
+<script is:inline src="/js/owl.carousel.min.js"></script>
 
 <script>
   declare const jQuery: any;
