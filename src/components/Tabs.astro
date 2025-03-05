@@ -1,4 +1,3 @@
-<!-- Import et-line icons -->
 <link
   rel="stylesheet"
   href="/styles/et-line.css"
@@ -12,7 +11,8 @@
 ></script>
 
 <div class="tabs-container">
-  <ul class="tab-buttons nav nav-tabs tpl-alt-tabs">
+  <!-- Desktop Tabs -->
+  <ul class="tab-buttons nav nav-tabs tpl-alt-tabs desktop-tabs">
     <li class="active">
       <a
         href="#front-end-engineering"
@@ -62,7 +62,273 @@
       </a>
     </li>
   </ul>
-  <div class="tab-content-wrapper tpl-tabs-cont">
+
+  <!-- Mobile Accordion -->
+  <div class="mobile-accordion">
+    <div
+      class="accordion-item active"
+      data-tab="front-end-engineering"
+    >
+      <div class="accordion-header">
+        <div class="accordion-icon">
+          <span class="icon-layers"></span>
+        </div>
+        <div class="accordion-title">Front-End Engineering</div>
+        <div class="accordion-toggle">
+          <i class="fa fa-chevron-down"></i>
+        </div>
+      </div>
+      <div
+        class="accordion-content"
+        style="display: block;"
+      >
+        <div id="accordion-front-end-engineering">
+          <p>
+            I love to code. What really drives me is <strong>problem-solving</strong> and front-end development
+            gives me plenty of puzzles to crack. For over a decade, I've been building <strong
+              >scalable, performant UIs</strong
+            > with a range of technologies including <strong
+              >TypeScript, JavaScript, React, and Material UI</strong
+            >, crafting seamless user experiences that are both <strong
+              >intuitive and efficient</strong
+            >.
+          </p>
+          <p>
+            I specialize in <strong>component-driven development</strong>, ensuring modularity and
+            reusability while optimizing render performance and state management. My work extends
+            beyond UI development, I integrate <strong>GraphQL APIs</strong>, fine-tune <strong
+              >progressive web app (PWA) functionality</strong
+            >, and streamline workflows with <strong
+              >modern build tools like Vite and Webpack</strong
+            >.
+          </p>
+          <p>
+            Whether it's <strong
+              >architecting a structured wizard flow, refining a design system, or solving a tricky
+              UI state issue</strong
+            >, I thrive on making front-end experiences feel fast, polished, and rock solid.
+          </p>
+
+          <div class="testimonial-content">
+            <div class="testimonial-text">
+              <p>
+                <span
+                  >Jeff has an excellent grasp of modern design and user experience development. His
+                  CSS and JavaScript skills are very strong and he is always eager to learn new
+                  things.</span
+                >
+              </p>
+            </div>
+            <div class="testimonial-author-info">
+              <h5 class="testimonial-author">Alex Walker</h5>
+              <p class="testimonial-firm">Software Engineer, Benaroya Research Institute</p>
+            </div>
+            <div class="testimonial-icon">
+              <i class="fa fa-quote-left"></i>
+            </div>
+            <div class="testimonial-icon-big">
+              <i class="fa fa-quote-right"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="accordion-item"
+      data-tab="ux-design"
+    >
+      <div class="accordion-header">
+        <div class="accordion-icon">
+          <span class="icon-target"></span>
+        </div>
+        <div class="accordion-title">User Experience Design</div>
+        <div class="accordion-toggle">
+          <i class="fa fa-chevron-down"></i>
+        </div>
+      </div>
+      <div class="accordion-content">
+        <div id="accordion-ux-design">
+          <p>
+            I approach UX design with a <strong>principle-driven mindset</strong>. I rely on a set
+            of
+            <strong>adaptable yet consistent guidelines</strong> that shape my decisions, keep my work
+            objective, and create a <strong>shared vision</strong> for every project. These principles
+            ensure that no matter the complexity, my process stays <strong
+              >structured, user-focused, and goal-oriented</strong
+            >.
+          </p>
+          <p>
+            At the core of my philosophy is <strong>deep user empathy</strong>. To design effective
+            solutions, I strive to <strong
+              >understand users, their pain points, and how they think</strong
+            >. Not just as data points, but as real people with real needs. By putting myself in
+            their shoes, I can
+            <strong>anticipate friction points</strong>, <strong>streamline interactions</strong>,
+            and create experiences that feel <strong>natural from the first click</strong>.
+          </p>
+          <p>
+            Great UX isn't just about how something looks. It's about <strong
+              >removing barriers</strong
+            >,
+            <strong>reducing cognitive load</strong>, and <strong
+              >making technology work effortlessly</strong
+            >
+            for the user. Whether I'm designing onboarding flows, structuring information, or refining
+            interactive elements, every decision is backed by <strong
+              >research, usability testing, and real-world feedback</strong
+            >
+            to create <strong>clear, effective, and engaging experiences</strong>.
+          </p>
+
+          <div class="testimonial-content">
+            <div class="testimonial-text">
+              <p>
+                <span
+                  >Our entire team agreed that Jeff was not only a very, very capable UX/UI
+                  designer, but his enthusiasm and unwavering dedication formed the cornerstone of
+                  our success.</span
+                >
+              </p>
+            </div>
+            <div class="testimonial-author-info">
+              <h5 class="testimonial-author">Glyn Beaumont</h5>
+              <p class="testimonial-firm">Managing Director, Hemisphere Interactive</p>
+            </div>
+            <div class="testimonial-icon">
+              <i class="fa fa-quote-left"></i>
+            </div>
+            <div class="testimonial-icon-big">
+              <i class="fa fa-quote-right"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="accordion-item"
+      data-tab="ui-design"
+    >
+      <div class="accordion-header">
+        <div class="accordion-icon">
+          <span class="icon-browser"></span>
+        </div>
+        <div class="accordion-title">User Interface Design</div>
+        <div class="accordion-toggle">
+          <i class="fa fa-chevron-down"></i>
+        </div>
+      </div>
+      <div class="accordion-content">
+        <div id="accordion-ui-design">
+          <p>
+            Users eat with their eyes first, and <strong>presentation is critical</strong>. When
+            building an enterprise product, it should <strong
+              >look and feel like an enterprise product</strong
+            >, polished, professional, and intentional. Design isn't just about making something
+            look good; it's about setting the right expectations and reinforcing trust through
+            <strong>clarity, structure, and visual hierarchy</strong>.
+          </p>
+          <p>
+            I err on the side of <strong>simplicity</strong>. I prefer <strong
+              >clean, uncluttered, purposeful design</strong
+            >, where every element serves a function and <strong
+              >negative space isn't wasted space</strong
+            >, it's an active part of the experience. A good UI should guide the user effortlessly,
+            reducing friction without drawing attention to itself. Some say the best UI is one that
+            goes unnoticed, and while that may be true, I've found that
+            <strong>users notice a lot more than we think</strong>. Every small detail—spacing,
+            typography, color contrast, motion subtly influences their perception, even if they
+            can't articulate why.
+          </p>
+
+          <div class="testimonial-content">
+            <div class="testimonial-text">
+              <p>
+                <span
+                  >His designs are well thought out based upon the needs and desires of the client,
+                  and works well in a collaborative environment to deliver a quality product that
+                  meets or exceeds the expectations of the client.</span
+                >
+              </p>
+            </div>
+            <div class="testimonial-author-info">
+              <h5 class="testimonial-author">Robert Zatt</h5>
+              <p class="testimonial-firm">Owner/Editor, Robert Zatt Productions</p>
+            </div>
+            <div class="testimonial-icon">
+              <i class="fa fa-quote-left"></i>
+            </div>
+            <div class="testimonial-icon-big">
+              <i class="fa fa-quote-right"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="accordion-item"
+      data-tab="project-management"
+    >
+      <div class="accordion-header">
+        <div class="accordion-icon">
+          <span class="icon-chat"></span>
+        </div>
+        <div class="accordion-title">Collaboration &amp; Leadership</div>
+        <div class="accordion-toggle">
+          <i class="fa fa-chevron-down"></i>
+        </div>
+      </div>
+      <div class="accordion-content">
+        <div id="accordion-project-management">
+          <p>
+            I believe that great products come from <strong
+              >efficient workflows, clear communication, and a culture of accountability</strong
+            >. I'm always looking for ways to streamline development, cut down on bottlenecks, and
+            remove unnecessary friction so teams can focus on building. That means implementing <strong
+              >smarter processes, not more processes</strong
+            >, whether it's refining sprint planning, optimizing code review pipelines, or
+            introducing automation to reduce repetitive tasks. Every change should serve one goal:
+            <strong>speeding up development without sacrificing quality</strong>.
+          </p>
+          <p>
+            <strong>Work/life balance</strong> is just as important as hitting deadlines. I've seen what
+            happens when teams get caught in
+            <strong>project creep and endless crunch cycles</strong>, it kills morale and burns
+            people out. A well-rested worker is a happy worker, and a happy worker is a productive
+            worker. We're here to build great products, not save the world, so there's no need to
+            act like we are.
+          </p>
+
+          <div class="testimonial-content">
+            <div class="testimonial-text">
+              <p>
+                <span
+                  >As a manager, Jeff is incredibly hands-on and personally invested. It is clear
+                  that he cares a great deal about the quality of work that goes into his projects,
+                  and is not afraid to jump in the trenches with the development team to get things
+                  done.</span
+                >
+              </p>
+            </div>
+            <div class="testimonial-author-info">
+              <h5 class="testimonial-author">Stephan Reese</h5>
+              <p class="testimonial-firm">Senior Project Manager, Hemisphere Interactive</p>
+            </div>
+            <div class="testimonial-icon">
+              <i class="fa fa-quote-left"></i>
+            </div>
+            <div class="testimonial-icon-big">
+              <i class="fa fa-quote-right"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-content-wrapper tpl-tabs-cont desktop-tabs-content">
     <div
       class="tab-content active"
       id="front-end-engineering"
@@ -270,6 +536,7 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
+    // Desktop tabs functionality
     const tabLinks = document.querySelectorAll<HTMLAnchorElement>(".tab-btn");
     const tabContents = document.querySelectorAll<HTMLDivElement>(".tab-content");
     const tabItems = document.querySelectorAll<HTMLLIElement>(".tab-buttons li");
@@ -297,6 +564,31 @@
         }
       });
     });
+
+    // Mobile accordion functionality
+    const accordionItems = document.querySelectorAll<HTMLDivElement>(".accordion-item");
+    const accordionHeaders = document.querySelectorAll<HTMLDivElement>(".accordion-header");
+
+    accordionHeaders.forEach((header) => {
+      header.addEventListener("click", () => {
+        const accordionItem = header.parentElement as HTMLDivElement;
+        const accordionContent = header.nextElementSibling as HTMLDivElement;
+        const isActive = accordionItem.classList.contains("active");
+
+        accordionItems.forEach((item) => {
+          item.classList.remove("active");
+          const content = item.querySelector(".accordion-content") as HTMLDivElement;
+          if (content) {
+            content.style.display = "none";
+          }
+        });
+
+        if (!isActive) {
+          accordionItem.classList.add("active");
+          accordionContent.style.display = "block";
+        }
+      });
+    });
   });
 </script>
 
@@ -308,7 +600,8 @@
     padding: 20px;
   }
 
-  .tab-buttons {
+  /* Desktop Tabs Styling */
+  .desktop-tabs {
     display: flex;
     padding: 0;
     margin: 0;
@@ -316,7 +609,7 @@
     justify-content: center;
   }
 
-  .tab-buttons li {
+  .desktop-tabs li {
     margin-right: 10px;
   }
 
@@ -336,7 +629,7 @@
     color: var(--secondary-color);
   }
 
-  .tab-buttons li.active .tab-btn {
+  .desktop-tabs li.active .tab-btn {
     color: var(--primary-color);
     font-weight: 600;
   }
@@ -356,7 +649,7 @@
     color: var(--secondary-color);
   }
 
-  .tab-buttons li.active .alt-tabs-icon {
+  .desktop-tabs li.active .alt-tabs-icon {
     color: var(--primary-color);
   }
 
@@ -378,7 +671,6 @@
     transition:
       opacity 0.3s ease,
       visibility 0.3s ease;
-
     border-radius: 3px;
   }
 
@@ -388,7 +680,65 @@
     visibility: visible;
   }
 
-  /* Testimonial styling */
+  /* Mobile Accordion Styling */
+  .mobile-accordion {
+    display: none;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .accordion-item {
+    margin-bottom: 10px;
+    border-radius: 3px;
+    border: 1px solid var(--border-color, #eee);
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .accordion-item.active {
+    border-color: transparent;
+  }
+
+  .accordion-header {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    cursor: pointer;
+    background-color: transparent;
+    transition: all 0.3s ease;
+    color: white;
+  }
+
+  .accordion-item.active .accordion-header {
+    color: var(--primary-color);
+  }
+
+  .accordion-icon {
+    font-size: 24px;
+    margin-right: 15px;
+    color: inherit;
+    transition: all 0.3s ease;
+  }
+
+  .accordion-title {
+    flex-grow: 1;
+    font-weight: 500;
+  }
+
+  .accordion-toggle {
+    transition: transform 0.3s ease;
+    color: inherit;
+  }
+
+  .accordion-item.active .accordion-toggle {
+    transform: rotate(180deg);
+  }
+
+  .accordion-content {
+    display: none;
+    padding: 20px;
+  }
+
   .testimonial-content {
     position: relative;
     margin-top: 50px;
@@ -446,18 +796,13 @@
 
   /* Responsive adjustments */
   @media only screen and (max-width: 768px) {
-    .tab-buttons {
-      flex-direction: column;
+    .desktop-tabs,
+    .desktop-tabs-content {
+      display: none;
     }
 
-    .tab-buttons li {
-      margin-right: 0;
-      margin-bottom: 10px;
-    }
-
-    .alt-tabs-icon {
-      font-size: 32px;
-      margin-bottom: 8px;
+    .mobile-accordion {
+      display: block;
     }
 
     .testimonial-content {
@@ -475,6 +820,11 @@
       font-size: 36px;
       right: -18px;
       bottom: -18px;
+    }
+
+    .tabs-container {
+      padding: 0;
+      margin: 0 auto;
     }
   }
 </style>

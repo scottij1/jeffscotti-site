@@ -21,7 +21,7 @@ export const testimonials: Testimonial[] = [
     name: "Adam Conde",
     company: "Sr. Director of Information Technology at Boundless Bio",
     image: "/testimonials/headshot_adam_conde.jpg",
-    text: "I hired Jeff a little over a year ago with the hope of hiring a strong WordPress developer. What I got instead was an incredibley talented software engineer, a dedicated worker, a great person, and friend. He is a logical and methodical problem solver. He has the rare combination of a developer with legitimate design and UX skills. Which made a huge difference in the quality of our web projects. I am confident that he would bring these traits and skills to any employer and I hope that one day I can work with him again.",
+    text: "I hired Jeff a little over a year ago with the hope of hiring a strong WordPress developer. What I got instead was an incredibly talented software engineer, a dedicated worker, a great person, and friend. He is a logical and methodical problem solver. He has the rare combination of a developer with legitimate design and UX skills. Which made a huge difference in the quality of our web projects. I am confident that he would bring these traits and skills to any employer and I hope that one day I can work with him again.",
     visible: true,
   },
   {
