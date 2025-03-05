@@ -16,26 +16,87 @@ import VantaBackground from "../components/VantaBackground.astro";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://ka-f.fontawesome.com" crossorigin />
+    <link rel="preconnect" href="https://kit.fontawesome.com" crossorigin />
+
+    <!-- Preload critical resources -->
+    <link
+      rel="preload"
+      href="/fonts/poppins/Poppins-Regular.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/poppins/Poppins-Bold.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+
+    <!-- Inline critical theme detection to avoid FOUC -->
     <script is:inline>
-      const savedTheme = localStorage.getItem("theme");
-      if (savedTheme) {
-        document.documentElement.classList.add(savedTheme);
-      } else {
-        // Set dark theme as default
-        document.documentElement.classList.add("theme-dark");
-        localStorage.setItem("theme", "theme-dark");
-      }
+      // Execute this script as early as possible to avoid theme flashing
+      (function () {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme) {
+          document.documentElement.classList.add(savedTheme);
+        } else {
+          // Set dark theme as default
+          document.documentElement.classList.add("theme-dark");
+          localStorage.setItem("theme", "theme-dark");
+        }
+      })();
     </script>
+
+    <!-- Favicons -->
     <link rel="icon" type="image/ico" href="/favicon.ico" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png" />
     <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png" />
+
     <meta name="generator" content={Astro.generator} />
     <title>Jeff Scotti - Senior Front End Engineer, Senior UI/UX Designer</title>
 
-    <link rel="preconnect" href="https://ka-f.fontawesome.com" crossorigin />
-    <script src="https://kit.fontawesome.com/ad9e6c27c0.js" crossorigin="anonymous"></script>
+    <!-- Load FontAwesome with defer to not block rendering -->
+    <script src="https://kit.fontawesome.com/ad9e6c27c0.js" crossorigin="anonymous" defer></script>
+
+    <!-- Inline critical CSS -->
+    <style is:inline>
+      /* Critical CSS for initial render */
+      :root {
+        --primary-color: #007bff;
+        --text-color: #333;
+        --bg-color: #fff;
+      }
+      .theme-dark {
+        --text-color: #f5f5f5;
+        --bg-color: #222;
+      }
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        color: var(--text-color);
+        background-color: var(--bg-color);
+      }
+      .page-container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+    <!-- Load non-critical CSS asynchronously -->
+    <link
+      rel="stylesheet"
+      href="/styles/owl.carousel.css"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript><link rel="stylesheet" href="/styles/owl.carousel.css" /></noscript>
   </head>
   <body>
     <VantaBackground />
@@ -44,5 +105,38 @@ import VantaBackground from "../components/VantaBackground.astro";
       <slot />
       <Footer />
     </div>
+
+    <!-- Add content-visibility to improve rendering performance -->
+    <script>
+      // Add content-visibility to off-screen elements
+      document.addEventListener("DOMContentLoaded", () => {
+        if ("IntersectionObserver" in window) {
+          const sections = document.querySelectorAll("section, footer, .testimonials-container");
+
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                // When element is not in viewport
+                const el = entry.target as HTMLElement;
+                if (!entry.isIntersecting) {
+                  el.style.contentVisibility = "auto";
+                  el.style.containIntrinsicSize = "0 500px"; // Estimate height
+                } else {
+                  el.style.contentVisibility = "visible";
+                  el.style.containIntrinsicSize = "auto";
+                }
+              });
+            },
+            {
+              rootMargin: "100px", // Load slightly before they come into view
+            },
+          );
+
+          sections.forEach((section) => {
+            observer.observe(section);
+          });
+        }
+      });
+    </script>
   </body>
 </html>

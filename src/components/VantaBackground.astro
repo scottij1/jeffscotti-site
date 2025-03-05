@@ -1,67 +1,107 @@
 <div
   id="vanta-bg"
-  style="width: 100vw; height: 100vh; position: absolute; top: 0; left: 0; z-index: -1;">
+  style="width: 100vw; height: 100vh; position: absolute; top: 0; left: 0; z-index: -1;"
+  data-vanta-background>
 </div>
-<script is:inline src="/js/three.min.js"></script>
-<script is:inline src="/js/vanta.dots.min.js"></script>
+<script is:inline src="/js/three.min.js" defer></script>
+<script is:inline src="/js/vanta.dots.min.js" defer></script>
 
 <!-- Initialize Vanta -->
-<script>
-  window.addEventListener("load", () => {
+<script defer>
+  // Use requestIdleCallback to defer non-critical initialization
+  const initVanta = () => {
+    // Use IntersectionObserver to only initialize when visible
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const element = entry.target;
+
+            // Check current theme
+            const isLightTheme = document.documentElement.classList.contains("theme-light");
+
+            // Reduce complexity on mobile
+            const isMobile = window.innerWidth < 768;
+            const spacing = isMobile ? 45.0 : 35.0;
+            const scale = isMobile ? 0.8 : 1.0;
+
+            // Initialize with appropriate theme colors
+            let effect = VANTA.DOTS({
+              el: element,
+              mouseControls: true,
+              touchControls: true,
+              gyroControls: false, // Disable gyro controls to reduce processing
+              minHeight: 200.0,
+              minWidth: 200.0,
+              scale: scale,
+              scaleMobile: scale,
+              // Use light theme colors if light theme is active, otherwise use dark theme colors
+              color: isLightTheme ? 0x333333 : 0xd5d5d5, // Dots color
+              backgroundColor: isLightTheme ? 0xf5f5f5 : 0x222222, // Background color
+              size: 1.0,
+              spacing: spacing,
+              showLines: false,
+            });
+
+            // Listen for theme changes
+            document.addEventListener("themeChanged", (e) => {
+              // Get the current theme
+              const isLightTheme = document.documentElement.classList.contains("theme-light");
+
+              // Destroy the current effect
+              if (effect && typeof effect.destroy === "function") {
+                effect.destroy();
+              }
+
+              // Create a new effect with the appropriate colors
+              effect = VANTA.DOTS({
+                el: element,
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false,
+                minHeight: 200.0,
+                minWidth: 200.0,
+                scale: scale,
+                scaleMobile: scale,
+                // Use light theme colors if light theme is active, otherwise use dark theme colors
+                color: isLightTheme ? 0x333333 : 0xd5d5d5, // Dots color
+                backgroundColor: isLightTheme ? 0xf5f5f5 : 0x222222, // Background color
+                size: 1.0,
+                spacing: spacing,
+                showLines: false,
+              });
+            });
+
+            // Disconnect observer once initialized
+            observer.disconnect();
+          }
+        });
+      },
+      {threshold: 0.1},
+    );
+
     const element = document.getElementById("vanta-bg");
-    if (!element) {
+    if (element) {
+      observer.observe(element);
+    } else {
       console.error("Background element not found");
-      return;
     }
+  };
 
-    // Check current theme
-    const isLightTheme = document.documentElement.classList.contains("theme-light");
-
-    // Initialize with appropriate theme colors
-    let effect = VANTA.DOTS({
-      el: element,
-      mouseControls: true,
-      touchControls: true,
-      gyroControls: true,
-      minHeight: 200.0,
-      minWidth: 200.0,
-      scale: 1.0,
-      scaleMobile: 1.0,
-      // Use light theme colors if light theme is active, otherwise use dark theme colors
-      color: isLightTheme ? 0x333333 : 0xd5d5d5, // Dots color
-      backgroundColor: isLightTheme ? 0xf5f5f5 : 0x222222, // Background color
-      size: 1.0,
-      spacing: 35.0,
-      showLines: false,
-    });
-
-    // Listen for theme changes
-    document.addEventListener("themeChanged", (e) => {
-      // Get the current theme
-      const isLightTheme = document.documentElement.classList.contains("theme-light");
-
-      // Destroy the current effect
-      if (effect && typeof effect.destroy === "function") {
-        effect.destroy();
+  // Use requestIdleCallback or setTimeout as fallback
+  if ("requestIdleCallback" in window) {
+    window.requestIdleCallback(() => {
+      // Wait for DOM content to be fully loaded
+      if (document.readyState === "complete") {
+        initVanta();
+      } else {
+        window.addEventListener("load", initVanta);
       }
-
-      // Create a new effect with the appropriate colors
-      effect = VANTA.DOTS({
-        el: element,
-        mouseControls: true,
-        touchControls: true,
-        gyroControls: true,
-        minHeight: 200.0,
-        minWidth: 200.0,
-        scale: 1.0,
-        scaleMobile: 1.0,
-        // Use light theme colors if light theme is active, otherwise use dark theme colors
-        color: isLightTheme ? 0x333333 : 0xd5d5d5, // Dots color
-        backgroundColor: isLightTheme ? 0xf5f5f5 : 0x222222, // Background color
-        size: 1.0,
-        spacing: 35.0,
-        showLines: false,
-      });
     });
-  });
+  } else {
+    // Fallback for browsers that don't support requestIdleCallback
+    setTimeout(() => {
+      window.addEventListener("load", initVanta);
+    }, 1);
+  }
 </script>

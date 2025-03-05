@@ -1,11 +1,11 @@
 ---
-import type { Testimonial } from "../data/testimonials";
+import type {Testimonial} from "../data/testimonials";
 
 interface Props {
   testimonial: Testimonial;
 }
 
-const { testimonial } = Astro.props;
+const {testimonial} = Astro.props;
 
 // Function to split text into words and limit to a specific count
 function limitWords(text: string, wordLimit: number) {
@@ -13,22 +13,29 @@ function limitWords(text: string, wordLimit: number) {
   const needsReadMore = words.length > wordLimit;
 
   if (!needsReadMore) {
-    return { displayText: text, hiddenText: "", needsReadMore };
+    return {displayText: text, hiddenText: "", needsReadMore};
   }
 
   const displayText = words.slice(0, wordLimit).join(" ");
   const hiddenText = words.slice(wordLimit).join(" ");
 
-  return { displayText, hiddenText, needsReadMore };
+  return {displayText, hiddenText, needsReadMore};
 }
 
-const { displayText, hiddenText, needsReadMore } = limitWords(testimonial.text, 60);
+const {displayText, hiddenText, needsReadMore} = limitWords(testimonial.text, 60);
 ---
 
 <div class="testimonial-item">
   <div class="testimonial-content">
     <div class="testimonial-picture">
-      <img src={testimonial.image} alt={testimonial.name} />
+      <img
+        src={testimonial.image}
+        alt={testimonial.name}
+        loading="lazy"
+        width="80"
+        height="80"
+        decoding="async"
+      />
     </div>
 
     <div class="testimonial-text">
