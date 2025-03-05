@@ -9,6 +9,37 @@ import "../styles/footer.scss";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import VantaBackground from "../components/VantaBackground.astro";
+
+// SEO Props with defaults
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonicalURL?: URL | string;
+  type?: "website" | "article" | "profile";
+  keywords?: string[];
+}
+
+// Default SEO values
+const {
+  title = "Jeff Scotti - Senior Front End Engineer, Senior UI/UX Designer",
+  description = "Jeff Scotti is a Senior Front End Engineer and UI/UX Designer with 15+ years of experience building intuitive, high-performance web applications.",
+  image = new URL("/assets/js-headshot.png", Astro.site || Astro.url),
+  canonicalURL = Astro.url,
+  type = "profile",
+  keywords = [
+    "Front End Engineer",
+    "UI/UX Designer",
+    "Web Developer",
+    "JavaScript",
+    "React",
+    "User Experience",
+  ],
+} = Astro.props;
+
+// Ensure canonicalURL is a URL object
+const canonicalURLObj =
+  canonicalURL instanceof URL ? canonicalURL : new URL(canonicalURL, Astro.site || Astro.url);
 ---
 
 <!doctype html>
@@ -16,6 +47,27 @@ import VantaBackground from "../components/VantaBackground.astro";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords.join(", ")} />
+    <meta name="author" content="Jeff Scotti" />
+    <link rel="canonical" href={canonicalURLObj} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURLObj} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:site_name" content="Jeff Scotti" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURLObj} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={image} />
 
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://ka-f.fontawesome.com" crossorigin />
@@ -61,7 +113,7 @@ import VantaBackground from "../components/VantaBackground.astro";
     <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png" />
 
     <meta name="generator" content={Astro.generator} />
-    <title>Jeff Scotti - Senior Front End Engineer, Senior UI/UX Designer</title>
+    <title>{title}</title>
 
     <!-- Load FontAwesome with defer to not block rendering -->
     <script src="https://kit.fontawesome.com/ad9e6c27c0.js" crossorigin="anonymous" defer></script>
@@ -106,6 +158,28 @@ import VantaBackground from "../components/VantaBackground.astro";
       <slot />
       <Footer />
     </div>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Jeff Scotti",
+        "url": "https://jeffscotti.net",
+        "image": "https://jeffscotti.net/assets/js-headshot.png",
+        "jobTitle": "Senior Front End Engineer & Senior UI/UX Designer",
+        "description": "I build intuitive, high-performance web applications by combining clean, efficient code with thoughtful design.",
+        "sameAs": ["https://linkedin.com/in/jeffscotti", "https://github.com/scottij1"],
+        "email": "jeff@jeffscotti.net",
+        "knowsAbout": [
+          "Front End Development",
+          "UI/UX Design",
+          "JavaScript",
+          "React",
+          "Web Performance"
+        ]
+      }
+    </script>
 
     <!-- Add content-visibility to improve rendering performance -->
     <script>

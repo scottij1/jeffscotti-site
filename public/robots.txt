@@ -1,0 +1,6 @@
+# robots.txt for jeffscotti.net
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://jeffscotti.net/sitemap.xml
