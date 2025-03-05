@@ -63,6 +63,14 @@ h2 {
   }
 }
 
+h2.job-title {
+  &:before,
+  &:after {
+    display: none;
+    content: none;
+  }
+}
+
 h3 {
   font-size: 21px;
 }

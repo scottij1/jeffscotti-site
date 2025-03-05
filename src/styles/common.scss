@@ -137,14 +137,20 @@ a {
   font-size: 32px;
   font-weight: 600;
   color: $heading-color;
-  margin: 0 0 10px;
+  margin: 0;
 }
 
-.page-subtitle h4 {
+.page-subtitle h2 {
   font-size: 16px;
   font-weight: 400;
   color: $text-color;
   margin: 0;
+
+  &:before,
+  &:after {
+    display: none;
+    content: none;
+  }
 }
 
 // Buttons
