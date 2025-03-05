@@ -1,0 +1,109 @@
+---
+import "../styles/footer.scss";
+import resumePdf from "../assets/jeffscotti_resume.pdf";
+import resumeDocx from "../assets/jeffscotti_resume.docx?url";
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer
+  id="site_footer"
+  class="footer"
+>
+  <div class="footer-content">
+    <div class="copyright">
+      &copy; {currentYear} Jeff Scotti. All rights reserved.
+    </div>
+
+    <div class="footer-links">
+      <ul>
+        <li class="dropdown">
+          <a
+            href="#"
+            class="dropdown-toggle"
+          >
+            <i class="fa-solid fa-file-invoice"></i>
+            <span>Resume</span>
+            <i class="fa-solid fa-chevron-up chevron-icon"></i>
+          </a>
+          <div class="dropdown-menu">
+            <a
+              href={resumePdf}
+              class="dropdown-item"
+              target="_blank"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <span>PDF Version</span>
+            </a>
+            <a
+              href={resumeDocx}
+              class="dropdown-item"
+              target="_blank"
+            >
+              <i class="fa-solid fa-file-word"></i>
+              <span>Word Version</span>
+            </a>
+          </div>
+        </li>
+        <li>
+          <a
+            href="https://www.linkedin.com/in/jeffscotti"
+            target="_blank"
+          >
+            <i class="fab fa-linkedin"></i>
+            <span>LinkedIn</span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://github.com/jeffscotti"
+            target="_blank"
+          >
+            <i class="fab fa-github"></i>
+            <span>GitHub</span>
+          </a>
+        </li>
+        <li>
+          <a href="mailto:jeff@jeffscotti.net">
+            <i class="fas fa-envelope"></i>
+            <span>Contact</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const dropdownToggle = document.querySelector(
+      ".footer-links .dropdown-toggle",
+    ) as HTMLAnchorElement | null;
+    const dropdownMenu = document.querySelector(
+      ".footer-links .dropdown-menu",
+    ) as HTMLDivElement | null;
+
+    const toggleMenu = (e: Event) => {
+      if (dropdownMenu) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        dropdownMenu.classList.toggle("active");
+      }
+    };
+
+    if (dropdownToggle) {
+      // Use click for mobile
+      dropdownToggle.addEventListener("click", toggleMenu);
+    }
+
+    document.addEventListener("click", (e) => {
+      const target = e.target as HTMLElement;
+      const dropdown = document.querySelector(".footer-links .dropdown") as HTMLElement | null;
+
+      if (dropdown && !dropdown.contains(target) && dropdownMenu) {
+        dropdownMenu.classList.remove("active");
+      }
+    });
+  });
+</script>

@@ -37,7 +37,7 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
           <div class="home-buttons">
             <div class="dropdown">
               <button class="btn dropdown-toggle">
-                <i class="fa-solid fa-file"></i>
+                <i class="fa-solid fa-file-invoice"></i>
                 <span>Resume</span>
                 <i class="fa-solid fa-chevron-down"></i>
               </button>
@@ -319,12 +319,11 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
       text-align: center;
     }
 
-    /* Hide chevron icon on mobile */
     .dropdown-toggle .fa-chevron-down {
       display: none;
     }
 
-    /* Mobile dropdown menu styles - matching site-nav */
+    /* Mobile dropdown menu styles */
     .dropdown-menu {
       display: none;
       position: fixed;
@@ -381,7 +380,6 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
   import anime from "animejs";
 
   document.addEventListener("DOMContentLoaded", () => {
-    // Job title animation
     anime({
       targets: ".job-title .char",
       opacity: [0, 1],
@@ -398,14 +396,13 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
     const dropdownMenu = document.querySelector(".dropdown-menu") as HTMLDivElement | null;
     const closeButton = document.querySelector(".mobile-close-btn") as HTMLButtonElement | null;
     const menuItems = document.querySelectorAll(".dropdown-item") as NodeListOf<HTMLAnchorElement>;
+    const MENU_ANIMATION_DURATION = 200;
 
-    // Function to handle menu opening
     const openMobileMenu = (e: Event) => {
       if (isMobile() && dropdownMenu) {
         e.preventDefault();
         e.stopPropagation();
 
-        // First set display to flex, then add active class for animation
         dropdownMenu.style.display = "flex";
 
         // Force a reflow to ensure the display change takes effect before adding the class
@@ -416,7 +413,6 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
       }
     };
 
-    // Function to handle menu closing
     const closeMobileMenu = (e: Event) => {
       if (isMobile() && dropdownMenu && dropdownMenu.classList.contains("active")) {
         e.preventDefault();
@@ -426,24 +422,21 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
         dropdownMenu.classList.add("closing");
         dropdownMenu.classList.remove("active");
 
-        // Wait for animation to complete before hiding
         setTimeout(() => {
           if (dropdownMenu) {
             dropdownMenu.classList.remove("closing");
             dropdownMenu.style.display = "none";
             document.body.style.overflow = ""; // Restore scrolling
           }
-        }, 200); // Match the site-nav transition duration (0.2s)
+        }, MENU_ANIMATION_DURATION);
       }
     };
 
-    // Add event listeners for mobile
     if (dropdownToggle && dropdownMenu && closeButton) {
       // Use click instead of hover for mobile
       dropdownToggle.addEventListener("click", openMobileMenu);
       closeButton.addEventListener("click", closeMobileMenu);
 
-      // Close menu when an option is clicked
       menuItems.forEach((item) => {
         item.addEventListener("click", () => {
           if (isMobile()) {
@@ -459,7 +452,7 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
                   dropdownMenu.style.display = "none";
                   document.body.style.overflow = ""; // Restore scrolling
                 }
-              }, 200); // Match the site-nav transition duration (0.2s)
+              }, MENU_ANIMATION_DURATION);
             }
           }
         });
