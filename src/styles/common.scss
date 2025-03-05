@@ -49,6 +49,98 @@ ul {
   }
 }
 
+// Typography
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-family;
+  color: $heading-color;
+  line-height: 1.2em;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-weight: $font-weight-bold;
+}
+
+h1 {
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 27px;
+}
+
+h3 {
+  font-size: 21px;
+}
+
+h4 {
+  font-size: 18px;
+}
+
+h5 {
+  font-size: 16px;
+}
+
+h6 {
+  font-size: 14px;
+}
+
+p {
+  margin: 0 0 10px;
+  font-size: $font-size-base;
+  color: $text-color;
+}
+
+a {
+  color: $primary-color;
+  text-decoration: none;
+  outline: none;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    color: $link-hover-color;
+    text-decoration: none;
+  }
+
+  &:focus {
+    outline: 0;
+    text-decoration: none;
+  }
+}
+
+.block-title {
+  margin-bottom: 30px;
+}
+
+.block-title h2 {
+  font-size: 24px;
+  color: $heading-color;
+  margin: 0;
+}
+
+.page-title {
+  padding: 50px 0;
+  text-align: center;
+}
+
+.page-title h1 {
+  font-size: 32px;
+  font-weight: 600;
+  color: $heading-color;
+  margin: 0 0 10px;
+}
+
+.page-subtitle h4 {
+  font-size: 16px;
+  font-weight: 400;
+  color: $text-color;
+  margin: 0;
+}
+
+// Buttons
 .btn {
   display: inline-block;
   position: relative;
@@ -101,3 +193,67 @@ ul {
     border-color: $primary-color;
   }
 }
+
+// Form elements
+.form-control {
+  height: 42px;
+  border: 2px solid $border-color;
+  border-radius: $border-radius-sm;
+  padding: 10px 25px 10px 12px;
+  color: $text-color;
+  background: transparent;
+  box-shadow: none;
+  outline: none;
+  font-family: $font-family;
+  transition: all 0.3s ease-in-out;
+
+  &:focus {
+    border-color: $primary-color;
+  }
+}
+
+// Utility classes
+.text-center {
+  text-align: center;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+
+.mb-1 {
+  margin-bottom: $spacing-sm;
+}
+
+.mb-2 {
+  margin-bottom: $spacing-md;
+}
+
+.mb-3 {
+  margin-bottom: $spacing-lg;
+}
+
+.mb-4 {
+  margin-bottom: $spacing-xl;
+}
+
+.mt-0 {
+  margin-top: 0;
+}
+
+.mt-1 {
+  margin-top: $spacing-sm;
+}
+
+.mt-2 {
+  margin-top: $spacing-md;
+}
+
+.mt-3 {
+  margin-top: $spacing-lg;
+}
+
+.mt-4 {
+  margin-top: $spacing-xl;
+}
+

@@ -1,8 +1,5 @@
 @import "variables";
 
-// Note: Most styles have been moved directly into the Welcome.astro component
-// This file is kept for potential future global welcome styles
-
 .welcome-container {
   font-family: $font-family;
   color: $text-color;

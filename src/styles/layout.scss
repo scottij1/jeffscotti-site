@@ -13,7 +13,6 @@
   border-radius: 0;
 }
 
-
 #main {
   position: relative;
   height: 100%;
@@ -29,37 +28,8 @@
   padding: 0 30px;
 }
 
-.page-title {
-  padding: 50px 0;
-  text-align: center;
-}
-
-.page-title h1 {
-  font-size: 32px;
-  font-weight: 600;
-  color: $heading-color;
-  margin: 0 0 10px;
-}
-
-.page-subtitle h4 {
-  font-size: 16px;
-  font-weight: 400;
-  color: $text-color;
-  margin: 0;
-}
-
 .page-content {
   padding-bottom: 50px;
-}
-
-.block-title {
-  margin-bottom: 30px;
-}
-
-.block-title h2 {
-  font-size: 24px;
-  color: $heading-color;
-  margin: 0;
 }
 
 .row {
