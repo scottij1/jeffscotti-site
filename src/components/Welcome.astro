@@ -19,12 +19,37 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
         </div>
 
         <div class="text-column">
-          <h1 class="name">Jeff Scotti</h1>
+          <h1 class="name">
+            {
+              "Jeff Scotti".split("").map((char, index) =>
+                char === " " ? (
+                  <span data-key={index}>&nbsp;</span>
+                ) : (
+                  <span
+                    data-key={index}
+                    class="char"
+                  >
+                    {char}
+                  </span>
+                ),
+              )
+            }
+          </h1>
+
           <h4 class="job-title">
             {
-              " Senior Front End Engineer & Senior UI/UX Designer"
-                .split("")
-                .map((char) => <span class="char">{char}</span>)
+              " Senior Front End Engineer & Senior UI/UX Designer".split("").map((char, index) =>
+                char === " " ? (
+                  <span data-key={index}>&nbsp;</span>
+                ) : (
+                  <span
+                    data-key={index}
+                    class="char"
+                  >
+                    {char}
+                  </span>
+                ),
+              )
             }
           </h4>
           <p class="bio">
@@ -187,6 +212,11 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+  }
+
+  /* Ensure each letter can be transformed independently */
+  .char {
+    display: inline-block;
   }
 
   /* Dropdown styles */
@@ -381,44 +411,47 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
 
   document.addEventListener("DOMContentLoaded", () => {
     anime({
-      targets: ".job-title .char",
+      targets: ".name .char",
+      translateY: [-80, 0],
       opacity: [0, 1],
-      translateY: [50, 0],
-      scale: [0.3, 1],
-      easing: "easeOutExpo",
-      duration: 500,
-      delay: (el, i) => 50 * i,
+      easing: "easeOutCubic",
+      duration: 1000,
+      delay: anime.stagger(100, { start: 2500 }),
+    });
+
+    anime({
+      targets: ".job-title .char",
+      translateY: [-80, 0],
+      opacity: [0, 1],
+      easing: "easeOutCubic",
+      duration: 1000,
+      delay: anime.stagger(20, { start: 2500 }),
     });
 
     // Mobile menu functionality
-    const isMobile = () => window.innerWidth <= 768;
+    const isMobile = (): boolean => window.innerWidth <= 768;
     const dropdownToggle = document.querySelector(".dropdown-toggle") as HTMLButtonElement | null;
     const dropdownMenu = document.querySelector(".dropdown-menu") as HTMLDivElement | null;
     const closeButton = document.querySelector(".mobile-close-btn") as HTMLButtonElement | null;
-    const menuItems = document.querySelectorAll(".dropdown-item") as NodeListOf<HTMLAnchorElement>;
+    const menuItems = document.querySelectorAll(".dropdown-item");
     const MENU_ANIMATION_DURATION = 200;
 
-    const openMobileMenu = (e: Event) => {
+    const openMobileMenu = (e: Event): void => {
       if (isMobile() && dropdownMenu) {
         e.preventDefault();
         e.stopPropagation();
-
         dropdownMenu.style.display = "flex";
-
-        // Force a reflow to ensure the display change takes effect before adding the class
-        void dropdownMenu.offsetWidth;
-
+        // Force reflow
+        void (dropdownMenu as HTMLElement).offsetWidth;
         dropdownMenu.classList.add("active");
-        document.body.style.overflow = "hidden"; // Prevent scrolling when menu is open
+        document.body.style.overflow = "hidden";
       }
     };
 
-    const closeMobileMenu = (e: Event) => {
+    const closeMobileMenu = (e: Event): void => {
       if (isMobile() && dropdownMenu && dropdownMenu.classList.contains("active")) {
         e.preventDefault();
         e.stopPropagation();
-
-        // Add closing class for slide-out animation
         dropdownMenu.classList.add("closing");
         dropdownMenu.classList.remove("active");
 
@@ -426,39 +459,32 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
           if (dropdownMenu) {
             dropdownMenu.classList.remove("closing");
             dropdownMenu.style.display = "none";
-            document.body.style.overflow = ""; // Restore scrolling
+            document.body.style.overflow = "";
           }
         }, MENU_ANIMATION_DURATION);
       }
     };
 
     if (dropdownToggle && dropdownMenu && closeButton) {
-      // Use click instead of hover for mobile
       dropdownToggle.addEventListener("click", openMobileMenu);
       closeButton.addEventListener("click", closeMobileMenu);
 
       menuItems.forEach((item) => {
         item.addEventListener("click", () => {
-          if (isMobile()) {
-            // We don't prevent default here to allow the link to work
-            // Just close the menu after the link is clicked
-            if (dropdownMenu && dropdownMenu.classList.contains("active")) {
-              dropdownMenu.classList.add("closing");
-              dropdownMenu.classList.remove("active");
-
-              setTimeout(() => {
-                if (dropdownMenu) {
-                  dropdownMenu.classList.remove("closing");
-                  dropdownMenu.style.display = "none";
-                  document.body.style.overflow = ""; // Restore scrolling
-                }
-              }, MENU_ANIMATION_DURATION);
-            }
+          if (isMobile() && dropdownMenu && dropdownMenu.classList.contains("active")) {
+            dropdownMenu.classList.add("closing");
+            dropdownMenu.classList.remove("active");
+            setTimeout(() => {
+              if (dropdownMenu) {
+                dropdownMenu.classList.remove("closing");
+                dropdownMenu.style.display = "none";
+                document.body.style.overflow = "";
+              }
+            }, MENU_ANIMATION_DURATION);
           }
         });
       });
 
-      // Handle window resize
       window.addEventListener("resize", () => {
         if (!isMobile() && dropdownMenu && dropdownMenu.classList.contains("active")) {
           dropdownMenu.classList.remove("active", "closing");
