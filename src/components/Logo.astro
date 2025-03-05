@@ -34,18 +34,15 @@ import ravenLogoBlack from "../assets/raven-logo-sm-blk.png";
     color: var(--heading-color);
   }
 
-  /* Hide both logos by default */
   .white-logo,
   .black-logo {
     display: none;
   }
 
-  /* Show white logo in dark theme */
   .theme-dark .white-logo {
     display: block;
   }
 
-  /* Show black logo in light theme */
   .theme-light .black-logo {
     display: block;
   }
@@ -74,9 +71,6 @@ import ravenLogoBlack from "../assets/raven-logo-sm-blk.png";
     }
   }
 
-  // Update logo visibility when the page loads
   document.addEventListener("DOMContentLoaded", updateLogoVisibility);
-
-  // Update logo visibility when theme changes
   document.addEventListener("themeChanged", updateLogoVisibility);
 </script>

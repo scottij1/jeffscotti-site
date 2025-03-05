@@ -36,6 +36,10 @@ const isPathActive = (path: string) => {
           <a href="/about">About</a>
         </li>
 
+        <li class={`menu-item ${isPathActive("/skills") ? "current-menu-item" : ""}`}>
+          <a href="/skills">Skills</a>
+        </li>
+
         <li class={`menu-item ${isPathActive("/contact") ? "current-menu-item" : ""}`}>
           <a href="mailto:jeff@jeffscotti.net">Contact</a>
         </li>

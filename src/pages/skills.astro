@@ -1,0 +1,35 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Tabs from "../components/Tabs.astro";
+---
+
+<Layout title="About | Jeff Scotti">
+  <div
+    id="main"
+    class="site-main"
+  >
+    <div
+      id="main-content"
+      class="single-page-content"
+    >
+      <div
+        id="primary"
+        class="content-area"
+      >
+        <div class="page-title">
+          <h1>Skills &amp; Philosophy</h1>
+          <div class="page-subtitle">
+            <h4>What I Can Do For You</h4>
+          </div>
+        </div>
+        <Tabs />
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .about-section {
+      margin: 15px 0;
+    }
+  </style>
+</Layout>
