@@ -37,20 +37,8 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
           </h1>
 
           <h4 class="job-title">
-            {
-              " Senior Front End Engineer & Senior UI/UX Designer".split("").map((char, index) =>
-                char === " " ? (
-                  <span data-key={index}>&nbsp;</span>
-                ) : (
-                  <span
-                    data-key={index}
-                    class="char"
-                  >
-                    {char}
-                  </span>
-                ),
-              )
-            }
+            <span class="job-title-line">Senior Front End Engineer</span>
+            <span class="job-title-line">& Senior UI/UX Designer</span>
           </h4>
           <p class="bio">
             I build intuitive, high-performance web applications by combining clean, efficient code
@@ -190,6 +178,10 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
     font-size: 16px;
     font-weight: 400;
     margin-bottom: 10px;
+  }
+
+  .job-title-line {
+    display: inline-block;
   }
 
   .name {
@@ -336,6 +328,10 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
       text-align: center;
     }
 
+    .job-title-line {
+      display: block;
+    }
+
     .name {
       margin-bottom: 10px;
     }
@@ -417,15 +413,6 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
       easing: "easeOutCubic",
       duration: 1000,
       delay: anime.stagger(100, { start: 2500 }),
-    });
-
-    anime({
-      targets: ".job-title .char",
-      translateY: [-80, 0],
-      opacity: [0, 1],
-      easing: "easeOutCubic",
-      duration: 1000,
-      delay: anime.stagger(20, { start: 2500 }),
     });
 
     // Mobile menu functionality
