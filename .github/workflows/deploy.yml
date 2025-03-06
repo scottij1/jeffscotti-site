@@ -26,6 +26,29 @@ jobs:
       - name: Build Astro Site
         run: npm run build
 
+      - name: Verify Build Output
+        run: |
+          echo "Verifying build output..."
+          ls -la dist/
+          ls -la dist/client/
+          echo "Checking for critical files..."
+          if [ ! -f "dist/start.js" ]; then
+            echo "Error: dist/start.js is missing!"
+            exit 1
+          fi
+          if [ ! -f "dist/.htaccess" ]; then
+            echo "Error: dist/.htaccess is missing!"
+            exit 1
+          fi
+          if [ ! -d "dist/client/_astro" ]; then
+            echo "Error: dist/client/_astro directory is missing!"
+            exit 1
+          fi
+          echo "Build verification completed successfully."
+          
+      # We'll use a different approach for backups
+      # The restore-site.js script can be used for manual restoration if needed
+
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:

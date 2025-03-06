@@ -106,6 +106,34 @@ async function main() {
         execSync('npm install ftp-deploy', { stdio: 'inherit' });
       }
       
+      // Verify build output before deployment
+      console.log('\n🔍 Verifying build output...');
+      
+      const criticalFiles = [
+        path.join(__dirname, 'dist', 'start.js'),
+        path.join(__dirname, 'dist', '.htaccess')
+      ];
+      
+      const criticalDirs = [
+        path.join(__dirname, 'dist', 'client', '_astro')
+      ];
+      
+      for (const file of criticalFiles) {
+        if (!fs.existsSync(file)) {
+          console.error(`❌ Critical file missing: ${file}`);
+          process.exit(1);
+        }
+      }
+      
+      for (const dir of criticalDirs) {
+        if (!fs.existsSync(dir)) {
+          console.error(`❌ Critical directory missing: ${dir}`);
+          process.exit(1);
+        }
+      }
+      
+      console.log('✅ Build verification completed successfully.');
+      
       const ftpConfig = {
         user: process.env.FTP_USERNAME,
         password: process.env.FTP_PASSWORD,
@@ -115,7 +143,7 @@ async function main() {
         remoteRoot: process.env.FTP_REMOTE_PATH,
         include: ['*', '**/*'],
         exclude: ['.git*', '.git*/**', 'node_modules/**'],
-        deleteRemote: false,
+        deleteRemote: false, // Important: Don't delete remote files
         forcePasv: true
       };
       
