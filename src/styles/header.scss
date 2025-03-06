@@ -73,16 +73,15 @@
       text-decoration: none;
       line-height: 50px;
       font-size: 14px;
-      opacity: 0.55;
       transition: all 0.3s ease-in-out;
 
       &:hover {
-        opacity: 1;
+        color: $secondary-color;
       }
     }
 
     &.current-menu-item > a {
-      opacity: 1;
+      color: $primary-color;
     }
   }
 
@@ -112,11 +111,10 @@
 
       a {
         display: block;
-        opacity: 0.5;
         line-height: 1.6em;
 
         &:hover {
-          opacity: 1;
+          color: $secondary-color;
         }
       }
     }
@@ -253,10 +251,9 @@
         padding: $spacing-sm 0;
         font-size: 20px;
         font-weight: 500;
-        opacity: 0.8;
-
+        
         &:hover {
-          opacity: 1;
+          color: $secondary-color;
         }
       }
     }

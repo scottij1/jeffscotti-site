@@ -177,16 +177,15 @@ const isPathActive = (path: string) => {
     text-decoration: none;
     line-height: 50px;
     font-size: 16px;
-    opacity: 0.55;
     transition: all 0.3s ease-in-out;
   }
 
   .site-main-menu li a:hover {
-    opacity: 1;
+    color: var(--secondary-color);
   }
 
   .site-main-menu li.current-menu-item > a {
-    opacity: 1;
+    color: var(--primary-color);
   }
 
   .site-main-menu .sub-menu {
@@ -217,12 +216,11 @@ const isPathActive = (path: string) => {
 
   .site-main-menu .sub-menu li a {
     display: block;
-    opacity: 0.5;
     line-height: 1.6em;
   }
 
   .site-main-menu .sub-menu li a:hover {
-    opacity: 1;
+    color: var(--secondary-color);
   }
 
   .site-main-menu li:hover > .sub-menu {
@@ -359,11 +357,10 @@ const isPathActive = (path: string) => {
       padding: 10px 0;
       font-size: 20px;
       font-weight: 500;
-      opacity: 0.8;
     }
 
     .site-main-menu li a:hover {
-      opacity: 1;
+      color: var(--secondary-color);
     }
 
     .site-main-menu .sub-menu {
