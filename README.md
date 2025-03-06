@@ -89,13 +89,38 @@ The script requires the following environment variables in your `.env` file:
 
 If DreamHost supports running Node.js applications, you can deploy the entire `dist/` directory and run the Node.js server. See the `dist/README.md` file for detailed instructions.
 
+For detailed setup instructions and troubleshooting, see the `DREAMHOST-SETUP.md` file.
+
 #### Option 2: Using Static Site (if DreamHost doesn't support Node.js)
 
-If DreamHost doesn't support running Node.js applications, you may need to:
+If DreamHost doesn't support running Node.js applications, you can switch to static site generation:
 
-1. Change the Astro configuration to use static site generation instead of server-side rendering
-2. Remove the server-side API routes or implement them using a different approach (e.g., serverless functions)
-3. Build the site and deploy only the static assets
+1. Use the provided script to switch to static mode:
+   ```bash
+   node switch-mode.js static
+   ```
+
+2. Build the site:
+   ```bash
+   npm run build
+   ```
+
+3. Deploy the site to DreamHost
+
+To switch back to server-side rendering mode:
+```bash
+node switch-mode.js ssr
+```
+
+### Troubleshooting
+
+If you encounter a 500 Internal Server Error or other issues with your deployment, see the `DREAMHOST-SETUP.md` file for detailed troubleshooting steps.
+
+For Apache configuration issues, you can try using the simpler .htaccess file provided in `dist/simple-htaccess.txt`:
+```bash
+# On your DreamHost server
+cp simple-htaccess.txt .htaccess
+```
 
 ## 📝 Notes
 
