@@ -30,41 +30,44 @@ import Layout from "../layouts/Layout.astro";
           <div class="contact-section">
             <!-- Contact Form -->
             <div class="contact-form-container">
-              <form id="contact_form" class="contact-form">
-                <div class="form-group form-group-with-icon">
+              <form id="contact_form" class="contact-form" method="POST" action="/api/contact">
+                <div class="form-group">
+                  <label for="form_name">Full Name</label>
                   <input
                     id="form_name"
                     type="text"
                     name="name"
                     class="form-control"
-                    placeholder="Full Name"
+                    placeholder="e.g., John Smith"
                     required
                   />
                 </div>
 
-                <div class="form-group form-group-with-icon">
+                <div class="form-group">
+                  <label for="form_email">Email</label>
                   <input
                     id="form_email"
                     type="email"
                     name="email"
                     class="form-control"
-                    placeholder="Email"
+                    placeholder="e.g., john.smith@example.com"
                     required
                   />
                 </div>
 
-                <div class="form-group form-group-with-icon">
+                <div class="form-group">
+                  <label for="form_message">Message</label>
                   <textarea
                     id="form_message"
                     name="message"
                     class="form-control"
-                    placeholder="Message"
+                    placeholder="e.g., I'm interested in discussing a potential project..."
                     rows="7"
                     required>
                   </textarea>
                 </div>
 
-                <button type="submit" class="button btn-send">Submit</button>
+                <button type="submit" class="btn">Submit</button>
               </form>
             </div>
 
@@ -73,31 +76,23 @@ import Layout from "../layouts/Layout.astro";
               <div class="contact-info">
                 <div class="info-list">
                   <div class="info-block">
-                    <div class="ci-icon">
-                      <i class="fas fa-envelope"></i>
-                    </div>
                     <div class="ci-text">
-                      <h4>Email</h4>
-                      <p>hello@jeffscotti.net</p>
-                    </div>
-                  </div>
-
-                  <div class="info-block">
-                    <div class="ci-icon">
-                      <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <div class="ci-text">
-                      <h4>Location</h4>
+                      <h4>
+                        <span class="ci-icon">
+                          <i class="fa-solid fa-location-dot"></i>
+                        </span>Location
+                      </h4>
                       <p>San Diego, CA</p>
                     </div>
                   </div>
 
                   <div class="info-block">
-                    <div class="ci-icon">
-                      <i class="fas fa-users"></i>
-                    </div>
                     <div class="ci-text">
-                      <h4>Connect With Me</h4>
+                      <h4>
+                        <span class="ci-icon">
+                          <i class="fa-solid fa-people-arrows"></i>
+                        </span>Connect With Me
+                      </h4>
                       <div class="social-links">
                         <a href="#" class="social-link" title="LinkedIn">
                           <i class="fab fa-linkedin-in"></i>
@@ -141,7 +136,7 @@ import Layout from "../layouts/Layout.astro";
   .contact-info {
     background-color: rgba(40, 40, 40, 0.5);
     border-radius: 8px;
-    padding: 25px;
+    padding: 0 25px 25px 25px;
   }
 
   /* Info list */
@@ -150,37 +145,60 @@ import Layout from "../layouts/Layout.astro";
   }
 
   .info-block {
-    position: relative;
     margin-bottom: 30px;
-    padding-left: 50px;
   }
 
-  .ci-icon {
-    position: absolute;
-    left: 0;
-    top: 0;
+  .social-links {
+    margin-top: 10px;
+    padding-left: 30px;
+    text-align: left;
+    display: flex;
+    gap: 10px;
+  }
+
+  .social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     width: 40px;
     height: 40px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
     text-align: center;
-    font-size: 20px;
-    color: var(--primary-color);
+    font-size: 18px;
+    border-radius: 50%;
+    transition: all 0.3s ease-in-out;
   }
 
-  .ci-icon i {
-    position: relative;
-    top: 5px;
+  .social-link:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-3px);
   }
 
   .ci-text h4 {
+    display: flex;
+    align-items: center;
     font-size: 16px;
     color: var(--heading-color);
     margin: 0 0 5px;
   }
 
+  .ci-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    font-size: 18px;
+    color: var(--primary-color);
+  }
+
   .ci-text p {
     font-size: 14px;
     color: var(--text-color);
-    margin: 0 0 5px;
+    margin: 0 0 0 35px;
   }
 
   /* Contact form */
@@ -197,8 +215,13 @@ import Layout from "../layouts/Layout.astro";
     box-sizing: border-box;
   }
 
-  .form-group-with-icon {
-    position: relative;
+  /* Form labels */
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: var(--heading-color);
+    font-weight: 600;
   }
 
   /* Input and textarea styling */
@@ -210,9 +233,16 @@ import Layout from "../layouts/Layout.astro";
     border-radius: 5px;
     padding: 10px 25px 10px 12px;
     background: transparent;
-    color: #eee;
+    color: white;
     transition: border-color 0.3s ease-in-out;
     font-size: 16px;
+    backdrop-filter: blur(5px);
+  }
+
+  /* Placeholder styling */
+  .form-control::placeholder {
+    color: #888;
+    opacity: 1;
   }
 
   /* On focus, change the border color to blue */
@@ -226,27 +256,7 @@ import Layout from "../layouts/Layout.astro";
     min-height: 150px;
   }
 
-  /* Button */
-  .button.btn-send {
-    display: inline-block;
-    position: relative;
-    padding: 0.8em 2.1em;
-    margin-bottom: 0.75em;
-    margin-right: 0.25em;
-    font-size: 1em;
-    line-height: 1.2;
-    border: 2px solid var(--primary-color);
-    color: #fff;
-    background-color: #333;
-    border-radius: 30px;
-    font-family: var(--font-family);
-    transition: all 0.3s ease-in-out;
-  }
-
-  .button.btn-send:hover {
-    background-color: var(--primary-color);
-    color: #fff;
-  }
+  /* Button styles are now using global .btn-primary class */
 
   @media (max-width: 768px) {
     .contact-section {
@@ -260,23 +270,4 @@ import Layout from "../layouts/Layout.astro";
   }
 </style>
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const fields = ["form_name", "form_email", "form_message"];
-
-    fields.forEach((id) => {
-      const input = document.getElementById(id);
-      const borderDiv = document.getElementById(id.replace("form_", "") + "-border");
-      if (input && borderDiv) {
-        input.addEventListener("focus", () => {
-          borderDiv.style.opacity = "1";
-          borderDiv.style.zIndex = "2";
-        });
-        input.addEventListener("blur", () => {
-          borderDiv.style.opacity = "0";
-          borderDiv.style.zIndex = "-1";
-        });
-      }
-    });
-  });
-</script>
+<!-- Removed unused JavaScript that referenced non-existent border elements -->

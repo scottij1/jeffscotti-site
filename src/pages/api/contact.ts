@@ -14,19 +14,19 @@ export const post: APIRoute = async ({ request }) => {
   }
 
   const transporter = nodemailer.createTransport({
-    host: 'smtp.example.com',
-    port: 587, // 465 for secure connection, or 587 for TLS
-    secure: false, // true for 465, false for other ports
+    host: process.env.SMTP_HOST, 
+    port: Number(process.env.SMTP_PORT),
+    secure: process.env.SMTP_PORT === '465', 
     auth: {
-      user: process.env.SMTP_USER, 
-      pass: process.env.SMTP_PASS, 
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
     },
   });
 
   try {
     await transporter.sendMail({
-      from: email, // sender address
-      to: 'jeff@jeffscotti.net', 
+      from: email,
+      to:  process.env.CONTACT_EMAIL,
       subject: `Contact Form Submission from ${name}`,
       text: message,
       html: `<p>${message}</p>`,
