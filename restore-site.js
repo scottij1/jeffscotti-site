@@ -120,8 +120,10 @@ async function main() {
 import { startServer } from './server/entry.mjs';
 
 // Set default port and host
+// Using 0.0.0.0 to listen on all available network interfaces
+// This is important for hosting environments like DreamHost
 const PORT = process.env.PORT || 4321;
-const HOST = process.env.HOST || '127.0.0.1';
+const HOST = process.env.HOST || '0.0.0.0';
 
 // Start the server
 startServer({
@@ -141,22 +143,48 @@ startServer({
       fs.writeFileSync(htaccessPath, `# Enable the RewriteEngine
 RewriteEngine On
 
-# If the request is for an existing file or directory, serve it directly
-RewriteCond %{REQUEST_FILENAME} -f [OR]
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^ - [L]
+# Enable detailed error reporting
+Options +FollowSymLinks
+RewriteOptions Inherit
 
-# For static assets in the client directory, serve them directly
-RewriteRule ^client/(.*)$ client/$1 [L]
+# Enable proxy modules
+<IfModule mod_proxy.c>
+    <IfModule mod_proxy_http.c>
+        # If the request is for an existing file or directory, serve it directly
+        RewriteCond %{REQUEST_FILENAME} -f [OR]
+        RewriteCond %{REQUEST_FILENAME} -d
+        RewriteRule ^ - [L]
 
-# For all other requests, proxy to the Node.js server
-# Note: You'll need to replace 127.0.0.1:4321 with the actual address and port of your Node.js server
-RewriteRule ^(.*)$ http://127.0.0.1:4321/$1 [P,L]
+        # For static assets in the client directory, serve them directly
+        RewriteRule ^client/(.*)$ client/$1 [L]
 
-# Set some headers for proxied content
-<IfModule mod_headers.c>
-    Header set X-Powered-By "Astro"
-</IfModule>`);
+        # For all other requests, proxy to the Node.js server
+        # Using localhost instead of 127.0.0.1 for better compatibility
+        RewriteRule ^(.*)$ http://localhost:4321/$1 [P,L]
+
+        # Set some headers for proxied content
+        <IfModule mod_headers.c>
+            Header set X-Powered-By "Astro"
+        </IfModule>
+
+        # Set proxy timeout
+        ProxyTimeout 600
+        
+        # Enable proxy error override
+        ProxyErrorOverride On
+    </IfModule>
+</IfModule>
+
+# Fallback for when proxy modules are not available
+<IfModule !mod_proxy.c>
+    ErrorDocument 503 "The server is temporarily unavailable. Please contact the server administrator for assistance."
+</IfModule>
+
+# Custom error pages
+ErrorDocument 500 "Internal Server Error: The server encountered an unexpected condition that prevented it from fulfilling the request. Please contact the server administrator."
+ErrorDocument 502 "Bad Gateway: The server received an invalid response from the upstream server. Please contact the server administrator."
+ErrorDocument 503 "Service Unavailable: The server is currently unable to handle the request due to a temporary overloading or maintenance of the server. Please contact the server administrator."
+ErrorDocument 504 "Gateway Timeout: The server was acting as a gateway or proxy and did not receive a timely response from the upstream server. Please contact the server administrator."`);
       
       // Create start.sh
       const startShPath = path.join(__dirname, 'dist', 'start.sh');
@@ -167,7 +195,7 @@ cd "$(dirname "$0")"
 
 # Set environment variables
 export PORT=4321
-export HOST=127.0.0.1
+export HOST=0.0.0.0
 
 # Start the server
 node start.js`);
@@ -199,12 +227,15 @@ node start.js`);
 import http from 'http';
 
 const PORT = process.env.PORT || 4321;
-const HOST = process.env.HOST || '127.0.0.1';
+const HOST = process.env.HOST || '0.0.0.0';
 
-console.log(\`Testing server at http://\${HOST}:\${PORT}...\`);
+// For testing, we'll use localhost since we're connecting to the local server
+const TEST_HOST = 'localhost';
+
+console.log(\`Testing server at http://\${TEST_HOST}:\${PORT}...\`);
 
 const req = http.request({
-  host: HOST,
+  host: TEST_HOST,
   port: PORT,
   path: '/',
   method: 'GET',
