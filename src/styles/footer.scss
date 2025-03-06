@@ -52,7 +52,11 @@
       gap: 6px;
 
       &:hover {
-        color: $secondary-color;
+        color: $primary-color;
+      }
+
+      &:active {
+        color: $active-color;
       }
     }
   }
@@ -107,7 +111,11 @@
     transition: all 0.2s;
 
     &:hover {
-      color: $secondary-color;
+      color: $primary-color;
+    }
+    
+    &:active {
+      color: $active-color;
     }
   }
 }
@@ -166,8 +174,13 @@
       }
 
       &:hover i:not(.chevron-icon) {
-        background-color: $secondary-color;
-        border-color: $secondary-color;
+        background-color: $primary-color;
+        border-color: $primary-color;
+      }
+      
+      &:active i:not(.chevron-icon) {
+        background-color: $active-color;
+        border-color: $active-color;
       }
     }
 

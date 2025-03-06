@@ -8,7 +8,8 @@
   --text-color: #d5d5d5; // Light gray for main text
   --heading-color: #f5f5f5; // Almost white for headings
   --border-color: #444; // Medium gray for borders
-  --link-hover-color: #ff9800; // Orange for link hover
+  --link-hover-color: #007ced; // Blue for link hover
+  --active-color: #ff9800; // Orange for active states
 
   // Fonts
   --font-family: "Poppins", Helvetica, sans-serif;
@@ -39,6 +40,7 @@ $text-color: var(--text-color);
 $heading-color: var(--heading-color);
 $border-color: var(--border-color);
 $link-hover-color: var(--link-hover-color);
+$active-color: var(--active-color);
 
 $font-family: var(--font-family);
 $font-size-base: var(--font-size-base);

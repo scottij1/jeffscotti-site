@@ -74,8 +74,12 @@ a {
   transition: all 0.3s ease-in-out;
 
   &:hover {
-    color: $link-hover-color;
+    color: $active-color;
     text-decoration: none;
+  }
+  
+  &:active {
+    color: $active-color;
   }
 
   &:focus {
@@ -154,6 +158,12 @@ a {
     color: $heading-color;
     border-color: $primary-color;
   }
+  
+  &:active {
+    background-color: $active-color;
+    color: $heading-color;
+    border-color: $active-color;
+  }
 }
 
 .btn-primary {
@@ -165,6 +175,12 @@ a {
     background-color: $primary-color;
     color: #fff;
     border-color: $primary-color;
+  }
+  
+  &:active {
+    background-color: $active-color;
+    color: #fff;
+    border-color: $active-color;
   }
 }
 

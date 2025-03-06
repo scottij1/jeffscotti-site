@@ -68,21 +68,25 @@
       margin-right: 0;
     }
 
-    a {
-      color: $heading-color;
-      text-decoration: none;
-      line-height: 50px;
-      font-size: 14px;
-      transition: all 0.3s ease-in-out;
+      a {
+        color: $heading-color;
+        text-decoration: none;
+        line-height: 50px;
+        font-size: 14px;
+        transition: all 0.3s ease-in-out;
 
-      &:hover {
-        color: $secondary-color;
+        &:hover {
+          color: $link-hover-color;
+        }
+
+        &:active {
+          color: $active-color;
+        }
       }
-    }
 
-    &.current-menu-item > a {
-      color: $primary-color;
-    }
+      &.current-menu-item > a {
+        color: $active-color;
+      }
   }
 
   .sub-menu {
@@ -114,7 +118,11 @@
         line-height: 1.6em;
 
         &:hover {
-          color: $secondary-color;
+          color: $link-hover-color;
+        }
+
+        &:active {
+          color: $active-color;
         }
       }
     }
@@ -253,7 +261,11 @@
         font-weight: 500;
         
         &:hover {
-          color: $secondary-color;
+          color: $link-hover-color;
+        }
+        
+        &:active {
+          color: $active-color;
         }
       }
     }

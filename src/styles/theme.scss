@@ -7,7 +7,8 @@ html.theme-dark {
   --text-color: #d5d5d5; // Light gray for main text
   --heading-color: #f5f5f5; // Almost white for headings
   --border-color: #444; // Medium gray for borders
-  --link-hover-color: #ff9800; // Orange for link hover
+  --link-hover-color: #007ced; // Blue for link hover
+  --active-color: #ff9800; // Orange for active states
 }
 
 html.theme-light {
@@ -18,5 +19,6 @@ html.theme-light {
   --text-color: #333333; // Dark gray
   --heading-color: #222222; // Almost black
   --border-color: #dddddd; // Light gray
-  --link-hover-color: #e67e00; // Darker orange
+  --link-hover-color: #0066cc; // Blue for link hover
+  --active-color: #e67e00; // Orange for active states
 }
