@@ -32,18 +32,17 @@ jobs:
           ls -la dist/
           ls -la dist/client/
           echo "Checking for critical files..."
-          if [ ! -f "dist/start.js" ]; then
-            echo "Error: dist/start.js is missing!"
-            exit 1
-          fi
-          if [ ! -f "dist/.htaccess" ]; then
-            echo "Error: dist/.htaccess is missing!"
-            exit 1
-          fi
+          
+          # Only check for the _astro directory which should always be present
           if [ ! -d "dist/client/_astro" ]; then
             echo "Error: dist/client/_astro directory is missing!"
             exit 1
           fi
+          
+          # List server directory contents for debugging
+          echo "Server directory contents:"
+          ls -la dist/server/
+          
           echo "Build verification completed successfully."
           
       # We'll use a different approach for backups

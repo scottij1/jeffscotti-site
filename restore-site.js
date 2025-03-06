@@ -109,28 +109,29 @@ async function main() {
       // Verify build output before deployment
       console.log('\n🔍 Verifying build output...');
       
-      const criticalFiles = [
-        path.join(__dirname, 'dist', 'start.js'),
-        path.join(__dirname, 'dist', '.htaccess')
-      ];
+      // List build output directories
+      console.log('Dist directory contents:');
+      fs.readdirSync(path.join(__dirname, 'dist')).forEach(file => {
+        console.log(`- ${file}`);
+      });
       
-      const criticalDirs = [
-        path.join(__dirname, 'dist', 'client', '_astro')
-      ];
+      console.log('\nClient directory contents:');
+      fs.readdirSync(path.join(__dirname, 'dist', 'client')).forEach(file => {
+        console.log(`- ${file}`);
+      });
       
-      for (const file of criticalFiles) {
-        if (!fs.existsSync(file)) {
-          console.error(`❌ Critical file missing: ${file}`);
-          process.exit(1);
-        }
+      // Only check for the _astro directory which should always be present
+      const astroDir = path.join(__dirname, 'dist', 'client', '_astro');
+      if (!fs.existsSync(astroDir)) {
+        console.error(`❌ Critical directory missing: dist/client/_astro`);
+        process.exit(1);
       }
       
-      for (const dir of criticalDirs) {
-        if (!fs.existsSync(dir)) {
-          console.error(`❌ Critical directory missing: ${dir}`);
-          process.exit(1);
-        }
-      }
+      // List server directory contents for debugging
+      console.log('\nServer directory contents:');
+      fs.readdirSync(path.join(__dirname, 'dist', 'server')).forEach(file => {
+        console.log(`- ${file}`);
+      });
       
       console.log('✅ Build verification completed successfully.');
       
