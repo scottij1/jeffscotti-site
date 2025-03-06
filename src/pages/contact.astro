@@ -30,7 +30,7 @@ import Layout from "../layouts/Layout.astro";
           <div class="contact-section">
             <!-- Contact Form -->
             <div class="contact-form-container">
-              <form id="contact_form" class="contact-form" method="POST" action="/api/contact">
+              <form id="contact_form" class="contact-form">
                 <div class="form-group">
                   <label for="form_name">Full Name</label>
                   <input
@@ -67,7 +67,8 @@ import Layout from "../layouts/Layout.astro";
                   </textarea>
                 </div>
 
-                <button type="submit" class="btn">Submit</button>
+                <button type="submit" class="btn" id="submit_btn">Submit</button>
+                <div id="form_status" class="form-status" style="display: none;"></div>
               </form>
             </div>
 
@@ -256,6 +257,26 @@ import Layout from "../layouts/Layout.astro";
     min-height: 150px;
   }
 
+  /* Form status messages */
+  .form-status {
+    margin-top: 15px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: 500;
+  }
+
+  .form-status.success {
+    background-color: rgba(25, 135, 84, 0.2);
+    color: #20c997;
+    border: 1px solid rgba(25, 135, 84, 0.4);
+  }
+
+  .form-status.error {
+    background-color: rgba(220, 53, 69, 0.2);
+    color: #ff6b6b;
+    border: 1px solid rgba(220, 53, 69, 0.4);
+  }
+
   /* Button styles are now using global .btn-primary class */
 
   @media (max-width: 768px) {
@@ -270,4 +291,66 @@ import Layout from "../layouts/Layout.astro";
   }
 </style>
 
-<!-- Removed unused JavaScript that referenced non-existent border elements -->
+<!-- Form submission script -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("contact_form") as HTMLFormElement;
+    const statusDiv = document.getElementById("form_status") as HTMLDivElement;
+    const submitBtn = document.getElementById("submit_btn") as HTMLButtonElement;
+
+    if (!form || !statusDiv || !submitBtn) {
+      console.error("Could not find required form elements");
+      return;
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending...";
+
+      statusDiv.style.display = "none";
+
+      const nameInput = form.querySelector('[name="name"]') as HTMLInputElement;
+      const emailInput = form.querySelector('[name="email"]') as HTMLInputElement;
+      const messageInput = form.querySelector('[name="message"]') as HTMLTextAreaElement;
+
+      const formData = {
+        name: nameInput.value.trim(),
+        email: emailInput.value.trim(),
+        message: messageInput.value.trim(),
+      };
+
+      try {
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
+
+        const result = await response.json();
+
+        statusDiv.style.display = "block";
+
+        if (response.ok) {
+          statusDiv.textContent = "Thank you! Your message has been sent.";
+          statusDiv.className = "form-status success";
+          form.reset();
+        } else {
+          statusDiv.textContent = result.error || "Something went wrong. Please try again.";
+          statusDiv.className = "form-status error";
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        statusDiv.style.display = "block";
+        statusDiv.textContent = "Network error. Please try again later.";
+        statusDiv.className = "form-status error";
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Submit";
+      }
+    });
+  });
+</script>
