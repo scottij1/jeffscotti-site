@@ -3,8 +3,8 @@
 <script
   type="text/javascript"
   src="https://kit.fontawesome.com/ad9e6c27c0.js"
-  crossorigin="anonymous"
-></script>
+  crossorigin="anonymous">
+</script>
 
 <div class="tabs-container">
   <!-- Desktop Tabs -->
@@ -598,11 +598,11 @@
   }
 
   .tab-btn:hover {
-    color: var(--secondary-color);
+    color: var(--primary-color);
   }
 
   .desktop-tabs li.active .tab-btn {
-    color: var(--primary-color);
+    color: var(--active-color);
   }
 
   /* Icon styling */
@@ -617,11 +617,11 @@
   }
 
   .tab-btn:hover .alt-tabs-icon {
-    color: var(--secondary-color);
+    color: var(--primary-color);
   }
 
   .desktop-tabs li.active .alt-tabs-icon {
-    color: var(--primary-color);
+    color: var(--active-color);
   }
 
   /* Content styling */
@@ -681,7 +681,7 @@
   }
 
   .accordion-item.active .accordion-header {
-    color: var(--primary-color);
+    color: var(--active-color);
   }
 
   .accordion-icon {
@@ -689,6 +689,10 @@
     margin-right: 15px;
     color: inherit;
     transition: all 0.3s ease;
+  }
+
+  .accordion-header:hover {
+    color: var(--primary-color);
   }
 
   .accordion-title {
