@@ -277,7 +277,11 @@ import Layout from "../layouts/Layout.astro";
     border: 1px solid rgba(220, 53, 69, 0.4);
   }
 
-  /* Button styles are now using global .btn-primary class */
+  /* Button disabled state */
+  .btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
 
   @media (max-width: 768px) {
     .contact-section {
@@ -291,7 +295,6 @@ import Layout from "../layouts/Layout.astro";
   }
 </style>
 
-<!-- Form submission script -->
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("contact_form") as HTMLFormElement;
@@ -315,14 +318,35 @@ import Layout from "../layouts/Layout.astro";
       const emailInput = form.querySelector('[name="email"]') as HTMLInputElement;
       const messageInput = form.querySelector('[name="message"]') as HTMLTextAreaElement;
 
+      // Ensure message is properly trimmed to handle any whitespace issues
+      let message = messageInput.value;
+      if (message) {
+        message = message.trim();
+      }
+
       const formData = {
         name: nameInput.value.trim(),
         email: emailInput.value.trim(),
-        message: messageInput.value.trim(),
+        message: message,
       };
 
       try {
-        const response = await fetch("/api/contact", {
+        console.log("Sending form data:", JSON.stringify(formData));
+
+        // Use the new API endpoint
+        const baseUrl = window.location.origin;
+        const apiUrl = `${baseUrl}/api/contact-form`;
+        console.log("API URL:", apiUrl);
+
+        // Log request details
+        console.log("Request details:", {
+          url: apiUrl,
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify(formData),
+        });
+
+        const response = await fetch(apiUrl, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -330,20 +354,44 @@ import Layout from "../layouts/Layout.astro";
           body: JSON.stringify(formData),
         });
 
-        const result = await response.json();
+        console.log("Response status:", response.status, response.statusText);
 
-        statusDiv.style.display = "block";
+        // Try to get the raw response text first for debugging
+        const responseText = await response.clone().text();
+        console.log("Raw response:", responseText);
 
+        // Check if the response is ok before trying to parse JSON
         if (response.ok) {
-          statusDiv.textContent = "Thank you! Your message has been sent.";
-          statusDiv.className = "form-status success";
-          form.reset();
+          try {
+            const result = await response.json();
+            statusDiv.style.display = "block";
+            statusDiv.textContent = "Thank you! Your message has been sent.";
+            statusDiv.className = "form-status success";
+            form.reset();
+          } catch (parseError) {
+            console.error("Error parsing JSON:", parseError);
+            statusDiv.style.display = "block";
+            statusDiv.textContent =
+              "Server returned success but with invalid format. Please try again.";
+            statusDiv.className = "form-status error";
+          }
         } else {
-          statusDiv.textContent = result.error || "Something went wrong. Please try again.";
-          statusDiv.className = "form-status error";
+          // Try to parse error response as JSON, but handle case where it's not JSON
+          try {
+            const errorResult = await response.json();
+            statusDiv.style.display = "block";
+            statusDiv.textContent = errorResult.error || "Something went wrong. Please try again.";
+            statusDiv.className = "form-status error";
+          } catch (parseError) {
+            // If we can't parse the error as JSON, use the status text
+            console.error("Error parsing error response:", parseError);
+            statusDiv.style.display = "block";
+            statusDiv.textContent = `Error: ${response.status} ${response.statusText}`;
+            statusDiv.className = "form-status error";
+          }
         }
       } catch (error) {
-        console.error("Error:", error);
+        console.error("Network Error:", error);
         statusDiv.style.display = "block";
         statusDiv.textContent = "Network error. Please try again later.";
         statusDiv.className = "form-status error";
