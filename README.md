@@ -55,6 +55,34 @@ export default defineConfig({
 
 This site is deployed to DreamHost using GitHub Actions. The workflow is defined in `.github/workflows/deploy.yml`.
 
+### Deployment Configuration
+
+The deployment uses the `SamKirkland/FTP-Deploy-Action@4.3.0` GitHub Action to deploy the site via FTP. The configuration includes:
+
+- `dangerous-clean-slate: false` - Prevents deletion of files on the server that don't exist locally
+- `exclude` - Excludes certain files/directories from being deleted
+- `state-name` - Maintains state between deployments
+- `log-level: verbose` - Provides detailed logs for debugging
+
+### Manual Restore
+
+If you need to manually restore the site, you can use the `restore-site.js` script:
+
+```bash
+node restore-site.js
+```
+
+This script will:
+1. Install dependencies
+2. Build the site
+3. Deploy it to DreamHost via FTP with the same configuration as the GitHub workflow
+
+The script requires the following environment variables in your `.env` file:
+- `FTP_SERVER` - The FTP server hostname
+- `FTP_USERNAME` - The FTP username
+- `FTP_PASSWORD` - The FTP password
+- `FTP_REMOTE_PATH` - The remote path on the FTP server
+
 ### Deployment Options
 
 #### Option 1: Using Node.js (if DreamHost supports Node.js)
