@@ -9,6 +9,8 @@ import "../styles/footer.scss";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import VantaBackground from "../components/VantaBackground.astro";
+import ravenLogoWhite from "../assets/raven-logo-sm.png";
+import ravenLogoBlack from "../assets/raven-logo-sm-blk.png";
 
 interface Props {
   title?: string;
@@ -98,6 +100,9 @@ const canonicalURLObj =
       type="font/ttf"
       crossorigin
     />
+    <!-- Preload logo images to prevent layout shift during navigation -->
+    <link rel="preload" as="image" href={ravenLogoWhite.src} type="image/png" />
+    <link rel="preload" as="image" href={ravenLogoBlack.src} type="image/png" />
     <!-- Note: Preloading the image is handled by the Image component with fetchpriority="high" -->
 
     <!-- Inline critical theme detection to avoid FOUC -->

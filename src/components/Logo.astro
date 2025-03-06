@@ -4,8 +4,22 @@ import ravenLogoBlack from "../assets/raven-logo-sm-blk.png";
 ---
 
 <div class="logo-lockup">
-  <img src={ravenLogoWhite.src} alt="Raven Logo" class="raven-logo white-logo" />
-  <img src={ravenLogoBlack.src} alt="Raven Logo" class="raven-logo black-logo" />
+  <div class="logo-container">
+    <img
+      src={ravenLogoWhite.src}
+      alt="Raven Logo"
+      class="raven-logo white-logo"
+      width="45"
+      height="45"
+    />
+    <img
+      src={ravenLogoBlack.src}
+      alt="Raven Logo"
+      class="raven-logo black-logo"
+      width="45"
+      height="45"
+    />
+  </div>
   <span class="logo-text"><strong>Jeff</strong> Scotti</span>
 </div>
 
@@ -16,19 +30,25 @@ import ravenLogoBlack from "../assets/raven-logo-sm-blk.png";
     gap: 10px;
   }
 
+  .logo-container {
+    width: 50px;
+    height: 50px;
+    position: relative;
+  }
+
   .raven-logo {
-    height: 45px;
-    width: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 55px;
+    width: 55px;
+    object-fit: contain;
+    display: none;
   }
 
   .logo-text {
     font-size: 17pt;
     color: var(--heading-color);
-  }
-
-  .white-logo,
-  .black-logo {
-    display: none;
   }
 
   .theme-dark .white-logo {
