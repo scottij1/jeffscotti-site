@@ -22,33 +22,6 @@ ul {
   }
 }
 
-.social-links {
-  margin-top: 10px;
-  text-align: left;
-  display: flex;
-  gap: 10px;
-
-  .social-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: $text-color;
-    text-align: center;
-    font-size: 18px;
-    border-radius: 50%;
-    transition: all 0.3s ease-in-out;
-
-    &:hover {
-      background-color: $primary-color;
-      color: $heading-color;
-      transform: translateY(-3px);
-    }
-  }
-}
-
 // Typography
 h1,
 h2,
@@ -112,7 +85,7 @@ a {
 }
 
 .block-title {
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
 .block-title h2 {
