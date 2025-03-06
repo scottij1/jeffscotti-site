@@ -1,11 +1,8 @@
 // src/env.server.ts
-import { loadEnv } from 'vite';
 import * as dotenv from 'dotenv';
 
-// Load environment variables from .env file
 dotenv.config();
 
-// Define environment variables with fallbacks
 export const ENV = {
   SMTP_HOST: process.env.SMTP_HOST || 'smtp.dreamhost.com',
   SMTP_PORT: process.env.SMTP_PORT || '465',
@@ -14,7 +11,6 @@ export const ENV = {
   CONTACT_EMAIL: process.env.CONTACT_EMAIL || 'jeff@jeffscotti.net',
 };
 
-// Validate required environment variables
 export function validateEnv() {
   const missingVars = [];
   
@@ -25,7 +21,6 @@ export function validateEnv() {
   if (!ENV.CONTACT_EMAIL) missingVars.push('CONTACT_EMAIL');
   
   if (missingVars.length > 0) {
-    console.warn(`Missing environment variables: ${missingVars.join(', ')}`);
     return false;
   }
   
