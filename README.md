@@ -1,34 +1,22 @@
-# Astro Starter Kit: Basics
+# jeffscotti.net - Personal Website
 
-```sh
-npm create astro@latest -- --template basics
-```
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+This is the source code for Jeff Scotti's personal website, built with Astro.
 
 ## 🚀 Project Structure
 
-Inside of your Astro project, you'll see the following folders and files:
-
 ```text
 /
-├── public/
-│   └── favicon.svg
+├── public/              # Static assets that are copied directly to the build output
 ├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
+│   ├── assets/          # Assets that are processed by Astro
+│   ├── components/      # Reusable Astro components
+│   ├── data/            # Data files used in the site
+│   ├── layouts/         # Layout components
+│   ├── pages/           # Page components and API routes
+│   │   └── api/         # API routes
+│   └── styles/          # SCSS styles
 └── package.json
 ```
-
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
 
 ## 🧞 Commands
 
@@ -43,6 +31,46 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-## 👀 Want to learn more?
+## 🌐 Server-Side Rendering
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+This site uses Astro's server-side rendering (SSR) capabilities for API routes and dynamic content. The `output: 'server'` configuration in `astro.config.mjs` enables SSR, and the `@astrojs/node` adapter is used to generate a Node.js server.
+
+### Node.js Adapter
+
+The Node.js adapter is configured in `astro.config.mjs`:
+
+```js
+import { defineConfig } from "astro/config";
+import node from "@astrojs/node";
+
+export default defineConfig({
+  output: 'server',
+  adapter: node({
+    mode: 'standalone'
+  })
+});
+```
+
+## 🚀 Deployment
+
+This site is deployed to DreamHost using GitHub Actions. The workflow is defined in `.github/workflows/deploy.yml`.
+
+### Deployment Options
+
+#### Option 1: Using Node.js (if DreamHost supports Node.js)
+
+If DreamHost supports running Node.js applications, you can deploy the entire `dist/` directory and run the Node.js server. See the `dist/README.md` file for detailed instructions.
+
+#### Option 2: Using Static Site (if DreamHost doesn't support Node.js)
+
+If DreamHost doesn't support running Node.js applications, you may need to:
+
+1. Change the Astro configuration to use static site generation instead of server-side rendering
+2. Remove the server-side API routes or implement them using a different approach (e.g., serverless functions)
+3. Build the site and deploy only the static assets
+
+## 📝 Notes
+
+- The site uses SCSS for styling
+- API routes are located in `src/pages/api/`
+- Environment variables are managed in `.env` and `.env.production` files (not committed to the repository)
