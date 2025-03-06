@@ -30,7 +30,23 @@ import Layout from "../layouts/Layout.astro";
           <div class="contact-section">
             <!-- Contact Form -->
             <div class="contact-form-container">
-              <form id="contact_form" class="contact-form">
+              <form
+                id="contact_form"
+                class="contact-form"
+                action="https://formsubmit.co/jeffscotti@gmail.com"
+                method="POST">
+                <!-- FormSubmit.co Configuration -->
+                <input
+                  type="hidden"
+                  name="_subject"
+                  value="New Contact Form Submission - jeffscotti.net"
+                />
+                <input type="hidden" name="_template" value="table" />
+                <input type="hidden" name="_next" value="https://jeffscotti.net/thank-you" />
+
+                <!-- Honeypot field to prevent spam -->
+                <input type="text" name="_honey" style="display:none" />
+
                 <div class="form-group">
                   <label for="form_name">Full Name</label>
                   <input
@@ -68,7 +84,9 @@ import Layout from "../layouts/Layout.astro";
                 </div>
 
                 <button type="submit" class="btn" id="submit_btn">Submit</button>
-                <div id="form_status" class="form-status" style="display: none;"></div>
+                <div id="form_status" class="form-status" style="display: none;">
+                  If you see this message, please refresh the page and try again.
+                </div>
               </form>
             </div>
 
@@ -296,87 +314,17 @@ import Layout from "../layouts/Layout.astro";
 </style>
 
 <script>
+  // Simple script to show loading state when form is submitted
   document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("contact_form") as HTMLFormElement;
-    const statusDiv = document.getElementById("form_status") as HTMLDivElement;
     const submitBtn = document.getElementById("submit_btn") as HTMLButtonElement;
 
-    if (!form || !statusDiv || !submitBtn) {
-      return;
+    if (form && submitBtn) {
+      form.addEventListener("submit", () => {
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Sending...";
+        // FormSubmit.co will handle the actual submission
+      });
     }
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      submitBtn.disabled = true;
-      submitBtn.textContent = "Sending...";
-
-      statusDiv.style.display = "none";
-
-      const nameInput = form.querySelector('[name="name"]') as HTMLInputElement;
-      const emailInput = form.querySelector('[name="email"]') as HTMLInputElement;
-      const messageInput = form.querySelector('[name="message"]') as HTMLTextAreaElement;
-
-      // Ensure message is properly trimmed to handle any whitespace issues
-      let message = messageInput.value;
-      if (message) {
-        message = message.trim();
-      }
-
-      const formData = {
-        name: nameInput.value.trim(),
-        email: emailInput.value.trim(),
-        message: message,
-      };
-
-      try {
-        const baseUrl = window.location.origin;
-        const apiUrl = `${baseUrl}/api/contact-form`;
-
-        const response = await fetch(apiUrl, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        });
-
-        // Check if the response is ok before trying to parse JSON
-        if (response.ok) {
-          try {
-            const result = await response.json();
-            statusDiv.style.display = "block";
-            statusDiv.textContent = "Thank you! Your message has been sent.";
-            statusDiv.className = "form-status success";
-            form.reset();
-          } catch (parseError) {
-            statusDiv.style.display = "block";
-            statusDiv.textContent =
-              "Server returned success but with invalid format. Please try again.";
-            statusDiv.className = "form-status error";
-          }
-        } else {
-          // Try to parse error response as JSON, but handle case where it's not JSON
-          try {
-            const errorResult = await response.json();
-            statusDiv.style.display = "block";
-            statusDiv.textContent = errorResult.error || "Something went wrong. Please try again.";
-            statusDiv.className = "form-status error";
-          } catch (parseError) {
-            // If we can't parse the error as JSON, use the status text
-            statusDiv.style.display = "block";
-            statusDiv.textContent = `Error: ${response.status} ${response.statusText}`;
-            statusDiv.className = "form-status error";
-          }
-        }
-      } catch (error) {
-        statusDiv.style.display = "block";
-        statusDiv.textContent = "Network error. Please try again later.";
-        statusDiv.className = "form-status error";
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = "Submit";
-      }
-    });
   });
 </script>

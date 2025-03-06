@@ -1,0 +1,60 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  title="Thank You | Jeff Scotti"
+  description="Thank you for contacting Jeff Scotti. Your message has been received."
+  type="website">
+  <div id="main" class="site-main">
+    <div id="main-content" class="single-page-content">
+      <div id="primary" class="content-area">
+        <div class="page-title">
+          <h1>Thank You</h1>
+          <div class="page-subtitle">
+            <h4>Message Received</h4>
+          </div>
+        </div>
+
+        <div id="content" class="page-content site-content single-post" role="main">
+          <div class="thank-you-container">
+            <div class="thank-you-message">
+              <p>
+                Your message has been sent successfully. I'll get back to you as soon as possible.
+              </p>
+              <div class="button-container">
+                <a href="/" class="btn">Return to Home</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .thank-you-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+  }
+
+  .thank-you-message {
+    text-align: center;
+    max-width: 600px;
+    padding: 40px;
+    background-color: rgba(40, 40, 40, 0.5);
+    border-radius: 8px;
+  }
+
+  .thank-you-message p {
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+
+  .button-container {
+    margin-top: 20px;
+  }
+</style>

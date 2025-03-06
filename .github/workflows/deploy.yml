@@ -26,193 +26,111 @@ jobs:
       - name: Build Astro Site
         run: npm run build
         
-      - name: Create Server Files
+      - name: Create .htaccess File
         run: |
-          # Create start.js
-          cat > dist/start.js << 'EOL'
-          #!/usr/bin/env node
-          
-          /**
-           * This script starts the Astro SSR server
-           */
-          
-          import { startServer } from './server/entry.mjs';
-          
-          // Set default port and host
-          // Using 0.0.0.0 to listen on all available network interfaces
-          // This is important for hosting environments like DreamHost
-          const PORT = process.env.PORT || 4321;
-          const HOST = process.env.HOST || '0.0.0.0';
-          
-          // Start the server
-          startServer({
-            port: PORT,
-            host: HOST
-          })
-            .then(({ server }) => {
-              console.log(`Server running at http://${HOST}:${PORT}`);
-            })
-            .catch((err) => {
-              console.error('Failed to start server:', err);
-              process.exit(1);
-            });
-          EOL
-          
-          # Create .htaccess
+          # Create .htaccess for static site
           cat > dist/.htaccess << 'EOL'
-          # Enable the RewriteEngine
+          # Enable URL rewriting
           RewriteEngine On
           
-          # Enable detailed error reporting
-          Options +FollowSymLinks
-          RewriteOptions Inherit
+          # Set the base
+          RewriteBase /
           
-          # Enable proxy modules
-          <IfModule mod_proxy.c>
-              <IfModule mod_proxy_http.c>
-                  # If the request is for an existing file or directory, serve it directly
-                  RewriteCond %{REQUEST_FILENAME} -f [OR]
-                  RewriteCond %{REQUEST_FILENAME} -d
-                  RewriteRule ^ - [L]
+          # Redirect www to non-www
+          RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+          RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
           
-                  # For static assets in the client directory, serve them directly
-                  RewriteRule ^client/(.*)$ client/$1 [L]
+          # If the request is for an existing file, directory, or link, serve it directly
+          RewriteCond %{REQUEST_FILENAME} -f [OR]
+          RewriteCond %{REQUEST_FILENAME} -d [OR]
+          RewriteCond %{REQUEST_FILENAME} -l
+          RewriteRule ^ - [L]
           
-                  # For all other requests, proxy to the Node.js server
-                  # Using localhost instead of 127.0.0.1 for better compatibility
-                  RewriteRule ^(.*)$ http://localhost:4321/$1 [P,L]
+          # For clean URLs - redirect /page to /page/
+          RewriteCond %{REQUEST_FILENAME} !-f
+          RewriteCond %{REQUEST_FILENAME} !-d
+          RewriteCond %{REQUEST_URI} !(\.[a-zA-Z0-9]{1,5}|/)$
+          RewriteRule ^(.*)$ /$1/ [R=301,L]
           
-                  # Set some headers for proxied content
-                  <IfModule mod_headers.c>
-                      Header set X-Powered-By "Astro"
-                  </IfModule>
+          # If the request is for a non-existent file, serve the index.html in that directory
+          RewriteCond %{REQUEST_FILENAME} !-f
+          RewriteCond %{REQUEST_FILENAME} !-d
+          RewriteRule ^([^.]+)/$ $1/index.html [L]
           
-                  # Set proxy timeout
-                  ProxyTimeout 600
-                  
-                  # Enable proxy error override
-                  ProxyErrorOverride On
-              </IfModule>
-          </IfModule>
-          
-          # Fallback for when proxy modules are not available
-          <IfModule !mod_proxy.c>
-              ErrorDocument 503 "The server is temporarily unavailable. Please contact the server administrator for assistance."
-          </IfModule>
+          # If the request is for the root, serve index.html
+          RewriteRule ^$ index.html [L]
           
           # Custom error pages
-          ErrorDocument 500 "Internal Server Error: The server encountered an unexpected condition that prevented it from fulfilling the request. Please contact the server administrator."
-          ErrorDocument 502 "Bad Gateway: The server received an invalid response from the upstream server. Please contact the server administrator."
-          ErrorDocument 503 "Service Unavailable: The server is currently unable to handle the request due to a temporary overloading or maintenance of the server. Please contact the server administrator."
-          ErrorDocument 504 "Gateway Timeout: The server was acting as a gateway or proxy and did not receive a timely response from the upstream server. Please contact the server administrator."
-          EOL
+          ErrorDocument 404 /404.html
+          ErrorDocument 500 /500.html
           
-          # Create start.sh
-          cat > dist/start.sh << 'EOL'
-          #!/bin/bash
+          # Set proper MIME types
+          AddType application/javascript .js
+          AddType text/css .css
+          AddType image/svg+xml .svg
+          AddType application/font-woff .woff
+          AddType application/font-woff2 .woff2
+          AddType application/vnd.ms-fontobject .eot
+          AddType application/x-font-ttf .ttf
           
-          # Change to the directory containing this script
-          cd "$(dirname "$0")"
+          # Enable CORS for fonts
+          <FilesMatch "\.(ttf|otf|eot|woff|woff2)$">
+            <IfModule mod_headers.c>
+              Header set Access-Control-Allow-Origin "*"
+            </IfModule>
+          </FilesMatch>
           
-          # Set environment variables
-          export PORT=4321
-          export HOST=0.0.0.0
-          
-          # Start the server
-          node start.js
-          EOL
-          
-          # Create package.json
-          cat > dist/package.json << 'EOL'
-          {
-            "name": "jeffscotti-site-server",
-            "type": "module",
-            "version": "1.0.0",
-            "private": true,
-            "scripts": {
-              "start": "node start.js",
-              "test": "node test.js"
-            },
-            "engines": {
-              "node": ">=18.19.0"
-            }
-          }
-          EOL
-          
-          # Create test.js
-          cat > dist/test.js << 'EOL'
-          #!/usr/bin/env node
-          
-          /**
-           * This script tests if the server is running correctly
-           */
-          
-          import http from 'http';
-          
-          const PORT = process.env.PORT || 4321;
-          const HOST = process.env.HOST || '0.0.0.0';
-          
-          // For testing, we'll use localhost since we're connecting to the local server
-          const TEST_HOST = 'localhost';
-          
-          console.log(`Testing server at http://${TEST_HOST}:${PORT}...`);
-          
-          const req = http.request({
-            host: TEST_HOST,
-            port: PORT,
-            path: '/',
-            method: 'GET',
-            timeout: 5000
-          }, (res) => {
-            console.log(`Server responded with status code: ${res.statusCode}`);
+          # Enable caching for static assets
+          <IfModule mod_expires.c>
+            ExpiresActive On
             
-            let data = '';
-            res.on('data', (chunk) => {
-              data += chunk;
-            });
+            # Images
+            ExpiresByType image/jpeg "access plus 1 year"
+            ExpiresByType image/gif "access plus 1 year"
+            ExpiresByType image/png "access plus 1 year"
+            ExpiresByType image/webp "access plus 1 year"
+            ExpiresByType image/svg+xml "access plus 1 year"
+            ExpiresByType image/x-icon "access plus 1 year"
             
-            res.on('end', () => {
-              console.log('Response received successfully');
-              console.log(`Response size: ${data.length} bytes`);
-              console.log('Server is running correctly!');
-              process.exit(0);
-            });
-          });
+            # CSS, JavaScript
+            ExpiresByType text/css "access plus 1 month"
+            ExpiresByType text/javascript "access plus 1 month"
+            ExpiresByType application/javascript "access plus 1 month"
+            
+            # Fonts
+            ExpiresByType application/font-woff "access plus 1 year"
+            ExpiresByType application/font-woff2 "access plus 1 year"
+            ExpiresByType application/vnd.ms-fontobject "access plus 1 year"
+            ExpiresByType application/x-font-ttf "access plus 1 year"
+            ExpiresByType font/opentype "access plus 1 year"
+          </IfModule>
           
-          req.on('error', (err) => {
-            console.error('Error connecting to server:', err.message);
-            console.error('Make sure the server is running with: npm start');
-            process.exit(1);
-          });
+          # Disable directory listing
+          Options -Indexes
           
-          req.on('timeout', () => {
-            console.error('Request timed out');
-            req.destroy();
-            process.exit(1);
-          });
-          
-          req.end();
+          # Compress text files
+          <IfModule mod_deflate.c>
+            AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json
+          </IfModule>
           EOL
-          
-          # Make scripts executable
-          chmod +x dist/start.js dist/start.sh dist/test.js
 
       - name: Verify Build Output
         run: |
           echo "Verifying build output..."
           ls -la dist/
-          ls -la dist/client/
           echo "Checking for critical files..."
           
-          # Only check for the _astro directory which should always be present
-          if [ ! -d "dist/client/_astro" ]; then
-            echo "Error: dist/client/_astro directory is missing!"
+          # Check for the _astro directory which should always be present
+          if [ ! -d "dist/_astro" ]; then
+            echo "Error: dist/_astro directory is missing!"
             exit 1
           fi
           
-          # List server directory contents for debugging
-          echo "Server directory contents:"
-          ls -la dist/server/
+          # Check for error pages
+          if [ ! -f "dist/404.html" ] || [ ! -f "dist/500.html" ]; then
+            echo "Error: Error pages are missing!"
+            exit 1
+          fi
           
           echo "Build verification completed successfully."
           
