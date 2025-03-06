@@ -106,6 +106,148 @@ async function main() {
         execSync('npm install ftp-deploy', { stdio: 'inherit' });
       }
       
+      // Create server files
+      console.log('\n📝 Creating server files...');
+      
+      // Create start.js
+      const startJsPath = path.join(__dirname, 'dist', 'start.js');
+      fs.writeFileSync(startJsPath, `#!/usr/bin/env node
+
+/**
+ * This script starts the Astro SSR server
+ */
+
+import { startServer } from './server/entry.mjs';
+
+// Set default port and host
+const PORT = process.env.PORT || 4321;
+const HOST = process.env.HOST || '127.0.0.1';
+
+// Start the server
+startServer({
+  port: PORT,
+  host: HOST
+})
+  .then(({ server }) => {
+    console.log(\`Server running at http://\${HOST}:\${PORT}\`);
+  })
+  .catch((err) => {
+    console.error('Failed to start server:', err);
+    process.exit(1);
+  });`);
+      
+      // Create .htaccess
+      const htaccessPath = path.join(__dirname, 'dist', '.htaccess');
+      fs.writeFileSync(htaccessPath, `# Enable the RewriteEngine
+RewriteEngine On
+
+# If the request is for an existing file or directory, serve it directly
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# For static assets in the client directory, serve them directly
+RewriteRule ^client/(.*)$ client/$1 [L]
+
+# For all other requests, proxy to the Node.js server
+# Note: You'll need to replace 127.0.0.1:4321 with the actual address and port of your Node.js server
+RewriteRule ^(.*)$ http://127.0.0.1:4321/$1 [P,L]
+
+# Set some headers for proxied content
+<IfModule mod_headers.c>
+    Header set X-Powered-By "Astro"
+</IfModule>`);
+      
+      // Create start.sh
+      const startShPath = path.join(__dirname, 'dist', 'start.sh');
+      fs.writeFileSync(startShPath, `#!/bin/bash
+
+# Change to the directory containing this script
+cd "$(dirname "$0")"
+
+# Set environment variables
+export PORT=4321
+export HOST=127.0.0.1
+
+# Start the server
+node start.js`);
+      
+      // Create package.json
+      const packageJsonPath = path.join(__dirname, 'dist', 'package.json');
+      fs.writeFileSync(packageJsonPath, JSON.stringify({
+        name: "jeffscotti-site-server",
+        type: "module",
+        version: "1.0.0",
+        private: true,
+        scripts: {
+          start: "node start.js",
+          test: "node test.js"
+        },
+        engines: {
+          node: ">=18.19.0"
+        }
+      }, null, 2));
+      
+      // Create test.js
+      const testJsPath = path.join(__dirname, 'dist', 'test.js');
+      fs.writeFileSync(testJsPath, `#!/usr/bin/env node
+
+/**
+ * This script tests if the server is running correctly
+ */
+
+import http from 'http';
+
+const PORT = process.env.PORT || 4321;
+const HOST = process.env.HOST || '127.0.0.1';
+
+console.log(\`Testing server at http://\${HOST}:\${PORT}...\`);
+
+const req = http.request({
+  host: HOST,
+  port: PORT,
+  path: '/',
+  method: 'GET',
+  timeout: 5000
+}, (res) => {
+  console.log(\`Server responded with status code: \${res.statusCode}\`);
+  
+  let data = '';
+  res.on('data', (chunk) => {
+    data += chunk;
+  });
+  
+  res.on('end', () => {
+    console.log('Response received successfully');
+    console.log(\`Response size: \${data.length} bytes\`);
+    console.log('Server is running correctly!');
+    process.exit(0);
+  });
+});
+
+req.on('error', (err) => {
+  console.error('Error connecting to server:', err.message);
+  console.error('Make sure the server is running with: npm start');
+  process.exit(1);
+});
+
+req.on('timeout', () => {
+  console.error('Request timed out');
+  req.destroy();
+  process.exit(1);
+});
+
+req.end();`);
+      
+      // Make scripts executable
+      try {
+        fs.chmodSync(startJsPath, '755');
+        fs.chmodSync(startShPath, '755');
+        fs.chmodSync(testJsPath, '755');
+      } catch (err) {
+        console.warn('Warning: Could not make scripts executable. You may need to do this manually on the server.');
+      }
+      
       // Verify build output before deployment
       console.log('\n🔍 Verifying build output...');
       
