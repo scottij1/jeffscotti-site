@@ -16,14 +16,28 @@ import Layout from "../layouts/Layout.astro";
           </div>
         </div>
 
-        <div id="content" class="page-content site-content single-post" role="main">
+        <div
+          id="content"
+          class="page-content site-content single-post"
+          role="main"
+          aria-label="Thank you message">
           <div class="thank-you-container">
-            <div class="thank-you-message">
+            <div class="thank-you-message" aria-live="polite" role="status">
               <p>
-                Your message has been sent successfully. I'll get back to you as soon as possible.
+                Thanks for your message! It has been submitted successfully and I'll get back to you
+                as soon as possible.
+              </p>
+              <p class="redirect-message" aria-atomic="true">
+                You will be redirected to the home page in <span
+                  id="countdown"
+                  aria-live="assertive">
+                  10
+                </span> seconds.
               </p>
               <div class="button-container">
-                <a href="/" class="btn">Return to Home</a>
+                <a href="/" class="btn" aria-label="Return to home page immediately">
+                  Return to Home
+                </a>
               </div>
             </div>
           </div>
@@ -32,6 +46,35 @@ import Layout from "../layouts/Layout.astro";
     </div>
   </div>
 </Layout>
+
+<script>
+  // Countdown and redirect functionality
+  document.addEventListener("DOMContentLoaded", () => {
+    let seconds = 10;
+    const countdownElement = document.getElementById("countdown");
+
+    const countdownInterval = setInterval(() => {
+      seconds--;
+      if (countdownElement) {
+        countdownElement.textContent = seconds.toString();
+      }
+
+      if (seconds <= 0) {
+        clearInterval(countdownInterval);
+        // Announce to screen readers before redirecting
+        const announcement = document.createElement("div");
+        announcement.setAttribute("aria-live", "assertive");
+        announcement.textContent = "Redirecting to home page now";
+        document.body.appendChild(announcement);
+
+        // Give screen readers a moment to announce before redirecting
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 500);
+      }
+    }, 1000);
+  });
+</script>
 
 <style>
   .thank-you-container {
@@ -51,7 +94,21 @@ import Layout from "../layouts/Layout.astro";
 
   .thank-you-message p {
     font-size: 18px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+  }
+
+  .redirect-message {
+    font-size: 16px;
+    color: #f8f8f8;
+    background-color: rgba(60, 60, 60, 0.7);
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+
+  #countdown {
+    font-weight: bold;
+    font-size: 18px;
   }
 
   .button-container {

@@ -16,15 +16,19 @@ import Layout from "../layouts/Layout.astro";
           </div>
         </div>
 
-        <div id="content" class="page-content site-content single-post" role="main">
+        <div
+          id="content"
+          class="page-content site-content single-post"
+          role="main"
+          aria-label="Page not found message">
           <div class="error-container">
-            <div class="error-message">
+            <div class="error-message" role="alert" aria-live="assertive">
               <p>
                 The page you are looking for might have been removed, had its name changed, or is
                 temporarily unavailable.
               </p>
               <div class="button-container">
-                <a href="/" class="btn">Return to Home</a>
+                <a href="/" class="btn" aria-label="Return to home page">Return to Home</a>
               </div>
             </div>
           </div>

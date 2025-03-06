@@ -16,15 +16,19 @@ import Layout from "../layouts/Layout.astro";
           </div>
         </div>
 
-        <div id="content" class="page-content site-content single-post" role="main">
+        <div
+          id="content"
+          class="page-content site-content single-post"
+          role="main"
+          aria-label="Server error message">
           <div class="error-container">
-            <div class="error-message">
+            <div class="error-message" role="alert" aria-live="assertive">
               <p>
                 Sorry, something went wrong on our server. We're working to fix the issue. Please
                 try again later.
               </p>
               <div class="button-container">
-                <a href="/" class="btn">Return to Home</a>
+                <a href="/" class="btn" aria-label="Return to home page">Return to Home</a>
               </div>
             </div>
           </div>
