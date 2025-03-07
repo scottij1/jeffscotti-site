@@ -1,4 +1,4 @@
-@import "variables";
+@use "variables" as *;
 
 .header {
   display: block;
@@ -116,13 +116,18 @@
       a {
         display: block;
         line-height: 1.6em;
+        padding: 5px 10px;
+        border-radius: 4px;
+        transition: all 0.3s ease-in-out;
 
         &:hover {
-          color: $link-hover-color;
+          color: #fff;
+          background-color: $primary-color;
         }
 
         &:active {
-          color: $active-color;
+          color: #fff;
+          background-color: $active-color;
         }
       }
     }

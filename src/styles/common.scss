@@ -1,4 +1,4 @@
-@import "variables";
+@use "variables" as *;
 
 // Common styles that are used across multiple pages but aren't already in layout.scss
 // This file should only contain styles that are repeated in multiple pages
@@ -156,13 +156,13 @@ a {
 
   &:hover {
     background-color: $primary-color;
-    color: $heading-color;
+    color: #fff;
     border-color: $primary-color;
   }
   
   &:active {
     background-color: $active-color;
-    color: $heading-color;
+    color: #fff;
     border-color: $active-color;
   }
 }
