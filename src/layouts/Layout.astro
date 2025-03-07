@@ -196,6 +196,23 @@ const canonicalURLObj =
       }
     </style>
 
+    <!-- Inline critical CSS for bio paragraph to improve LCP -->
+    <style is:inline>
+      .bio {
+        font-size: 16px;
+        margin-bottom: 20px;
+        line-height: 1.75;
+        padding-right: 10%;
+        /* Ensure the bio is visible immediately */
+        content-visibility: visible !important;
+      }
+      @media screen and (max-width: 768px) {
+        .bio {
+          padding-right: 0;
+        }
+      }
+    </style>
+
     <!-- Load non-critical CSS asynchronously -->
     <link
       rel="stylesheet"
@@ -238,8 +255,10 @@ const canonicalURLObj =
 
     <!-- Add content-visibility to improve rendering performance -->
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
+      // Defer content visibility optimization to after LCP
+      const optimizeContentVisibility = () => {
         if ("IntersectionObserver" in window) {
+          // Exclude the bio paragraph from content visibility optimization
           const sections = document.querySelectorAll("section, footer, .testimonials-container");
 
           const observer = new IntersectionObserver(
@@ -247,6 +266,9 @@ const canonicalURLObj =
               entries.forEach((entry) => {
                 // When element is not in viewport
                 const el = entry.target as HTMLElement;
+                // Skip bio paragraph to ensure it's always rendered
+                if (el.querySelector(".bio")) return;
+
                 if (!entry.isIntersecting) {
                   el.style.contentVisibility = "auto";
                   el.style.containIntrinsicSize = "0 500px";
@@ -265,7 +287,18 @@ const canonicalURLObj =
             observer.observe(section);
           });
         }
-      });
+      };
+
+      // Use requestIdleCallback to defer non-critical operations
+      if (window.requestIdleCallback) {
+        window.requestIdleCallback(() => {
+          window.addEventListener("load", optimizeContentVisibility);
+        });
+      } else {
+        window.addEventListener("load", () => {
+          setTimeout(optimizeContentVisibility, 1000);
+        });
+      }
     </script>
   </body>
 </html>

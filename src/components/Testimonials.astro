@@ -27,12 +27,12 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
 <style is:global>
   /* Default widths applied to each testimonial item right away */
   .testimonials > * {
-    width: 50%; /* Desktop: each item takes half the width */
+    width: 50%;
     box-sizing: border-box;
   }
   @media (max-width: 768px) {
     .testimonials > * {
-      width: 100%; /* Mobile: full width */
+      width: 100%;
     }
   }
 
@@ -43,7 +43,7 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
   }
   .testimonials.owl-carousel .owl-item {
     flex: 0 0 auto;
-    width: 50%; /* Adjust as needed */
+    width: 50%;
   }
   @media (max-width: 768px) {
     .testimonials.owl-carousel .owl-item {
@@ -51,7 +51,6 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
     }
   }
 
-  /* Other global styles remain the same */
   .read-more-link,
   .show-less-link {
     color: var(--primary-color);
@@ -59,20 +58,24 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
     cursor: pointer;
     font-weight: 500;
   }
+
   .read-more-link:hover,
   .show-less-link:hover {
     text-decoration: underline;
   }
+
   .testimonials-container {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
   }
+
   .testimonial-item {
     padding: 30px;
     margin-bottom: 10px;
   }
+
   .testimonial-content {
     position: relative;
     padding: 30px 20px 20px 60px;
@@ -81,6 +84,7 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
     border: 2px solid var(--border-color);
     transition: all 0.25s ease-in-out;
   }
+
   .testimonial-picture {
     position: absolute;
     display: block;
@@ -89,6 +93,7 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
     width: 80px;
     height: 80px;
   }
+
   .testimonial-picture img {
     display: inline-block;
     width: 100%;
@@ -97,24 +102,29 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
     border-radius: 50%;
     border: 2px solid var(--border-color);
   }
+
   .testimonial-text p {
     font-style: italic;
     color: var(--text-color);
   }
+
   .testimonial-author-info {
     margin-top: 15px;
   }
+
   .testimonial-author {
     margin: 0 0 2px;
     font-size: 0.9em;
     color: var(--heading-color);
   }
+
   .testimonial-firm {
     margin: 0;
     font-size: 0.8em;
     color: var(--text-color);
     opacity: 0.8;
   }
+
   .testimonial-icon {
     display: block;
     line-height: 20px;
@@ -124,6 +134,7 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
     bottom: 46px;
     color: var(--border-color);
   }
+
   .testimonial-icon-big {
     display: block;
     line-height: 44px;
@@ -135,15 +146,18 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
     opacity: 0.2;
     z-index: -1;
   }
+
   .testimonials.owl-carousel .owl-dots {
     position: relative;
     width: 100%;
     text-align: center;
   }
+
   .testimonials.owl-carousel .owl-dot {
     display: inline-block;
     margin: 3px 0;
   }
+
   .testimonials.owl-carousel .owl-dot span {
     display: block;
     height: 3px;
@@ -153,13 +167,16 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
     width: 20px;
     transition: all 0.25s ease-in-out;
   }
+
   .testimonials.owl-carousel .owl-dot.active span,
   .testimonials.owl-carousel .owl-dot:hover span {
     background-color: var(--primary-color);
   }
+
   .testimonials.owl-carousel .owl-dot.active span {
     width: 30px;
   }
+
   @media (max-width: 768px) {
     .testimonial-content {
       margin-right: 30px;
@@ -178,7 +195,6 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
     <h2>{title}</h2>
   </div>
 
-  <!-- Carousel container. The 'pre-carousel-hidden' class can be removed if not needed -->
   <div
     id="testimonials_1"
     class="testimonials pre-carousel-hidden"
@@ -253,7 +269,8 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             observer.disconnect();
-            loadScriptsAndInit();
+            // Add a delay to prioritize LCP rendering
+            setTimeout(loadScriptsAndInit, 1000);
           }
         });
       },
@@ -266,7 +283,12 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
     }
   }
 
-  document.addEventListener("DOMContentLoaded", initTestimonials);
+  // Defer initialization until after LCP
+  if (document.readyState === "complete") {
+    initTestimonials();
+  } else {
+    window.addEventListener("load", initTestimonials);
+  }
   document.addEventListener("astro:page-load", initTestimonials);
   window.addEventListener("resize", function () {
     if (typeof jQuery !== "undefined" && typeof jQuery.fn.owlCarousel !== "undefined") {
