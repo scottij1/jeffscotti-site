@@ -13,40 +13,28 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
 });
 ---
 
-<!-- Preload Owl Carousel CSS -->
+<!-- Preload Splide CSS -->
 <link
   rel="preload"
-  href="/styles/owl.carousel.css"
+  href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css"
   as="style"
   onload="this.onload=null;this.rel='stylesheet'"
 />
 <noscript>
-  <link rel="stylesheet" href="/styles/owl.carousel.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css"
+  />
 </noscript>
 
 <style is:global>
   /* Default widths applied to each testimonial item right away */
-  .testimonials > * {
+  .splide__slide {
     width: 50%;
     box-sizing: border-box;
   }
   @media (max-width: 768px) {
-    .testimonials > * {
-      width: 100%;
-    }
-  }
-
-  /* Critical Owl Carousel layout styles (applied once the carousel is activated) */
-  .testimonials.owl-carousel .owl-stage {
-    display: flex;
-    transition: transform 0.25s ease-in-out;
-  }
-  .testimonials.owl-carousel .owl-item {
-    flex: 0 0 auto;
-    width: 50%;
-  }
-  @media (max-width: 768px) {
-    .testimonials.owl-carousel .owl-item {
+    .splide__slide {
       width: 100%;
     }
   }
@@ -69,6 +57,7 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    min-height: 200px;
   }
 
   .testimonial-item {
@@ -147,44 +136,59 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
     z-index: -1;
   }
 
-  .testimonials.owl-carousel .owl-dots {
-    position: relative;
-    width: 100%;
-    text-align: center;
-  }
-
-  .testimonials.owl-carousel .owl-dot {
-    display: inline-block;
-    margin: 3px 0;
-  }
-
-  .testimonials.owl-carousel .owl-dot span {
-    display: block;
-    height: 3px;
-    background-color: var(--border-color);
-    border-radius: 3px;
-    margin: 4px;
-    width: 20px;
-    transition: all 0.25s ease-in-out;
-  }
-
-  .testimonials.owl-carousel .owl-dot.active span,
-  .testimonials.owl-carousel .owl-dot:hover span {
-    background-color: var(--primary-color);
-  }
-
-  .testimonials.owl-carousel .owl-dot.active span {
-    width: 30px;
-  }
-
   @media (max-width: 768px) {
     .testimonial-content {
       margin-right: 30px;
     }
   }
 
-  .testimonials-container {
-    min-height: 200px;
+  /* Splide custom styles to exactly match Owl Carousel dots */
+  .splide__pagination {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    bottom: 0;
+    padding: 0;
+  }
+
+  .splide__pagination li {
+    display: inline-block;
+    margin: 3px 0;
+  }
+
+  .splide__pagination__page {
+    display: block;
+    height: 3px;
+    background-color: white;
+    border-radius: 3px;
+    margin: 4px;
+    width: 20px;
+    transition: all 0.25s ease-in-out;
+    opacity: 1;
+    border: none;
+    padding: 0;
+    box-shadow: none;
+    transform: none;
+  }
+
+  .splide__pagination__page.is-active {
+    background-color: blue;
+    width: 30px;
+    transform: none;
+    opacity: 1;
+  }
+
+  .splide__pagination__page:hover {
+    background-color: blue;
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Override any default Splide button styles */
+  .splide__pagination button {
+    padding: 0;
+    border: none;
+    background: white;
   }
 
   /* Optionally hide the carousel container until initialization */
@@ -199,17 +203,20 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
     <h2>{title}</h2>
   </div>
 
-  <div
-    id="testimonials_1"
-    class="testimonials pre-carousel-hidden"
-    data-mobile-items="1"
-    data-tablet-items="2"
-    data-items="2">
-    {
-      testimonialsToShow.map((testimonial) => {
-        return <TestimonialItem testimonial={testimonial} />;
-      })
-    }
+  <div class="splide pre-carousel-hidden" id="testimonials_1" aria-label="Testimonials">
+    <div class="splide__track">
+      <ul class="splide__list">
+        {
+          testimonialsToShow.map((testimonial) => {
+            return (
+              <li class="splide__slide">
+                <TestimonialItem testimonial={testimonial} />
+              </li>
+            );
+          })
+        }
+      </ul>
+    </div>
   </div>
 </div>
 
@@ -223,45 +230,117 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
 
   function initTestimonials() {
     const initCarousel = () => {
-      if (typeof jQuery !== "undefined") {
-        const screenWidth = window.innerWidth;
-        const itemsToShow = screenWidth >= 768 ? 2 : 1;
-        const carousel = jQuery("#testimonials_1");
+      if (typeof Splide !== "undefined") {
+        // Get the total number of testimonials
+        const totalItems = document.querySelectorAll(".splide__slide").length;
+        const perPage = window.innerWidth >= 768 ? 2 : 1;
 
-        if (!carousel.hasClass("owl-loaded")) {
-          carousel.addClass("owl-carousel");
-          carousel.owlCarousel({
-            nav: false,
-            items: itemsToShow,
-            loop: true,
-            navText: false,
-            margin: 25,
-            lazyLoad: true,
-            responsive: {
-              0: {items: 1},
-              480: {items: 1},
-              768: {items: 2},
-              1200: {items: 2},
-            },
+        // Create a custom pagination function
+        const customPagination = function (splide, components, options) {
+          // Calculate the number of pages needed
+          const pages = Math.ceil(totalItems / perPage);
+
+          // Create the pagination HTML
+          const list = document.createElement("ul");
+          list.classList.add("splide__pagination");
+
+          // Create the correct number of pagination items
+          for (let i = 0; i < pages; i++) {
+            const li = document.createElement("li");
+            const button = document.createElement("button");
+            button.classList.add("splide__pagination__page");
+            if (i === 0) button.classList.add("is-active");
+            button.setAttribute("type", "button");
+            button.setAttribute("aria-controls", `splide01-slide${i * perPage + 1}`);
+            button.setAttribute("aria-label", `Go to slide ${i + 1}`);
+
+            // Set the button styles
+            button.style.width = "20px";
+            button.style.height = "3px";
+            button.style.borderRadius = "3px";
+            button.style.margin = "4px";
+            button.style.transform = "none";
+            button.style.backgroundColor = "white";
+
+            if (i === 0) {
+              button.style.backgroundColor = "blue";
+              button.style.width = "30px";
+            }
+
+            // Add click event to navigate to the slide
+            button.addEventListener("click", () => {
+              splide.go(i);
+            });
+
+            li.appendChild(button);
+            list.appendChild(li);
+          }
+
+          // Add the pagination to the splide container
+          const container = document.createElement("div");
+          container.classList.add("splide__pagination__container");
+          container.appendChild(list);
+
+          // Add the container to the splide component
+          components.Elements.track.parentNode.appendChild(container);
+
+          // Update the active pagination on move
+          splide.on("moved", (newIndex) => {
+            const buttons = list.querySelectorAll("button");
+            buttons.forEach((button, index) => {
+              if (index === newIndex) {
+                button.classList.add("is-active");
+                button.style.backgroundColor = "blue";
+                button.style.width = "30px";
+              } else {
+                button.classList.remove("is-active");
+                button.style.backgroundColor = "white";
+                button.style.width = "20px";
+              }
+            });
           });
-        }
+
+          return {
+            destroy: () => {
+              if (container && container.parentNode) {
+                container.parentNode.removeChild(container);
+              }
+            },
+          };
+        };
+
+        const splide = new Splide("#testimonials_1", {
+          perPage: perPage,
+          gap: 25,
+          rewind: true,
+          pagination: false, // Disable default pagination
+          arrows: false,
+          lazyLoad: true,
+          speed: 250,
+          easing: "ease-in-out",
+          breakpoints: {
+            768: {
+              perPage: 1,
+            },
+          },
+        });
+
+        // Register and mount the custom pagination
+        splide.mount({CustomPagination: customPagination});
         setupReadMoreLinks();
         // Reveal the carousel after initialization
         document.getElementById("testimonials_1").classList.remove("pre-carousel-hidden");
       }
     };
 
-    const loadScriptsAndInit = () => {
-      if (typeof jQuery === "undefined") {
-        loadScript("/js/jquery-3.5.1.min.js", function () {
-          loadScript("/js/owl.carousel.min.js", function () {
+    const loadSplideAndInit = () => {
+      if (typeof Splide === "undefined") {
+        loadScript(
+          "https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js",
+          function () {
             initCarousel();
-          });
-        });
-      } else if (typeof jQuery.fn.owlCarousel === "undefined") {
-        loadScript("/js/owl.carousel.min.js", function () {
-          initCarousel();
-        });
+          },
+        );
       } else {
         initCarousel();
       }
@@ -270,7 +349,7 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
     const isMobile = window.innerWidth < 768;
 
     if (isMobile) {
-      setTimeout(loadScriptsAndInit, 300);
+      setTimeout(loadSplideAndInit, 300);
     } else {
       const observer = new IntersectionObserver(
         (entries) => {
@@ -278,7 +357,7 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
             if (entry.isIntersecting) {
               observer.disconnect();
               // Add a delay to prioritize LCP rendering
-              setTimeout(loadScriptsAndInit, 500);
+              setTimeout(loadSplideAndInit, 500);
             }
           });
         },
@@ -303,11 +382,14 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
   }
   document.addEventListener("astro:page-load", initTestimonials);
   window.addEventListener("resize", function () {
-    if (typeof jQuery !== "undefined" && typeof jQuery.fn.owlCarousel !== "undefined") {
-      const carousel = jQuery("#testimonials_1");
-      if (carousel.hasClass("owl-loaded")) {
-        carousel.trigger("destroy.owl.carousel");
-        initTestimonials();
+    if (typeof Splide !== "undefined") {
+      const splideElement = document.getElementById("testimonials_1");
+      if (splideElement) {
+        const splideInstance = Splide.getInstance(splideElement);
+        if (splideInstance) {
+          splideInstance.destroy();
+          initTestimonials();
+        }
       }
     }
   });
