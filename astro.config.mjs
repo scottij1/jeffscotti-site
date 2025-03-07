@@ -10,8 +10,8 @@ export default defineConfig({
   
   // Build options
   build: {
-    // Optional: Control if CSS should be bundled
-    inlineStylesheets: 'auto',
+    // Always inline small stylesheets to improve LCP
+    inlineStylesheets: 'always',
   },
   
   // Set the directory where your site will be built

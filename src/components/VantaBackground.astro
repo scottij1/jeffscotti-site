@@ -3,56 +3,94 @@
   style="width: 100vw; height: 100vh; position: absolute; top: 0; left: 0; z-index: -1;"
   data-vanta-background>
 </div>
-<script is:inline src="/js/three.min.js"></script>
-<script is:inline src="/js/vanta.dots.min.js"></script>
+
 <script is:inline>
-  // Store the effect globally to prevent recreation during transitions
-  let vantaEffect = null;
+  // Defer loading of Vanta background to improve LCP
+  const loadVantaBackground = () => {
+    // Function to load a script dynamically
+    const loadScript = (src) => {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement("script");
+        script.src = src;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
+    };
 
-  function initVantaEffect() {
-    const element = document.getElementById("vanta-bg");
-    if (!element) {
-      console.error("Background element not found");
-      return;
+    // Store the effect globally to prevent recreation during transitions
+    let vantaEffect = null;
+
+    const initVantaEffect = () => {
+      if (typeof VANTA === "undefined") return;
+
+      const element = document.getElementById("vanta-bg");
+      if (!element) {
+        console.error("Background element not found");
+        return;
+      }
+
+      const isLightTheme = document.documentElement.classList.contains("theme-light");
+
+      // Reduce complexity on mobile
+      const isMobile = window.innerWidth < 768;
+      const spacing = isMobile ? 45.0 : 35.0;
+      const scale = isMobile ? 0.8 : 1.0;
+
+      // Destroy existing effect if it exists
+      if (vantaEffect && typeof vantaEffect.destroy === "function") {
+        vantaEffect.destroy();
+        vantaEffect = null;
+      }
+
+      // Initialize with appropriate theme colors
+      vantaEffect = VANTA.DOTS({
+        el: element,
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.0,
+        minWidth: 200.0,
+        scale: scale,
+        scaleMobile: scale,
+        color: isLightTheme ? 0x333333 : 0xd5d5d5,
+        backgroundColor: isLightTheme ? 0xf5f5f5 : 0x222222,
+        size: 1.0,
+        spacing: spacing,
+        showLines: false,
+      });
+    };
+
+    // Load scripts in sequence
+    const loadVantaScripts = async () => {
+      try {
+        await loadScript("/js/three.min.js");
+        await loadScript("/js/vanta.dots.min.js");
+        initVantaEffect();
+
+        // Set up event listeners after scripts are loaded
+        document.addEventListener("astro:page-load", initVantaEffect);
+        document.addEventListener("themeChanged", initVantaEffect);
+      } catch (error) {
+        console.error("Failed to load Vanta scripts:", error);
+      }
+    };
+
+    // Use requestIdleCallback to defer loading until after LCP
+    if ("requestIdleCallback" in window) {
+      requestIdleCallback(() => {
+        loadVantaScripts();
+      });
+    } else {
+      // Fallback for browsers that don't support requestIdleCallback
+      setTimeout(loadVantaScripts, 2000); // Delay by 2 seconds to prioritize LCP
     }
+  };
 
-    const isLightTheme = document.documentElement.classList.contains("theme-light");
-
-    // Reduce complexity on mobile
-    const isMobile = window.innerWidth < 768;
-    const spacing = isMobile ? 45.0 : 35.0;
-    const scale = isMobile ? 0.8 : 1.0;
-
-    // Destroy existing effect if it exists
-    if (vantaEffect && typeof vantaEffect.destroy === "function") {
-      vantaEffect.destroy();
-      vantaEffect = null;
-    }
-
-    // Initialize with appropriate theme colors
-    vantaEffect = VANTA.DOTS({
-      el: element,
-      mouseControls: true,
-      touchControls: true,
-      gyroControls: false,
-      minHeight: 200.0,
-      minWidth: 200.0,
-      scale: scale,
-      scaleMobile: scale,
-      color: isLightTheme ? 0x333333 : 0xd5d5d5,
-      backgroundColor: isLightTheme ? 0xf5f5f5 : 0x222222,
-      size: 1.0,
-      spacing: spacing,
-      showLines: false,
-    });
+  // Wait for the page to be fully loaded before initializing Vanta
+  if (document.readyState === "complete") {
+    loadVantaBackground();
+  } else {
+    window.addEventListener("load", loadVantaBackground);
   }
-
-  document.addEventListener("DOMContentLoaded", initVantaEffect);
-
-  // Re-initialize after page transitions
-  document.addEventListener("astro:page-load", initVantaEffect);
-
-  document.addEventListener("themeChanged", (e) => {
-    initVantaEffect();
-  });
 </script>
