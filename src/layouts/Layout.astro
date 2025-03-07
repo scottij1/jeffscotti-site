@@ -11,6 +11,7 @@ import Footer from "../components/Footer.astro";
 import VantaBackground from "../components/VantaBackground.astro";
 import ravenLogoWhite from "../assets/raven-logo-sm.png";
 import ravenLogoBlack from "../assets/raven-logo-sm-blk.png";
+import {ENV} from "../env.server";
 
 interface Props {
   title?: string;
@@ -84,6 +85,7 @@ const canonicalURLObj =
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://ka-f.fontawesome.com" crossorigin />
     <link rel="preconnect" href="https://kit.fontawesome.com" crossorigin />
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
 
     <!-- Preload critical resources -->
     <link
@@ -135,6 +137,19 @@ const canonicalURLObj =
 
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+
+    <!-- Google Analytics -->
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${ENV.GA_MEASUREMENT_ID}`}>
+    </script>
+    <script is:inline define:vars={{measurementId: ENV.GA_MEASUREMENT_ID, tagId: ENV.GA_TAG_ID}}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", measurementId);
+      gtag("config", tagId);
+    </script>
 
     <!-- Load FontAwesome with defer to not block rendering -->
     <script src="https://kit.fontawesome.com/ad9e6c27c0.js" crossorigin="anonymous" defer></script>
