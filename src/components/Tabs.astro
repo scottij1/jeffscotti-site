@@ -109,16 +109,9 @@ const firstTabId = tabItems.length > 0 ? tabItems[0].id : "";
 <script>
   // Initialize tabs functionality immediately and also after Astro view transitions
   function initTabsAndAccordion() {
-    console.log("Initializing tabs");
-
-    // Desktop tabs functionality
     const tabLinks = document.querySelectorAll<HTMLAnchorElement>(".tab-btn");
     const tabContents = document.querySelectorAll<HTMLDivElement>(".tab-content");
     const tabItems = document.querySelectorAll<HTMLLIElement>(".tab-buttons li");
-
-    console.log(
-      `Found ${tabLinks.length} tab links, ${tabContents.length} tab contents, ${tabItems.length} tab items`,
-    );
 
     tabLinks.forEach((link) => {
       link.addEventListener("click", (e) => {

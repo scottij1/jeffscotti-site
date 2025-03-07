@@ -151,8 +151,8 @@ const canonicalURLObj =
     <ViewTransitions />
 
     <!-- Google Analytics -->
-    <script async src={`https://www.googletagmanager.com/gtag/js?id=${ENV.GA_MEASUREMENT_ID}`}>
-    </script>
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${ENV.GA_MEASUREMENT_ID}`}
+    ></script>
     <script is:inline define:vars={{measurementId: ENV.GA_MEASUREMENT_ID, tagId: ENV.GA_TAG_ID}}>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
@@ -163,8 +163,14 @@ const canonicalURLObj =
       gtag("config", tagId);
     </script>
 
-    <!-- Load FontAwesome with defer to not block rendering -->
-    <script src="https://kit.fontawesome.com/ad9e6c27c0.js" crossorigin="anonymous" defer></script>
+    <!-- Load FontAwesome CSS directly instead of using the JS kit -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
 
     <!-- Inline critical CSS for initial render -->
     <style is:inline>
