@@ -52,24 +52,26 @@ const isPathActive = (path: string) => {
 </header>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const siteNav = document.querySelector(".site-nav") as HTMLElement | null;
-    const menuToggle = document.querySelector(".menu-toggle") as HTMLElement | null;
+  function handleMenuToggleClick(siteNav: HTMLElement, menuToggle: HTMLElement) {
+    siteNav.classList.toggle("open");
+    menuToggle.classList.toggle("open");
+  }
 
-    if (menuToggle && siteNav) {
-      menuToggle.addEventListener("click", () => {
-        siteNav.classList.toggle("open");
-        menuToggle.classList.toggle("open");
-      });
-    }
-
-    // Debounce resize events
-    let resizeTimer: ReturnType<typeof setTimeout> | undefined;
-    window.addEventListener("resize", () => {
-      if (!siteNav || !menuToggle) {
-        return;
+  function handleSubmenuToggleClick(e: Event) {
+    if (window.innerWidth <= 991) {
+      e.preventDefault();
+      const item = e.currentTarget as HTMLElement;
+      const subMenu = item.parentElement?.querySelector(".sub-menu");
+      if (subMenu) {
+        subMenu.classList.toggle("open");
       }
+    }
+  }
 
+  function setupResizeHandler(siteNav: HTMLElement, menuToggle: HTMLElement) {
+    let resizeTimer: ReturnType<typeof setTimeout> | undefined;
+
+    function handleResize() {
       // Immediately remove any transition to prevent animation during resize
       siteNav.style.transition = "none";
       menuToggle.style.transition = "none";
@@ -82,26 +84,42 @@ const isPathActive = (path: string) => {
         siteNav.style.transition = "";
         menuToggle.style.transition = "";
       }, 200);
-    });
+    }
 
-    // Handle submenu toggles for mobile
+    window.removeEventListener("resize", handleResize);
+    window.addEventListener("resize", handleResize);
+  }
+
+  function initializeMobileMenu() {
+    const siteNav = document.querySelector(".site-nav") as HTMLElement | null;
+    const menuToggle = document.querySelector(".menu-toggle") as HTMLElement | null;
+
+    if (!menuToggle || !siteNav) return;
+
+    // Remove existing event listeners to prevent duplicates
+    const newMenuToggle = menuToggle.cloneNode(true) as HTMLElement;
+    menuToggle.parentNode?.replaceChild(newMenuToggle, menuToggle);
+
+    newMenuToggle.addEventListener("click", () => handleMenuToggleClick(siteNav, newMenuToggle));
+
+    setupResizeHandler(siteNav, newMenuToggle);
+
     const menuItemsWithChildren = document.querySelectorAll(".menu-item-has-children > a");
     menuItemsWithChildren.forEach((item) => {
-      item.addEventListener("click", (e) => {
-        if (window.innerWidth <= 991) {
-          e.preventDefault();
-          const subMenu = item.parentElement?.querySelector(".sub-menu");
-          if (subMenu) {
-            subMenu?.classList.toggle("open");
-          }
-        }
-      });
+      // Clone and replace to remove existing listeners
+      const newItem = item.cloneNode(true) as HTMLElement;
+      item.parentNode?.replaceChild(newItem, item);
+
+      newItem.addEventListener("click", handleSubmenuToggleClick);
     });
-  });
+  }
+
+  // Initialize on page load and after view transitions
+  document.addEventListener("astro:page-load", initializeMobileMenu);
+  document.addEventListener("astro:after-swap", initializeMobileMenu);
 </script>
 
 <style>
-  /* Header styles */
   .header {
     display: block;
     width: 100%;
@@ -333,15 +351,15 @@ const isPathActive = (path: string) => {
     }
 
     .site-nav.open {
-      transform: translateX(0); /* Slide in from right */
+      transform: translateX(0);
     }
 
     .site-main-menu {
       flex-direction: column;
       padding: 20px;
       height: 100%;
-      justify-content: flex-start; /* Align to top */
-      align-items: flex-start; /* Align to left */
+      justify-content: flex-start;
+      align-items: flex-start;
       text-align: left;
       margin-top: 10px;
     }

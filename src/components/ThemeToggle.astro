@@ -36,29 +36,39 @@
     document.dispatchEvent(new CustomEvent("themeChanged", {detail: {theme}}));
   }
 
-  // Initialize theme toggle on each page load
-  document.addEventListener("astro:page-load", () => {
+  function handleThemeToggleClick() {
+    const html = document.documentElement;
+
+    if (html.classList.contains("theme-light")) {
+      html.classList.remove("theme-light");
+      html.classList.add("theme-dark");
+      saveTheme("theme-dark");
+    } else {
+      html.classList.remove("theme-dark");
+      html.classList.add("theme-light");
+      saveTheme("theme-light");
+    }
+  }
+
+  function initializeThemeToggle() {
     const themeToggle = document.getElementById("theme-toggle");
     const html = document.documentElement;
 
+    if (!themeToggle) return;
+
+    // Remove any existing event listeners to prevent duplicates
+    themeToggle.removeEventListener("click", handleThemeToggleClick);
+
+    themeToggle.addEventListener("click", handleThemeToggleClick);
+
     updateToggleIcon(html.classList.contains("theme-light") ? "theme-light" : "theme-dark");
+  }
 
-    if (themeToggle) {
-      themeToggle.addEventListener("click", () => {
-        const html = document.documentElement;
+  // Initialize on page load
+  document.addEventListener("astro:page-load", initializeThemeToggle);
 
-        if (html.classList.contains("theme-light")) {
-          html.classList.remove("theme-light");
-          html.classList.add("theme-dark");
-          saveTheme("theme-dark");
-        } else {
-          html.classList.remove("theme-dark");
-          html.classList.add("theme-light");
-          saveTheme("theme-light");
-        }
-      });
-    }
-  });
+  // Also initialize after view transitions
+  document.addEventListener("astro:after-swap", initializeThemeToggle);
 </script>
 
 <style>
