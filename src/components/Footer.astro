@@ -15,37 +15,59 @@ const currentYear = new Date().getFullYear();
     <div class="footer-links">
       <ul>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle">
-            <i class="fa-solid fa-file-invoice"></i>
+          <button
+            type="button"
+            class="dropdown-toggle"
+            aria-label="View or download resume options"
+            aria-expanded="false"
+            aria-haspopup="true"
+            aria-controls="resume-dropdown">
+            <i class="fa-solid fa-file-invoice" aria-hidden="true"></i>
             <span>Resume</span>
-            <i class="fa-solid fa-chevron-up chevron-icon"></i>
-          </a>
-          <div class="dropdown-menu">
-            <a href={resumePdf} class="dropdown-item" target="_blank">
-              <i class="fa-solid fa-file-pdf"></i>
+            <i class="fa-solid fa-chevron-up chevron-icon" aria-hidden="true"></i>
+          </button>
+          <div id="resume-dropdown" class="dropdown-menu" role="menu">
+            <a
+              href={resumePdf}
+              class="dropdown-item"
+              target="_blank"
+              role="menuitem"
+              aria-label="Download PDF resume">
+              <i class="fa-solid fa-file-pdf" aria-hidden="true"></i>
               <span>PDF Version</span>
             </a>
-            <a href={resumeDocx} class="dropdown-item" target="_blank">
-              <i class="fa-solid fa-file-word"></i>
+            <a
+              href={resumeDocx}
+              class="dropdown-item"
+              target="_blank"
+              role="menuitem"
+              aria-label="Download Word resume">
+              <i class="fa-solid fa-file-word" aria-hidden="true"></i>
               <span>Word Version</span>
             </a>
           </div>
         </li>
         <li>
-          <a href="https://www.linkedin.com/in/jeffscotti" target="_blank">
-            <i class="fab fa-linkedin"></i>
+          <a
+            href="https://www.linkedin.com/in/jeffscotti"
+            target="_blank"
+            aria-label="Visit Jeff Scotti's LinkedIn profile">
+            <i class="fab fa-linkedin" aria-hidden="true"></i>
             <span>LinkedIn</span>
           </a>
         </li>
         <li>
-          <a href="https://github.com/jeffscotti" target="_blank">
-            <i class="fab fa-github"></i>
+          <a
+            href="https://github.com/jeffscotti"
+            target="_blank"
+            aria-label="Visit Jeff Scotti's GitHub profile">
+            <i class="fab fa-github" aria-hidden="true"></i>
             <span>GitHub</span>
           </a>
         </li>
         <li>
-          <a href="mailto:jeff@jeffscotti.net">
-            <i class="fas fa-envelope"></i>
+          <a href="mailto:jeff@jeffscotti.net" aria-label="Email Jeff Scotti">
+            <i class="fas fa-envelope" aria-hidden="true"></i>
             <span>Contact</span>
           </a>
         </li>
@@ -58,31 +80,77 @@ const currentYear = new Date().getFullYear();
   document.addEventListener("DOMContentLoaded", () => {
     const dropdownToggle = document.querySelector(
       ".footer-links .dropdown-toggle",
-    ) as HTMLAnchorElement | null;
+    ) as HTMLButtonElement | null;
     const dropdownMenu = document.querySelector(
       ".footer-links .dropdown-menu",
     ) as HTMLDivElement | null;
+    const menuItems = dropdownMenu?.querySelectorAll(
+      ".dropdown-item",
+    ) as NodeListOf<HTMLAnchorElement> | null;
 
     const toggleMenu = (e: Event) => {
-      if (dropdownMenu) {
+      if (dropdownMenu && dropdownToggle) {
         e.preventDefault();
         e.stopPropagation();
 
+        const isExpanded = dropdownMenu.classList.contains("active");
         dropdownMenu.classList.toggle("active");
+        dropdownToggle.setAttribute("aria-expanded", (!isExpanded).toString());
+
+        // If opening the menu, focus the first item
+        if (!isExpanded && menuItems && menuItems.length > 0) {
+          menuItems[0].focus();
+        }
       }
     };
 
     if (dropdownToggle) {
       // Use click for mobile
       dropdownToggle.addEventListener("click", toggleMenu);
+
+      // Handle keyboard events
+      dropdownToggle.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          toggleMenu(e);
+        }
+      });
+    }
+
+    // Handle keyboard navigation within the dropdown menu
+    if (menuItems) {
+      menuItems.forEach((item, index) => {
+        item.addEventListener("keydown", (e) => {
+          // Handle arrow keys for navigation
+          if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+            e.preventDefault();
+
+            const nextIndex =
+              e.key === "ArrowDown"
+                ? (index + 1) % menuItems.length
+                : (index - 1 + menuItems.length) % menuItems.length;
+
+            menuItems[nextIndex].focus();
+          }
+
+          // Close menu on Escape
+          if (e.key === "Escape" && dropdownMenu && dropdownToggle) {
+            e.preventDefault();
+            dropdownMenu.classList.remove("active");
+            dropdownToggle.setAttribute("aria-expanded", "false");
+            dropdownToggle.focus();
+          }
+        });
+      });
     }
 
     document.addEventListener("click", (e) => {
       const target = e.target as HTMLElement;
       const dropdown = document.querySelector(".footer-links .dropdown") as HTMLElement | null;
 
-      if (dropdown && !dropdown.contains(target) && dropdownMenu) {
+      if (dropdown && !dropdown.contains(target) && dropdownMenu && dropdownToggle) {
         dropdownMenu.classList.remove("active");
+        dropdownToggle.setAttribute("aria-expanded", "false");
       }
     });
   });

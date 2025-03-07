@@ -42,7 +42,7 @@
       margin-right: 0;
     }
 
-    a {
+    a, button.dropdown-toggle {
       color: $heading-color;
       text-decoration: none;
       font-size: 14px;
@@ -50,6 +50,11 @@
       display: flex;
       align-items: center;
       gap: 6px;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      font-family: inherit;
 
       &:hover {
         color: $primary-color;
@@ -66,6 +71,7 @@
 
     .dropdown-toggle {
       cursor: pointer;
+      text-align: left;
     }
 
     // Bridge element to maintain hover
@@ -111,11 +117,13 @@
     transition: all 0.2s;
 
     &:hover {
-      color: $primary-color;
+      background-color: $primary-color;
+      color: #fff;
     }
     
     &:active {
-      color: $active-color;
+      background-color: $active-color;
+      color: #fff;
     }
   }
 }
@@ -156,33 +164,33 @@
       margin-right: $spacing-md;
     }
 
-    a {
-      span {
-        display: none;
-      }
+      a, button.dropdown-toggle {
+        span {
+          display: none;
+        }
 
-      i:not(.chevron-icon) {
-        font-size: 18px;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid rgba($heading-color, 0.3);
-        border-radius: 50%;
-        transition: all 0.3s ease-in-out;
-      }
+        i:not(.chevron-icon) {
+          font-size: 18px;
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid rgba($heading-color, 0.3);
+          border-radius: 50%;
+          transition: all 0.3s ease-in-out;
+        }
 
-      &:hover i:not(.chevron-icon) {
-        background-color: $primary-color;
-        border-color: $primary-color;
+        &:hover i:not(.chevron-icon) {
+          background-color: $primary-color;
+          border-color: $primary-color;
+        }
+        
+        &:active i:not(.chevron-icon) {
+          background-color: $active-color;
+          border-color: $active-color;
+        }
       }
-      
-      &:active i:not(.chevron-icon) {
-        background-color: $active-color;
-        border-color: $active-color;
-      }
-    }
 
     .dropdown-item {
       span {
