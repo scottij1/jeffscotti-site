@@ -109,6 +109,8 @@ const canonicalURLObj =
       type="font/woff2"
       crossorigin
     />
+    <!-- Preload three.js to improve performance -->
+    <link rel="preload" href="/js/three.min.js" as="script" />
     <!-- Preload logo images to prevent layout shift during navigation -->
     <link rel="preload" as="image" href={ravenLogoWhite.src} type="image/png" />
     <link rel="preload" as="image" href={ravenLogoBlack.src} type="image/png" />
@@ -151,8 +153,8 @@ const canonicalURLObj =
     <ClientRouter />
 
     <!-- Google Analytics -->
-    <script async src={`https://www.googletagmanager.com/gtag/js?id=${ENV.GA_MEASUREMENT_ID}`}>
-    </script>
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${ENV.GA_MEASUREMENT_ID}`}
+    ></script>
     <script is:inline define:vars={{measurementId: ENV.GA_MEASUREMENT_ID, tagId: ENV.GA_TAG_ID}}>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
