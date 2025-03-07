@@ -1,10 +1,8 @@
 @font-face {
   font-family: "et-line";
   font-display: swap; /* Prevent icon font from blocking rendering */
-  src: url("../fonts/et-line.woff") format("woff"); /* Prioritize WOFF for better performance */
-  src:
-    url("../fonts/et-line.eot"),
-    url("../fonts/et-line.eot?#iefix") format("embedded-opentype"),
+  src: 
+    url("../fonts/et-line.woff") format("woff"),
     url("../fonts/et-line.ttf") format("truetype"),
     url("../fonts/et-line.svg#et-line") format("svg");
   font-weight: normal;
