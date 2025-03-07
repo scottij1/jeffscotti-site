@@ -6,6 +6,7 @@ import "../styles/layout.scss";
 import "../styles/theme.scss";
 import "../styles/common.scss";
 import "../styles/footer.scss";
+import {ViewTransitions} from "astro:transitions";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import VantaBackground from "../components/VantaBackground.astro";
@@ -38,7 +39,6 @@ const {
   ],
 } = Astro.props;
 
-// Ensure canonicalURL is a URL object
 const canonicalURLObj =
   canonicalURL instanceof URL ? canonicalURL : new URL(canonicalURL, Astro.site || Astro.url);
 ---
@@ -126,6 +126,15 @@ const canonicalURLObj =
           localStorage.setItem("theme", "theme-dark");
         }
       })();
+
+      // Ensure theme is maintained during page transitions
+      document.addEventListener("astro:after-swap", () => {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme) {
+          document.documentElement.classList.remove("theme-light", "theme-dark");
+          document.documentElement.classList.add(savedTheme);
+        }
+      });
     </script>
 
     <!-- Favicons -->
@@ -137,6 +146,9 @@ const canonicalURLObj =
 
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+
+    <!-- Add View Transitions for persistent layout -->
+    <ViewTransitions />
 
     <!-- Google Analytics -->
     <script async src={`https://www.googletagmanager.com/gtag/js?id=${ENV.GA_MEASUREMENT_ID}`}>
@@ -190,7 +202,7 @@ const canonicalURLObj =
   <body>
     <VantaBackground />
     <div class="page-container">
-      <Header />
+      <Header transition:persist="header" />
       <slot />
       <Footer />
     </div>

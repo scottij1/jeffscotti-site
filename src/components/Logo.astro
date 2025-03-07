@@ -3,7 +3,7 @@ import ravenLogoWhite from "../assets/raven-logo-sm.png";
 import ravenLogoBlack from "../assets/raven-logo-sm-blk.png";
 ---
 
-<div class="logo-lockup">
+<div class="logo-lockup" transition:persist="logo">
   <div class="logo-container">
     <img src={ravenLogoWhite.src} alt="Raven Logo" class="raven-logo white-logo" />
     <img src={ravenLogoBlack.src} alt="Raven Logo" class="raven-logo black-logo" />
@@ -34,43 +34,19 @@ import ravenLogoBlack from "../assets/raven-logo-sm-blk.png";
     color: var(--heading-color);
   }
 
-  .white-logo,
+  .white-logo {
+    display: block;
+  }
+
   .black-logo {
     display: none;
   }
 
-  .theme-dark .white-logo {
-    display: block;
+  html.theme-light .white-logo {
+    display: none;
   }
 
-  .theme-light .black-logo {
-    display: block;
-  }
-
-  /* Default to white logo if no theme class is present */
-  :root:not(.theme-light):not(.theme-dark) .white-logo {
+  html.theme-light .black-logo {
     display: block;
   }
 </style>
-
-<script>
-  // Function to update logo visibility based on current theme
-  function updateLogoVisibility() {
-    const isLightTheme = document.documentElement.classList.contains("theme-light");
-    const whiteLogo = document.querySelector(".white-logo") as HTMLElement | null;
-    const blackLogo = document.querySelector(".black-logo") as HTMLElement | null;
-
-    if (whiteLogo && blackLogo) {
-      if (isLightTheme) {
-        whiteLogo.style.display = "none";
-        blackLogo.style.display = "block";
-      } else {
-        whiteLogo.style.display = "block";
-        blackLogo.style.display = "none";
-      }
-    }
-  }
-
-  document.addEventListener("DOMContentLoaded", updateLogoVisibility);
-  document.addEventListener("themeChanged", updateLogoVisibility);
-</script>
