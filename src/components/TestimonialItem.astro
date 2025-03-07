@@ -7,7 +7,6 @@ interface Props {
 
 const {testimonial} = Astro.props;
 
-// Function to split text into words and limit to a specific count
 function limitWords(text: string, wordLimit: number) {
   const words = text.split(/\s+/);
   const needsReadMore = words.length > wordLimit;
