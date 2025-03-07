@@ -183,6 +183,10 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
     }
   }
 
+  .testimonials-container {
+    min-height: 200px;
+  }
+
   /* Optionally hide the carousel container until initialization */
   .pre-carousel-hidden {
     opacity: 0;
@@ -263,23 +267,31 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
       }
     };
 
-    // Delay script loading until the container is visible
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            observer.disconnect();
-            // Add a delay to prioritize LCP rendering
-            setTimeout(loadScriptsAndInit, 1000);
-          }
-        });
-      },
-      {threshold: 0.1},
-    );
+    const isMobile = window.innerWidth < 768;
 
-    const testimonials = document.querySelector(".testimonials-container");
-    if (testimonials) {
-      observer.observe(testimonials);
+    if (isMobile) {
+      setTimeout(loadScriptsAndInit, 300);
+    } else {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              observer.disconnect();
+              // Add a delay to prioritize LCP rendering
+              setTimeout(loadScriptsAndInit, 500);
+            }
+          });
+        },
+        {
+          threshold: 0.01,
+          rootMargin: "300px 0px",
+        },
+      );
+
+      const testimonials = document.querySelector(".testimonials-container");
+      if (testimonials) {
+        observer.observe(testimonials);
+      }
     }
   }
 

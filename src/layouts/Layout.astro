@@ -263,16 +263,15 @@ const canonicalURLObj =
       // Defer content visibility optimization to after LCP
       const optimizeContentVisibility = () => {
         if ("IntersectionObserver" in window) {
-          // Exclude the bio paragraph from content visibility optimization
-          const sections = document.querySelectorAll("section, footer, .testimonials-container");
+          const sections = document.querySelectorAll("section, footer");
 
           const observer = new IntersectionObserver(
             (entries) => {
               entries.forEach((entry) => {
                 // When element is not in viewport
                 const el = entry.target as HTMLElement;
-                // Skip bio paragraph to ensure it's always rendered
-                if (el.querySelector(".bio")) return;
+                if (el.querySelector(".bio") || el.classList.contains("testimonials-container"))
+                  return;
 
                 if (!entry.isIntersecting) {
                   el.style.contentVisibility = "auto";
