@@ -121,7 +121,11 @@ const firstTabId = tabItems.length > 0 ? tabItems[0].id : "";
     const tabLinks = document.querySelectorAll<HTMLAnchorElement>(".tab-btn");
     const tabContents = document.querySelectorAll<HTMLDivElement>(".tab-content");
     const tabItems = document.querySelectorAll<HTMLLIElement>(".tab-buttons li");
+    const accordionToggles = document.querySelectorAll<HTMLInputElement>(
+      ".accordion-toggle-checkbox",
+    );
 
+    // Handle desktop tabs
     tabLinks.forEach((link) => {
       link.addEventListener("click", (e) => {
         e.preventDefault();
@@ -140,6 +144,20 @@ const firstTabId = tabItems.length > 0 ? tabItems[0].id : "";
           if (tabContent) {
             tabContent.classList.add("active");
           }
+        }
+      });
+    });
+
+    // Handle mobile accordion - ensure only one can be open at a time
+    accordionToggles.forEach((toggle) => {
+      toggle.addEventListener("change", (e) => {
+        if (toggle.checked) {
+          // Close all other accordions
+          accordionToggles.forEach((otherToggle) => {
+            if (otherToggle !== toggle) {
+              otherToggle.checked = false;
+            }
+          });
         }
       });
     });
