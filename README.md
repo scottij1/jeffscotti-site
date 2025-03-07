@@ -7,6 +7,10 @@ This is the source code for Jeff Scotti's personal website, built with Astro.
 ```text
 /
 ├── public/              # Static assets that are copied directly to the build output
+│   ├── fonts/           # Web fonts (Poppins, et-line)
+│   ├── js/              # JavaScript libraries (jQuery, Three.js, Vanta)
+│   ├── styles/          # CSS files
+│   └── testimonials/    # Testimonial images
 ├── src/
 │   ├── assets/          # Assets that are processed by Astro
 │   ├── components/      # Reusable Astro components
@@ -31,99 +35,117 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-## 🌐 Server-Side Rendering
+## 🔄 Static vs. Server-Side Rendering
 
-This site uses Astro's server-side rendering (SSR) capabilities for API routes and dynamic content. The `output: 'server'` configuration in `astro.config.mjs` enables SSR, and the `@astrojs/node` adapter is used to generate a Node.js server.
+This site can be built in two modes:
 
-### Node.js Adapter
+### Current Mode: Static Site Generation
 
-The Node.js adapter is configured in `astro.config.mjs`:
+The site is currently configured to use static site generation (SSG) as specified in `astro.config.mjs`
 
-```js
-import { defineConfig } from "astro/config";
-import node from "@astrojs/node";
+In static mode:
+- The entire site is pre-rendered to HTML at build time
+- No Node.js server is required for hosting
+- API routes (like the contact form) require special handling
 
-export default defineConfig({
-  output: 'server',
-  adapter: node({
-    mode: 'standalone'
-  })
-});
+### Alternative: Server-Side Rendering
+
+The site can also be configured for server-side rendering (SSR) which enables dynamic API routes like the contact form handler.
+
+To switch between modes, use the provided script:
+
+```bash
+# Switch to static site generation
+node switch-mode.js static
+
+# Switch to server-side rendering
+node switch-mode.js ssr
 ```
+
+After switching modes, rebuild the site with `npm run build`.
+
+## 📧 Contact Form
+
+### Current Implementation: FormSubmit.co
+
+The site currently uses [FormSubmit.co](https://formsubmit.co/) as a simple, quick solution for handling form submissions in static mode. This is implemented in `src/pages/contact.astro`:
+
+### Alternative: Nodemailer Implementation
+
+The site also includes a Nodemailer-based contact form implementation that can be used with server-side rendering. However, this requires:
+
+1. A DreamHost plan upgrade to include a Virtual Private Server (VPS) to support a Node.js environment
+2. Switching to SSR mode using the `switch-mode.js` script
+
+If you decide to use the Nodemailer implementation, you'll need these environment variables in your `.env` file:
+
+```
+SMTP_HOST=smtp.dreamhost.com
+SMTP_PORT=465
+SMTP_USER=your-email@example.com
+SMTP_PASS=your-password
+CONTACT_EMAIL=recipient@example.com
+GA_MEASUREMENT_ID=your-ga-id
+GA_TAG_ID=your-tag-id
+```
+
+The infrastructure is in place to support Nodemailer in the future when a VPS is available.
+
+## 🎨 Styling
+
+The site uses:
+- SCSS for styling (in `src/styles/`)
+- Poppins font family
+- et-line icon font (for skills tabs)
+- font awesome icons 
+- Vanta.js for the animated background
 
 ## 🚀 Deployment
 
-This site is deployed to DreamHost using GitHub Actions. The workflow is defined in `.github/workflows/deploy.yml`.
+### GitHub Actions Automated Deployment
 
-### Deployment Configuration
+The site is automatically deployed through GitHub Actions when changes are pushed to the main branch. The workflow is defined in `.github/workflows/deploy.yml`.
 
-The deployment uses the `SamKirkland/FTP-Deploy-Action@4.3.0` GitHub Action to deploy the site via FTP. The configuration includes:
+The deployment process:
 
-- `dangerous-clean-slate: false` - Prevents deletion of files on the server that don't exist locally
-- `exclude` - Excludes certain files/directories from being deleted
-- `state-name` - Maintains state between deployments
-- `log-level: verbose` - Provides detailed logs for debugging
+1. Checks out the code
+2. Sets up Node.js 18.19.0
+3. Installs dependencies
+4. Builds the site using `npm run build`
+5. Creates a custom `.htaccess` file for the static site
+6. Verifies the build output
+7. Deploys the site via FTP using the SamKirkland/FTP-Deploy-Action
 
-### Manual Restore
-
-If you need to manually restore the site, you can use the `restore-site.js` script:
-
-```bash
-node restore-site.js
-```
-
-This script will:
-1. Install dependencies
-2. Build the site
-3. Deploy it to DreamHost via FTP with the same configuration as the GitHub workflow
-
-The script requires the following environment variables in your `.env` file:
+The GitHub Actions workflow uses the following secrets:
 - `FTP_SERVER` - The FTP server hostname
 - `FTP_USERNAME` - The FTP username
 - `FTP_PASSWORD` - The FTP password
 - `FTP_REMOTE_PATH` - The remote path on the FTP server
 
-### Deployment Options
+### Manual Deployment
 
-#### Option 1: Using Node.js (if DreamHost supports Node.js)
+If you need to manually deploy the site:
 
-If DreamHost supports running Node.js applications, you can deploy the entire `dist/` directory and run the Node.js server. See the `dist/README.md` file for detailed instructions.
-
-For detailed setup instructions and troubleshooting, see the `DREAMHOST-SETUP.md` file.
-
-#### Option 2: Using Static Site (if DreamHost doesn't support Node.js)
-
-If DreamHost doesn't support running Node.js applications, you can switch to static site generation:
-
-1. Use the provided script to switch to static mode:
-   ```bash
-   node switch-mode.js static
-   ```
-
-2. Build the site:
+1. Build the site:
    ```bash
    npm run build
    ```
 
-3. Deploy the site to DreamHost
+2. The built site will be in the `dist/` directory, which can be deployed to any static hosting service
 
-To switch back to server-side rendering mode:
+### Manual Restore
+
+For emergency situations, you can use the `restore-site.js` script to manually restore the site:
+
 ```bash
-node switch-mode.js ssr
+node restore-site.js
 ```
 
-### Troubleshooting
-
-If you encounter a 500 Internal Server Error or other issues with your deployment, see the `DREAMHOST-SETUP.md` file for detailed troubleshooting steps.
-
-For Apache configuration issues, you can try using the simpler .htaccess file provided in `dist/simple-htaccess.txt`:
-```bash
-# On your DreamHost server
-cp simple-htaccess.txt .htaccess
-```
+This script requires the same environment variables in your `.env` file that are used by the GitHub Actions workflow.
 
 ## 📝 Notes
 
-- The site uses SCSS for styling
-- API routes are located in `src/pages/api/`
-- Environment variables are managed in `.env` and `.env.production` files (not committed to the repository)
+- The site uses SCSS for styling with variables defined in `src/styles/variables.scss`
+- The Vanta.js background is configured in `src/components/VantaBackground.astro`
+- Testimonials data is stored in `src/data/testimonials.ts`
+- The site includes a theme toggle for light/dark mode
