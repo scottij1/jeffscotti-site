@@ -6,7 +6,7 @@ import "../styles/layout.scss";
 import "../styles/theme.scss";
 import "../styles/common.scss";
 import "../styles/footer.scss";
-import {ViewTransitions} from "astro:transitions";
+import {ClientRouter} from "astro:transitions";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import VantaBackground from "../components/VantaBackground.astro";
@@ -147,12 +147,12 @@ const canonicalURLObj =
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
 
-    <!-- Add View Transitions for persistent layout -->
-    <ViewTransitions />
+    <!-- Add Client Router for persistent layout -->
+    <ClientRouter />
 
     <!-- Google Analytics -->
-    <script async src={`https://www.googletagmanager.com/gtag/js?id=${ENV.GA_MEASUREMENT_ID}`}
-    ></script>
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${ENV.GA_MEASUREMENT_ID}`}>
+    </script>
     <script is:inline define:vars={{measurementId: ENV.GA_MEASUREMENT_ID, tagId: ENV.GA_TAG_ID}}>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
