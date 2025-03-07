@@ -94,6 +94,7 @@ const canonicalURLObj =
       as="font"
       type="font/woff2"
       crossorigin
+      fetchpriority="high"
     />
     <link
       rel="preload"
@@ -153,8 +154,8 @@ const canonicalURLObj =
     <ClientRouter />
 
     <!-- Google Analytics -->
-    <script async src={`https://www.googletagmanager.com/gtag/js?id=${ENV.GA_MEASUREMENT_ID}`}
-    ></script>
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${ENV.GA_MEASUREMENT_ID}`}>
+    </script>
     <script is:inline define:vars={{measurementId: ENV.GA_MEASUREMENT_ID, tagId: ENV.GA_TAG_ID}}>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
@@ -207,6 +208,8 @@ const canonicalURLObj =
         padding-right: 10%;
         /* Ensure the bio is visible immediately */
         content-visibility: visible !important;
+        text-rendering: optimizeLegibility;
+        font-display: swap;
       }
       @media screen and (max-width: 768px) {
         .bio {

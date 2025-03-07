@@ -45,7 +45,7 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
             <span class="job-title-line">Senior Front End Engineer</span>
             <span class="job-title-line">& Senior UI/UX Designer</span>
           </h2>
-          <p class="bio">
+          <p class="bio" data-priority="high">
             I build intuitive, high-performance web applications by combining clean, efficient code
             with thoughtful design. With 15+ years of experience, I specialize in crafting scalable
             user interfaces, leading technical projects, and enhancing digital experiences through
@@ -194,6 +194,11 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
     margin-bottom: 20px;
     line-height: 1.75;
     padding-right: 10%;
+    /* Ensure the bio is visible immediately */
+    visibility: visible;
+    opacity: 1;
+    contain: none; /* Disable containment to ensure it's rendered immediately */
+    will-change: auto; /* Don't create a new layer unnecessarily */
   }
 
   .home-buttons {
@@ -433,7 +438,7 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
         translateY: [-80, 0],
         opacity: [0, 1],
         easing: "easeOutCubic",
-        duration: 0,
+        duration: 1000,
         delay: anime.stagger(100),
       });
     };
@@ -447,7 +452,23 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
     }
   };
 
+  // Prioritize bio paragraph rendering
+  const prioritizeBio = () => {
+    const bioElement = document.querySelector('.bio[data-priority="high"]') as HTMLElement;
+    if (bioElement) {
+      // Force the browser to prioritize this element
+      bioElement.style.visibility = "visible";
+      bioElement.style.opacity = "1";
+    }
+  };
+
+  // Execute immediately
+  prioritizeBio();
+
   document.addEventListener("DOMContentLoaded", () => {
+    // Ensure bio is prioritized
+    prioritizeBio();
+
     // Defer animations to improve LCP
     if (document.readyState === "complete") {
       initAnimations();
