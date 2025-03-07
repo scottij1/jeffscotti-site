@@ -6,12 +6,6 @@ const firstTabId = tabItems.length > 0 ? tabItems[0].id : "";
 
 <link rel="stylesheet" href="/styles/et-line.css" type="text/css" />
 
-<script
-  type="text/javascript"
-  src="https://kit.fontawesome.com/ad9e6c27c0.js"
-  crossorigin="anonymous"
-></script>
-
 <div class="tabs-container">
   <!-- Desktop Tabs -->
   <ul class="tab-buttons nav nav-tabs tpl-alt-tabs desktop-tabs">
@@ -29,12 +23,18 @@ const firstTabId = tabItems.length > 0 ? tabItems[0].id : "";
     }
   </ul>
 
-  <!-- Mobile Accordion -->
+  <!-- Mobile Accordion - CSS Only Implementation -->
   <div class="mobile-accordion">
     {
       tabItems.map((tab, index) => (
-        <div class={`accordion-item ${index === 0 ? "active" : ""}`} data-tab={tab.id}>
-          <div class="accordion-header">
+        <div class="accordion-wrapper">
+          <input
+            type="checkbox"
+            id={`accordion-toggle-${tab.id}`}
+            class="accordion-toggle-checkbox"
+            checked={index === 0}
+          />
+          <label for={`accordion-toggle-${tab.id}`} class="accordion-header">
             <div class="accordion-icon">
               <span class={tab.icon} />
             </div>
@@ -42,8 +42,8 @@ const firstTabId = tabItems.length > 0 ? tabItems[0].id : "";
             <div class="accordion-toggle">
               <i class="fa fa-chevron-down" />
             </div>
-          </div>
-          <div class="accordion-content" style={index === 0 ? "display: block;" : ""}>
+          </label>
+          <div class="accordion-content">
             <div id={`accordion-${tab.id}`}>
               {tab.content.map((paragraph) => (
                 <p set:html={paragraph} />
@@ -107,15 +107,23 @@ const firstTabId = tabItems.length > 0 ? tabItems[0].id : "";
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
+  // Initialize tabs functionality immediately and also after Astro view transitions
+  function initTabsAndAccordion() {
+    console.log("Initializing tabs");
+
     // Desktop tabs functionality
     const tabLinks = document.querySelectorAll<HTMLAnchorElement>(".tab-btn");
     const tabContents = document.querySelectorAll<HTMLDivElement>(".tab-content");
     const tabItems = document.querySelectorAll<HTMLLIElement>(".tab-buttons li");
 
+    console.log(
+      `Found ${tabLinks.length} tab links, ${tabContents.length} tab contents, ${tabItems.length} tab items`,
+    );
+
     tabLinks.forEach((link) => {
       link.addEventListener("click", (e) => {
         e.preventDefault();
+        console.log("Tab clicked:", link.dataset.tab);
 
         tabItems.forEach((item) => item.classList.remove("active"));
         tabContents.forEach((content) => content.classList.remove("active"));
@@ -134,32 +142,14 @@ const firstTabId = tabItems.length > 0 ? tabItems[0].id : "";
         }
       });
     });
+  }
 
-    // Mobile accordion functionality
-    const accordionItems = document.querySelectorAll<HTMLDivElement>(".accordion-item");
-    const accordionHeaders = document.querySelectorAll<HTMLDivElement>(".accordion-header");
+  // Run initialization immediately
+  initTabsAndAccordion();
 
-    accordionHeaders.forEach((header) => {
-      header.addEventListener("click", () => {
-        const accordionItem = header.parentElement as HTMLDivElement;
-        const accordionContent = header.nextElementSibling as HTMLDivElement;
-        const isActive = accordionItem.classList.contains("active");
-
-        accordionItems.forEach((item) => {
-          item.classList.remove("active");
-          const content = item.querySelector(".accordion-content") as HTMLDivElement;
-          if (content) {
-            content.style.display = "none";
-          }
-        });
-
-        if (!isActive) {
-          accordionItem.classList.add("active");
-          accordionContent.style.display = "block";
-        }
-      });
-    });
-  });
+  // Also run after Astro view transitions
+  document.addEventListener("astro:page-load", initTabsAndAccordion);
+  document.addEventListener("astro:after-swap", initTabsAndAccordion);
 </script>
 
 <style>
@@ -249,14 +239,13 @@ const firstTabId = tabItems.length > 0 ? tabItems[0].id : "";
     visibility: visible;
   }
 
-  /* Mobile Accordion Styling */
   .mobile-accordion {
-    display: none;
+    display: none; /* Hide on desktop */
     max-width: 800px;
     margin: 0 auto;
   }
 
-  .accordion-item {
+  .accordion-wrapper {
     margin-bottom: 10px;
     border-radius: 3px;
     border: 1px solid var(--border-color, #eee);
@@ -264,8 +253,11 @@ const firstTabId = tabItems.length > 0 ? tabItems[0].id : "";
     transition: all 0.3s ease;
   }
 
-  .accordion-item.active {
-    border-color: transparent;
+  /* Hide the checkbox */
+  .accordion-toggle-checkbox {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
   }
 
   .accordion-header {
@@ -278,8 +270,8 @@ const firstTabId = tabItems.length > 0 ? tabItems[0].id : "";
     color: white;
   }
 
-  .accordion-item.active .accordion-header {
-    color: var(--active-color);
+  .accordion-header:hover {
+    color: var(--primary-color);
   }
 
   .accordion-icon {
@@ -287,10 +279,6 @@ const firstTabId = tabItems.length > 0 ? tabItems[0].id : "";
     margin-right: 15px;
     color: inherit;
     transition: all 0.3s ease;
-  }
-
-  .accordion-header:hover {
-    color: var(--primary-color);
   }
 
   .accordion-title {
@@ -303,13 +291,36 @@ const firstTabId = tabItems.length > 0 ? tabItems[0].id : "";
     color: inherit;
   }
 
-  .accordion-item.active .accordion-toggle {
+  .accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding: 0 20px;
+  }
+
+  /* When checkbox is checked, show the content */
+  .accordion-toggle-checkbox:checked ~ .accordion-content {
+    max-height: 2000px; /* Large enough to show all content */
+    padding: 20px;
+  }
+
+  /* Hide border when accordion is open */
+  .accordion-toggle-checkbox:checked + .accordion-header {
+    color: var(--active-color);
+  }
+
+  .accordion-toggle-checkbox:checked + .accordion-header .accordion-toggle {
     transform: rotate(180deg);
   }
 
-  .accordion-content {
-    display: none;
-    padding: 20px;
+  /* Make the parent wrapper borderless when open */
+  .accordion-toggle-checkbox:checked ~ .accordion-content {
+    border-top: none;
+  }
+
+  /* Hide the border of the wrapper when open */
+  .accordion-wrapper:has(.accordion-toggle-checkbox:checked) {
+    border-color: transparent;
   }
 
   .testimonial-content {
@@ -375,7 +386,7 @@ const firstTabId = tabItems.length > 0 ? tabItems[0].id : "";
     }
 
     .mobile-accordion {
-      display: block;
+      display: block; /* Show on mobile */
     }
 
     .testimonial-content {
