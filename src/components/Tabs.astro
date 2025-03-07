@@ -125,7 +125,6 @@ const firstTabId = tabItems.length > 0 ? tabItems[0].id : "";
     tabLinks.forEach((link) => {
       link.addEventListener("click", (e) => {
         e.preventDefault();
-        console.log("Tab clicked:", link.dataset.tab);
 
         tabItems.forEach((item) => item.classList.remove("active"));
         tabContents.forEach((content) => content.classList.remove("active"));
