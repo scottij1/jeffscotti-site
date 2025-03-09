@@ -292,10 +292,10 @@ import Layout from "../layouts/Layout.astro";
   }
 </style>
 
-<script>
+<script is:inline>
   document.addEventListener("DOMContentLoaded", () => {
-    const filters = document.querySelectorAll<HTMLElement>(".filter");
-    const items = document.querySelectorAll<HTMLElement>(".item");
+    const filters = document.querySelectorAll(".filter");
+    const items = document.querySelectorAll(".item");
 
     filters.forEach((filter) => {
       filter.addEventListener("click", (e) => {
@@ -307,7 +307,7 @@ import Layout from "../layouts/Layout.astro";
 
         items.forEach((item) => {
           const dataGroups = item.getAttribute("data-groups") || "[]";
-          const groups: string[] = JSON.parse(dataGroups.replace(/'/g, '"'));
+          const groups = JSON.parse(dataGroups.replace(/'/g, '"'));
 
           if (group === "all" || groups.includes(group)) {
             item.style.display = "block";

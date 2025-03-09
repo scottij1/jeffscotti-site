@@ -33,6 +33,10 @@ const isPathActive = (path: string) => {
           <a href="/skills">Skills</a>
         </li>
 
+        <li class={`menu-item ${isPathActive("/projects") ? "current-menu-item" : ""}`}>
+          <a href="/projects">Projects</a>
+        </li>
+
         <li class={`menu-item ${isPathActive("/contact") ? "current-menu-item" : ""}`}>
           <a href="/contact">Contact</a>
         </li>
