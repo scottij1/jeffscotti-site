@@ -1,0 +1,393 @@
+---
+// ProjectView.astro - Sliding project view component
+---
+
+<div id="project-view" class="project-view">
+  <div class="project-view-wrapper">
+    <div class="project-view-nav">
+      <div class="nav-item project-view-prev-next">
+        <button id="prev-project" class="nav-button"><i class="fas fa-chevron-left"></i></button>
+        <button id="next-project" class="nav-button"><i class="fas fa-chevron-right"></i></button>
+      </div>
+      <div class="nav-item project-view-close-button">
+        <button id="project-view-close-button" class="nav-button">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="project-view-content">
+      <!-- Project content will be loaded here dynamically -->
+      <div id="project-modalis" class="project-content" style="display: none;">
+        <div class="project-view-title">
+          <h2>Modalis</h2>
+          <div class="project-view-subtitle">Media Asset Management and Distribution System</div>
+        </div>
+
+        <div class="project-view-body">
+          <div class="project-view-gallery">
+            <div class="gallery-container">
+              <img
+                src="/images/portfolio/modalis/1-large-media-cards.png"
+                alt="Modalis Media Cards"
+              />
+            </div>
+          </div>
+
+          <div class="project-view-details">
+            <div class="project-description">
+              <h3>Description</h3>
+              <p>
+                Modalis is a comprehensive media asset management and distribution system designed
+                for media companies to organize, manage, and distribute their digital assets
+                efficiently.
+              </p>
+              <p>
+                The system provides robust tools for metadata management, workflow automation, and
+                content delivery across multiple platforms.
+              </p>
+            </div>
+
+            <div class="project-technologies">
+              <h3>Technologies</h3>
+              <ul class="tech-tags">
+                <li>React</li>
+                <li>Node.js</li>
+                <li>GraphQL</li>
+                <li>AWS</li>
+                <li>Elasticsearch</li>
+              </ul>
+            </div>
+
+            <div class="project-role">
+              <h3>My Role</h3>
+              <p>
+                Lead front-end developer responsible for designing and implementing the user
+                interface, ensuring a seamless user experience, and optimizing performance for
+                handling large media libraries.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="project-transcript-editor" class="project-content" style="display: none;">
+        <div class="project-view-title">
+          <h2>Closed Caption Transcript Editor</h2>
+          <div class="project-view-subtitle">
+            Web-based tool for editing video transcripts and captions
+          </div>
+        </div>
+
+        <div class="project-view-body">
+          <div class="project-view-gallery">
+            <div class="gallery-container">
+              <img src="/images/portfolio/project-transcript-edit.jpg" alt="Transcript Editor" />
+            </div>
+          </div>
+
+          <div class="project-view-details">
+            <div class="project-description">
+              <h3>Description</h3>
+              <p>
+                The Closed Caption Transcript Editor is a specialized web application designed to
+                streamline the process of creating, editing, and synchronizing closed captions for
+                video content.
+              </p>
+              <p>
+                It features a timeline-based interface that allows editors to precisely time
+                captions with video content, supporting multiple caption formats and accessibility
+                standards.
+              </p>
+            </div>
+
+            <div class="project-technologies">
+              <h3>Technologies</h3>
+              <ul class="tech-tags">
+                <li>Vue.js</li>
+                <li>Web Audio API</li>
+                <li>HTML5 Video</li>
+                <li>WebVTT</li>
+                <li>Express.js</li>
+              </ul>
+            </div>
+
+            <div class="project-role">
+              <h3>My Role</h3>
+              <p>
+                Full-stack developer responsible for implementing the caption timing system, video
+                playback controls, and ensuring cross-browser compatibility and accessibility
+                compliance.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="project-quiz-creator" class="project-content" style="display: none;">
+        <div class="project-view-title">
+          <h2>Video Quiz Creator</h2>
+          <div class="project-view-subtitle">
+            Interactive tool for creating video-based quizzes and assessments
+          </div>
+        </div>
+
+        <div class="project-view-body">
+          <div class="project-view-gallery">
+            <div class="gallery-container">
+              <img src="/images/portfolio/project-quiz-creator.jpg" alt="Quiz Creator" />
+            </div>
+          </div>
+
+          <div class="project-view-details">
+            <div class="project-description">
+              <h3>Description</h3>
+              <p>
+                The Video Quiz Creator is an educational technology tool that enables instructors to
+                create interactive assessments integrated directly with video content.
+              </p>
+              <p>
+                It allows for the insertion of various question types at specific timestamps in
+                videos, tracking student responses and providing detailed analytics on performance.
+              </p>
+            </div>
+
+            <div class="project-technologies">
+              <h3>Technologies</h3>
+              <ul class="tech-tags">
+                <li>React</li>
+                <li>Redux</li>
+                <li>Firebase</li>
+                <li>Video.js</li>
+                <li>D3.js</li>
+              </ul>
+            </div>
+
+            <div class="project-role">
+              <h3>My Role</h3>
+              <p>
+                Lead developer responsible for architecting the application, implementing the quiz
+                creation interface, and developing the analytics dashboard for instructors.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .project-view {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: var(--background-color);
+    z-index: 1000;
+    overflow-y: auto;
+    transition: transform 0.5s ease-in-out;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .project-view.open {
+    transform: translateX(-100%);
+  }
+
+  .project-view-wrapper {
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .project-view-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+
+  .nav-item {
+    display: flex;
+    gap: 15px;
+  }
+
+  .nav-button {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 18px;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .nav-button:hover {
+    background-color: var(--primary-color);
+    color: white;
+  }
+
+  .project-view-title {
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 20px;
+  }
+
+  .project-view-title h2 {
+    font-size: 28px;
+    margin: 0 0 10px 0;
+    color: var(--heading-color);
+  }
+
+  .project-view-subtitle {
+    font-size: 16px;
+    color: var(--text-color);
+    opacity: 0.8;
+  }
+
+  .project-view-body {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+  }
+
+  .project-view-gallery {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .gallery-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .project-view-details {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .project-view-details h3 {
+    font-size: 18px;
+    margin: 0 0 15px 0;
+    color: var(--heading-color);
+  }
+
+  .project-view-details p {
+    margin: 0 0 15px 0;
+    line-height: 1.6;
+  }
+
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .tech-tags li {
+    background-color: var(--container-bg-color);
+    color: var(--text-color);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .project-view-body {
+      grid-template-columns: 1fr;
+    }
+
+    .project-view-wrapper {
+      padding: 20px;
+    }
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    const projectView = document.getElementById("project-view");
+    const closeButton = document.getElementById("project-view-close-button");
+    const prevButton = document.getElementById("prev-project");
+    const nextButton = document.getElementById("next-project");
+    const projectContents = document.querySelectorAll(".project-content");
+
+    let currentProjectIndex = 0;
+    const projectIds = ["project-modalis", "project-transcript-editor", "project-quiz-creator"];
+
+    // Listen for theme changes
+    document.addEventListener("themeChanged", (event) => {
+      // The theme is already applied to the document root by the ThemeToggle component
+      // This listener is here in case we need to make any theme-specific adjustments
+      // to the ProjectView component in the future
+      console.log("Theme changed in ProjectView:", event.detail.theme);
+    });
+
+    // Function to show a specific project
+    function showProject(projectId) {
+      // Hide all projects first
+      projectContents.forEach((content) => {
+        content.style.display = "none";
+      });
+
+      // Show the selected project
+      const projectToShow = document.getElementById(projectId);
+      if (projectToShow) {
+        projectToShow.style.display = "block";
+
+        // Update current index
+        currentProjectIndex = projectIds.indexOf(projectId);
+      }
+    }
+
+    // Close the project view
+    function closeProjectView() {
+      projectView.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+
+    // Open the project view with a specific project
+    function openProjectView(projectId) {
+      showProject(projectId);
+      projectView.classList.add("open");
+      document.body.style.overflow = "hidden"; // Prevent scrolling of the main page
+    }
+
+    // Navigate to previous project
+    function goToPrevProject() {
+      currentProjectIndex = (currentProjectIndex - 1 + projectIds.length) % projectIds.length;
+      showProject(projectIds[currentProjectIndex]);
+    }
+
+    // Navigate to next project
+    function goToNextProject() {
+      currentProjectIndex = (currentProjectIndex + 1) % projectIds.length;
+      showProject(projectIds[currentProjectIndex]);
+    }
+
+    // Event listeners
+    closeButton.addEventListener("click", closeProjectView);
+    prevButton.addEventListener("click", goToPrevProject);
+    nextButton.addEventListener("click", goToNextProject);
+
+    // Expose functions to window for external access
+    window.openProjectView = openProjectView;
+    window.closeProjectView = closeProjectView;
+
+    // Handle escape key to close
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && projectView.classList.contains("open")) {
+        closeProjectView();
+      }
+    });
+  });
+</script>

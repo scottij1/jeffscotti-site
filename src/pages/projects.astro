@@ -1,5 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import ProjectView from "../components/ProjectView.astro";
+
+// Feature flag to control filter menu visibility
+const SHOW_FILTER_MENU = false;
 ---
 
 <Layout
@@ -30,131 +34,93 @@ import Layout from "../layouts/Layout.astro";
         <div id="content" class="page-content site-content single-post" role="main">
           <div class="row">
             <div class="col-xs-12 col-sm-12">
-              <!-- Portfolio Filters -->
-              <ul class="portfolio-filters">
-                <li class="active">
-                  <a class="filter btn btn-sm btn-link" data-group="all">All</a>
-                </li>
-                <li>
-                  <a class="filter btn btn-sm btn-link" data-group="web-development">
-                    Web Development
-                  </a>
-                </li>
-                <li>
-                  <a class="filter btn btn-sm btn-link" data-group="ui-design">UI Design</a>
-                </li>
-                <li>
-                  <a class="filter btn btn-sm btn-link" data-group="mobile-apps">Mobile Apps</a>
-                </li>
-              </ul>
+              {
+                SHOW_FILTER_MENU && (
+                  <ul class="portfolio-filters">
+                    <li class="active">
+                      <a class="filter btn btn-sm btn-link" data-group="all">
+                        All
+                      </a>
+                    </li>
+                    <li>
+                      <a class="filter btn btn-sm btn-link" data-group="web-development">
+                        Web Development
+                      </a>
+                    </li>
+                    <li>
+                      <a class="filter btn btn-sm btn-link" data-group="ui-design">
+                        UI Design
+                      </a>
+                    </li>
+                    <li>
+                      <a class="filter btn btn-sm btn-link" data-group="mobile-apps">
+                        Mobile Apps
+                      </a>
+                    </li>
+                  </ul>
+                )
+              }
 
               <!-- Portfolio Grid -->
               <div class="portfolio-grid">
-                <!-- Portfolio Item 1 -->
-                <figure class="item" data-groups='["all", "web-development"]'>
+                <!-- Portfolio Item 1: Modalis -->
+                <figure class="item" data-groups='["all", "web-development", "ui-design"]'>
                   <div class="portfolio-item-img">
-                    <div class="portfolio-item-preview"></div>
-                    <a href="#" class="project-link"></a>
+                    <img
+                      src="/images/portfolio/project-modalis.jpg"
+                      alt="Modalis - Media Asset Management and Distribution"
+                    />
+                    <a href="#" class="project-link" data-project="project-modalis"></a>
                   </div>
                   <i class="far fa-file-alt"></i>
-                  <h4 class="name">E-Commerce Website</h4>
-                  <span class="category">
-                    A responsive e-commerce platform built with modern web technologies.
-                  </span>
+                  <h4 class="name">Modalis</h4>
+                  <span class="category">Media Asset Management and Distribution System</span>
                   <div class="project-tags">
-                    <span>React</span>
-                    <span>Node.js</span>
-                    <span>MongoDB</span>
-                  </div>
-                </figure>
-
-                <!-- Portfolio Item 2 -->
-                <figure class="item" data-groups='["all", "ui-design"]'>
-                  <div class="portfolio-item-img">
-                    <div class="portfolio-item-preview"></div>
-                    <a href="#" class="project-link"></a>
-                  </div>
-                  <i class="far fa-file-alt"></i>
-                  <h4 class="name">Portfolio Template</h4>
-                  <span class="category">
-                    A customizable portfolio template for creative professionals.
-                  </span>
-                  <div class="project-tags">
-                    <span>HTML5</span>
-                    <span>CSS3</span>
+                    <span>Web Application</span>
+                    <span>UI/UX Design</span>
                     <span>JavaScript</span>
                   </div>
                 </figure>
 
-                <!-- Portfolio Item 3 -->
-                <figure class="item" data-groups='["all", "web-development", "ui-design"]'>
-                  <div class="portfolio-item-img">
-                    <div class="portfolio-item-preview"></div>
-                    <a href="#" class="project-link"></a>
-                  </div>
-                  <i class="far fa-file-alt"></i>
-                  <h4 class="name">Weather App</h4>
-                  <span class="category">
-                    A weather application with real-time data and forecast visualization.
-                  </span>
-                  <div class="project-tags">
-                    <span>Vue.js</span>
-                    <span>API Integration</span>
-                    <span>CSS Grid</span>
-                  </div>
-                </figure>
-
-                <!-- Portfolio Item 4 -->
-                <figure class="item" data-groups='["all", "mobile-apps"]'>
-                  <div class="portfolio-item-img">
-                    <div class="portfolio-item-preview"></div>
-                    <a href="#" class="project-link"></a>
-                  </div>
-                  <i class="far fa-file-alt"></i>
-                  <h4 class="name">Task Management App</h4>
-                  <span class="category">
-                    A productivity tool for organizing and tracking tasks and projects.
-                  </span>
-                  <div class="project-tags">
-                    <span>React</span>
-                    <span>Firebase</span>
-                    <span>Material UI</span>
-                  </div>
-                </figure>
-
-                <!-- Portfolio Item 5 -->
+                <!-- Portfolio Item 2: Transcript Editor -->
                 <figure class="item" data-groups='["all", "web-development"]'>
                   <div class="portfolio-item-img">
-                    <div class="portfolio-item-preview"></div>
-                    <a href="#" class="project-link"></a>
+                    <img
+                      src="/images/portfolio/project-transcript-edit.jpg"
+                      alt="Closed Caption Transcript Editor"
+                    />
+                    <a href="#" class="project-link" data-project="project-transcript-editor"></a>
                   </div>
                   <i class="far fa-file-alt"></i>
-                  <h4 class="name">Blog Platform</h4>
+                  <h4 class="name">Closed Caption Transcript Editor</h4>
                   <span class="category">
-                    A modern blogging platform with content management system.
+                    Web-based tool for editing video transcripts and captions
                   </span>
                   <div class="project-tags">
-                    <span>Next.js</span>
-                    <span>GraphQL</span>
-                    <span>Tailwind CSS</span>
+                    <span>Web Application</span>
+                    <span>Video Processing</span>
+                    <span>Accessibility</span>
                   </div>
                 </figure>
 
-                <!-- Portfolio Item 6 -->
-                <figure class="item" data-groups='["all", "ui-design"]'>
+                <!-- Portfolio Item 3: Quiz Creator -->
+                <figure class="item" data-groups='["all", "web-development", "ui-design"]'>
                   <div class="portfolio-item-img">
-                    <div class="portfolio-item-preview"></div>
-                    <a href="#" class="project-link"></a>
+                    <img
+                      src="/images/portfolio/project-quiz-creator.jpg"
+                      alt="Video Quiz Creator"
+                    />
+                    <a href="#" class="project-link" data-project="project-quiz-creator"></a>
                   </div>
                   <i class="far fa-file-alt"></i>
-                  <h4 class="name">Dashboard UI</h4>
+                  <h4 class="name">Video Quiz Creator</h4>
                   <span class="category">
-                    A comprehensive dashboard interface for data visualization.
+                    Interactive tool for creating video-based quizzes and assessments
                   </span>
                   <div class="project-tags">
-                    <span>Figma</span>
-                    <span>UI/UX</span>
-                    <span>Data Visualization</span>
+                    <span>Web Application</span>
+                    <span>Educational Tech</span>
+                    <span>Interactive Media</span>
                   </div>
                 </figure>
               </div>
@@ -164,6 +130,7 @@ import Layout from "../layouts/Layout.astro";
       </div>
     </div>
   </div>
+  <ProjectView />
 </Layout>
 
 <style>
@@ -208,7 +175,7 @@ import Layout from "../layouts/Layout.astro";
     position: relative;
     margin: 0;
     padding: 0;
-    background-color: rgba(30, 30, 30, 0.7);
+    background-color: var(--container-bg-color);
     border-radius: 8px;
     overflow: hidden;
     transition:
@@ -227,14 +194,22 @@ import Layout from "../layouts/Layout.astro";
     overflow: hidden;
   }
 
+  .portfolio-item-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
   .portfolio-item-preview {
     width: 100%;
     height: 100%;
-    background-color: #2a2a2a;
+    background-color: var(--container-bg-color);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #555;
+    color: var(--text-color);
+    opacity: 0.6;
     font-size: 1.2rem;
   }
 
@@ -277,8 +252,9 @@ import Layout from "../layouts/Layout.astro";
   }
 
   .project-tags span {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: #aaa;
+    background-color: var(--container-bg-color);
+    color: var(--text-color);
+    opacity: 0.7;
     padding: 3px 8px;
     border-radius: 4px;
     font-size: 10px;
@@ -294,6 +270,15 @@ import Layout from "../layouts/Layout.astro";
 
 <script is:inline>
   document.addEventListener("DOMContentLoaded", () => {
+    // Listen for theme changes
+    document.addEventListener("themeChanged", (event) => {
+      // The theme is already applied to the document root by the ThemeToggle component
+      // This listener is here in case we need to make any theme-specific adjustments
+      // to the portfolio page in the future
+      console.log("Theme changed in Portfolio page:", event.detail.theme);
+    });
+
+    // Filter functionality
     const filters = document.querySelectorAll(".filter");
     const items = document.querySelectorAll(".item");
 
@@ -315,6 +300,19 @@ import Layout from "../layouts/Layout.astro";
             item.style.display = "none";
           }
         });
+      });
+    });
+
+    // Project view functionality
+    const projectLinks = document.querySelectorAll(".project-link");
+
+    projectLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const projectId = link.getAttribute("data-project");
+        if (projectId && typeof window.openProjectView === "function") {
+          window.openProjectView(projectId);
+        }
       });
     });
   });
