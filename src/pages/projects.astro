@@ -2,7 +2,6 @@
 import Layout from "../layouts/Layout.astro";
 import ProjectView from "../components/ProjectView.astro";
 
-// Feature flag to control filter menu visibility
 const SHOW_FILTER_MENU = false;
 ---
 
@@ -25,9 +24,9 @@ const SHOW_FILTER_MENU = false;
     <div id="main-content" class="single-page-content">
       <div id="primary" class="content-area">
         <div class="page-title">
-          <h1>Portfolio</h1>
+          <h1>Projects</h1>
           <div class="page-subtitle">
-            <h4>My Work</h4>
+            <h2>Some of my work</h2>
           </div>
         </div>
 
@@ -70,10 +69,15 @@ const SHOW_FILTER_MENU = false;
                       src="/images/portfolio/project-modalis.jpg"
                       alt="Modalis - Media Asset Management and Distribution"
                     />
-                    <a href="#" class="project-link" data-project="project-modalis"></a>
+                    <a
+                      href="#"
+                      class="project-link"
+                      data-project="project-modalis"
+                      aria-label="View Modalis project details">
+                    </a>
                   </div>
                   <i class="far fa-file-alt"></i>
-                  <h4 class="name">Modalis</h4>
+                  <h3 class="name">Modalis</h3>
                   <span class="category">Media Asset Management and Distribution System</span>
                   <div class="project-tags">
                     <span>Web Application</span>
@@ -89,10 +93,15 @@ const SHOW_FILTER_MENU = false;
                       src="/images/portfolio/project-transcript-edit.jpg"
                       alt="Closed Caption Transcript Editor"
                     />
-                    <a href="#" class="project-link" data-project="project-transcript-editor"></a>
+                    <a
+                      href="#"
+                      class="project-link"
+                      data-project="project-transcript-editor"
+                      aria-label="View Closed Caption Transcript Editor project details">
+                    </a>
                   </div>
                   <i class="far fa-file-alt"></i>
-                  <h4 class="name">Closed Caption Transcript Editor</h4>
+                  <h3 class="name">Closed Caption Transcript Editor</h3>
                   <span class="category">
                     Web-based tool for editing video transcripts and captions
                   </span>
@@ -110,10 +119,15 @@ const SHOW_FILTER_MENU = false;
                       src="/images/portfolio/project-quiz-creator.jpg"
                       alt="Video Quiz Creator"
                     />
-                    <a href="#" class="project-link" data-project="project-quiz-creator"></a>
+                    <a
+                      href="#"
+                      class="project-link"
+                      data-project="project-quiz-creator"
+                      aria-label="View Video Quiz Creator project details">
+                    </a>
                   </div>
                   <i class="far fa-file-alt"></i>
-                  <h4 class="name">Video Quiz Creator</h4>
+                  <h3 class="name">Video Quiz Creator</h3>
                   <span class="category">
                     Interactive tool for creating video-based quizzes and assessments
                   </span>
@@ -230,7 +244,7 @@ const SHOW_FILTER_MENU = false;
     display: none;
   }
 
-  .item h4.name {
+  .item h3.name {
     padding: 15px 15px 5px;
     font-size: 16px;
     color: var(--heading-color);
@@ -270,14 +284,6 @@ const SHOW_FILTER_MENU = false;
 
 <script is:inline>
   document.addEventListener("DOMContentLoaded", () => {
-    // Listen for theme changes
-    document.addEventListener("themeChanged", (event) => {
-      // The theme is already applied to the document root by the ThemeToggle component
-      // This listener is here in case we need to make any theme-specific adjustments
-      // to the portfolio page in the future
-      console.log("Theme changed in Portfolio page:", event.detail.theme);
-    });
-
     // Filter functionality
     const filters = document.querySelectorAll(".filter");
     const items = document.querySelectorAll(".item");

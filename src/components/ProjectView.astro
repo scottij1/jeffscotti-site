@@ -9,11 +9,15 @@ import {projects, getProjectById} from "../data/projects";
   <div class="project-view-wrapper">
     <div class="project-view-nav">
       <div class="nav-item project-view-prev-next">
-        <button id="prev-project" class="nav-button"><i class="fas fa-chevron-left"></i></button>
-        <button id="next-project" class="nav-button"><i class="fas fa-chevron-right"></i></button>
+        <button id="prev-project" class="nav-button" aria-label="Previous Project">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button id="next-project" class="nav-button" aria-label="Next Project">
+          <i class="fas fa-chevron-right"></i>
+        </button>
       </div>
       <div class="nav-item project-view-close-button">
-        <button id="project-view-close-button" class="nav-button">
+        <button id="project-view-close-button" class="nav-button" aria-label="Close Project View">
           <i class="fas fa-times"></i>
         </button>
       </div>

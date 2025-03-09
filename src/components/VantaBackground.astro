@@ -4,10 +4,14 @@
   data-vanta-background>
 </div>
 
+<!-- Import Three.js as ES module and expose globally for Vanta.js which expects it in window -->
+<script>
+  import * as THREE from "three";
+  window.THREE = THREE;
+</script>
+
 <script is:inline>
-  // Defer loading of Vanta background to improve LCP
   const loadVantaBackground = () => {
-    // Function to load a script dynamically with async attribute
     const loadScript = (src, isAsync = false) => {
       return new Promise((resolve, reject) => {
         const script = document.createElement("script");
@@ -19,7 +23,6 @@
       });
     };
 
-    // Store the effect globally to prevent recreation during transitions
     let vantaEffect = null;
 
     const initVantaEffect = () => {
@@ -33,12 +36,11 @@
 
       const isLightTheme = document.documentElement.classList.contains("theme-light");
 
-      // Reduce complexity on mobile
+      // Reduce complexity on mobile for better performance
       const isMobile = window.innerWidth < 768;
       const spacing = isMobile ? 45.0 : 35.0;
       const scale = isMobile ? 0.8 : 1.0;
 
-      // Destroy existing effect if it exists
       if (vantaEffect && typeof vantaEffect.destroy === "function") {
         vantaEffect.destroy();
         vantaEffect = null;
@@ -61,40 +63,28 @@
       });
     };
 
-    // Load scripts with improved non-blocking approach
-    const loadVantaScripts = () => {
-      // Check if three.js is already loaded (from preload)
-      const threeJsLoaded = typeof THREE !== "undefined";
+    loadScript("/js/vanta.dots.min.js")
+      .then(() => {
+        initVantaEffect();
 
-      // Create a chain of promises to ensure correct loading order
-      const loadSequence = threeJsLoaded ? Promise.resolve() : loadScript("/js/three.min.js", true); // Load three.js asynchronously if not already loaded
-
-      loadSequence
-        .then(() => loadScript("/js/vanta.dots.min.js"))
-        .then(() => {
-          initVantaEffect();
-
-          // Set up event listeners after scripts are loaded
-          document.addEventListener("astro:page-load", initVantaEffect);
-          document.addEventListener("themeChanged", initVantaEffect);
-        })
-        .catch((error) => {
-          console.error("Failed to load Vanta scripts:", error);
-        });
-    };
-
-    // Use requestIdleCallback to defer loading until after LCP
-    if ("requestIdleCallback" in window) {
-      requestIdleCallback(() => {
-        loadVantaScripts();
+        // Reinitialize on page transitions and theme changes
+        document.addEventListener("astro:page-load", initVantaEffect);
+        document.addEventListener("themeChanged", initVantaEffect);
+      })
+      .catch((error) => {
+        console.error("Failed to load Vanta script:", error);
       });
-    } else {
-      // Fallback for browsers that don't support requestIdleCallback
-      setTimeout(loadVantaScripts, 2000); // Delay by 2 seconds to prioritize LCP
-    }
   };
 
-  // Wait for the page to be fully loaded before initializing Vanta
+  // Defer loading to improve LCP (Largest Contentful Paint)
+  if ("requestIdleCallback" in window) {
+    requestIdleCallback(() => {
+      loadVantaBackground();
+    });
+  } else {
+    setTimeout(loadVantaBackground, 2000);
+  }
+
   if (document.readyState === "complete") {
     loadVantaBackground();
   } else {

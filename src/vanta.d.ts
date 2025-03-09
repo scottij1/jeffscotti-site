@@ -1,43 +1,38 @@
-// Declaration for the global VANTA object loaded from CDN
-interface VantaEffect {
-  destroy: () => void;
+// Type definitions for Vanta.js
+declare namespace VANTA {
+  interface VantaBaseOptions {
+    el: HTMLElement;
+    mouseControls?: boolean;
+    touchControls?: boolean;
+    gyroControls?: boolean;
+    minHeight?: number;
+    minWidth?: number;
+    scale?: number;
+    scaleMobile?: number;
+    THREE?: any; // THREE.js instance
+  }
+
+  interface VantaDotsOptions extends VantaBaseOptions {
+    color?: number;
+    color2?: number;
+    backgroundColor?: number;
+    size?: number;
+    spacing?: number;
+    showLines?: boolean;
+  }
+
+  function DOTS(options: VantaDotsOptions): {
+    destroy: () => void;
+  };
 }
 
-interface VantaDotsOptions {
-  el: HTMLElement | string;
-  color?: number;
-  backgroundColor?: number;
-  size?: number;
-  spacing?: number;
-  showLines?: boolean;
-  mouseControls?: boolean;
-  touchControls?: boolean;
-  gyroControls?: boolean;
-  minHeight?: number;
-  minWidth?: number;
-  scale?: number;
-  scaleMobile?: number;
-}
+declare const VANTA: {
+  DOTS: (options: VANTA.VantaDotsOptions) => {
+    destroy: () => void;
+  };
+};
 
-interface VantaNetOptions {
-  el: HTMLElement | string;
-  color?: number;
-  backgroundColor?: number;
-  points?: number;
-  maxDistance?: number;
-  spacing?: number;
-  mouseControls?: boolean;
-  touchControls?: boolean;
-  gyroControls?: boolean;
-  minHeight?: number;
-  minWidth?: number;
-  scale?: number;
-  scaleMobile?: number;
+// Extend Window interface to include THREE
+interface Window {
+  THREE: any;
 }
-
-interface VantaGlobal {
-  DOTS: (options: VantaDotsOptions) => VantaEffect;
-  NET: (options: VantaNetOptions) => VantaEffect;
-}
-
-declare const VANTA: VantaGlobal;

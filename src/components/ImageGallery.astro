@@ -1,5 +1,4 @@
 ---
-// ImageGallery.astro - Component for displaying project image galleries
 import type {ProjectImage} from "../data/projects";
 
 interface Props {
@@ -220,7 +219,6 @@ const {images, projectId} = Astro.props;
 
 <script is:inline define:vars={{projectId, images}}>
   document.addEventListener("DOMContentLoaded", () => {
-    // --- Gallery Initialization ---
     const galleryId = `gallery-${projectId}`;
     const gallery = document.getElementById(galleryId);
     if (!gallery) return;
@@ -334,17 +332,12 @@ const {images, projectId} = Astro.props;
         const modalThumbnailsContainer = modal.querySelector(".modal-thumbnails-container");
         if (modalThumbnailsContainer) modalThumbnailsContainer.innerHTML = "";
 
-        // Clear any existing images
         modalContainer.innerHTML = "";
 
-        // Create fullsize image elements
         images.forEach((image, i) => {
-          // Create fullsize image element
           const imageDiv = document.createElement("div");
           imageDiv.className = "modal-fullsize-image fullsize-image";
           imageDiv.setAttribute("data-index", i);
-
-          // Apply styles directly to the element
           imageDiv.style.position = "absolute";
           imageDiv.style.top = "0";
           imageDiv.style.left = "0";
@@ -354,7 +347,6 @@ const {images, projectId} = Astro.props;
           imageDiv.style.display = "none";
           imageDiv.style.zIndex = "1";
 
-          // If this is the first image, make it active
           if (i === 0) {
             imageDiv.classList.add("active");
             imageDiv.style.opacity = "1";
@@ -369,14 +361,13 @@ const {images, projectId} = Astro.props;
           img.style.top = "50%";
           img.style.left = "50%";
           img.style.transform = "translate(-50%, -50%)";
-          img.style.maxWidth = "90%";
-          img.style.maxHeight = "80%";
+          img.style.maxWidth = "100%";
+          img.style.maxHeight = "100%";
           img.style.objectFit = "contain";
 
           imageDiv.appendChild(img);
           modalContainer.appendChild(imageDiv);
 
-          // Create modal thumbnail element
           if (modalThumbnailsContainer) {
             // Apply styles to the thumbnails container if not already applied
             if (!modalThumbnailsContainer.style.display) {
@@ -419,7 +410,6 @@ const {images, projectId} = Astro.props;
               showModalImage(i);
             });
 
-            // Add hover effect
             thumbnail.addEventListener("mouseenter", () => {
               if (!thumbnail.classList.contains("active")) {
                 thumbnail.style.opacity = "0.9";
@@ -442,7 +432,6 @@ const {images, projectId} = Astro.props;
         const modalThumbnails = modal.querySelectorAll(".modal-thumbnail");
         if (modalImages.length === 0) return;
 
-        // Remove active class and reset styles for all images
         modalImages.forEach((img) => {
           img.classList.remove("active");
           img.style.opacity = "0";
@@ -450,14 +439,12 @@ const {images, projectId} = Astro.props;
           img.style.zIndex = "1";
         });
 
-        // Remove active class and reset styles for all thumbnails
         modalThumbnails.forEach((thumb) => {
           thumb.classList.remove("active");
           thumb.style.opacity = "0.6";
           thumb.style.border = "2px solid transparent";
         });
 
-        // Add active class and apply styles to the selected image
         if (modalImages[index]) {
           modalImages[index].classList.add("active");
           modalImages[index].style.opacity = "1";
@@ -465,14 +452,12 @@ const {images, projectId} = Astro.props;
           modalImages[index].style.zIndex = "2";
         }
 
-        // Add active class and apply styles to the selected thumbnail
         if (modalThumbnails[index]) {
           modalThumbnails[index].classList.add("active");
           modalThumbnails[index].style.opacity = "1";
           modalThumbnails[index].style.border = "2px solid white";
         }
 
-        // Update counter and caption
         if (modalCurrentIndexEl) modalCurrentIndexEl.textContent = index + 1;
         if (modalCaptionEl) modalCaptionEl.textContent = images[index]?.caption || "";
         modalIndex = index;
@@ -531,7 +516,6 @@ const {images, projectId} = Astro.props;
         });
       }
 
-      // Attach click listeners to gallery images for opening the modal
       zoomableImages.forEach((img) => {
         img.addEventListener("click", (e) => {
           e.preventDefault();
