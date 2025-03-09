@@ -1,6 +1,7 @@
 ---
 // ProjectView.astro - Sliding project view component
 import ImageGallery from "./ImageGallery.astro";
+import FullSizeImageModal from "./FullSizeImageModal.astro";
 import {projects, getProjectById} from "../data/projects";
 ---
 
@@ -61,6 +62,9 @@ import {projects, getProjectById} from "../data/projects";
       }
     </div>
   </div>
+
+  {/* Add full-size image modal for each project */}
+  {projects.map((project) => <FullSizeImageModal projectId={project.id} />)}
 </div>
 
 <style>

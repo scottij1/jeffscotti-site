@@ -20,7 +20,12 @@ const {images, projectId} = Astro.props;
       {
         images.map((image, index) => (
           <div class={`gallery-image ${index === 0 ? "active" : ""}`} data-index={index}>
-            <img src={image.src} alt={image.alt} loading={index < 2 ? "eager" : "lazy"} />
+            <img
+              src={image.src}
+              alt={image.alt}
+              loading={index < 2 ? "eager" : "lazy"}
+              class="zoomable-image"
+            />
             {image.caption && <div class="image-caption">{image.caption}</div>}
           </div>
         ))
@@ -95,6 +100,7 @@ const {images, projectId} = Astro.props;
     height: 100%;
     object-fit: contain;
     object-position: center;
+    cursor: zoom-in;
   }
 
   .image-caption {
@@ -212,47 +218,35 @@ const {images, projectId} = Astro.props;
   }
 </style>
 
-<script is:inline define:vars={{projectId}}>
+<script is:inline define:vars={{projectId, images}}>
   document.addEventListener("DOMContentLoaded", () => {
+    // --- Gallery Initialization ---
     const galleryId = `gallery-${projectId}`;
     const gallery = document.getElementById(galleryId);
-
     if (!gallery) return;
 
-    const images = gallery.querySelectorAll(".gallery-image");
+    const galleryImages = gallery.querySelectorAll(".gallery-image");
     const thumbnails = gallery.querySelectorAll(".thumbnail");
     const prevButton = gallery.querySelector(".prev-image");
     const nextButton = gallery.querySelector(".next-image");
     const currentIndexEl = gallery.querySelector(".current-index");
+    const zoomableImages = gallery.querySelectorAll(".zoomable-image");
+    const totalImages = galleryImages.length;
+    let galleryIndex = 0;
 
-    let currentIndex = 0;
-    const totalImages = images.length;
-
-    // Function to show a specific image
     function showImage(index) {
-      // Hide all images
-      images.forEach((image) => {
-        image.classList.remove("active");
-      });
+      galleryImages.forEach((img) => img.classList.remove("active"));
+      if (galleryImages[index]) galleryImages[index].classList.add("active");
 
-      // Show the selected image
-      images[index].classList.add("active");
-
-      // Update thumbnails
-      thumbnails.forEach((thumb) => {
-        thumb.classList.remove("active");
-      });
-
+      thumbnails.forEach((thumb) => thumb.classList.remove("active"));
       if (thumbnails[index]) {
         thumbnails[index].classList.add("active");
-
         // Scroll thumbnail into view if needed
         const thumbsContainer = gallery.querySelector(".thumbnails-scroll");
         if (thumbsContainer) {
           const thumbLeft = thumbnails[index].offsetLeft;
           const containerWidth = thumbsContainer.clientWidth;
           const scrollLeft = thumbsContainer.scrollLeft;
-
           if (thumbLeft < scrollLeft || thumbLeft > scrollLeft + containerWidth - 80) {
             thumbsContainer.scrollTo({
               left: thumbLeft - containerWidth / 2 + 40,
@@ -262,37 +256,23 @@ const {images, projectId} = Astro.props;
         }
       }
 
-      // Update counter
-      if (currentIndexEl) {
-        currentIndexEl.textContent = index + 1;
-      }
-
-      // Update current index
-      currentIndex = index;
+      if (currentIndexEl) currentIndexEl.textContent = index + 1;
+      galleryIndex = index;
     }
 
-    // Navigate to previous image
     function prevImage() {
-      const newIndex = (currentIndex - 1 + totalImages) % totalImages;
+      const newIndex = (galleryIndex - 1 + totalImages) % totalImages;
       showImage(newIndex);
     }
 
-    // Navigate to next image
     function nextImage() {
-      const newIndex = (currentIndex + 1) % totalImages;
+      const newIndex = (galleryIndex + 1) % totalImages;
       showImage(newIndex);
     }
 
-    // Add event listeners
-    if (prevButton) {
-      prevButton.addEventListener("click", prevImage);
-    }
+    if (prevButton) prevButton.addEventListener("click", prevImage);
+    if (nextButton) nextButton.addEventListener("click", nextImage);
 
-    if (nextButton) {
-      nextButton.addEventListener("click", nextImage);
-    }
-
-    // Add thumbnail click handlers
     thumbnails.forEach((thumb) => {
       thumb.addEventListener("click", () => {
         const index = parseInt(thumb.getAttribute("data-index") || "0", 10);
@@ -300,42 +280,272 @@ const {images, projectId} = Astro.props;
       });
     });
 
-    // Keyboard navigation
     document.addEventListener("keydown", (e) => {
-      // Only handle keyboard events if this gallery is visible
       const galleryElement = document.getElementById(galleryId);
-      if (!galleryElement || getComputedStyle(galleryElement).display === "none") {
-        return;
-      }
-
-      if (e.key === "ArrowLeft") {
-        prevImage();
-      } else if (e.key === "ArrowRight") {
-        nextImage();
-      }
+      if (!galleryElement || getComputedStyle(galleryElement).display === "none") return;
+      if (e.key === "ArrowLeft") prevImage();
+      else if (e.key === "ArrowRight") nextImage();
     });
 
-    // Preload adjacent images
     function preloadAdjacentImages(index) {
       const nextIndex = (index + 1) % totalImages;
       const prevIndex = (index - 1 + totalImages) % totalImages;
-
-      const nextImage = images[nextIndex].querySelector("img");
-      const prevImage = images[prevIndex].querySelector("img");
-
-      if (nextImage && nextImage.getAttribute("loading") === "lazy") {
-        nextImage.setAttribute("loading", "eager");
+      const nextImg = galleryImages[nextIndex].querySelector("img");
+      const prevImg = galleryImages[prevIndex].querySelector("img");
+      if (nextImg && nextImg.getAttribute("loading") === "lazy") {
+        nextImg.setAttribute("loading", "eager");
       }
-
-      if (prevImage && prevImage.getAttribute("loading") === "lazy") {
-        prevImage.setAttribute("loading", "eager");
+      if (prevImg && prevImg.getAttribute("loading") === "lazy") {
+        prevImg.setAttribute("loading", "eager");
       }
     }
 
-    // Initialize with first image and preload adjacent images
+    // Initialize gallery with the first image
     showImage(0);
-    if (totalImages > 1) {
-      preloadAdjacentImages(0);
+    if (totalImages > 1) preloadAdjacentImages(0);
+
+    // --- Modal Initialization (Delayed) ---
+    const modalId = `fullsize-modal-${projectId}`;
+
+    // This function waits until the modal element is available
+    function initModal() {
+      const modal = document.getElementById(modalId);
+      if (!modal) {
+        setTimeout(initModal, 50);
+        return;
+      }
+
+      let modalIndex = 0;
+      const modalContainer = modal.querySelector(".fullsize-image-container");
+      const modalPrevButton = modal.querySelector(".prev-image");
+      const modalNextButton = modal.querySelector(".next-image");
+      const modalCloseButton = modal.querySelector(".close-modal");
+      const modalCurrentIndexEl = modal.querySelector(".current-index");
+      const modalTotalImagesEl = modal.querySelector(".total-images");
+      const modalCaptionEl = modal.querySelector(".image-caption");
+
+      if (modalTotalImagesEl) {
+        modalTotalImagesEl.textContent = totalImages;
+      }
+
+      // Build modal images and thumbnails
+      if (modalContainer) {
+        modalContainer.innerHTML = "";
+        const modalThumbnailsContainer = modal.querySelector(".modal-thumbnails-container");
+        if (modalThumbnailsContainer) modalThumbnailsContainer.innerHTML = "";
+
+        // Clear any existing images
+        modalContainer.innerHTML = "";
+
+        // Create fullsize image elements
+        images.forEach((image, i) => {
+          // Create fullsize image element
+          const imageDiv = document.createElement("div");
+          imageDiv.className = "modal-fullsize-image fullsize-image";
+          imageDiv.setAttribute("data-index", i);
+
+          // Apply styles directly to the element
+          imageDiv.style.position = "absolute";
+          imageDiv.style.top = "0";
+          imageDiv.style.left = "0";
+          imageDiv.style.width = "100%";
+          imageDiv.style.height = "100%";
+          imageDiv.style.opacity = "0";
+          imageDiv.style.display = "none";
+          imageDiv.style.zIndex = "1";
+
+          // If this is the first image, make it active
+          if (i === 0) {
+            imageDiv.classList.add("active");
+            imageDiv.style.opacity = "1";
+            imageDiv.style.display = "block";
+            imageDiv.style.zIndex = "2";
+          }
+
+          const img = document.createElement("img");
+          img.src = image.src;
+          img.alt = image.alt || `Image ${i + 1}`;
+          img.style.position = "absolute";
+          img.style.top = "50%";
+          img.style.left = "50%";
+          img.style.transform = "translate(-50%, -50%)";
+          img.style.maxWidth = "90%";
+          img.style.maxHeight = "80%";
+          img.style.objectFit = "contain";
+
+          imageDiv.appendChild(img);
+          modalContainer.appendChild(imageDiv);
+
+          // Create modal thumbnail element
+          if (modalThumbnailsContainer) {
+            // Apply styles to the thumbnails container if not already applied
+            if (!modalThumbnailsContainer.style.display) {
+              modalThumbnailsContainer.style.display = "flex";
+              modalThumbnailsContainer.style.justifyContent = "center";
+              modalThumbnailsContainer.style.gap = "10px";
+              modalThumbnailsContainer.style.padding = "10px 0";
+              modalThumbnailsContainer.style.overflowX = "auto";
+              modalThumbnailsContainer.style.maxWidth = "100%";
+            }
+
+            const thumbnail = document.createElement("div");
+            thumbnail.className = "modal-thumbnail";
+            if (i === 0) thumbnail.classList.add("active");
+            thumbnail.setAttribute("data-index", i);
+
+            // Apply styles directly to the thumbnail
+            thumbnail.style.width = "60px";
+            thumbnail.style.height = "45px";
+            thumbnail.style.borderRadius = "4px";
+            thumbnail.style.overflow = "hidden";
+            thumbnail.style.cursor = "pointer";
+            thumbnail.style.opacity = i === 0 ? "1" : "0.6";
+            thumbnail.style.transition = "all 0.3s ease";
+            thumbnail.style.border = i === 0 ? "2px solid white" : "2px solid transparent";
+
+            const thumbImg = document.createElement("img");
+            thumbImg.src = image.src;
+            thumbImg.alt = `Thumbnail ${i + 1}`;
+            thumbImg.style.width = "100%";
+            thumbImg.style.height = "100%";
+            thumbImg.style.objectFit = "cover";
+
+            thumbnail.appendChild(thumbImg);
+            modalThumbnailsContainer.appendChild(thumbnail);
+
+            thumbnail.addEventListener("click", (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              showModalImage(i);
+            });
+
+            // Add hover effect
+            thumbnail.addEventListener("mouseenter", () => {
+              if (!thumbnail.classList.contains("active")) {
+                thumbnail.style.opacity = "0.9";
+                thumbnail.style.transform = "translateY(-2px)";
+              }
+            });
+
+            thumbnail.addEventListener("mouseleave", () => {
+              if (!thumbnail.classList.contains("active")) {
+                thumbnail.style.opacity = "0.6";
+                thumbnail.style.transform = "";
+              }
+            });
+          }
+        });
+      }
+
+      function showModalImage(index) {
+        const modalImages = modal.querySelectorAll(".fullsize-image");
+        const modalThumbnails = modal.querySelectorAll(".modal-thumbnail");
+        if (modalImages.length === 0) return;
+
+        // Remove active class and reset styles for all images
+        modalImages.forEach((img) => {
+          img.classList.remove("active");
+          img.style.opacity = "0";
+          img.style.display = "none";
+          img.style.zIndex = "1";
+        });
+
+        // Remove active class and reset styles for all thumbnails
+        modalThumbnails.forEach((thumb) => {
+          thumb.classList.remove("active");
+          thumb.style.opacity = "0.6";
+          thumb.style.border = "2px solid transparent";
+        });
+
+        // Add active class and apply styles to the selected image
+        if (modalImages[index]) {
+          modalImages[index].classList.add("active");
+          modalImages[index].style.opacity = "1";
+          modalImages[index].style.display = "block";
+          modalImages[index].style.zIndex = "2";
+        }
+
+        // Add active class and apply styles to the selected thumbnail
+        if (modalThumbnails[index]) {
+          modalThumbnails[index].classList.add("active");
+          modalThumbnails[index].style.opacity = "1";
+          modalThumbnails[index].style.border = "2px solid white";
+        }
+
+        // Update counter and caption
+        if (modalCurrentIndexEl) modalCurrentIndexEl.textContent = index + 1;
+        if (modalCaptionEl) modalCaptionEl.textContent = images[index]?.caption || "";
+        modalIndex = index;
+      }
+
+      function prevModalImage() {
+        const newIndex = (modalIndex - 1 + totalImages) % totalImages;
+        showModalImage(newIndex);
+      }
+
+      function nextModalImage() {
+        const newIndex = (modalIndex + 1) % totalImages;
+        showModalImage(newIndex);
+      }
+
+      function openModal(index) {
+        showModalImage(index);
+        modal.classList.add("open");
+        document.body.style.overflow = "hidden";
+        document.addEventListener("keydown", handleModalKeydown);
+      }
+
+      function closeModal() {
+        modal.classList.remove("open");
+        document.body.style.overflow = "";
+        document.removeEventListener("keydown", handleModalKeydown);
+      }
+
+      function handleModalKeydown(e) {
+        if (e.key === "ArrowLeft") prevModalImage();
+        else if (e.key === "ArrowRight") nextModalImage();
+        else if (e.key === "Escape") closeModal();
+      }
+
+      if (modalPrevButton) {
+        modalPrevButton.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          prevModalImage();
+        });
+      }
+
+      if (modalNextButton) {
+        modalNextButton.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          nextModalImage();
+        });
+      }
+
+      if (modalCloseButton) {
+        modalCloseButton.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          closeModal();
+        });
+      }
+
+      // Attach click listeners to gallery images for opening the modal
+      zoomableImages.forEach((img) => {
+        img.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const galleryImage = img.closest(".gallery-image");
+          if (galleryImage) {
+            const index = parseInt(galleryImage.getAttribute("data-index") || "0", 10);
+            openModal(index);
+          }
+        });
+      });
     }
+
+    // Initialize the modal (waits until its element exists)
+    initModal();
   });
 </script>
