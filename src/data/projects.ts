@@ -16,16 +16,15 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: "project-modalis",
-    title: "Modalis",
-    subtitle: "Media Asset Management and Distribution System",
-    description: [
-      "Modalis is a comprehensive media asset management and distribution system designed for media companies to organize, manage, and distribute their digital assets efficiently.",
-      "The system provides robust tools for metadata management, workflow automation, and content delivery across multiple platforms."
-    ],
-    technologies: ["React", "Node.js", "GraphQL", "AWS", "Elasticsearch"],
-    role: "Lead front-end developer responsible for designing and implementing the user interface, ensuring a seamless user experience, and optimizing performance for handling large media libraries.",
-    images: [
+      "id": "project-modalis",
+      "title": "Modalis",
+      "subtitle": "Media Asset Management and Distribution System",
+      "description": [
+        "Modalis is a powerful media asset management and distribution platform tailored for media companies to efficiently organize, tag, and deliver digital content. It offers robust metadata management, workflow automation, and seamless multi-platform distribution."
+      ],
+      "technologies": ["Angular", "Firebase", "Node.js", "TypeScript", "HTML5", "SCSS"],
+      "role": "Lead Front-End Engineer & Lead UI/UX Designer — Spearheaded the development of a highly interactive and scalable UI in Angular, ensuring fluid navigation and efficient media handling. Crafted an intuitive user experience that streamlined metadata tagging, bulk asset operations, and workflow automation. Focused on performance optimizations, ensuring smooth handling of large media libraries. Led the UX strategy, refining interactions, accessibility, and visual consistency for an enhanced user experience.",
+      images: [
       {
         src: "/images/portfolio/modalis/1-large-media-cards.png",
         alt: "Modalis Media Cards",
@@ -159,16 +158,15 @@ export const projects: Project[] = [
     ]
   },
   {
-    id: "project-transcript-editor",
-    title: "Closed Caption Transcript Editor",
-    subtitle: "Web-based tool for editing video transcripts and captions",
-    description: [
-      "The Closed Caption Transcript Editor is a specialized web application designed to streamline the process of creating, editing, and synchronizing closed captions for video content.",
-      "It features a timeline-based interface that allows editors to precisely time captions with video content, supporting multiple caption formats and accessibility standards."
-    ],
-    technologies: ["Vue.js", "Web Audio API", "HTML5 Video", "WebVTT", "Express.js"],
-    role: "Full-stack developer responsible for implementing the caption timing system, video playback controls, and ensuring cross-browser compatibility and accessibility compliance.",
-    images: [
+   "id": "project-transcript-editor",
+      "title": "Closed Caption Transcript Editor",
+      "subtitle": "AI-Powered Web-Based Tool for Editing Video Transcripts and Captions",
+      "description": [
+        "A sophisticated web-based platform that automates video transcription and caption editing. Videos are first processed through a proprietary cloud-based transcoding service, then transcribed using Azure Speech-to-Text. The transcriptions are stored in Firebase, where an AI-powered analysis tool detects potential errors, highlights them, and suggests corrections, allowing users to refine captions with a single click."
+      ],
+      "technologies": ["Angular", "Azure", "Firebase", "Node.js", "TypeScript", "HTML5 Video", "WebVTT", "SCSS"],
+      "role": "Lead Front-End Engineer & Lead UI/UX Designer — Engineered a timeline-based transcript editor in Angular, enabling seamless AI-assisted transcription review and real-time editing. Integrated Azure transcription services with Firebase to provide users with an efficient, AI-enhanced workflow. Designed a clean, intuitive UI that prioritized accessibility and streamlined error correction. Led user research and iterative UX improvements, refining the interaction design to make transcript editing faster and more user-friendly.",
+      images: [
       {
         src: "/images/portfolio/project-transcript-edit.jpg",
         alt: "Transcript Editor",
@@ -227,16 +225,15 @@ export const projects: Project[] = [
     ]
   },
   {
-    id: "project-quiz-creator",
-    title: "Video Quiz Creator",
-    subtitle: "Interactive tool for creating video-based quizzes and assessments",
-    description: [
-      "The Video Quiz Creator is an educational technology tool that enables instructors to create interactive assessments integrated directly with video content.",
-      "It allows for the insertion of various question types at specific timestamps in videos, tracking student responses and providing detailed analytics on performance."
+    "id": "project-quiz-creator",
+    "title": "Video Quiz Creator",
+    "subtitle": "Interactive Tool for Creating Video-Based Quizzes and Assessments",
+    "description": [
+      "An innovative learning tool that allows educators to embed interactive quizzes directly into video content. Questions can be placed at precise timestamps, tracking student engagement and generating insightful performance analytics. The system is powered by Azure for backend processing and storage, ensuring scalability and reliability."
     ],
-    technologies: ["React", "Redux", "Firebase", "Video.js", "D3.js"],
-    role: "Lead developer responsible for architecting the application, implementing the quiz creation interface, and developing the analytics dashboard for instructors.",
-    images: [
+    "technologies": ["Angular", "Azure", "Node.js", "TypeScript", "Video.js", "SCSS"],
+    "role": "Lead Front-End Engineer & Lead UI/UX Designer — Led the development of a dynamic, engaging quiz-building interface in Angular, making it effortless for instructors to create and embed interactive assessments. Built an instructor-focused analytics dashboard, providing rich insights into student performance. Focused on UX refinement, designing an intuitive workflow that simplified quiz configuration and improved student engagement. Ensured a smooth integration with Azure services, optimizing data flow and real-time response tracking.",
+      images: [
       {
         src: "/images/portfolio/project-quiz-creator.jpg",
         alt: "Quiz Creator",
