@@ -208,7 +208,7 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
         {
           testimonialsToShow.map((testimonial) => {
             return (
-              <li class="splide__slide">
+              <li class="splide__slide" role="group">
                 <TestimonialItem testimonial={testimonial} />
               </li>
             );
@@ -250,8 +250,9 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
             button.classList.add("splide__pagination__page");
             if (i === 0) button.classList.add("is-active");
             button.setAttribute("type", "button");
-            button.setAttribute("aria-controls", `splide01-slide${i * perPage + 1}`);
-            button.setAttribute("aria-label", `Go to slide ${i + 1}`);
+            // Use the actual ID of the slide for aria-controls
+            button.setAttribute("aria-controls", `testimonials_1-slide${i * perPage}`);
+            button.setAttribute("aria-label", `Show testimonials page ${i + 1}`);
 
             // Set the button styles
             button.style.width = "20px";
