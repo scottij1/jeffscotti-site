@@ -202,8 +202,13 @@ import {projects, getProjectById} from "../data/projects";
 </style>
 
 <script is:inline define:vars={{projectIds: projects.map((p) => p.id)}}>
-  document.addEventListener("DOMContentLoaded", () => {
+  window.initProjectView = function () {
     const projectView = document.getElementById("project-view");
+    if (!projectView) {
+      console.error("Project view element not found");
+      return;
+    }
+
     const closeButton = document.getElementById("project-view-close-button");
     const prevButton = document.getElementById("prev-project");
     const nextButton = document.getElementById("next-project");
@@ -213,9 +218,6 @@ import {projects, getProjectById} from "../data/projects";
 
     // Listen for theme changes
     document.addEventListener("themeChanged", (event) => {
-      // The theme is already applied to the document root by the ThemeToggle component
-      // This listener is here in case we need to make any theme-specific adjustments
-      // to the ProjectView component in the future
       console.log("Theme changed in ProjectView:", event.detail.theme);
     });
 
@@ -262,9 +264,17 @@ import {projects, getProjectById} from "../data/projects";
     }
 
     // Event listeners
-    closeButton.addEventListener("click", closeProjectView);
-    prevButton.addEventListener("click", goToPrevProject);
-    nextButton.addEventListener("click", goToNextProject);
+    if (closeButton) {
+      closeButton.addEventListener("click", closeProjectView);
+    }
+
+    if (prevButton) {
+      prevButton.addEventListener("click", goToPrevProject);
+    }
+
+    if (nextButton) {
+      nextButton.addEventListener("click", goToNextProject);
+    }
 
     // Expose functions to window for external access
     window.openProjectView = openProjectView;
@@ -276,5 +286,8 @@ import {projects, getProjectById} from "../data/projects";
         closeProjectView();
       }
     });
-  });
+  };
+
+  document.addEventListener("DOMContentLoaded", window.initProjectView);
+  document.addEventListener("astro:page-load", window.initProjectView);
 </script>

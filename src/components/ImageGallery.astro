@@ -221,7 +221,9 @@ const {images, projectId} = Astro.props;
   document.addEventListener("DOMContentLoaded", () => {
     const galleryId = `gallery-${projectId}`;
     const gallery = document.getElementById(galleryId);
-    if (!gallery) return;
+    if (!gallery) {
+      return;
+    }
 
     const galleryImages = gallery.querySelectorAll(".gallery-image");
     const thumbnails = gallery.querySelectorAll(".thumbnail");
@@ -233,10 +235,18 @@ const {images, projectId} = Astro.props;
     let galleryIndex = 0;
 
     function showImage(index) {
-      galleryImages.forEach((img) => img.classList.remove("active"));
-      if (galleryImages[index]) galleryImages[index].classList.add("active");
+      galleryImages.forEach((img) => {
+        img.classList.remove("active");
+      });
 
-      thumbnails.forEach((thumb) => thumb.classList.remove("active"));
+      if (galleryImages[index]) {
+        galleryImages[index].classList.add("active");
+      }
+
+      thumbnails.forEach((thumb) => {
+        thumb.classList.remove("active");
+      });
+
       if (thumbnails[index]) {
         thumbnails[index].classList.add("active");
         // Scroll thumbnail into view if needed
@@ -254,7 +264,9 @@ const {images, projectId} = Astro.props;
         }
       }
 
-      if (currentIndexEl) currentIndexEl.textContent = index + 1;
+      if (currentIndexEl) {
+        currentIndexEl.textContent = index + 1;
+      }
       galleryIndex = index;
     }
 
@@ -268,8 +280,13 @@ const {images, projectId} = Astro.props;
       showImage(newIndex);
     }
 
-    if (prevButton) prevButton.addEventListener("click", prevImage);
-    if (nextButton) nextButton.addEventListener("click", nextImage);
+    if (prevButton) {
+      prevButton.addEventListener("click", prevImage);
+    }
+
+    if (nextButton) {
+      nextButton.addEventListener("click", nextImage);
+    }
 
     thumbnails.forEach((thumb) => {
       thumb.addEventListener("click", () => {
@@ -280,9 +297,15 @@ const {images, projectId} = Astro.props;
 
     document.addEventListener("keydown", (e) => {
       const galleryElement = document.getElementById(galleryId);
-      if (!galleryElement || getComputedStyle(galleryElement).display === "none") return;
-      if (e.key === "ArrowLeft") prevImage();
-      else if (e.key === "ArrowRight") nextImage();
+      if (!galleryElement || getComputedStyle(galleryElement).display === "none") {
+        return;
+      }
+
+      if (e.key === "ArrowLeft") {
+        prevImage();
+      } else if (e.key === "ArrowRight") {
+        nextImage();
+      }
     });
 
     function preloadAdjacentImages(index) {
@@ -290,9 +313,11 @@ const {images, projectId} = Astro.props;
       const prevIndex = (index - 1 + totalImages) % totalImages;
       const nextImg = galleryImages[nextIndex].querySelector("img");
       const prevImg = galleryImages[prevIndex].querySelector("img");
+
       if (nextImg && nextImg.getAttribute("loading") === "lazy") {
         nextImg.setAttribute("loading", "eager");
       }
+
       if (prevImg && prevImg.getAttribute("loading") === "lazy") {
         prevImg.setAttribute("loading", "eager");
       }
@@ -300,7 +325,9 @@ const {images, projectId} = Astro.props;
 
     // Initialize gallery with the first image
     showImage(0);
-    if (totalImages > 1) preloadAdjacentImages(0);
+    if (totalImages > 1) {
+      preloadAdjacentImages(0);
+    }
 
     // --- Modal Initialization (Delayed) ---
     const modalId = `fullsize-modal-${projectId}`;
@@ -330,7 +357,9 @@ const {images, projectId} = Astro.props;
       if (modalContainer) {
         modalContainer.innerHTML = "";
         const modalThumbnailsContainer = modal.querySelector(".modal-thumbnails-container");
-        if (modalThumbnailsContainer) modalThumbnailsContainer.innerHTML = "";
+        if (modalThumbnailsContainer) {
+          modalThumbnailsContainer.innerHTML = "";
+        }
 
         modalContainer.innerHTML = "";
 
@@ -381,7 +410,9 @@ const {images, projectId} = Astro.props;
 
             const thumbnail = document.createElement("div");
             thumbnail.className = "modal-thumbnail";
-            if (i === 0) thumbnail.classList.add("active");
+            if (i === 0) {
+              thumbnail.classList.add("active");
+            }
             thumbnail.setAttribute("data-index", i);
 
             // Apply styles directly to the thumbnail
@@ -430,7 +461,9 @@ const {images, projectId} = Astro.props;
       function showModalImage(index) {
         const modalImages = modal.querySelectorAll(".fullsize-image");
         const modalThumbnails = modal.querySelectorAll(".modal-thumbnail");
-        if (modalImages.length === 0) return;
+        if (modalImages.length === 0) {
+          return;
+        }
 
         modalImages.forEach((img) => {
           img.classList.remove("active");
@@ -458,8 +491,14 @@ const {images, projectId} = Astro.props;
           modalThumbnails[index].style.border = "2px solid white";
         }
 
-        if (modalCurrentIndexEl) modalCurrentIndexEl.textContent = index + 1;
-        if (modalCaptionEl) modalCaptionEl.textContent = images[index]?.caption || "";
+        if (modalCurrentIndexEl) {
+          modalCurrentIndexEl.textContent = index + 1;
+        }
+
+        if (modalCaptionEl) {
+          modalCaptionEl.textContent = images[index]?.caption || "";
+        }
+
         modalIndex = index;
       }
 
@@ -487,9 +526,13 @@ const {images, projectId} = Astro.props;
       }
 
       function handleModalKeydown(e) {
-        if (e.key === "ArrowLeft") prevModalImage();
-        else if (e.key === "ArrowRight") nextModalImage();
-        else if (e.key === "Escape") closeModal();
+        if (e.key === "ArrowLeft") {
+          prevModalImage();
+        } else if (e.key === "ArrowRight") {
+          nextModalImage();
+        } else if (e.key === "Escape") {
+          closeModal();
+        }
       }
 
       if (modalPrevButton) {

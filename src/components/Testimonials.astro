@@ -230,11 +230,12 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
   function initTestimonials() {
     const initCarousel = () => {
       if (typeof Splide !== "undefined") {
-        // Get the total number of testimonials
+        const splideElement = document.getElementById("testimonials_1");
+        if (!splideElement) return;
+
         const totalItems = document.querySelectorAll(".splide__slide").length;
         const perPage = window.innerWidth >= 768 ? 2 : 1;
 
-        // Create a custom pagination function
         const customPagination = function (splide, components, options) {
           // Calculate the number of pages needed
           const pages = Math.ceil(totalItems / perPage);
@@ -309,24 +310,25 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
           };
         };
 
-        const splide = new Splide("#testimonials_1", {
-          perPage: perPage,
-          gap: 25,
-          rewind: true,
-          pagination: false, // Disable default pagination
-          arrows: false,
-          lazyLoad: true,
-          speed: 250,
-          easing: "ease-in-out",
-          breakpoints: {
-            768: {
-              perPage: 1,
+        try {
+          const splide = new Splide("#testimonials_1", {
+            perPage: perPage,
+            gap: 25,
+            rewind: true,
+            pagination: false,
+            arrows: false,
+            lazyLoad: true,
+            speed: 250,
+            easing: "ease-in-out",
+            breakpoints: {
+              768: {
+                perPage: 1,
+              },
             },
-          },
-        });
+          });
 
-        // Register and mount the custom pagination
-        splide.mount({CustomPagination: customPagination});
+          splide.mount({CustomPagination: customPagination});
+        } catch (error) {}
         setupReadMoreLinks();
         // Reveal the carousel after initialization
         document.getElementById("testimonials_1").classList.remove("pre-carousel-hidden");
@@ -338,11 +340,11 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
         loadScript(
           "https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js",
           function () {
-            initCarousel();
+            setTimeout(initCarousel, 100);
           },
         );
       } else {
-        initCarousel();
+        setTimeout(initCarousel, 100);
       }
     };
 

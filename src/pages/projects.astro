@@ -283,8 +283,7 @@ const SHOW_FILTER_MENU = false;
 </style>
 
 <script is:inline>
-  document.addEventListener("DOMContentLoaded", () => {
-    // Filter functionality
+  function initProjectLinks() {
     const filters = document.querySelectorAll(".filter");
     const items = document.querySelectorAll(".item");
 
@@ -309,17 +308,31 @@ const SHOW_FILTER_MENU = false;
       });
     });
 
-    // Project view functionality
     const projectLinks = document.querySelectorAll(".project-link");
 
     projectLinks.forEach((link) => {
       link.addEventListener("click", (e) => {
         e.preventDefault();
         const projectId = link.getAttribute("data-project");
+
         if (projectId && typeof window.openProjectView === "function") {
           window.openProjectView(projectId);
+        } else {
+          console.error("openProjectView function not available");
+          if (typeof window.initProjectView === "function") {
+            window.initProjectView();
+
+            setTimeout(() => {
+              if (typeof window.openProjectView === "function") {
+                window.openProjectView(projectId);
+              }
+            }, 100);
+          }
         }
       });
     });
-  });
+  }
+
+  document.addEventListener("DOMContentLoaded", initProjectLinks);
+  document.addEventListener("astro:page-load", initProjectLinks);
 </script>
