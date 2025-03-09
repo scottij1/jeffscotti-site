@@ -202,11 +202,11 @@ import {projects, getProjectById} from "../data/projects";
 </style>
 
 <script is:inline define:vars={{projectIds: projects.map((p) => p.id)}}>
-  window.initProjectView = function () {
+  function initializeProjectView() {
     const projectView = document.getElementById("project-view");
     if (!projectView) {
       console.error("Project view element not found");
-      return;
+      return false;
     }
 
     const closeButton = document.getElementById("project-view-close-button");
@@ -234,7 +234,14 @@ import {projects, getProjectById} from "../data/projects";
         projectToShow.style.display = "block";
 
         // Update current index
-        currentProjectIndex = projectIds.indexOf(projectId);
+        const newIndex = projectIds.indexOf(projectId);
+        if (newIndex !== -1) {
+          currentProjectIndex = newIndex;
+        } else {
+          console.error("Project ID not found in projectIds array:", projectId);
+        }
+      } else {
+        console.error("Project element not found with ID:", projectId);
       }
     }
 
@@ -279,6 +286,8 @@ import {projects, getProjectById} from "../data/projects";
     // Expose functions to window for external access
     window.openProjectView = openProjectView;
     window.closeProjectView = closeProjectView;
+    window.goToPrevProject = goToPrevProject;
+    window.goToNextProject = goToNextProject;
 
     // Handle escape key to close
     document.addEventListener("keydown", (e) => {
@@ -286,8 +295,23 @@ import {projects, getProjectById} from "../data/projects";
         closeProjectView();
       }
     });
+
+    return true;
+  }
+
+  window.initProjectView = function () {
+    return initializeProjectView();
   };
 
-  document.addEventListener("DOMContentLoaded", window.initProjectView);
-  document.addEventListener("astro:page-load", window.initProjectView);
+  document.addEventListener("DOMContentLoaded", function () {
+    initializeProjectView();
+  });
+
+  document.addEventListener("astro:page-load", function () {
+    initializeProjectView();
+  });
+
+  if (document.readyState === "complete" || document.readyState === "interactive") {
+    setTimeout(initializeProjectView, 0);
+  }
 </script>

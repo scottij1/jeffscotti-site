@@ -315,24 +315,26 @@ const SHOW_FILTER_MENU = false;
         e.preventDefault();
         const projectId = link.getAttribute("data-project");
 
-        if (projectId && typeof window.openProjectView === "function") {
+        if (!projectId) return;
+
+        if (typeof window.initProjectView === "function") {
+          window.initProjectView();
+        }
+
+        if (typeof window.openProjectView === "function") {
           window.openProjectView(projectId);
         } else {
-          console.error("openProjectView function not available");
-          if (typeof window.initProjectView === "function") {
-            window.initProjectView();
-
-            setTimeout(() => {
-              if (typeof window.openProjectView === "function") {
-                window.openProjectView(projectId);
-              }
-            }, 100);
-          }
+          setTimeout(() => {
+            if (typeof window.openProjectView === "function") {
+              window.openProjectView(projectId);
+            }
+          }, 300);
         }
       });
     });
   }
 
+  // Initialize on both DOMContentLoaded and astro:page-load
   document.addEventListener("DOMContentLoaded", initProjectLinks);
   document.addEventListener("astro:page-load", initProjectLinks);
 </script>

@@ -218,11 +218,11 @@ const {images, projectId} = Astro.props;
 </style>
 
 <script is:inline define:vars={{projectId, images}}>
-  document.addEventListener("DOMContentLoaded", () => {
+  function initializeGallery() {
     const galleryId = `gallery-${projectId}`;
     const gallery = document.getElementById(galleryId);
     if (!gallery) {
-      return;
+      return false;
     }
 
     const galleryImages = gallery.querySelectorAll(".gallery-image");
@@ -574,5 +574,19 @@ const {images, projectId} = Astro.props;
 
     // Initialize the modal (waits until its element exists)
     initModal();
+
+    return true;
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    initializeGallery();
   });
+
+  document.addEventListener("astro:page-load", function () {
+    initializeGallery();
+  });
+
+  if (document.readyState === "complete" || document.readyState === "interactive") {
+    setTimeout(initializeGallery, 0);
+  }
 </script>
