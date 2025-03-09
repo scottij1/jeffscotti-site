@@ -1,5 +1,7 @@
 ---
 // ProjectView.astro - Sliding project view component
+import ImageGallery from "./ImageGallery.astro";
+import {projects, getProjectById} from "../data/projects";
 ---
 
 <div id="project-view" class="project-view">
@@ -18,161 +20,45 @@
 
     <div class="project-view-content">
       <!-- Project content will be loaded here dynamically -->
-      <div id="project-modalis" class="project-content" style="display: none;">
-        <div class="project-view-title">
-          <h2>Modalis</h2>
-          <div class="project-view-subtitle">Media Asset Management and Distribution System</div>
-        </div>
+      {
+        projects.map((project) => (
+          <div id={project.id} class="project-content" style="display: none;">
+            <div class="project-view-title">
+              <h2>{project.title}</h2>
+              <div class="project-view-subtitle">{project.subtitle}</div>
+            </div>
 
-        <div class="project-view-body">
-          <div class="project-view-gallery">
-            <div class="gallery-container">
-              <img
-                src="/images/portfolio/modalis/1-large-media-cards.png"
-                alt="Modalis Media Cards"
-              />
+            <div class="project-view-body">
+              <div class="project-view-gallery">
+                <ImageGallery images={project.images} projectId={project.id} />
+              </div>
+
+              <div class="project-view-details">
+                <div class="project-description">
+                  <h3>Description</h3>
+                  {project.description.map((paragraph) => (
+                    <p>{paragraph}</p>
+                  ))}
+                </div>
+
+                <div class="project-technologies">
+                  <h3>Technologies</h3>
+                  <ul class="tech-tags">
+                    {project.technologies.map((tech) => (
+                      <li>{tech}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div class="project-role">
+                  <h3>My Role</h3>
+                  <p>{project.role}</p>
+                </div>
+              </div>
             </div>
           </div>
-
-          <div class="project-view-details">
-            <div class="project-description">
-              <h3>Description</h3>
-              <p>
-                Modalis is a comprehensive media asset management and distribution system designed
-                for media companies to organize, manage, and distribute their digital assets
-                efficiently.
-              </p>
-              <p>
-                The system provides robust tools for metadata management, workflow automation, and
-                content delivery across multiple platforms.
-              </p>
-            </div>
-
-            <div class="project-technologies">
-              <h3>Technologies</h3>
-              <ul class="tech-tags">
-                <li>React</li>
-                <li>Node.js</li>
-                <li>GraphQL</li>
-                <li>AWS</li>
-                <li>Elasticsearch</li>
-              </ul>
-            </div>
-
-            <div class="project-role">
-              <h3>My Role</h3>
-              <p>
-                Lead front-end developer responsible for designing and implementing the user
-                interface, ensuring a seamless user experience, and optimizing performance for
-                handling large media libraries.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="project-transcript-editor" class="project-content" style="display: none;">
-        <div class="project-view-title">
-          <h2>Closed Caption Transcript Editor</h2>
-          <div class="project-view-subtitle">
-            Web-based tool for editing video transcripts and captions
-          </div>
-        </div>
-
-        <div class="project-view-body">
-          <div class="project-view-gallery">
-            <div class="gallery-container">
-              <img src="/images/portfolio/project-transcript-edit.jpg" alt="Transcript Editor" />
-            </div>
-          </div>
-
-          <div class="project-view-details">
-            <div class="project-description">
-              <h3>Description</h3>
-              <p>
-                The Closed Caption Transcript Editor is a specialized web application designed to
-                streamline the process of creating, editing, and synchronizing closed captions for
-                video content.
-              </p>
-              <p>
-                It features a timeline-based interface that allows editors to precisely time
-                captions with video content, supporting multiple caption formats and accessibility
-                standards.
-              </p>
-            </div>
-
-            <div class="project-technologies">
-              <h3>Technologies</h3>
-              <ul class="tech-tags">
-                <li>Vue.js</li>
-                <li>Web Audio API</li>
-                <li>HTML5 Video</li>
-                <li>WebVTT</li>
-                <li>Express.js</li>
-              </ul>
-            </div>
-
-            <div class="project-role">
-              <h3>My Role</h3>
-              <p>
-                Full-stack developer responsible for implementing the caption timing system, video
-                playback controls, and ensuring cross-browser compatibility and accessibility
-                compliance.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="project-quiz-creator" class="project-content" style="display: none;">
-        <div class="project-view-title">
-          <h2>Video Quiz Creator</h2>
-          <div class="project-view-subtitle">
-            Interactive tool for creating video-based quizzes and assessments
-          </div>
-        </div>
-
-        <div class="project-view-body">
-          <div class="project-view-gallery">
-            <div class="gallery-container">
-              <img src="/images/portfolio/project-quiz-creator.jpg" alt="Quiz Creator" />
-            </div>
-          </div>
-
-          <div class="project-view-details">
-            <div class="project-description">
-              <h3>Description</h3>
-              <p>
-                The Video Quiz Creator is an educational technology tool that enables instructors to
-                create interactive assessments integrated directly with video content.
-              </p>
-              <p>
-                It allows for the insertion of various question types at specific timestamps in
-                videos, tracking student responses and providing detailed analytics on performance.
-              </p>
-            </div>
-
-            <div class="project-technologies">
-              <h3>Technologies</h3>
-              <ul class="tech-tags">
-                <li>React</li>
-                <li>Redux</li>
-                <li>Firebase</li>
-                <li>Video.js</li>
-                <li>D3.js</li>
-              </ul>
-            </div>
-
-            <div class="project-role">
-              <h3>My Role</h3>
-              <p>
-                Lead developer responsible for architecting the application, implementing the quiz
-                creation interface, and developing the analytics dashboard for instructors.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+        ))
+      }
     </div>
   </div>
 </div>
@@ -261,12 +147,6 @@
     overflow: hidden;
   }
 
-  .gallery-container img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
   .project-view-details {
     display: flex;
     flex-direction: column;
@@ -313,7 +193,7 @@
   }
 </style>
 
-<script is:inline>
+<script is:inline define:vars={{projectIds: projects.map((p) => p.id)}}>
   document.addEventListener("DOMContentLoaded", () => {
     const projectView = document.getElementById("project-view");
     const closeButton = document.getElementById("project-view-close-button");
@@ -322,7 +202,6 @@
     const projectContents = document.querySelectorAll(".project-content");
 
     let currentProjectIndex = 0;
-    const projectIds = ["project-modalis", "project-transcript-editor", "project-quiz-creator"];
 
     // Listen for theme changes
     document.addEventListener("themeChanged", (event) => {
