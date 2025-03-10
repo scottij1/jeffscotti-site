@@ -27,6 +27,46 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
 </noscript>
 
 <style is:global>
+  /* Loading indicator styles */
+  .testimonials-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 100%;
+    position: relative;
+    margin: 0 auto;
+  }
+
+  .testimonials-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spinner 0.8s ease-in-out infinite;
+  }
+
+  @keyframes spinner {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Fade-in animation for testimonials */
+  .testimonials-fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 0.6s ease-out,
+      transform 0.6s ease-out;
+  }
+
+  .testimonials-fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   /* Default widths applied to each testimonial item right away */
   .splide__slide {
     width: 50%;
@@ -202,7 +242,15 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
     <h2>{title}</h2>
   </div>
 
-  <div class="splide pre-carousel-hidden" id="testimonials_1" aria-label="Testimonials">
+  <!-- Loading indicator -->
+  <div class="testimonials-loading" id="testimonials_loading">
+    <div class="testimonials-spinner"></div>
+  </div>
+
+  <div
+    class="splide pre-carousel-hidden testimonials-fade-in"
+    id="testimonials_1"
+    aria-label="Testimonials">
     <div class="splide__track">
       <ul class="splide__list">
         {
@@ -330,8 +378,19 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
           splide.mount({CustomPagination: customPagination});
         } catch (error) {}
         setupReadMoreLinks();
-        // Reveal the carousel after initialization
-        document.getElementById("testimonials_1").classList.remove("pre-carousel-hidden");
+        // Hide loading indicator and reveal the carousel with fade-in animation
+        const loadingElement = document.getElementById("testimonials_loading");
+        if (loadingElement) {
+          loadingElement.style.display = "none";
+        }
+
+        const testimonialElement = document.getElementById("testimonials_1");
+        if (testimonialElement) {
+          testimonialElement.classList.remove("pre-carousel-hidden");
+          // Trigger a reflow before adding the visible class to ensure the animation works
+          void testimonialElement.offsetWidth;
+          testimonialElement.classList.add("visible");
+        }
       }
     };
 
