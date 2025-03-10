@@ -16,6 +16,100 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    "id": "project-automated-cfe-bill",
+    "title": "Automated CFE Bill Processing",
+    "subtitle": "Streamlined Utility Bill Processing System with Mobile and Desktop Support",
+    "description": [
+      "A comprehensive system designed to automate the processing of CFE (Comisión Federal de Electricidad) utility bills. The application features both desktop and mobile interfaces, allowing users to upload, process, and verify utility bill information through various methods including direct API integration and manual uploads with OCR processing. The system includes contextual help, glossary references, and multiple operational modes to accommodate different user workflows."
+    ],
+    "technologies": ["React", "TypeScript", "Mobile-First Design", "Responsive UI", "OCR Integration", "API Integration", "Progressive Web App"],
+    "role": "Lead UX Designer & Front-End Engineer — Designed and implemented a dual-interface system that works seamlessly across desktop and mobile devices. Created an intuitive workflow that guides users through the bill processing journey with contextual help and clear status indicators. Developed a responsive UI that adapts to different screen sizes while maintaining functionality and usability. Integrated with backend OCR services and customer information systems to automate data extraction and verification.",
+    images: [
+      // Desktop images
+      {
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/1-enter-rpu-form.png",
+        alt: "Desktop RPU Form Entry",
+        caption: "Initial form for entering RPU (customer) information"
+      },
+      {
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/2-fetching-customer-info-loading.png",
+        alt: "Desktop Loading State",
+        caption: "Loading state while fetching customer information"
+      },
+      {
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/3-fetching-user-info-async-timeout.png",
+        alt: "Desktop Async Timeout",
+        caption: "Asynchronous timeout handling for long-running operations"
+      },
+      {
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/4-confirm-customer-info.png",
+        alt: "Desktop Customer Info Confirmation",
+        caption: "Confirmation screen for customer information"
+      },
+      {
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/5-submission-successful.png",
+        alt: "Desktop Submission Success",
+        caption: "Successful submission confirmation screen"
+      },
+      {
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/6-manual-cfe-upload.png",
+        alt: "Desktop Manual CFE Upload",
+        caption: "Manual CFE bill upload interface"
+      },
+      {
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/7-manual-cfe-upload-progress.png",
+        alt: "Desktop Upload Progress",
+        caption: "Progress indicator for bill upload process"
+      },
+      {
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/8-confirm-populated-info.png",
+        alt: "Desktop Populated Info Confirmation",
+        caption: "Confirmation of automatically populated information from OCR"
+      },
+      {
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/9-confirm-populated-info-ocr-error.png",
+        alt: "Desktop OCR Error Handling",
+        caption: "Error handling for OCR processing issues"
+      },
+      {
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/10-help-inline-sidebar.png",
+        alt: "Desktop Inline Help Sidebar",
+        caption: "Contextual help sidebar for user assistance"
+      },
+      {
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/11-help-glossary.png",
+        alt: "Desktop Help Glossary",
+        caption: "Glossary of terms to assist users"
+      },
+      {
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/12-switch-mode-buttom.png",
+        alt: "Desktop Mode Switch Button",
+        caption: "Button for switching between operational modes"
+      },
+      {
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/13-switch-mode-confirm-dialog.png",
+        alt: "Desktop Mode Switch Confirmation",
+        caption: "Confirmation dialog for switching operational modes"
+      },
+      {
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/14-checklist-mode-toggle.png",
+        alt: "Desktop Checklist Mode Toggle",
+        caption: "Toggle for enabling checklist mode"
+      },
+      {
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/15-checklist-mode-toggle-dialog.png",
+        alt: "Desktop Checklist Mode Dialog",
+        caption: "Dialog for configuring checklist mode options"
+      },
+      {
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/16-guided-mode-ops-platform-integration.png",
+        alt: "Desktop Ops Platform Integration",
+        caption: "Integration with operations platform in guided mode"
+      },
+      // Mobile images are handled separately in the tabbed UI
+    ]
+  },
+  {
     "id": "project-async-wizard",
     "title": "Async Wizard UX Flow",
     "subtitle": "User Experience Design for Multi-step Solar Installation Process",
@@ -454,6 +548,80 @@ export const projects: Project[] = [
         caption: "Example of the quiz embedded in Canvas LMS"
       }
     ]
+  }
+];
+
+// Mobile images for the automated CFE bill project
+export const automatedCfeBillMobileImages: ProjectImage[] = [
+  {
+    src: "/images/portfolio/bright/automated_cfe_bill/mobile/1-enter-rpu-form.png",
+    alt: "Mobile RPU Form Entry",
+    caption: "Mobile interface for entering RPU (customer) information"
+  },
+  {
+    src: "/images/portfolio/bright/automated_cfe_bill/mobile/2-featching-customer-info-loading.png",
+    alt: "Mobile Loading State",
+    caption: "Mobile loading state while fetching customer information"
+  },
+  {
+    src: "/images/portfolio/bright/automated_cfe_bill/mobile/3-fetching-customer-info-async-error.png",
+    alt: "Mobile Async Error",
+    caption: "Mobile error handling for asynchronous operations"
+  },
+  {
+    src: "/images/portfolio/bright/automated_cfe_bill/mobile/4-confirm-customer-info.png",
+    alt: "Mobile Customer Info Confirmation",
+    caption: "Mobile confirmation screen for customer information"
+  },
+  {
+    src: "/images/portfolio/bright/automated_cfe_bill/mobile/5-submission-successful.png",
+    alt: "Mobile Submission Success",
+    caption: "Mobile successful submission confirmation screen"
+  },
+  {
+    src: "/images/portfolio/bright/automated_cfe_bill/mobile/6-manual-cfe-upload.png",
+    alt: "Mobile Manual CFE Upload",
+    caption: "Mobile interface for manual CFE bill upload"
+  },
+  {
+    src: "/images/portfolio/bright/automated_cfe_bill/mobile/7-manual-cfe-upload-accordion.png",
+    alt: "Mobile Upload Accordion",
+    caption: "Mobile accordion interface for bill upload options"
+  },
+  {
+    src: "/images/portfolio/bright/automated_cfe_bill/mobile/8-manual-cfe-upload-progress.png",
+    alt: "Mobile Upload Progress",
+    caption: "Mobile progress indicator for bill upload process"
+  },
+  {
+    src: "/images/portfolio/bright/automated_cfe_bill/mobile/9-manual-cfe-upload-confirm.png",
+    alt: "Mobile Upload Confirmation",
+    caption: "Mobile confirmation screen after bill upload"
+  },
+  {
+    src: "/images/portfolio/bright/automated_cfe_bill/mobile/10-progress-menu.png",
+    alt: "Mobile Progress Menu",
+    caption: "Mobile progress menu showing completion status"
+  },
+  {
+    src: "/images/portfolio/bright/automated_cfe_bill/mobile/11-switch-modal-action-sheet.png",
+    alt: "Mobile Mode Switch Action Sheet",
+    caption: "Mobile action sheet for switching operational modes"
+  },
+  {
+    src: "/images/portfolio/bright/automated_cfe_bill/mobile/12-help-action-sheet.png",
+    alt: "Mobile Help Action Sheet",
+    caption: "Mobile action sheet for accessing help options"
+  },
+  {
+    src: "/images/portfolio/bright/automated_cfe_bill/mobile/13-help-contact-support-action-sheet.png",
+    alt: "Mobile Contact Support Action Sheet",
+    caption: "Mobile action sheet for contacting support"
+  },
+  {
+    src: "/images/portfolio/bright/automated_cfe_bill/mobile/14-help-glossary.png",
+    alt: "Mobile Help Glossary",
+    caption: "Mobile glossary of terms to assist users"
   }
 ];
 

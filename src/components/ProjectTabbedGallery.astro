@@ -1,0 +1,178 @@
+---
+import type {ProjectImage} from "../data/projects";
+import ImageGallery from "./ImageGallery.astro";
+
+interface Props {
+  desktopImages: ProjectImage[];
+  mobileImages: ProjectImage[];
+  projectId: string;
+}
+
+const {desktopImages, mobileImages, projectId} = Astro.props;
+---
+
+<div class="tabbed-gallery-container">
+  <!-- Desktop Tabs -->
+  <ul class="tab-buttons">
+    <li class="active">
+      <a href="#desktop-tab" class="tab-btn" data-tab="desktop-tab" aria-label="Desktop view">
+        <div class="tab-icon">
+          <i class="fas fa-desktop"></i>
+        </div>
+        Desktop
+      </a>
+    </li>
+    <li>
+      <a href="#mobile-tab" class="tab-btn" data-tab="mobile-tab" aria-label="Mobile view">
+        <div class="tab-icon">
+          <i class="fas fa-mobile-alt"></i>
+        </div>
+        Mobile
+      </a>
+    </li>
+  </ul>
+
+  <div class="tab-content-wrapper">
+    <div class="tab-content active" id="desktop-tab">
+      <ImageGallery images={desktopImages} projectId={`${projectId}-desktop`} />
+    </div>
+    <div class="tab-content" id="mobile-tab">
+      <ImageGallery images={mobileImages} projectId={`${projectId}-mobile`} />
+    </div>
+  </div>
+</div>
+
+<style>
+  .tabbed-gallery-container {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .tab-buttons {
+    display: flex;
+    padding: 0;
+    margin: 0 0 20px 0;
+    list-style: none;
+    justify-content: center;
+  }
+
+  .tab-buttons li {
+    margin-right: 10px;
+  }
+
+  .tab-btn {
+    display: block;
+    text-decoration: none;
+    padding: 10px 20px;
+    color: inherit;
+    transition: all 0.27s cubic-bezier(0, 0, 0.58, 1);
+    cursor: pointer;
+    border-radius: 3px 3px 0 0;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .tab-btn:hover {
+    color: var(--primary-color);
+  }
+
+  .tab-buttons li.active .tab-btn {
+    color: var(--active-color);
+    border-bottom: 2px solid var(--active-color);
+  }
+
+  .tab-icon {
+    display: inline-block;
+    margin-right: 8px;
+    font-size: 16px;
+    color: var(--text-color);
+    transition: all 0.27s cubic-bezier(0, 0, 0.58, 1);
+  }
+
+  .tab-btn:hover .tab-icon {
+    color: var(--primary-color);
+  }
+
+  .tab-buttons li.active .tab-icon {
+    color: var(--active-color);
+  }
+
+  .tab-content-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  .tab-content {
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s ease;
+  }
+
+  .tab-content.active {
+    opacity: 1;
+    visibility: visible;
+    height: auto;
+    overflow: visible;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .tab-buttons {
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 8px 15px;
+      font-size: 14px;
+    }
+  }
+</style>
+
+<script define:vars={{projectId}}>
+  function initializeTabbedGallery() {
+    const container = document.querySelector(".tabbed-gallery-container");
+    if (!container) return;
+
+    const tabLinks = container.querySelectorAll(".tab-btn");
+    const tabContents = container.querySelectorAll(".tab-content");
+    const tabItems = container.querySelectorAll(".tab-buttons li");
+
+    tabLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        tabItems.forEach((item) => item.classList.remove("active"));
+        tabContents.forEach((content) => content.classList.remove("active"));
+
+        const parentLi = link.closest("li");
+        if (parentLi) {
+          parentLi.classList.add("active");
+        }
+
+        const tabId = link.dataset.tab;
+        if (tabId) {
+          const tabContent = document.getElementById(tabId);
+          if (tabContent) {
+            tabContent.classList.add("active");
+          }
+        }
+      });
+    });
+  }
+
+  // Run initialization immediately
+  document.addEventListener("DOMContentLoaded", initializeTabbedGallery);
+
+  // Also run after Astro view transitions
+  document.addEventListener("astro:page-load", initializeTabbedGallery);
+  document.addEventListener("astro:after-swap", initializeTabbedGallery);
+
+  // Run if the document is already loaded
+  if (document.readyState === "complete" || document.readyState === "interactive") {
+    setTimeout(initializeTabbedGallery, 0);
+  }
+</script>

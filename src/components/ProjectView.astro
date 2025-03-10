@@ -1,8 +1,9 @@
 ---
 // ProjectView.astro - Sliding project view component
 import ImageGallery from "./ImageGallery.astro";
+import ProjectTabbedGallery from "./ProjectTabbedGallery.astro";
 import FullSizeImageModal from "./FullSizeImageModal.astro";
-import {projects, getProjectById} from "../data/projects";
+import {projects, getProjectById, automatedCfeBillMobileImages} from "../data/projects";
 ---
 
 <div id="project-view" class="project-view">
@@ -35,7 +36,15 @@ import {projects, getProjectById} from "../data/projects";
 
             <div class="project-view-body">
               <div class="project-view-gallery">
-                <ImageGallery images={project.images} projectId={project.id} />
+                {project.id === "project-automated-cfe-bill" ? (
+                  <ProjectTabbedGallery
+                    desktopImages={project.images}
+                    mobileImages={automatedCfeBillMobileImages}
+                    projectId={project.id}
+                  />
+                ) : (
+                  <ImageGallery images={project.images} projectId={project.id} />
+                )}
               </div>
 
               <div class="project-view-details">
@@ -69,6 +78,9 @@ import {projects, getProjectById} from "../data/projects";
 
   {/* Add full-size image modal for each project */}
   {projects.map((project) => <FullSizeImageModal projectId={project.id} />)}
+
+  {/* Add full-size image modal for mobile images of the automated CFE bill project */}
+  <FullSizeImageModal projectId="project-automated-cfe-bill-mobile" />
 </div>
 
 <style>

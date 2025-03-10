@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import ProjectView from "../components/ProjectView.astro";
 
-const SHOW_FILTER_MENU = false;
+const SHOW_FILTER_MENU = true;
 ---
 
 <Layout
@@ -42,18 +42,18 @@ const SHOW_FILTER_MENU = false;
                       </a>
                     </li>
                     <li>
-                      <a class="filter btn btn-sm btn-link" data-group="web-development">
-                        Web Development
+                      <a class="filter btn btn-sm btn-link" data-group="frontend-engineering">
+                        Front End Engineering
+                      </a>
+                    </li>
+                    <li>
+                      <a class="filter btn btn-sm btn-link" data-group="ux-design-research">
+                        UX Design & Research
                       </a>
                     </li>
                     <li>
                       <a class="filter btn btn-sm btn-link" data-group="ui-design">
                         UI Design
-                      </a>
-                    </li>
-                    <li>
-                      <a class="filter btn btn-sm btn-link" data-group="mobile-apps">
-                        Mobile Apps
                       </a>
                     </li>
                   </ul>
@@ -62,11 +62,39 @@ const SHOW_FILTER_MENU = false;
 
               <!-- Portfolio Grid -->
               <div class="portfolio-grid">
-                <!-- Portfolio Item: Async Wizard UX Flow -->
-                <figure class="item" data-groups='["all", "ui-design"]'>
+                <!-- Portfolio Item: Automated CFE Bill Processing -->
+                <figure
+                  class="item"
+                  data-groups='["all", "frontend-engineering", "ui-design", "mobile-first"]'>
                   <div class="portfolio-item-img">
                     <img
-                      src="/images/portfolio/bright/async_wizard_ux_flow/1-wrapper-ui-min.jpg"
+                      src="/images/portfolio/bright/automated_cfe_bill/cover-image.jpg"
+                      alt="Automated CFE Bill Processing"
+                    />
+                    <a
+                      href="#"
+                      class="project-link"
+                      data-project="project-automated-cfe-bill"
+                      aria-label="View Automated CFE Bill Processing project details">
+                    </a>
+                  </div>
+                  <i class="far fa-file-alt"></i>
+                  <h3 class="name">Automated CFE Bill Processing</h3>
+                  <span class="category">
+                    Streamlined Utility Bill Processing System with Mobile and Desktop Support
+                  </span>
+                  <div class="project-tags">
+                    <span>React</span>
+                    <span>Mobile-First</span>
+                    <span>OCR Integration</span>
+                  </div>
+                </figure>
+
+                <!-- Portfolio Item: Async Wizard UX Flow -->
+                <figure class="item" data-groups='["all", "ux-design-research", "ui-design"]'>
+                  <div class="portfolio-item-img">
+                    <img
+                      src="/images/portfolio/bright/async_wizard_ux_flow/cover-image.jpg"
                       alt="Async Wizard UX Flow"
                     />
                     <a
@@ -88,10 +116,12 @@ const SHOW_FILTER_MENU = false;
                   </div>
                 </figure>
                 <!-- Portfolio Item: Biocom Member Benefits Center -->
-                <figure class="item" data-groups='["all", "web-development", "ui-design"]'>
+                <figure
+                  class="item"
+                  data-groups='["all", "frontend-engineering", "ui-design", "data-visualization", "dashboard"]'>
                   <div class="portfolio-item-img">
                     <img
-                      src="/images/portfolio/biocom/member_benefits_center/1-overview.png"
+                      src="/images/portfolio/biocom/member_benefits_center/cover-image.jpg"
                       alt="Biocom Member Benefits Center Dashboard"
                     />
                     <a
@@ -111,10 +141,10 @@ const SHOW_FILTER_MENU = false;
                   </div>
                 </figure>
                 <!-- Portfolio Item 1: Modalis -->
-                <figure class="item" data-groups='["all", "web-development", "ui-design"]'>
+                <figure class="item" data-groups='["all", "frontend-engineering", "ui-design"]'>
                   <div class="portfolio-item-img">
                     <img
-                      src="/images/portfolio/project-modalis.jpg"
+                      src="/images/portfolio/modalis/cover-image.jpg"
                       alt="Modalis - Media Asset Management and Distribution"
                     />
                     <a
@@ -135,10 +165,12 @@ const SHOW_FILTER_MENU = false;
                 </figure>
 
                 <!-- Portfolio Item 2: Transcript Editor -->
-                <figure class="item" data-groups='["all", "web-development"]'>
+                <figure
+                  class="item"
+                  data-groups='["all", "frontend-engineering", "ux-design-research"]'>
                   <div class="portfolio-item-img">
                     <img
-                      src="/images/portfolio/project-transcript-edit.jpg"
+                      src="/images/portfolio/transcript_edit/cover-image.jpg"
                       alt="Closed Caption Transcript Editor"
                     />
                     <a
@@ -161,10 +193,12 @@ const SHOW_FILTER_MENU = false;
                 </figure>
 
                 <!-- Portfolio Item 3: Quiz Creator -->
-                <figure class="item" data-groups='["all", "web-development", "ui-design"]'>
+                <figure
+                  class="item"
+                  data-groups='["all", "frontend-engineering", "ui-design", "ux-design-research"]'>
                   <div class="portfolio-item-img">
                     <img
-                      src="/images/portfolio/project-quiz-creator.jpg"
+                      src="/images/portfolio/quiz_creator/cover-image.jpg"
                       alt="Video Quiz Creator"
                     />
                     <a
