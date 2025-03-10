@@ -1,8 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ProjectView from "../components/ProjectView.astro";
+import {projects} from "../data/projects";
 
 const SHOW_FILTER_MENU = true;
+const visibleProjects = projects.filter((project) => !project.hidden);
 ---
 
 <Layout
@@ -62,163 +64,92 @@ const SHOW_FILTER_MENU = true;
 
               <!-- Portfolio Grid -->
               <div class="portfolio-grid">
-                <!-- Portfolio Item: Automated CFE Bill Processing -->
-                <figure
-                  class="item"
-                  data-groups='["all", "frontend-engineering", "ui-design", "mobile-first"]'>
-                  <div class="portfolio-item-img">
-                    <img
-                      src="/images/portfolio/bright/automated_cfe_bill/cover-image.jpg"
-                      alt="Automated CFE Bill Processing"
-                    />
-                    <a
-                      href="#"
-                      class="project-link"
-                      data-project="project-automated-cfe-bill"
-                      aria-label="View Automated CFE Bill Processing project details">
-                    </a>
-                  </div>
-                  <i class="far fa-file-alt"></i>
-                  <h3 class="name">Automated CFE Bill Processing</h3>
-                  <span class="category">
-                    Streamlined Utility Bill Processing System with Mobile and Desktop Support
-                  </span>
-                  <div class="project-tags">
-                    <span>React</span>
-                    <span>Mobile-First</span>
-                    <span>OCR Integration</span>
-                  </div>
-                </figure>
+                {
+                  visibleProjects.map((project) => {
+                    // Define groups based on project technologies and role
+                    const groups = ["all"];
 
-                <!-- Portfolio Item: Async Wizard UX Flow -->
-                <figure class="item" data-groups='["all", "ux-design-research", "ui-design"]'>
-                  <div class="portfolio-item-img">
-                    <img
-                      src="/images/portfolio/bright/async_wizard_ux_flow/cover-image.jpg"
-                      alt="Async Wizard UX Flow"
-                    />
-                    <a
-                      href="#"
-                      class="project-link"
-                      data-project="project-async-wizard"
-                      aria-label="View Async Wizard UX Flow project details">
-                    </a>
-                  </div>
-                  <i class="far fa-file-alt"></i>
-                  <h3 class="name">Async Wizard UX Flow</h3>
-                  <span class="category">
-                    User Experience Design for Multi-step Solar Installation Process
-                  </span>
-                  <div class="project-tags">
-                    <span>UX Design</span>
-                    <span>User Flow</span>
-                    <span>Solar Energy</span>
-                  </div>
-                </figure>
-                <!-- Portfolio Item: Biocom Member Benefits Center -->
-                <figure
-                  class="item"
-                  data-groups='["all", "frontend-engineering", "ui-design", "data-visualization", "dashboard"]'>
-                  <div class="portfolio-item-img">
-                    <img
-                      src="/images/portfolio/biocom/member_benefits_center/cover-image.jpg"
-                      alt="Biocom Member Benefits Center Dashboard"
-                    />
-                    <a
-                      href="#"
-                      class="project-link"
-                      data-project="project-biocom-mbc"
-                      aria-label="View Biocom Member Benefits Center project details">
-                    </a>
-                  </div>
-                  <i class="far fa-file-alt"></i>
-                  <h3 class="name">Biocom Member Benefits Center</h3>
-                  <span class="category">Interactive Dashboard for Member Benefits Tracking</span>
-                  <div class="project-tags">
-                    <span>Web Application</span>
-                    <span>Dashboard</span>
-                    <span>Data Visualization</span>
-                  </div>
-                </figure>
-                <!-- Portfolio Item 1: Modalis -->
-                <figure class="item" data-groups='["all", "frontend-engineering", "ui-design"]'>
-                  <div class="portfolio-item-img">
-                    <img
-                      src="/images/portfolio/modalis/cover-image.jpg"
-                      alt="Modalis - Media Asset Management and Distribution"
-                    />
-                    <a
-                      href="#"
-                      class="project-link"
-                      data-project="project-modalis"
-                      aria-label="View Modalis project details">
-                    </a>
-                  </div>
-                  <i class="far fa-file-alt"></i>
-                  <h3 class="name">Modalis</h3>
-                  <span class="category">Media Asset Management and Distribution System</span>
-                  <div class="project-tags">
-                    <span>Web Application</span>
-                    <span>UI/UX Design</span>
-                    <span>JavaScript</span>
-                  </div>
-                </figure>
+                    if (
+                      project.rolePositions.includes("Front-End Engineer") ||
+                      project.rolePositions.includes("Lead Front-End Engineer")
+                    ) {
+                      groups.push("frontend-engineering");
+                    }
 
-                <!-- Portfolio Item 2: Transcript Editor -->
-                <figure
-                  class="item"
-                  data-groups='["all", "frontend-engineering", "ux-design-research"]'>
-                  <div class="portfolio-item-img">
-                    <img
-                      src="/images/portfolio/transcript_edit/cover-image.jpg"
-                      alt="Closed Caption Transcript Editor"
-                    />
-                    <a
-                      href="#"
-                      class="project-link"
-                      data-project="project-transcript-editor"
-                      aria-label="View Closed Caption Transcript Editor project details">
-                    </a>
-                  </div>
-                  <i class="far fa-file-alt"></i>
-                  <h3 class="name">Closed Caption Transcript Editor</h3>
-                  <span class="category">
-                    Web-based tool for editing video transcripts and captions
-                  </span>
-                  <div class="project-tags">
-                    <span>Web Application</span>
-                    <span>Video Processing</span>
-                    <span>Accessibility</span>
-                  </div>
-                </figure>
+                    if (
+                      project.rolePositions.includes("UX Designer") ||
+                      project.rolePositions.includes("Lead UX Designer")
+                    ) {
+                      groups.push("ux-design-research");
+                    }
 
-                <!-- Portfolio Item 3: Quiz Creator -->
-                <figure
-                  class="item"
-                  data-groups='["all", "frontend-engineering", "ui-design", "ux-design-research"]'>
-                  <div class="portfolio-item-img">
-                    <img
-                      src="/images/portfolio/quiz_creator/cover-image.jpg"
-                      alt="Video Quiz Creator"
-                    />
-                    <a
-                      href="#"
-                      class="project-link"
-                      data-project="project-quiz-creator"
-                      aria-label="View Video Quiz Creator project details">
-                    </a>
-                  </div>
-                  <i class="far fa-file-alt"></i>
-                  <h3 class="name">Video Quiz Creator</h3>
-                  <span class="category">
-                    Interactive tool for creating video-based quizzes and assessments
-                  </span>
-                  <div class="project-tags">
-                    <span>Web Application</span>
-                    <span>Educational Tech</span>
-                    <span>Interactive Media</span>
-                  </div>
-                </figure>
+                    if (
+                      project.rolePositions.includes("UI/UX Designer") ||
+                      project.rolePositions.includes("Lead UI/UX Designer")
+                    ) {
+                      groups.push("ui-design");
+                    }
+
+                    // Add mobile-first tag if applicable
+                    if (project.technologies.includes("Mobile-First Design")) {
+                      groups.push("mobile-first");
+                    }
+
+                    // Add data visualization tag if applicable
+                    if (project.technologies.includes("Chart.js")) {
+                      groups.push("data-visualization");
+                      groups.push("dashboard");
+                    }
+
+                    // Get cover image path
+                    const idParts = project.id.split("-");
+                    let coverImagePath = "";
+
+                    if (project.id === "project-automated-cfe-bill") {
+                      coverImagePath =
+                        "/images/portfolio/bright/automated_cfe_bill/cover-image.jpg";
+                    } else if (project.id === "project-async-wizard") {
+                      coverImagePath =
+                        "/images/portfolio/bright/async_wizard_ux_flow/cover-image.jpg";
+                    } else if (project.id === "project-biocom-mbc") {
+                      coverImagePath =
+                        "/images/portfolio/biocom/member_benefits_center/cover-image.jpg";
+                    } else if (project.id === "project-modalis") {
+                      coverImagePath = "/images/portfolio/modalis/cover-image.jpg";
+                    } else if (project.id === "project-transcript-editor") {
+                      coverImagePath = "/images/portfolio/transcript_edit/cover-image.jpg";
+                    } else if (project.id === "project-quiz-creator") {
+                      coverImagePath = "/images/portfolio/quiz_creator/cover-image.jpg";
+                    } else {
+                      // Default fallback
+                      coverImagePath = project.images[0]?.src || "";
+                    }
+
+                    // Get project tags (limit to 3)
+                    const projectTags = project.technologies.slice(0, 3);
+
+                    return (
+                      <figure class="item" data-groups={JSON.stringify(groups)}>
+                        <div class="portfolio-item-img">
+                          <img src={coverImagePath} alt={project.title} />
+                          <a
+                            href="#"
+                            class="project-link"
+                            data-project={project.id}
+                            aria-label={`View ${project.title} project details`}></a>
+                        </div>
+                        <i class="far fa-file-alt" />
+                        <h3 class="name">{project.title}</h3>
+                        <span class="category">{project.subtitle}</span>
+                        <div class="project-tags">
+                          {projectTags.map((tag) => (
+                            <span>{tag}</span>
+                          ))}
+                        </div>
+                      </figure>
+                    );
+                  })
+                }
               </div>
             </div>
           </div>

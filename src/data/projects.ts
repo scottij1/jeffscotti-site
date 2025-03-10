@@ -15,6 +15,7 @@ export interface Project {
   processVision: string;
   images: ProjectImage[];
   liveUrl?: string; // Optional URL to the live project
+  hidden?: boolean; // Optional flag to hide project from projects page
 }
 
 export const projects: Project[] = [
@@ -27,10 +28,9 @@ export const projects: Project[] = [
     ],
     "technologies": ["React", "TypeScript", "Mobile-First Design", "Responsive UI", "OCR Integration", "API Integration", "Progressive Web App"],
     "role": "Lead UX Designer & Front-End Engineer — Designed and implemented a dual-interface system that works seamlessly across desktop and mobile devices. Created an intuitive workflow that guides users through the bill processing journey with contextual help and clear status indicators. Developed a responsive UI that adapts to different screen sizes while maintaining functionality and usability. Integrated with backend OCR services and customer information systems to automate data extraction and verification.",
-    "rolePositions": ["Lead UX Designer", "Front-End Engineer"],
-    "processVision": "Designed and implemented a dual-interface system that works seamlessly across desktop and mobile devices. Created an intuitive workflow that guides users through the bill processing journey with contextual help and clear status indicators. Developed a responsive UI that adapts to different screen sizes while maintaining functionality and usability. Integrated with backend OCR services and customer information systems to automate data extraction and verification.",
+    "rolePositions": ["Lead UX Designer", "Lead Front-End Engineer"],
+    "processVision": "My approach followed an iterative delivery model that evolved into a stand-alone UI while ensuring a seamless user experience. Instead of waiting for a full overhaul, I focused on continuous enhancements that improved usability over time. By incorporating responsive design, the system adapted across desktop and mobile devices, allowing users to navigate workflows effortlessly. A dual-interface system ensured both experienced and new users could choose between power mode for flexibility and guided mode for structured step-by-step assistance.\n\nThe UI integrated status indicators and contextual help to guide users through the bill processing journey, ensuring clarity at every step. Automating data extraction and verification through OCR services and backend integrations streamlined the workflow, reducing errors and manual effort. Over time, the system transitioned from its checklist-based integration to a fully independent UI with intuitive navigation, live support access, and a cleaner, distraction-free experience. This progressive approach minimized risk, allowed adaptability based on user feedback, and built stakeholder confidence while continuously refining the experience.",
     images: [
-      // Desktop images
       {
         src: "/images/portfolio/bright/automated_cfe_bill/desktop/1-enter-rpu-form.png",
         alt: "Desktop RPU Form Entry",
@@ -111,7 +111,6 @@ export const projects: Project[] = [
         alt: "Desktop Ops Platform Integration",
         caption: "Integration with operations platform in guided mode"
       },
-      // Mobile images are handled separately in the tabbed UI
     ]
   },
   {
@@ -125,6 +124,7 @@ export const projects: Project[] = [
     "role": "Lead UX Designer — Created an intuitive step-by-step wizard interface that simplifies the complex solar installation process. Designed a user-friendly flow that allows customers to complete steps asynchronously, improving conversion rates and reducing drop-offs. Focused on clear visual cues, progress indicators, and contextual help to guide users through each stage of the process. Collaborated with stakeholders to ensure the design met both user needs and business requirements.",
     "rolePositions": ["Lead UX Designer"],
     "processVision": "Created an intuitive step-by-step wizard interface that simplifies the complex solar installation process. Designed a user-friendly flow that allows customers to complete steps asynchronously, improving conversion rates and reducing drop-offs. Focused on clear visual cues, progress indicators, and contextual help to guide users through each stage of the process. Collaborated with stakeholders to ensure the design met both user needs and business requirements.",
+    "hidden": true,
     images: [
       {
         src: "/images/portfolio/bright/async_wizard_ux_flow/1-wrapper-ui-min.jpg",
@@ -197,7 +197,7 @@ export const projects: Project[] = [
     ],
     "technologies": ["JavaScript", "HTML5", "CSS", "Chart.js",],
     "role": "Lead Front-End Engineer & UI/UX Designer — Developed an intuitive, data-driven dashboard that transforms complex membership data into actionable insights. Created interactive visualizations for purchasing savings and event attendance metrics. Designed a responsive interface that works seamlessly across devices, with special attention to data export and printing functionality. Implemented user-friendly filtering and sorting options to help members quickly find relevant information.",
-    "rolePositions": ["Lead Front-End Engineer", "UI/UX Designer"],
+    "rolePositions": ["Lead Front-End Engineer", "Lead UI/UX Designer", "Architect"],
     "processVision": "Developed an intuitive, data-driven dashboard as a proof-of-concept prototype for Phase 1 of a multi-phased project. The existing system was tightly coupled within a WordPress site, relying on outdated Salesforce APIs that passed data through a PHP-based middleware layer before being processed by an aging jQuery front end. My role was to refactor and redesign the front end to create a modern, polished, and scalable interface while improving maintainability.\n\nTo meet tight timelines and business goals, I hired a backend engineer to refactor the Salesforce APIs and made the strategic decision to bypass the PHP layer entirely, integrating directly with Salesforce APIs to fetch data. In the process, I applied separation of concerns, modular patterns, and a rudimentary MVC approach to streamline development and deliver a functional prototype.\n\nThe redesigned dashboard featured interactive visualizations for purchasing savings and event attendance metrics, user-friendly filtering and sorting, and a responsive design that worked seamlessly across devices, particularly optimizing data export and printing functionality. Originally planned as an interim solution before transitioning to a standalone React app, the prototype was so well received by leadership and end users that Biocom leadership opted to continue using this version as the final product.",
     "liveUrl": "https://www.biocom.org/member-benefits-center/?id=001A000000D8SMTIA3",
     images: [
