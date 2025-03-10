@@ -188,7 +188,9 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
     border-radius: 3px;
     margin: 4px;
     width: 20px;
-    transition: all 0.25s ease-in-out;
+    transition:
+      background-color 0.3s ease-in-out,
+      width 0.3s ease-in-out;
     opacity: 1;
     border: none;
     padding: 0;
@@ -336,6 +338,7 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
             button.style.borderRadius = "3px";
             button.style.margin = "4px";
             button.style.transform = "none";
+            button.style.transition = "background-color 0.3s ease-in-out, width 0.3s ease-in-out";
 
             // Use computed styles to get the current theme colors
             const computedStyle = getComputedStyle(document.documentElement);
