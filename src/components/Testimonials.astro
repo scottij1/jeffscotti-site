@@ -61,11 +61,11 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
   }
 
   .testimonials-prev-button {
-    left: 0;
+    left: -50px;
   }
 
   .testimonials-next-button {
-    right: 0;
+    right: -50px;
   }
 
   .testimonials-container {
@@ -306,14 +306,14 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
 
   <div style="position: relative;">
     <button
-      class="testimonials-nav-button testimonials-prev-button"
+      class="testimonials-nav-button testimonials-prev-button pre-carousel-hidden"
       id="testimonials_prev_button"
       aria-label="Previous testimonials"
       aria-controls="testimonials_1">
       <i class="fas fa-chevron-left" aria-hidden="true"></i>
     </button>
     <button
-      class="testimonials-nav-button testimonials-next-button"
+      class="testimonials-nav-button testimonials-next-button pre-carousel-hidden"
       id="testimonials_next_button"
       aria-label="Next testimonials"
       aria-controls="testimonials_1">
@@ -550,10 +550,21 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
           }
 
           const testimonialElement = document.getElementById("testimonials_1");
+          const prevButton = document.getElementById("testimonials_prev_button");
+          const nextButton = document.getElementById("testimonials_next_button");
+
           if (testimonialElement) {
             testimonialElement.classList.remove("pre-carousel-hidden");
             void testimonialElement.offsetWidth;
             testimonialElement.classList.add("visible");
+          }
+
+          if (prevButton) {
+            prevButton.classList.remove("pre-carousel-hidden");
+          }
+
+          if (nextButton) {
+            nextButton.classList.remove("pre-carousel-hidden");
           }
         }
       };
