@@ -11,7 +11,10 @@ export interface Project {
   description: string[];
   technologies: string[];
   role: string;
+  rolePositions: string[];
+  processVision: string;
   images: ProjectImage[];
+  liveUrl?: string; // Optional URL to the live project
 }
 
 export const projects: Project[] = [
@@ -24,6 +27,8 @@ export const projects: Project[] = [
     ],
     "technologies": ["React", "TypeScript", "Mobile-First Design", "Responsive UI", "OCR Integration", "API Integration", "Progressive Web App"],
     "role": "Lead UX Designer & Front-End Engineer — Designed and implemented a dual-interface system that works seamlessly across desktop and mobile devices. Created an intuitive workflow that guides users through the bill processing journey with contextual help and clear status indicators. Developed a responsive UI that adapts to different screen sizes while maintaining functionality and usability. Integrated with backend OCR services and customer information systems to automate data extraction and verification.",
+    "rolePositions": ["Lead UX Designer", "Front-End Engineer"],
+    "processVision": "Designed and implemented a dual-interface system that works seamlessly across desktop and mobile devices. Created an intuitive workflow that guides users through the bill processing journey with contextual help and clear status indicators. Developed a responsive UI that adapts to different screen sizes while maintaining functionality and usability. Integrated with backend OCR services and customer information systems to automate data extraction and verification.",
     images: [
       // Desktop images
       {
@@ -118,6 +123,8 @@ export const projects: Project[] = [
     ],
     "technologies": ["Figma", "UX Design", "UI Design", "User Flow Mapping", "Wireframing", "Prototyping"],
     "role": "Lead UX Designer — Created an intuitive step-by-step wizard interface that simplifies the complex solar installation process. Designed a user-friendly flow that allows customers to complete steps asynchronously, improving conversion rates and reducing drop-offs. Focused on clear visual cues, progress indicators, and contextual help to guide users through each stage of the process. Collaborated with stakeholders to ensure the design met both user needs and business requirements.",
+    "rolePositions": ["Lead UX Designer"],
+    "processVision": "Created an intuitive step-by-step wizard interface that simplifies the complex solar installation process. Designed a user-friendly flow that allows customers to complete steps asynchronously, improving conversion rates and reducing drop-offs. Focused on clear visual cues, progress indicators, and contextual help to guide users through each stage of the process. Collaborated with stakeholders to ensure the design met both user needs and business requirements.",
     images: [
       {
         src: "/images/portfolio/bright/async_wizard_ux_flow/1-wrapper-ui-min.jpg",
@@ -188,8 +195,11 @@ export const projects: Project[] = [
     "description": [
       "A comprehensive dashboard designed for Biocom members to track and visualize their membership benefits. The platform provides detailed insights into purchasing savings, event attendance, committee memberships, and additional benefits, allowing members to maximize the value of their membership."
     ],
-    "technologies": ["React", "TypeScript", "Chart.js", "Material UI", "CSS3", "Responsive Design"],
+    "technologies": ["JavaScript", "HTML5", "CSS", "Chart.js",],
     "role": "Lead Front-End Engineer & UI/UX Designer — Developed an intuitive, data-driven dashboard that transforms complex membership data into actionable insights. Created interactive visualizations for purchasing savings and event attendance metrics. Designed a responsive interface that works seamlessly across devices, with special attention to data export and printing functionality. Implemented user-friendly filtering and sorting options to help members quickly find relevant information.",
+    "rolePositions": ["Lead Front-End Engineer", "UI/UX Designer"],
+    "processVision": "Developed an intuitive, data-driven dashboard as a proof-of-concept prototype for Phase 1 of a multi-phased project. The existing system was tightly coupled within a WordPress site, relying on outdated Salesforce APIs that passed data through a PHP-based middleware layer before being processed by an aging jQuery front end. My role was to refactor and redesign the front end to create a modern, polished, and scalable interface while improving maintainability.\n\nTo meet tight timelines and business goals, I hired a backend engineer to refactor the Salesforce APIs and made the strategic decision to bypass the PHP layer entirely, integrating directly with Salesforce APIs to fetch data. In the process, I applied separation of concerns, modular patterns, and a rudimentary MVC approach to streamline development and deliver a functional prototype.\n\nThe redesigned dashboard featured interactive visualizations for purchasing savings and event attendance metrics, user-friendly filtering and sorting, and a responsive design that worked seamlessly across devices, particularly optimizing data export and printing functionality. Originally planned as an interim solution before transitioning to a standalone React app, the prototype was so well received by leadership and end users that Biocom leadership opted to continue using this version as the final product.",
+    "liveUrl": "https://www.biocom.org/member-benefits-center/?id=001A000000D8SMTIA3",
     images: [
       {
         src: "/images/portfolio/biocom/member_benefits_center/1-overview.png",
@@ -262,6 +272,8 @@ export const projects: Project[] = [
       ],
       "technologies": ["Angular", "Firebase", "Node.js", "TypeScript", "HTML5", "SCSS"],
       "role": "Lead Front-End Engineer & Lead UI/UX Designer — Spearheaded the development of a highly interactive and scalable UI in Angular, ensuring fluid navigation and efficient media handling. Crafted an intuitive user experience that streamlined metadata tagging, bulk asset operations, and workflow automation. Focused on performance optimizations, ensuring smooth handling of large media libraries. Led the UX strategy, refining interactions, accessibility, and visual consistency for an enhanced user experience.",
+      "rolePositions": ["Lead Front-End Engineer", "Lead UI/UX Designer"],
+      "processVision": "Spearheaded the development of a highly interactive and scalable UI in Angular, ensuring fluid navigation and efficient media handling. Crafted an intuitive user experience that streamlined metadata tagging, bulk asset operations, and workflow automation. Focused on performance optimizations, ensuring smooth handling of large media libraries. Led the UX strategy, refining interactions, accessibility, and visual consistency for an enhanced user experience.",
       images: [
       {
         src: "/images/portfolio/modalis/1-large-media-cards.png",
@@ -404,6 +416,8 @@ export const projects: Project[] = [
       ],
       "technologies": ["Angular", "Azure", "Firebase", "Node.js", "TypeScript", "HTML5 Video", "WebVTT", "SCSS"],
       "role": "Lead Front-End Engineer & Lead UI/UX Designer — Engineered a timeline-based transcript editor in Angular, enabling seamless AI-assisted transcription review and real-time editing. Integrated Azure transcription services with Firebase to provide users with an efficient, AI-enhanced workflow. Designed a clean, intuitive UI that prioritized accessibility and streamlined error correction. Led user research and iterative UX improvements, refining the interaction design to make transcript editing faster and more user-friendly.",
+      "rolePositions": ["Lead Front-End Engineer", "Lead UI/UX Designer"],
+      "processVision": "Engineered a timeline-based transcript editor in Angular, enabling seamless AI-assisted transcription review and real-time editing. Integrated Azure transcription services with Firebase to provide users with an efficient, AI-enhanced workflow. Designed a clean, intuitive UI that prioritized accessibility and streamlined error correction. Led user research and iterative UX improvements, refining the interaction design to make transcript editing faster and more user-friendly.",
       images: [
       {
         src: "/images/portfolio/transcript_edit/1-transcript-edit-all.png",
@@ -466,6 +480,8 @@ export const projects: Project[] = [
     ],
     "technologies": ["Angular", "Azure", "Node.js", "TypeScript", "Video.js", "SCSS"],
     "role": "Lead Front-End Engineer & Lead UI/UX Designer — Led the development of a dynamic, engaging quiz-building interface in Angular, making it effortless for instructors to create and embed interactive assessments. Built an instructor-focused analytics dashboard, providing rich insights into student performance. Focused on UX refinement, designing an intuitive workflow that simplified quiz configuration and improved student engagement. Ensured a smooth integration with Azure services, optimizing data flow and real-time response tracking.",
+    "rolePositions": ["Lead Front-End Engineer", "Lead UI/UX Designer"],
+    "processVision": "Led the development of a dynamic, engaging quiz-building interface in Angular, making it effortless for instructors to create and embed interactive assessments. Built an instructor-focused analytics dashboard, providing rich insights into student performance. Focused on UX refinement, designing an intuitive workflow that simplified quiz configuration and improved student engagement. Ensured a smooth integration with Azure services, optimizing data flow and real-time response tracking.",
       images: [
       {
         src: "/images/portfolio/quiz_creator/1-standard-no-quizzes.png",

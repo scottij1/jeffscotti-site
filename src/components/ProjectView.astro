@@ -34,19 +34,19 @@ import {projects, getProjectById, automatedCfeBillMobileImages} from "../data/pr
               <div class="project-view-subtitle">{project.subtitle}</div>
             </div>
 
-            <div class="project-view-body">
-              <div class="project-view-gallery">
-                {project.id === "project-automated-cfe-bill" ? (
-                  <ProjectTabbedGallery
-                    desktopImages={project.images}
-                    mobileImages={automatedCfeBillMobileImages}
-                    projectId={project.id}
-                  />
-                ) : (
-                  <ImageGallery images={project.images} projectId={project.id} />
-                )}
-              </div>
+            <div class="project-view-gallery">
+              {project.id === "project-automated-cfe-bill" ? (
+                <ProjectTabbedGallery
+                  desktopImages={project.images}
+                  mobileImages={automatedCfeBillMobileImages}
+                  projectId={project.id}
+                />
+              ) : (
+                <ImageGallery images={project.images} projectId={project.id} />
+              )}
+            </div>
 
+            <div class="project-view-body">
               <div class="project-view-details">
                 <div class="project-description">
                   <h3>Description</h3>
@@ -66,8 +66,34 @@ import {projects, getProjectById, automatedCfeBillMobileImages} from "../data/pr
 
                 <div class="project-role">
                   <h3>My Role</h3>
-                  <p>{project.role}</p>
+                  <ul class="role-tags">
+                    {project.rolePositions.map((position) => (
+                      <li>{position}</li>
+                    ))}
+                  </ul>
                 </div>
+
+                {project.liveUrl && (
+                  <div class="project-live-version">
+                    <h3>Live Version</h3>
+                    <div class="live-site-link">
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="view-live-button">
+                        View
+                      </a>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div class="project-process-vision">
+                <h3>Process & Vision</h3>
+                {project.processVision.split("\n\n").map((paragraph: string) => (
+                  <p>{paragraph}</p>
+                ))}
               </div>
             </div>
           </div>
@@ -156,15 +182,19 @@ import {projects, getProjectById, automatedCfeBillMobileImages} from "../data/pr
     opacity: 0.8;
   }
 
-  .project-view-body {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 30px;
-  }
-
   .project-view-gallery {
     border-radius: 8px;
     overflow: hidden;
+    margin-bottom: 30px;
+    width: 100%;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 30px;
+  }
+
+  .project-view-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
   }
 
   .project-view-details {
@@ -193,12 +223,63 @@ import {projects, getProjectById, automatedCfeBillMobileImages} from "../data/pr
     margin: 0;
   }
 
-  .tech-tags li {
+  .tech-tags li,
+  .role-tags li {
     background-color: var(--container-bg-color);
     color: var(--text-color);
     padding: 5px 12px;
     border-radius: 20px;
     font-size: 12px;
+  }
+
+  .role-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px 0;
+  }
+
+  .live-site-link {
+    margin-top: 20px;
+  }
+
+  .view-live-button {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .view-live-button:hover {
+    background-color: var(--primary-color-dark, #0056b3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .project-process-vision {
+    padding-left: 20px;
+  }
+
+  .project-process-vision h3 {
+    font-size: 18px;
+    margin: 0 0 15px 0;
+    color: var(--heading-color);
+  }
+
+  .project-process-vision p {
+    margin: 0 0 15px 0;
+    line-height: 1.6;
   }
 
   /* Responsive adjustments */
@@ -209,6 +290,11 @@ import {projects, getProjectById, automatedCfeBillMobileImages} from "../data/pr
 
     .project-view-wrapper {
       padding: 20px;
+    }
+
+    .project-process-vision {
+      padding-left: 0;
+      margin-top: 30px;
     }
   }
 </style>
