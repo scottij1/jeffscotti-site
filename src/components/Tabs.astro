@@ -61,18 +61,14 @@ const firstTabId = tabItems.length > 0 ? tabItems[0].id : "";
               <div class="testimonial-content">
                 <div class="testimonial-text">
                   <p>
+                    <i class="fa fa-quote-left quote-start" />
                     <span>{tab.testimonial.text}</span>
+                    <i class="fa fa-quote-right quote-end" />
                   </p>
                 </div>
                 <div class="testimonial-author-info">
                   <h3 class="testimonial-author">{tab.testimonial.author}</h3>
                   <p class="testimonial-firm">{tab.testimonial.company}</p>
-                </div>
-                <div class="testimonial-icon">
-                  <i class="fa fa-quote-left" />
-                </div>
-                <div class="testimonial-icon-big">
-                  <i class="fa fa-quote-right" />
                 </div>
               </div>
             </div>
@@ -94,18 +90,14 @@ const firstTabId = tabItems.length > 0 ? tabItems[0].id : "";
             <div class="testimonial-content">
               <div class="testimonial-text">
                 <p>
+                  <i class="fa fa-quote-left quote-start" />
                   <span>{tab.testimonial.text}</span>
+                  <i class="fa fa-quote-right quote-end" />
                 </p>
               </div>
               <div class="testimonial-author-info">
                 <h3 class="testimonial-author">{tab.testimonial.author}</h3>
                 <p class="testimonial-firm">{tab.testimonial.company}</p>
-              </div>
-              <div class="testimonial-icon">
-                <i class="fa fa-quote-left" />
-              </div>
-              <div class="testimonial-icon-big">
-                <i class="fa fa-quote-right" />
               </div>
             </div>
           </section>
@@ -343,8 +335,11 @@ const firstTabId = tabItems.length > 0 ? tabItems[0].id : "";
 
   .testimonial-content {
     position: relative;
-    margin-top: 50px;
-    padding: 30px 20px 20px 60px;
+    margin-top: 40px;
+    padding: 20px;
+    background-color: rgba(128, 128, 128, 0.2);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     border-radius: var(--border-radius-md, 5px);
     border: 2px solid var(--border-color, #eee);
     transition: all 0.25s ease-in-out;
@@ -352,8 +347,11 @@ const firstTabId = tabItems.length > 0 ? tabItems[0].id : "";
 
   .testimonial-text p {
     font-style: italic;
-    color: var(--text-color, #333);
-    margin-bottom: 10px;
+    color: white;
+    position: relative;
+    z-index: 2;
+    padding: 0;
+    margin: 0;
   }
 
   .testimonial-author-info {
@@ -363,37 +361,33 @@ const firstTabId = tabItems.length > 0 ? tabItems[0].id : "";
   .testimonial-author {
     margin: 0 0 2px;
     font-size: 0.9em;
-    color: var(--heading-color, #333);
-    font-weight: 600;
+    color: white;
   }
 
   .testimonial-firm {
     margin: 0;
     font-size: 0.8em;
-    color: var(--text-color, #777);
+    color: white;
     opacity: 0.8;
   }
 
-  .testimonial-icon {
-    display: block;
-    line-height: 20px;
-    font-size: 20px;
-    position: absolute;
-    left: 20px;
-    bottom: 46px;
-    color: var(--border-color, #ddd);
+  .quote-start,
+  .quote-end {
+    color: var(--border-color);
+    opacity: 1;
+    font-size: 18px;
+    position: relative;
+    margin: 0 2px;
+    vertical-align: super;
+    z-index: 1;
   }
 
-  .testimonial-icon-big {
-    display: block;
-    line-height: 44px;
-    font-size: 44px;
-    position: absolute;
-    right: -24px;
-    bottom: -24px;
-    color: var(--border-color, #ddd);
-    opacity: 0.2;
-    z-index: -1;
+  .quote-start {
+    margin-right: 2px;
+  }
+
+  .quote-end {
+    margin-left: 2px;
   }
 
   /* Responsive adjustments */
@@ -409,19 +403,7 @@ const firstTabId = tabItems.length > 0 ? tabItems[0].id : "";
 
     .testimonial-content {
       margin-top: 20px;
-      padding: 25px 15px 15px 50px;
-    }
-
-    .testimonial-icon {
-      font-size: 16px;
-      left: 15px;
-      bottom: 40px;
-    }
-
-    .testimonial-icon-big {
-      font-size: 36px;
-      right: -18px;
-      bottom: -18px;
+      padding: 15px;
     }
 
     .tabs-container {
