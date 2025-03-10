@@ -336,18 +336,16 @@ const firstTabId = tabItems.length > 0 ? tabItems[0].id : "";
   .testimonial-content {
     position: relative;
     margin-top: 40px;
-    padding: 20px;
-    background-color: rgba(128, 128, 128, 0.2);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    padding: 30px 20px 20px 60px;
+    background-color: var(--container-bg-color);
     border-radius: var(--border-radius-md, 5px);
-    border: 2px solid var(--border-color, #eee);
+    border: 2px solid var(--border-color);
     transition: all 0.25s ease-in-out;
   }
 
   .testimonial-text p {
     font-style: italic;
-    color: white;
+    color: var(--text-color);
     position: relative;
     z-index: 2;
     padding: 0;
@@ -361,13 +359,13 @@ const firstTabId = tabItems.length > 0 ? tabItems[0].id : "";
   .testimonial-author {
     margin: 0 0 2px;
     font-size: 0.9em;
-    color: white;
+    color: var(--heading-color);
   }
 
   .testimonial-firm {
     margin: 0;
     font-size: 0.8em;
-    color: white;
+    color: var(--text-color);
     opacity: 0.8;
   }
 

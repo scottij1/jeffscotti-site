@@ -122,7 +122,7 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
 
   .testimonial-text p {
     font-style: italic;
-    color: white;
+    color: var(--text-color);
   }
 
   .testimonial-author-info {
@@ -184,7 +184,7 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
   .splide__pagination__page {
     display: block;
     height: 3px;
-    background-color: white;
+    background-color: var(--pagination-color, white);
     border-radius: 3px;
     margin: 4px;
     width: 20px;
@@ -197,14 +197,14 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
   }
 
   .splide__pagination__page.is-active {
-    background-color: blue;
+    background-color: var(--pagination-active-color, var(--secondary-color));
     width: 30px;
     transform: none;
     opacity: 1;
   }
 
   .splide__pagination__page:hover {
-    background-color: blue;
+    background-color: var(--pagination-hover-color, var(--primary-color));
     opacity: 1;
     transform: none;
   }
@@ -213,7 +213,22 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
   .splide__pagination button {
     padding: 0;
     border: none;
-    background: white;
+    background: var(--pagination-color, white);
+  }
+
+  /* Theme-specific pagination colors */
+  html.theme-light .splide__pagination__page,
+  html.theme-light .splide__pagination button {
+    --pagination-color: #444;
+    --pagination-active-color: var(--secondary-color);
+    --pagination-hover-color: var(--primary-color);
+  }
+
+  html.theme-dark .splide__pagination__page,
+  html.theme-dark .splide__pagination button {
+    --pagination-color: white;
+    --pagination-active-color: var(--secondary-color);
+    --pagination-hover-color: var(--primary-color);
   }
 
   /* Optionally hide the carousel container until initialization */
@@ -262,6 +277,32 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
   }
 
   function initTestimonials() {
+    // Function to update pagination colors based on current theme
+    function updatePaginationColors() {
+      const paginationButtons = document.querySelectorAll(".splide__pagination__page");
+      if (!paginationButtons.length) return;
+
+      const computedStyle = getComputedStyle(document.documentElement);
+      const paginationColor =
+        computedStyle.getPropertyValue("--pagination-color") ||
+        (document.documentElement.classList.contains("theme-light") ? "#444" : "white");
+      const activeColor =
+        computedStyle.getPropertyValue("--pagination-active-color") ||
+        computedStyle.getPropertyValue("--secondary-color") ||
+        "#ff9800";
+
+      paginationButtons.forEach((button) => {
+        if (button.classList.contains("is-active")) {
+          button.style.backgroundColor = activeColor;
+        } else {
+          button.style.backgroundColor = paginationColor;
+        }
+      });
+    }
+
+    // Listen for theme changes
+    document.addEventListener("themeChanged", updatePaginationColors);
+
     const initCarousel = () => {
       if (typeof Splide !== "undefined") {
         const splideElement = document.getElementById("testimonials_1");
@@ -295,10 +336,21 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
             button.style.borderRadius = "3px";
             button.style.margin = "4px";
             button.style.transform = "none";
-            button.style.backgroundColor = "white";
+
+            // Use computed styles to get the current theme colors
+            const computedStyle = getComputedStyle(document.documentElement);
+            const paginationColor =
+              computedStyle.getPropertyValue("--pagination-color") ||
+              (document.documentElement.classList.contains("theme-light") ? "#444" : "white");
+            const activeColor =
+              computedStyle.getPropertyValue("--pagination-active-color") ||
+              computedStyle.getPropertyValue("--secondary-color") ||
+              "#ff9800";
+
+            button.style.backgroundColor = paginationColor;
 
             if (i === 0) {
-              button.style.backgroundColor = "blue";
+              button.style.backgroundColor = activeColor;
               button.style.width = "30px";
             }
 
@@ -323,14 +375,25 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
           splide.on("moved", (newIndex) => {
             const buttons = list.querySelectorAll("button");
             const pageIndex = Math.floor(newIndex / perPage);
+
+            // Get the current theme colors again (in case theme changed)
+            const computedStyle = getComputedStyle(document.documentElement);
+            const paginationColor =
+              computedStyle.getPropertyValue("--pagination-color") ||
+              (document.documentElement.classList.contains("theme-light") ? "#444" : "white");
+            const activeColor =
+              computedStyle.getPropertyValue("--pagination-active-color") ||
+              computedStyle.getPropertyValue("--secondary-color") ||
+              "#ff9800";
+
             buttons.forEach((button, index) => {
               if (index === pageIndex) {
                 button.classList.add("is-active");
-                button.style.backgroundColor = "blue";
+                button.style.backgroundColor = activeColor;
                 button.style.width = "30px";
               } else {
                 button.classList.remove("is-active");
-                button.style.backgroundColor = "white";
+                button.style.backgroundColor = paginationColor;
                 button.style.width = "20px";
               }
             });
@@ -363,6 +426,9 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
           });
 
           splide.mount({CustomPagination: customPagination});
+
+          // Call updatePaginationColors after initialization to ensure correct colors
+          setTimeout(updatePaginationColors, 100);
         } catch (error) {}
         setupReadMoreLinks();
         // Hide loading indicator and reveal the carousel with fade-in animation
