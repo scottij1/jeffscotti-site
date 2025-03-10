@@ -304,7 +304,7 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
 
             // Add click event to navigate to the slide
             button.addEventListener("click", () => {
-              splide.go(i);
+              splide.go(i * perPage);
             });
 
             li.appendChild(button);
@@ -322,8 +322,9 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
           // Update the active pagination on move
           splide.on("moved", (newIndex) => {
             const buttons = list.querySelectorAll("button");
+            const pageIndex = Math.floor(newIndex / perPage);
             buttons.forEach((button, index) => {
-              if (index === newIndex) {
+              if (index === pageIndex) {
                 button.classList.add("is-active");
                 button.style.backgroundColor = "blue";
                 button.style.width = "30px";

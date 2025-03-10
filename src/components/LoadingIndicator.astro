@@ -1,0 +1,125 @@
+---
+
+---
+
+<div class="loading-circles loading-testimonials">
+  <svg
+    id="loadingCirclesSVG"
+    width="200"
+    height="200"
+    viewBox="0 0 306 306"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <circle
+      class="loading-circle center-circle"
+      cx="153"
+      cy="153"
+      r="15"
+      fill="var(--primary-color)"
+      stroke="none">
+    </circle>
+    <circle
+      class="loading-circle pulse-circle"
+      cx="153"
+      cy="153"
+      r="55"
+      stroke="var(--primary-color)"
+      stroke-width="2"
+      fill="transparent">
+    </circle>
+    <circle
+      class="loading-circle pulse-circle"
+      cx="153"
+      cy="153"
+      r="55"
+      stroke="var(--primary-color)"
+      stroke-width="2"
+      fill="transparent">
+    </circle>
+    <circle
+      class="loading-circle pulse-circle"
+      cx="153"
+      cy="153"
+      r="55"
+      stroke="var(--primary-color)"
+      stroke-width="2"
+      fill="transparent">
+    </circle>
+  </svg>
+</div>
+
+<style>
+  .loading-circles {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    position: relative;
+  }
+
+  svg {
+    position: relative;
+  }
+
+  svg .pulse-circle {
+    stroke: var(--primary-color);
+    filter: drop-shadow(0 0 5px rgba(0, 124, 237, 0.5));
+  }
+
+  .loading-testimonials {
+    height: 200px;
+  }
+</style>
+
+<script>
+  import anime from "animejs/lib/anime.es.js";
+
+  document.addEventListener("astro:page-load", initAnimation);
+  document.addEventListener("DOMContentLoaded", initAnimation);
+
+  function initAnimation() {
+    const loadingElements = document.querySelectorAll(".loading-circles");
+
+    loadingElements.forEach((loadingElement) => {
+      const pulseCircles = loadingElement.querySelectorAll(".pulse-circle");
+      const centerCircle = loadingElement.querySelector(".center-circle");
+
+      if (pulseCircles.length > 0) {
+        // Animate the center circle with a subtle pulse
+        if (centerCircle) {
+          anime({
+            targets: centerCircle,
+            r: [15, 18],
+            opacity: [0.9, 1],
+            easing: "easeInOutSine",
+            duration: 1500,
+            loop: true,
+            direction: "alternate",
+          });
+        }
+
+        // Animate the outer circles
+        const timeline = anime.timeline({
+          duration: 3000,
+          complete: function () {
+            timeline.restart();
+          },
+          easing: "easeOutSine",
+        });
+
+        timeline.add({
+          begin: () => {
+            anime({
+              targets: pulseCircles,
+              r: [15, 95],
+              opacity: [0.8, 0],
+              delay: anime.stagger(1000 / pulseCircles.length),
+              duration: 2000,
+              easing: "easeOutSine",
+            });
+          },
+        });
+      }
+    });
+  }
+</script>
