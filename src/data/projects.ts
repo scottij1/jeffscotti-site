@@ -16,6 +16,150 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    "id": "project-async-wizard",
+    "title": "Async Wizard UX Flow",
+    "subtitle": "User Experience Design for Multi-step Solar Installation Process",
+    "description": [
+      "A comprehensive UX flow design for an asynchronous wizard interface that guides users through the solar installation process. The wizard breaks down a complex process into manageable steps, allowing users to complete each stage at their own pace. The design includes various stages such as welcome screens, CFE bill upload, proposal review, identity verification, credit checks, property documentation, technical visits, project design, payment setup, customer approval, and tax situation verification."
+    ],
+    "technologies": ["Figma", "UX Design", "UI Design", "User Flow Mapping", "Wireframing", "Prototyping"],
+    "role": "Lead UX Designer — Created an intuitive step-by-step wizard interface that simplifies the complex solar installation process. Designed a user-friendly flow that allows customers to complete steps asynchronously, improving conversion rates and reducing drop-offs. Focused on clear visual cues, progress indicators, and contextual help to guide users through each stage of the process. Collaborated with stakeholders to ensure the design met both user needs and business requirements.",
+    images: [
+      {
+        src: "/images/portfolio/bright/async_wizard_ux_flow/1-wrapper-ui-min.jpg",
+        alt: "Async Wizard UI Wrapper",
+        caption: "Main wrapper UI design for the asynchronous wizard interface"
+      },
+      {
+        src: "/images/portfolio/bright/async_wizard_ux_flow/2-welcome-welcome-back-flow-min.jpg",
+        alt: "Welcome and Welcome Back Flow",
+        caption: "User flow for new and returning users"
+      },
+      {
+        src: "/images/portfolio/bright/async_wizard_ux_flow/3-cfe-bill-flow-min.jpg",
+        alt: "CFE Bill Flow",
+        caption: "Process for uploading and analyzing electricity bills"
+      },
+      {
+        src: "/images/portfolio/bright/async_wizard_ux_flow/4-propsal-min.jpg",
+        alt: "Proposal Review",
+        caption: "Solar installation proposal review and customization"
+      },
+      {
+        src: "/images/portfolio/bright/async_wizard_ux_flow/5-id-check-min.jpg",
+        alt: "ID Verification",
+        caption: "Identity verification process flow"
+      },
+      {
+        src: "/images/portfolio/bright/async_wizard_ux_flow/6-credit-check-min.jpg",
+        alt: "Credit Check",
+        caption: "Credit verification and financing options"
+      },
+      {
+        src: "/images/portfolio/bright/async_wizard_ux_flow/7-property-docs-min.jpg",
+        alt: "Property Documentation",
+        caption: "Property documentation upload and verification"
+      },
+      {
+        src: "/images/portfolio/bright/async_wizard_ux_flow/8-technical-visit-min.jpg",
+        alt: "Technical Visit",
+        caption: "Technical site visit scheduling and preparation"
+      },
+      {
+        src: "/images/portfolio/bright/async_wizard_ux_flow/9-project-design-min.jpg",
+        alt: "Project Design",
+        caption: "Solar installation project design and customization"
+      },
+      {
+        src: "/images/portfolio/bright/async_wizard_ux_flow/10-domicillacion-min.jpg",
+        alt: "Payment Setup",
+        caption: "Payment method setup and recurring payment configuration"
+      },
+      {
+        src: "/images/portfolio/bright/async_wizard_ux_flow/11-customer-approval-min.jpg",
+        alt: "Customer Approval",
+        caption: "Final customer review and approval process"
+      },
+      {
+        src: "/images/portfolio/bright/async_wizard_ux_flow/12-tax-situation-min.jpg",
+        alt: "Tax Situation",
+        caption: "Tax information verification and documentation"
+      }
+    ]
+  },
+  {
+    "id": "project-biocom-mbc",
+    "title": "Biocom Member Benefits Center",
+    "subtitle": "Interactive Dashboard for Member Benefits Tracking",
+    "description": [
+      "A comprehensive dashboard designed for Biocom members to track and visualize their membership benefits. The platform provides detailed insights into purchasing savings, event attendance, committee memberships, and additional benefits, allowing members to maximize the value of their membership."
+    ],
+    "technologies": ["React", "TypeScript", "Chart.js", "Material UI", "CSS3", "Responsive Design"],
+    "role": "Lead Front-End Engineer & UI/UX Designer — Developed an intuitive, data-driven dashboard that transforms complex membership data into actionable insights. Created interactive visualizations for purchasing savings and event attendance metrics. Designed a responsive interface that works seamlessly across devices, with special attention to data export and printing functionality. Implemented user-friendly filtering and sorting options to help members quickly find relevant information.",
+    images: [
+      {
+        src: "/images/portfolio/biocom/member_benefits_center/1-overview.png",
+        alt: "Member Benefits Dashboard Overview",
+        caption: "Main dashboard view showing key membership benefits metrics"
+      },
+      {
+        src: "/images/portfolio/biocom/member_benefits_center/4-purchasing-savings.png",
+        alt: "Purchasing Savings Section",
+        caption: "Detailed breakdown of purchasing savings with interactive chart"
+      },
+      {
+        src: "/images/portfolio/biocom/member_benefits_center/6-purchasing-savings-chart-options-dropdown.png",
+        alt: "Chart Options Dropdown",
+        caption: "Customizable chart options for different data visualizations"
+      },
+      {
+        src: "/images/portfolio/biocom/member_benefits_center/7-events-attended.png",
+        alt: "Events Attended Section",
+        caption: "Events attendance tracking with filterable list"
+      },
+      {
+        src: "/images/portfolio/biocom/member_benefits_center/8-purchasing-savings-export-chart-modal.png",
+        alt: "Export Chart Modal",
+        caption: "Modal for exporting chart data in various formats"
+      },
+      {
+        src: "/images/portfolio/biocom/member_benefits_center/9-events-attended-view-attendees-modal.png",
+        alt: "View Attendees Modal",
+        caption: "Detailed view of event attendees from your organization"
+      },
+      {
+        src: "/images/portfolio/biocom/member_benefits_center/10-committee-memberships.png",
+        alt: "Committee Memberships Section",
+        caption: "Overview of committee memberships and participation"
+      },
+      {
+        src: "/images/portfolio/biocom/member_benefits_center/11-additional-benefits.png",
+        alt: "Additional Benefits Section",
+        caption: "Summary of additional membership benefits and resources"
+      },
+      {
+        src: "/images/portfolio/biocom/member_benefits_center/2-export-data-modal.png",
+        alt: "Export Data Modal",
+        caption: "Modal for exporting membership data in various formats"
+      },
+      {
+        src: "/images/portfolio/biocom/member_benefits_center/3-print-data-modal.png",
+        alt: "Print Data Modal",
+        caption: "Print-friendly view of membership data"
+      },
+      {
+        src: "/images/portfolio/biocom/member_benefits_center/5-purchasing-savings-export-data-modal.png",
+        alt: "Purchasing Savings Export Modal",
+        caption: "Specialized export options for purchasing savings data"
+      },
+      {
+        src: "/images/portfolio/biocom/member_benefits_center/12-collapsed-menu.png",
+        alt: "Collapsed Menu View",
+        caption: "Responsive design with collapsed navigation menu for mobile devices"
+      }
+    ]
+  },
+  {
       "id": "project-modalis",
       "title": "Modalis",
       "subtitle": "Media Asset Management and Distribution System",

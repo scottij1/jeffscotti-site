@@ -62,6 +62,54 @@ const SHOW_FILTER_MENU = false;
 
               <!-- Portfolio Grid -->
               <div class="portfolio-grid">
+                <!-- Portfolio Item: Async Wizard UX Flow -->
+                <figure class="item" data-groups='["all", "ui-design"]'>
+                  <div class="portfolio-item-img">
+                    <img
+                      src="/images/portfolio/bright/async_wizard_ux_flow/1-wrapper-ui-min.jpg"
+                      alt="Async Wizard UX Flow"
+                    />
+                    <a
+                      href="#"
+                      class="project-link"
+                      data-project="project-async-wizard"
+                      aria-label="View Async Wizard UX Flow project details">
+                    </a>
+                  </div>
+                  <i class="far fa-file-alt"></i>
+                  <h3 class="name">Async Wizard UX Flow</h3>
+                  <span class="category">
+                    User Experience Design for Multi-step Solar Installation Process
+                  </span>
+                  <div class="project-tags">
+                    <span>UX Design</span>
+                    <span>User Flow</span>
+                    <span>Solar Energy</span>
+                  </div>
+                </figure>
+                <!-- Portfolio Item: Biocom Member Benefits Center -->
+                <figure class="item" data-groups='["all", "web-development", "ui-design"]'>
+                  <div class="portfolio-item-img">
+                    <img
+                      src="/images/portfolio/biocom/member_benefits_center/1-overview.png"
+                      alt="Biocom Member Benefits Center Dashboard"
+                    />
+                    <a
+                      href="#"
+                      class="project-link"
+                      data-project="project-biocom-mbc"
+                      aria-label="View Biocom Member Benefits Center project details">
+                    </a>
+                  </div>
+                  <i class="far fa-file-alt"></i>
+                  <h3 class="name">Biocom Member Benefits Center</h3>
+                  <span class="category">Interactive Dashboard for Member Benefits Tracking</span>
+                  <div class="project-tags">
+                    <span>Web Application</span>
+                    <span>Dashboard</span>
+                    <span>Data Visualization</span>
+                  </div>
+                </figure>
                 <!-- Portfolio Item 1: Modalis -->
                 <figure class="item" data-groups='["all", "web-development", "ui-design"]'>
                   <div class="portfolio-item-img">
@@ -206,13 +254,14 @@ const SHOW_FILTER_MENU = false;
     position: relative;
     height: 200px;
     overflow: hidden;
+    background-color: var(--container-bg-color);
   }
 
   .portfolio-item-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: top left;
   }
 
   .portfolio-item-preview {
