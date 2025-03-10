@@ -1,5 +1,6 @@
 ---
 import TestimonialItem from "./TestimonialItem.astro";
+import LoadingIndicator from "./LoadingIndicator.astro";
 import {testimonials} from "../data/testimonials";
 
 interface Props {
@@ -36,21 +37,6 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
     width: 100%;
     position: relative;
     margin: 0 auto;
-  }
-
-  .testimonials-spinner {
-    width: 40px;
-    height: 40px;
-    border: 3px solid rgba(0, 0, 0, 0.1);
-    border-radius: 50%;
-    border-top-color: var(--primary-color);
-    animation: spinner 0.8s ease-in-out infinite;
-  }
-
-  @keyframes spinner {
-    to {
-      transform: rotate(360deg);
-    }
   }
 
   /* Fade-in animation for testimonials */
@@ -244,7 +230,7 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
 
   <!-- Loading indicator -->
   <div class="testimonials-loading" id="testimonials_loading">
-    <div class="testimonials-spinner"></div>
+    <LoadingIndicator />
   </div>
 
   <div

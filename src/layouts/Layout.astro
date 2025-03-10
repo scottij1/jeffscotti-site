@@ -13,6 +13,7 @@ import VantaBackground from "../components/VantaBackground.astro";
 import ravenLogoWhite from "../assets/raven-logo-sm.png";
 import ravenLogoBlack from "../assets/raven-logo-sm-blk.png";
 import {ENV} from "../env.server";
+import LoadingIndicator from "../components/LoadingIndicator.astro";
 
 interface Props {
   title?: string;
@@ -152,8 +153,8 @@ const canonicalURLObj =
     <ClientRouter />
 
     <!-- Google Analytics -->
-    <script async src={`https://www.googletagmanager.com/gtag/js?id=${ENV.GA_MEASUREMENT_ID}`}>
-    </script>
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${ENV.GA_MEASUREMENT_ID}`}
+    ></script>
     <script is:inline define:vars={{measurementId: ENV.GA_MEASUREMENT_ID, tagId: ENV.GA_TAG_ID}}>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
