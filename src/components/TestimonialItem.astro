@@ -39,6 +39,7 @@ const {displayText, hiddenText, needsReadMore} = limitWords(testimonial.text, 60
 
     <div class="testimonial-text">
       <p>
+        <i class="fa fa-quote-left quote-start"></i>
         <span>{displayText}</span>
         {
           needsReadMore && (
@@ -59,20 +60,13 @@ const {displayText, hiddenText, needsReadMore} = limitWords(testimonial.text, 60
             </>
           )
         }
+        <i class="fa fa-quote-right quote-end"></i>
       </p>
     </div>
 
     <div class="testimonial-author-info">
       <h3 class="testimonial-author">{testimonial.name}</h3>
       <p class="testimonial-firm">{testimonial.company}</p>
-    </div>
-
-    <div class="testimonial-icon">
-      <i class="fa fa-quote-left"></i>
-    </div>
-
-    <div class="testimonial-icon-big">
-      <i class="fa fa-quote-right"></i>
     </div>
   </div>
 </div>

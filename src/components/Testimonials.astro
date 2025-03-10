@@ -66,14 +66,17 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
 
   .read-more-link,
   .show-less-link {
-    color: var(--primary-color);
+    color: #007bff;
     text-decoration: none;
     cursor: pointer;
     font-weight: 500;
+    position: relative;
+    z-index: 5;
   }
 
   .read-more-link:hover,
   .show-less-link:hover {
+    color: #ff8c00;
     text-decoration: underline;
   }
 
@@ -119,7 +122,7 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
 
   .testimonial-text p {
     font-style: italic;
-    color: var(--text-color);
+    color: white;
   }
 
   .testimonial-author-info {
@@ -139,26 +142,23 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
     opacity: 0.8;
   }
 
-  .testimonial-icon {
-    display: block;
-    line-height: 20px;
-    font-size: 20px;
-    position: absolute;
-    left: 20px;
-    bottom: 46px;
+  .quote-start,
+  .quote-end {
     color: var(--border-color);
+    opacity: 1;
+    font-size: 18px;
+    position: relative;
+    margin: 0 2px;
+    vertical-align: super;
+    z-index: 1;
   }
 
-  .testimonial-icon-big {
-    display: block;
-    line-height: 44px;
-    font-size: 44px;
-    position: absolute;
-    right: -24px;
-    bottom: -24px;
-    color: var(--border-color);
-    opacity: 0.2;
-    z-index: -1;
+  .quote-start {
+    margin-right: 2px;
+  }
+
+  .quote-end {
+    margin-left: 2px;
   }
 
   @media (max-width: 768px) {
