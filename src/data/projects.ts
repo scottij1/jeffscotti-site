@@ -168,11 +168,6 @@ export const projects: Project[] = [
       "role": "Lead Front-End Engineer & Lead UI/UX Designer — Engineered a timeline-based transcript editor in Angular, enabling seamless AI-assisted transcription review and real-time editing. Integrated Azure transcription services with Firebase to provide users with an efficient, AI-enhanced workflow. Designed a clean, intuitive UI that prioritized accessibility and streamlined error correction. Led user research and iterative UX improvements, refining the interaction design to make transcript editing faster and more user-friendly.",
       images: [
       {
-        src: "/images/portfolio/project-transcript-edit.jpg",
-        alt: "Transcript Editor",
-        caption: "Main interface of the Closed Caption Transcript Editor"
-      },
-      {
         src: "/images/portfolio/transcript_edit/1-transcript-edit-all.png",
         alt: "Transcript Editor Full Interface",
         caption: "Complete interface showing transcript editing capabilities"
@@ -234,11 +229,6 @@ export const projects: Project[] = [
     "technologies": ["Angular", "Azure", "Node.js", "TypeScript", "Video.js", "SCSS"],
     "role": "Lead Front-End Engineer & Lead UI/UX Designer — Led the development of a dynamic, engaging quiz-building interface in Angular, making it effortless for instructors to create and embed interactive assessments. Built an instructor-focused analytics dashboard, providing rich insights into student performance. Focused on UX refinement, designing an intuitive workflow that simplified quiz configuration and improved student engagement. Ensured a smooth integration with Azure services, optimizing data flow and real-time response tracking.",
       images: [
-      {
-        src: "/images/portfolio/project-quiz-creator.jpg",
-        alt: "Quiz Creator",
-        caption: "Main interface of the Video Quiz Creator"
-      },
       {
         src: "/images/portfolio/quiz_creator/1-standard-no-quizzes.png",
         alt: "Quiz Creator Empty State",
