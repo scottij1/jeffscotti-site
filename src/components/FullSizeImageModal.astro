@@ -35,7 +35,10 @@ const {projectId} = Astro.props;
     </div>
 
     <div class="modal-footer">
-      <div class="image-caption"></div>
+      <div class="modal-caption-container">
+        <div class="image-caption"></div>
+        <div id={`download-button-container-${projectId}`} class="download-button-container"></div>
+      </div>
 
       <div class="modal-thumbnails-container">
         <!-- Thumbnails will be dynamically added here -->
@@ -185,11 +188,25 @@ const {projectId} = Astro.props;
     text-align: center;
   }
 
+  .modal-caption-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 4px;
+    text-align: center;
+  }
+
   .image-caption {
     color: white;
     font-size: 16px;
-    max-width: 800px;
-    margin: 0 auto 15px auto;
+  }
+
+  .download-button-container {
+    margin-left: 15px;
   }
 
   .modal-thumbnails-container {

@@ -25,7 +25,21 @@ const {images, projectId} = Astro.props;
               loading={index < 2 ? "eager" : "lazy"}
               class="zoomable-image"
             />
-            {image.caption && <div class="image-caption">{image.caption}</div>}
+            {image.caption && (
+              <div class="image-caption">
+                {image.caption}
+                {projectId === "project-async-wizard" && (
+                  <a
+                    href={image.src}
+                    download
+                    class="download-button"
+                    title="Download high quality image">
+                    <i class="fas fa-download" />
+                    <span>High Quality</span>
+                  </a>
+                )}
+              </div>
+            )}
           </div>
         ))
       }
@@ -112,6 +126,31 @@ const {images, projectId} = Astro.props;
     padding: 10px 15px;
     font-size: 14px;
     text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .download-button {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 5px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
+    text-decoration: none;
+    font-size: 12px;
+  }
+
+  .download-button i {
+    margin-right: 5px;
+  }
+
+  .download-button:hover {
+    background-color: var(--primary-color);
   }
 
   .gallery-nav {
@@ -213,6 +252,21 @@ const {images, projectId} = Astro.props;
     .gallery-nav {
       width: 36px;
       height: 36px;
+    }
+
+    .download-button span {
+      display: none;
+    }
+
+    .download-button {
+      width: 30px;
+      height: 30px;
+      padding: 0;
+      border-radius: 50%;
+    }
+
+    .download-button i {
+      margin-right: 0;
     }
   }
 </style>
@@ -496,6 +550,26 @@ const {images, projectId} = Astro.props;
 
         if (modalCaptionEl) {
           modalCaptionEl.textContent = images[index]?.caption || "";
+        }
+
+        const downloadButtonContainer = modal.querySelector(
+          `#download-button-container-${projectId}`,
+        );
+        if (downloadButtonContainer) {
+          downloadButtonContainer.innerHTML = "";
+
+          if (
+            projectId === "project-async-wizard" ||
+            projectId === "project-async-wizard-desktop"
+          ) {
+            const downloadButton = document.createElement("a");
+            downloadButton.href = images[index].src;
+            downloadButton.download = "";
+            downloadButton.className = "download-button";
+            downloadButton.title = "Download high quality image";
+            downloadButton.innerHTML = '<i class="fas fa-download"></i><span>High Quality</span>';
+            downloadButtonContainer.appendChild(downloadButton);
+          }
         }
 
         modalIndex = index;
