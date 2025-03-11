@@ -1,18 +1,20 @@
 ---
 import type {ProjectImage} from "../data/projects";
 import ImageGallery from "./ImageGallery.astro";
+import PdfViewer from "./PdfViewer.astro";
 
 interface Props {
   desktopImages: ProjectImage[];
   mobileImages: ProjectImage[];
   projectId: string;
+  pdfUrl?: string; // Optional PDF URL
 }
 
-const {desktopImages, mobileImages, projectId} = Astro.props;
+const {desktopImages, mobileImages, projectId, pdfUrl} = Astro.props;
 ---
 
 <div class="tabbed-gallery-container">
-  <!-- Desktop Tabs -->
+  <!-- Tabs -->
   <ul class="tab-buttons">
     <li class="active">
       <a href="#desktop-tab" class="tab-btn" data-tab="desktop-tab" aria-label="Desktop view">
@@ -30,6 +32,18 @@ const {desktopImages, mobileImages, projectId} = Astro.props;
         Mobile
       </a>
     </li>
+    {
+      pdfUrl && (
+        <li>
+          <a href="#pdf-tab" class="tab-btn" data-tab="pdf-tab" aria-label="PDF document">
+            <div class="tab-icon">
+              <i class="fas fa-file-pdf" />
+            </div>
+            PDF
+          </a>
+        </li>
+      )
+    }
   </ul>
 
   <div class="tab-content-wrapper">
@@ -39,6 +53,13 @@ const {desktopImages, mobileImages, projectId} = Astro.props;
     <div class="tab-content" id="mobile-tab">
       <ImageGallery images={mobileImages} projectId={`${projectId}-mobile`} />
     </div>
+    {
+      pdfUrl && (
+        <div class="tab-content" id="pdf-tab">
+          <PdfViewer pdfUrl={pdfUrl} projectId={projectId} />
+        </div>
+      )
+    }
   </div>
 </div>
 

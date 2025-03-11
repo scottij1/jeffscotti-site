@@ -1,0 +1,147 @@
+---
+interface Props {
+  pdfUrl: string;
+  projectId: string;
+}
+
+const {pdfUrl, projectId} = Astro.props;
+---
+
+<div class="pdf-viewer-container" id={`pdf-viewer-${projectId}`}>
+  <div class="pdf-controls">
+    <button class="zoom-in" aria-label="Zoom in">
+      <i class="fas fa-search-plus"></i>
+    </button>
+    <button class="zoom-out" aria-label="Zoom out">
+      <i class="fas fa-search-minus"></i>
+    </button>
+    <a href={pdfUrl} download class="download-pdf" aria-label="Download PDF">
+      <i class="fas fa-download"></i>
+    </a>
+  </div>
+  <div class="pdf-wrapper">
+    <object data={pdfUrl} type="application/pdf" width="100%" height="100%" class="pdf-object">
+      <p>
+        It appears your browser doesn't support embedded PDFs.
+        <a href={pdfUrl} target="_blank">Click here to download the PDF</a>.
+      </p>
+    </object>
+  </div>
+</div>
+
+<style>
+  .pdf-viewer-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: var(--container-bg-color);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .pdf-controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+    display: flex;
+    gap: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 20px;
+  }
+
+  .pdf-controls button,
+  .pdf-controls a {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+  }
+
+  .pdf-controls button:hover,
+  .pdf-controls a:hover {
+    background-color: var(--primary-color);
+  }
+
+  .pdf-wrapper {
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+  }
+
+  .pdf-object {
+    border: none;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .pdf-wrapper {
+      height: 400px;
+    }
+  }
+</style>
+
+<script define:vars={{projectId}}>
+  function initializePdfViewer() {
+    const viewerId = `pdf-viewer-${projectId}`;
+    const viewer = document.getElementById(viewerId);
+    if (!viewer) return;
+
+    const pdfObject = viewer.querySelector(".pdf-object");
+    const zoomInBtn = viewer.querySelector(".zoom-in");
+    const zoomOutBtn = viewer.querySelector(".zoom-out");
+
+    // Scale factor for zooming
+    let scale = 1;
+    const minScale = 0.5;
+    const maxScale = 2;
+    const scaleStep = 0.1;
+
+    function zoomIn() {
+      if (scale < maxScale) {
+        scale += scaleStep;
+        applyZoom();
+      }
+    }
+
+    function zoomOut() {
+      if (scale > minScale) {
+        scale -= scaleStep;
+        applyZoom();
+      }
+    }
+
+    function applyZoom() {
+      // For embedded PDFs, we can't directly zoom the content
+      // This is a limitation of the <object> tag
+      // For a more advanced implementation, consider using PDF.js
+      console.log(`Zoom level: ${scale}`);
+    }
+
+    if (zoomInBtn) {
+      zoomInBtn.addEventListener("click", zoomIn);
+    }
+
+    if (zoomOutBtn) {
+      zoomOutBtn.addEventListener("click", zoomOut);
+    }
+  }
+
+  // Initialize on page load
+  document.addEventListener("DOMContentLoaded", initializePdfViewer);
+  document.addEventListener("astro:page-load", initializePdfViewer);
+
+  // Run if the document is already loaded
+  if (document.readyState === "complete" || document.readyState === "interactive") {
+    setTimeout(initializePdfViewer, 0);
+  }
+</script>
