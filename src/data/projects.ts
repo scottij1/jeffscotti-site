@@ -124,7 +124,7 @@ export const projects: Project[] = [
     "role": "Lead UX Designer — Created an intuitive step-by-step wizard interface that simplifies the complex solar installation process. Designed a user-friendly flow that allows customers to complete steps asynchronously, improving conversion rates and reducing drop-offs. Focused on clear visual cues, progress indicators, and contextual help to guide users through each stage of the process. Collaborated with stakeholders to ensure the design met both user needs and business requirements.",
     "rolePositions": ["Lead UX Designer"],
     "processVision": "Created an intuitive step-by-step wizard interface that simplifies the complex solar installation process. Designed a user-friendly flow that allows customers to complete steps asynchronously, improving conversion rates and reducing drop-offs. Focused on clear visual cues, progress indicators, and contextual help to guide users through each stage of the process. Collaborated with stakeholders to ensure the design met both user needs and business requirements.",
-    "hidden": true,
+    "hidden": false,
     images: [
       {
         src: "/images/portfolio/bright/async_wizard_ux_flow/1-wrapper-ui-min.jpg",
