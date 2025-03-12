@@ -42,6 +42,13 @@ import {projects, getProjectById, automatedCfeBillMobileImages} from "../data/pr
                   projectId={project.id}
                   pdfUrl="/images/portfolio/bright/automated_cfe_bill/process_and_vision.pdf"
                 />
+              ) : project.id === "project-biocom-site" ? (
+                <ProjectTabbedGallery
+                  desktopImages={project.images}
+                  mobileImages={[]}
+                  projectId={project.id}
+                  pdfUrl="/images/portfolio/biocom/biocom.org/site-map.pdf"
+                />
               ) : (
                 <ImageGallery images={project.images} projectId={project.id} />
               )}

@@ -17,25 +17,41 @@ const {desktopImages, mobileImages, projectId, pdfUrl} = Astro.props;
   <!-- Tabs -->
   <ul class="tab-buttons">
     <li class="active">
-      <a href="#desktop-tab" class="tab-btn" data-tab="desktop-tab" aria-label="Desktop view">
+      <a
+        href={`#${projectId}-desktop-tab`}
+        class="tab-btn"
+        data-tab={`${projectId}-desktop-tab`}
+        aria-label="Desktop view">
         <div class="tab-icon">
           <i class="fas fa-desktop"></i>
         </div>
         Desktop
       </a>
     </li>
-    <li>
-      <a href="#mobile-tab" class="tab-btn" data-tab="mobile-tab" aria-label="Mobile view">
-        <div class="tab-icon">
-          <i class="fas fa-mobile-alt"></i>
-        </div>
-        Mobile
-      </a>
-    </li>
+    {
+      mobileImages && mobileImages.length > 0 && (
+        <li>
+          <a
+            href={`#${projectId}-mobile-tab`}
+            class="tab-btn"
+            data-tab={`${projectId}-mobile-tab`}
+            aria-label="Mobile view">
+            <div class="tab-icon">
+              <i class="fas fa-mobile-alt" />
+            </div>
+            Mobile
+          </a>
+        </li>
+      )
+    }
     {
       pdfUrl && (
         <li>
-          <a href="#pdf-tab" class="tab-btn" data-tab="pdf-tab" aria-label="PDF document">
+          <a
+            href={`#${projectId}-pdf-tab`}
+            class="tab-btn"
+            data-tab={`${projectId}-pdf-tab`}
+            aria-label="PDF document">
             <div class="tab-icon">
               <i class="fas fa-file-pdf" />
             </div>
@@ -47,15 +63,19 @@ const {desktopImages, mobileImages, projectId, pdfUrl} = Astro.props;
   </ul>
 
   <div class="tab-content-wrapper">
-    <div class="tab-content active" id="desktop-tab">
+    <div class="tab-content active" id={`${projectId}-desktop-tab`}>
       <ImageGallery images={desktopImages} projectId={`${projectId}-desktop`} />
     </div>
-    <div class="tab-content" id="mobile-tab">
-      <ImageGallery images={mobileImages} projectId={`${projectId}-mobile`} />
-    </div>
+    {
+      mobileImages && mobileImages.length > 0 && (
+        <div class="tab-content" id={`${projectId}-mobile-tab`}>
+          <ImageGallery images={mobileImages} projectId={`${projectId}-mobile`} />
+        </div>
+      )
+    }
     {
       pdfUrl && (
-        <div class="tab-content" id="pdf-tab">
+        <div class="tab-content" id={`${projectId}-pdf-tab`}>
           <PdfViewer pdfUrl={pdfUrl} projectId={projectId} />
         </div>
       )
@@ -155,45 +175,72 @@ const {desktopImages, mobileImages, projectId, pdfUrl} = Astro.props;
 
 <script define:vars={{projectId}}>
   function initializeTabbedGallery() {
-    const container = document.querySelector(".tabbed-gallery-container");
-    if (!container) return;
+    console.log(`Initializing tabbed gallery for project: ${projectId}`);
 
-    const tabLinks = container.querySelectorAll(".tab-btn");
-    const tabContents = container.querySelectorAll(".tab-content");
-    const tabItems = container.querySelectorAll(".tab-buttons li");
+    // Find all tabbed gallery containers
+    const containers = document.querySelectorAll(".tabbed-gallery-container");
+    console.log(`Found ${containers.length} tabbed gallery containers`);
 
-    tabLinks.forEach((link) => {
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
+    containers.forEach((container, index) => {
+      console.log(`Setting up container ${index + 1}`);
 
-        tabItems.forEach((item) => item.classList.remove("active"));
-        tabContents.forEach((content) => content.classList.remove("active"));
+      const tabLinks = container.querySelectorAll(".tab-btn");
+      const tabContents = container.querySelectorAll(".tab-content");
+      const tabItems = container.querySelectorAll(".tab-buttons li");
 
-        const parentLi = link.closest("li");
-        if (parentLi) {
-          parentLi.classList.add("active");
-        }
+      console.log(
+        `Found ${tabLinks.length} tab links, ${tabContents.length} tab contents, ${tabItems.length} tab items`,
+      );
 
-        const tabId = link.dataset.tab;
-        if (tabId) {
-          const tabContent = document.getElementById(tabId);
-          if (tabContent) {
-            tabContent.classList.add("active");
+      tabLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          console.log(`Tab clicked: ${link.dataset.tab}`);
+
+          tabItems.forEach((item) => item.classList.remove("active"));
+          tabContents.forEach((content) => content.classList.remove("active"));
+
+          const parentLi = link.closest("li");
+          if (parentLi) {
+            parentLi.classList.add("active");
+            console.log(`Activated tab item: ${parentLi.textContent.trim()}`);
           }
-        }
+
+          const tabId = link.dataset.tab;
+          if (tabId) {
+            const tabContent = document.getElementById(tabId);
+            if (tabContent) {
+              tabContent.classList.add("active");
+              console.log(`Activated tab content: ${tabId}`);
+            } else {
+              console.error(`Tab content not found: ${tabId}`);
+            }
+          }
+        });
       });
     });
   }
 
   // Run initialization immediately
-  document.addEventListener("DOMContentLoaded", initializeTabbedGallery);
+  document.addEventListener("DOMContentLoaded", () => {
+    console.log("DOMContentLoaded event fired");
+    initializeTabbedGallery();
+  });
 
   // Also run after Astro view transitions
-  document.addEventListener("astro:page-load", initializeTabbedGallery);
-  document.addEventListener("astro:after-swap", initializeTabbedGallery);
+  document.addEventListener("astro:page-load", () => {
+    console.log("astro:page-load event fired");
+    initializeTabbedGallery();
+  });
+
+  document.addEventListener("astro:after-swap", () => {
+    console.log("astro:after-swap event fired");
+    initializeTabbedGallery();
+  });
 
   // Run if the document is already loaded
   if (document.readyState === "complete" || document.readyState === "interactive") {
+    console.log(`Document already ${document.readyState}, initializing immediately`);
     setTimeout(initializeTabbedGallery, 0);
   }
 </script>

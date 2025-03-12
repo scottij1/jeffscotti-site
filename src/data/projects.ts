@@ -264,6 +264,76 @@ export const projects: Project[] = [
     ]
   },
   {
+    "id": "project-biocom-site",
+    "title": "Biocom Corporate Website",
+    "subtitle": "Headless WordPress with React/Next.js Front End",
+    "description": [
+      "A comprehensive redesign and architectural overhaul of Biocom's corporate website, implementing a headless WordPress instance with a React/Next.js front end. This project consolidated multiple company websites and properties under the primary domain, concentrating web traffic and streamlining content management while providing an enhanced user experience."
+    ],
+    "technologies": ["React", "Next.js", "TypeScript", "WordPress", "PHP", "REST API", "Salesforce Integration", "Stripe Integration"],
+    "role": "Lead Front-End Engineer & Project Manager — Led the development team and provided direction on front-end application architecture while coordinating with back-end engineers to optimize microservices. Championed the design and modernization of user interfaces across proprietary systems and applications, enriching user experience and driving member engagement by incorporating new features to improve community sites. Liaised with key internal stakeholders to gather project requirements and provide status updates, translating highly technical concepts into layman's terms to facilitate effective communication.",
+    "rolePositions": ["Lead Front-End Engineer", "Project Manager", "UI/UX Designer"],
+    "processVision": "Architected and implemented a scalable, loosely coupled headless WordPress instance with a React/Next.js front end to consolidate company websites and properties under the domain of the primary website. This approach concentrated web traffic and facilitated streamlined content management while providing a modern, responsive user interface.\n\nBuilt a full-stack event management application as well as custom plugins for event registration and membership management, integrating Salesforce and Stripe POS systems to create a cohesive, easily accessible system for end users. Supported Sales and Membership by designing and building a custom dashboard to highlight ROI on membership by showcasing KPIs and providing comprehensive reports and data visualizations to assist with membership retention and expansion campaigns.",
+    "liveUrl": "https://www.biocom.org",
+    images: [
+      {
+        src: "/images/portfolio/biocom/biocom.org/1-homepage.jpg",
+        alt: "Biocom Homepage",
+        caption: "Redesigned Biocom homepage with modern UI and improved navigation"
+      },
+      {
+        src: "/images/portfolio/biocom/biocom.org/2-events-directory.jpg",
+        alt: "Events Directory",
+        caption: "Comprehensive events directory with filtering options"
+      },
+      {
+        src: "/images/portfolio/biocom/biocom.org/3-biocom-event.png",
+        alt: "Individual Event Page",
+        caption: "Detailed event page with registration options"
+      },
+      {
+        src: "/images/portfolio/biocom/biocom.org/4-biocom-committee.png",
+        alt: "Committee Page",
+        caption: "Committee information and membership details"
+      },
+      {
+        src: "/images/portfolio/biocom/biocom.org/5-member-directory.png",
+        alt: "Member Directory",
+        caption: "Searchable member directory with filtering capabilities"
+      },
+      {
+        src: "/images/portfolio/biocom/biocom.org/6-member-landing-page.png",
+        alt: "Member Landing Page",
+        caption: "Personalized member landing page with relevant information"
+      },
+      {
+        src: "/images/portfolio/biocom/biocom.org/7-event-registration-address-capture.png",
+        alt: "Event Registration - Address Capture",
+        caption: "Streamlined event registration process - address capture step"
+      },
+      {
+        src: "/images/portfolio/biocom/biocom.org/8-event-registration-enter-email.png",
+        alt: "Event Registration - Email Entry",
+        caption: "Event registration email verification step"
+      },
+      {
+        src: "/images/portfolio/biocom/biocom.org/9-event-registration-payment.png",
+        alt: "Event Registration - Payment",
+        caption: "Secure payment processing for event registration"
+      },
+      {
+        src: "/images/portfolio/biocom/biocom.org/12-custom-upload-page.png",
+        alt: "Custom Upload Interface",
+        caption: "Custom file upload interface for member submissions"
+      },
+      {
+        src: "/images/portfolio/biocom/biocom.org/13-custom-upload-page-done.png",
+        alt: "Upload Confirmation",
+        caption: "Confirmation screen after successful file upload"
+      }
+    ]
+  },
+  {
       "id": "project-modalis",
       "title": "Modalis",
       "subtitle": "Media Asset Management and Distribution System",
