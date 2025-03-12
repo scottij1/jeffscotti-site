@@ -175,27 +175,16 @@ const {desktopImages, mobileImages, projectId, pdfUrl} = Astro.props;
 
 <script define:vars={{projectId}}>
   function initializeTabbedGallery() {
-    console.log(`Initializing tabbed gallery for project: ${projectId}`);
-
-    // Find all tabbed gallery containers
     const containers = document.querySelectorAll(".tabbed-gallery-container");
-    console.log(`Found ${containers.length} tabbed gallery containers`);
 
-    containers.forEach((container, index) => {
-      console.log(`Setting up container ${index + 1}`);
-
+    containers.forEach((container) => {
       const tabLinks = container.querySelectorAll(".tab-btn");
       const tabContents = container.querySelectorAll(".tab-content");
       const tabItems = container.querySelectorAll(".tab-buttons li");
 
-      console.log(
-        `Found ${tabLinks.length} tab links, ${tabContents.length} tab contents, ${tabItems.length} tab items`,
-      );
-
       tabLinks.forEach((link) => {
         link.addEventListener("click", (e) => {
           e.preventDefault();
-          console.log(`Tab clicked: ${link.dataset.tab}`);
 
           tabItems.forEach((item) => item.classList.remove("active"));
           tabContents.forEach((content) => content.classList.remove("active"));
@@ -203,7 +192,6 @@ const {desktopImages, mobileImages, projectId, pdfUrl} = Astro.props;
           const parentLi = link.closest("li");
           if (parentLi) {
             parentLi.classList.add("active");
-            console.log(`Activated tab item: ${parentLi.textContent.trim()}`);
           }
 
           const tabId = link.dataset.tab;
@@ -211,9 +199,6 @@ const {desktopImages, mobileImages, projectId, pdfUrl} = Astro.props;
             const tabContent = document.getElementById(tabId);
             if (tabContent) {
               tabContent.classList.add("active");
-              console.log(`Activated tab content: ${tabId}`);
-            } else {
-              console.error(`Tab content not found: ${tabId}`);
             }
           }
         });
@@ -221,26 +206,19 @@ const {desktopImages, mobileImages, projectId, pdfUrl} = Astro.props;
     });
   }
 
-  // Run initialization immediately
   document.addEventListener("DOMContentLoaded", () => {
-    console.log("DOMContentLoaded event fired");
     initializeTabbedGallery();
   });
 
-  // Also run after Astro view transitions
   document.addEventListener("astro:page-load", () => {
-    console.log("astro:page-load event fired");
     initializeTabbedGallery();
   });
 
   document.addEventListener("astro:after-swap", () => {
-    console.log("astro:after-swap event fired");
     initializeTabbedGallery();
   });
 
-  // Run if the document is already loaded
   if (document.readyState === "complete" || document.readyState === "interactive") {
-    console.log(`Document already ${document.readyState}, initializing immediately`);
     setTimeout(initializeTabbedGallery, 0);
   }
 </script>

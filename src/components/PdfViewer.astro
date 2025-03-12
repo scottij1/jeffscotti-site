@@ -92,21 +92,14 @@ const {pdfUrl, projectId} = Astro.props;
 
 <script define:vars={{projectId, pdfUrl}}>
   function initializePdfViewer() {
-    console.log(`Initializing PDF viewer for project: ${projectId}, PDF URL: ${pdfUrl}`);
-
     const viewerId = `pdf-viewer-${projectId}`;
     const viewer = document.getElementById(viewerId);
 
     if (!viewer) {
-      console.error(`PDF viewer element not found with ID: ${viewerId}`);
       return;
     }
 
-    console.log(`PDF viewer element found: ${viewerId}`);
-
     const pdfObject = viewer.querySelector(".pdf-object");
-    console.log(`PDF object element found: ${pdfObject ? "yes" : "no"}`);
-
     const zoomInBtn = viewer.querySelector(".zoom-in");
     const zoomOutBtn = viewer.querySelector(".zoom-out");
 
@@ -117,7 +110,6 @@ const {pdfUrl, projectId} = Astro.props;
     const scaleStep = 0.1;
 
     function zoomIn() {
-      console.log("Zoom in clicked");
       if (scale < maxScale) {
         scale += scaleStep;
         applyZoom();
@@ -125,7 +117,6 @@ const {pdfUrl, projectId} = Astro.props;
     }
 
     function zoomOut() {
-      console.log("Zoom out clicked");
       if (scale > minScale) {
         scale -= scaleStep;
         applyZoom();
@@ -136,34 +127,28 @@ const {pdfUrl, projectId} = Astro.props;
       // For embedded PDFs, we can't directly zoom the content
       // This is a limitation of the <object> tag
       // For a more advanced implementation, consider using PDF.js
-      console.log(`Zoom level: ${scale}`);
     }
 
     if (zoomInBtn) {
       zoomInBtn.addEventListener("click", zoomIn);
-      console.log("Zoom in button listener attached");
     }
 
     if (zoomOutBtn) {
       zoomOutBtn.addEventListener("click", zoomOut);
-      console.log("Zoom out button listener attached");
     }
   }
 
   // Initialize on page load
   document.addEventListener("DOMContentLoaded", () => {
-    console.log("DOMContentLoaded event fired for PDF viewer");
     initializePdfViewer();
   });
 
   document.addEventListener("astro:page-load", () => {
-    console.log("astro:page-load event fired for PDF viewer");
     initializePdfViewer();
   });
 
   // Run if the document is already loaded
   if (document.readyState === "complete" || document.readyState === "interactive") {
-    console.log(`Document already ${document.readyState}, initializing PDF viewer immediately`);
     setTimeout(initializePdfViewer, 0);
   }
 </script>
