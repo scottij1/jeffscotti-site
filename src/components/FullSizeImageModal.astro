@@ -1,5 +1,4 @@
 ---
-// FullSizeImageModal.astro - Component for displaying full-sized images in a modal
 import type {ProjectImage} from "../data/projects";
 
 interface Props {
@@ -190,7 +189,7 @@ const {projectId} = Astro.props;
 
   .modal-caption-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin-bottom: 15px;
     background-color: rgba(0, 0, 0, 0.7);
@@ -203,6 +202,8 @@ const {projectId} = Astro.props;
   .image-caption {
     color: white;
     font-size: 16px;
+    text-align: center;
+    flex: 1;
   }
 
   .download-button-container {
@@ -245,7 +246,6 @@ const {projectId} = Astro.props;
     object-fit: cover;
   }
 
-  /* Responsive adjustments */
   @media (max-width: 768px) {
     .modal-nav {
       width: 40px;

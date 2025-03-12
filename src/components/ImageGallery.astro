@@ -127,7 +127,7 @@ const {images, projectId} = Astro.props;
     font-size: 14px;
     text-align: center;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
   }
 
@@ -377,7 +377,6 @@ const {images, projectId} = Astro.props;
       }
     }
 
-    // Initialize gallery with the first image
     showImage(0);
     if (totalImages > 1) {
       preloadAdjacentImages(0);
@@ -389,7 +388,8 @@ const {images, projectId} = Astro.props;
     function initModal() {
       const modal = document.getElementById(modalId);
       if (!modal) {
-        setTimeout(initModal, 50);
+        // Increase timeout and retry count to ensure modal is found
+        setTimeout(initModal, 100);
         return;
       }
 
@@ -642,6 +642,8 @@ const {images, projectId} = Astro.props;
             openModal(index);
           }
         });
+
+        img.style.cursor = "zoom-in";
       });
     }
 
@@ -656,6 +658,10 @@ const {images, projectId} = Astro.props;
   });
 
   document.addEventListener("astro:page-load", function () {
+    initializeGallery();
+  });
+
+  document.addEventListener("astro:after-swap", function () {
     initializeGallery();
   });
 

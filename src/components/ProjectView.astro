@@ -100,7 +100,7 @@ import {projects, getProjectById, automatedCfeBillMobileImages} from "../data/pr
               <div class="project-process-vision">
                 <h3>Process & Vision</h3>
                 {project.processVision.split("\n\n").map((paragraph: string) => (
-                  <p>{paragraph}</p>
+                  <p set:html={paragraph} />
                 ))}
               </div>
             </div>
@@ -109,12 +109,15 @@ import {projects, getProjectById, automatedCfeBillMobileImages} from "../data/pr
       }
     </div>
   </div>
-
-  {/* Add full-size image modal for each project */}
-  {projects.map((project) => <FullSizeImageModal projectId={project.id} />)}
-
-  {/* Add full-size image modal for mobile images of the automated CFE bill project */}
-  <FullSizeImageModal projectId="project-automated-cfe-bill-mobile" />
+  {
+    projects.map((project) => (
+      <>
+        <FullSizeImageModal projectId={project.id} />
+        <FullSizeImageModal projectId={`${project.id}-desktop`} />
+        <FullSizeImageModal projectId={`${project.id}-mobile`} />
+      </>
+    ))
+  }
 </div>
 
 <style>
@@ -290,7 +293,6 @@ import {projects, getProjectById, automatedCfeBillMobileImages} from "../data/pr
     line-height: 1.6;
   }
 
-  /* Responsive adjustments */
   @media (max-width: 768px) {
     .project-view-body {
       grid-template-columns: 1fr;
@@ -322,25 +324,20 @@ import {projects, getProjectById, automatedCfeBillMobileImages} from "../data/pr
 
     let currentProjectIndex = 0;
 
-    // Listen for theme changes
     document.addEventListener("themeChanged", (event) => {
       console.log("Theme changed in ProjectView:", event.detail.theme);
     });
 
-    // Function to show a specific project
     function showProject(projectId) {
-      // Hide all projects first
       projectContents.forEach((content) => {
         content.style.display = "none";
       });
 
-      // Show the selected project
       const projectToShow = document.getElementById(projectId);
       if (projectToShow) {
         projectToShow.style.display = "block";
-
-        // Update current index
         const newIndex = projectIds.indexOf(projectId);
+
         if (newIndex !== -1) {
           currentProjectIndex = newIndex;
         } else {
@@ -351,32 +348,27 @@ import {projects, getProjectById, automatedCfeBillMobileImages} from "../data/pr
       }
     }
 
-    // Close the project view
     function closeProjectView() {
       projectView.classList.remove("open");
       document.body.style.overflow = "";
     }
 
-    // Open the project view with a specific project
     function openProjectView(projectId) {
       showProject(projectId);
       projectView.classList.add("open");
-      document.body.style.overflow = "hidden"; // Prevent scrolling of the main page
+      document.body.style.overflow = "hidden";
     }
 
-    // Navigate to previous project
     function goToPrevProject() {
       currentProjectIndex = (currentProjectIndex - 1 + projectIds.length) % projectIds.length;
       showProject(projectIds[currentProjectIndex]);
     }
 
-    // Navigate to next project
     function goToNextProject() {
       currentProjectIndex = (currentProjectIndex + 1) % projectIds.length;
       showProject(projectIds[currentProjectIndex]);
     }
 
-    // Event listeners
     if (closeButton) {
       closeButton.addEventListener("click", closeProjectView);
     }
@@ -389,13 +381,11 @@ import {projects, getProjectById, automatedCfeBillMobileImages} from "../data/pr
       nextButton.addEventListener("click", goToNextProject);
     }
 
-    // Expose functions to window for external access
     window.openProjectView = openProjectView;
     window.closeProjectView = closeProjectView;
     window.goToPrevProject = goToPrevProject;
     window.goToNextProject = goToNextProject;
 
-    // Handle escape key to close
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && projectView.classList.contains("open")) {
         closeProjectView();
