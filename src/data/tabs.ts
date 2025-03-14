@@ -13,7 +13,7 @@ export interface TabItem {
 export const tabItems: TabItem[] = [
   {
     id: "front-end-engineering",
-    title: "Front-End Engineering",
+    title: "Frontend Engineering",
     icon: "icon-layers",
     content: [
       "I love to code. What really drives me is <strong>problem-solving</strong> and front-end development gives me plenty of puzzles to crack. For over a decade, I've been building <strong>scalable, performant UIs</strong> with a range of technologies including <strong>TypeScript, JavaScript, React, and Material UI</strong>, crafting seamless user experiences that are both <strong>intuitive and efficient</strong>.",

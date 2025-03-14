@@ -25,13 +25,13 @@ interface Props {
 }
 
 const {
-  title = "Jeff Scotti - Senior Front End Engineer, Senior UI/UX Designer",
-  description = "Jeff Scotti is a Senior Front End Engineer and UI/UX Designer with 15+ years of experience building intuitive, high-performance web applications.",
+  title = "Jeff Scotti - Senior Frontend Engineer, Senior UI/UX Designer",
+  description = "Jeff Scotti is a Senior Frontend Engineer and UI/UX Designer with 15+ years of experience building intuitive, high-performance web applications.",
   image = new URL("/assets/js-headshot.png", Astro.site || Astro.url),
   canonicalURL = Astro.url,
   type = "profile",
   keywords = [
-    "Front End Engineer",
+    "Frontend Engineer",
     "UI/UX Designer",
     "Web Developer",
     "JavaScript",
@@ -54,7 +54,7 @@ const canonicalURLObj =
     <meta
       name="description"
       content={description ||
-        "Jeff Scotti is a Senior Front End Engineer and UI/UX Designer with 15+ years of experience building intuitive, high-performance web applications."}
+        "Jeff Scotti is a Senior Frontend Engineer and UI/UX Designer with 15+ years of experience building intuitive, high-performance web applications."}
     />
     <meta name="keywords" content={keywords.join(", ")} />
     <meta name="author" content="Jeff Scotti" />
@@ -67,7 +67,7 @@ const canonicalURLObj =
     <meta
       property="og:description"
       content={description ||
-        "Jeff Scotti is a Senior Front End Engineer and UI/UX Designer with 15+ years of experience building intuitive, high-performance web applications."}
+        "Jeff Scotti is a Senior Frontend Engineer and UI/UX Designer with 15+ years of experience building intuitive, high-performance web applications."}
     />
     <meta property="og:image" content={image} />
     <meta property="og:site_name" content="Jeff Scotti" />
@@ -79,7 +79,7 @@ const canonicalURLObj =
     <meta
       property="twitter:description"
       content={description ||
-        "Jeff Scotti is a Senior Front End Engineer and UI/UX Designer with 15+ years of experience building intuitive, high-performance web applications."}
+        "Jeff Scotti is a Senior Frontend Engineer and UI/UX Designer with 15+ years of experience building intuitive, high-performance web applications."}
     />
     <meta property="twitter:image" content={image} />
 
@@ -153,8 +153,8 @@ const canonicalURLObj =
     <ClientRouter />
 
     <!-- Google Analytics -->
-    <script async src={`https://www.googletagmanager.com/gtag/js?id=${ENV.GA_MEASUREMENT_ID}`}
-    ></script>
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${ENV.GA_MEASUREMENT_ID}`}>
+    </script>
     <script is:inline define:vars={{measurementId: ENV.GA_MEASUREMENT_ID, tagId: ENV.GA_TAG_ID}}>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
@@ -235,13 +235,13 @@ const canonicalURLObj =
         "name": "Jeff Scotti",
         "url": "https://jeffscotti.net",
         "image": "https://jeffscotti.net/assets/js-headshot.png",
-        "jobTitle": "Senior Front End Engineer & Senior UI/UX Designer",
+        "jobTitle": "Senior Frontend Engineer & Senior UI/UX Designer",
         "description": "I build intuitive, high-performance web applications by combining clean, efficient code with thoughtful design.",
         "sameAs": ["https://linkedin.com/in/jeffscotti", "https://github.com/scottij1"],
         "email": "jeff@jeffscotti.net",
         "knowsAbout": [
           "Front-end Engineer",
-          "Front End Development",
+          "Frontend Development",
           "UI/UX Design",
           "JavaScript",
           "React",

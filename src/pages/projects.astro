@@ -8,7 +8,7 @@ const visibleProjects = projects.filter((project) => !project.hidden);
 ---
 
 <Layout
-  title="Portfolio & Projects | Jeff Scotti - Front End Engineer & UI/UX Designer"
+  title="Portfolio & Projects | Jeff Scotti - Frontend Engineer & UI/UX Designer"
   description="Explore Jeff Scotti's portfolio of web development projects, UI designs, and mobile applications showcasing expertise in React, Vue.js, and modern web technologies."
   type="website"
   keywords={[
@@ -18,7 +18,7 @@ const visibleProjects = projects.filter((project) => !project.hidden);
     "React Projects",
     "Vue.js Applications",
     "Mobile App Development",
-    "Front End Portfolio",
+    "Frontend Portfolio",
     "UI/UX Case Studies",
     "JavaScript Projects",
   ]}>
@@ -45,7 +45,7 @@ const visibleProjects = projects.filter((project) => !project.hidden);
                     </li>
                     <li>
                       <a class="filter btn btn-sm btn-link" data-group="frontend-engineering">
-                        Front End Engineering
+                        Frontend Engineering
                       </a>
                     </li>
                     <li>
@@ -70,8 +70,8 @@ const visibleProjects = projects.filter((project) => !project.hidden);
                     const groups = ["all"];
 
                     if (
-                      project.rolePositions.includes("Front-End Engineer") ||
-                      project.rolePositions.includes("Lead Front-End Engineer")
+                      project.rolePositions.includes("Frontend Engineer") ||
+                      project.rolePositions.includes("Lead Frontend Engineer")
                     ) {
                       groups.push("frontend-engineering");
                     }
@@ -136,7 +136,8 @@ const visibleProjects = projects.filter((project) => !project.hidden);
                             href="#"
                             class="project-link"
                             data-project={project.id}
-                            aria-label={`View ${project.title} project details`}></a>
+                            aria-label={`View ${project.title} project details`}
+                          />
                         </div>
                         <i class="far fa-file-alt" />
                         <h3 class="name">{project.title}</h3>
