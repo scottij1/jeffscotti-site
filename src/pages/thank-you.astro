@@ -48,7 +48,6 @@ import Layout from "../layouts/Layout.astro";
 </Layout>
 
 <script>
-  // Countdown and redirect functionality
   document.addEventListener("DOMContentLoaded", () => {
     let seconds = 10;
     const countdownElement = document.getElementById("countdown");
@@ -61,7 +60,6 @@ import Layout from "../layouts/Layout.astro";
 
       if (seconds <= 0) {
         clearInterval(countdownInterval);
-        // Announce to screen readers before redirecting
         const announcement = document.createElement("div");
         announcement.setAttribute("aria-live", "assertive");
         announcement.textContent = "Redirecting to home page now";

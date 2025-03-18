@@ -69,3 +69,5 @@ try {
   console.error(`❌ Error: ${error.message}`);
   process.exit(1);
 }
+
+//TODO: This is mostly working, even if SSR isn't... 

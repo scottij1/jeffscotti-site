@@ -66,7 +66,6 @@ const visibleProjects = projects.filter((project) => !project.hidden);
               <div class="portfolio-grid">
                 {
                   visibleProjects.map((project) => {
-                    // Define groups based on project technologies and role
                     const groups = ["all"];
 
                     if (
@@ -90,18 +89,15 @@ const visibleProjects = projects.filter((project) => !project.hidden);
                       groups.push("ui-design");
                     }
 
-                    // Add mobile-first tag if applicable
                     if (project.technologies.includes("Mobile-First Design")) {
                       groups.push("mobile-first");
                     }
 
-                    // Add data visualization tag if applicable
                     if (project.technologies.includes("Chart.js")) {
                       groups.push("data-visualization");
                       groups.push("dashboard");
                     }
 
-                    // Get cover image path
                     const idParts = project.id.split("-");
                     let coverImagePath = "";
 
@@ -121,11 +117,9 @@ const visibleProjects = projects.filter((project) => !project.hidden);
                     } else if (project.id === "project-quiz-creator") {
                       coverImagePath = "/images/portfolio/quiz_creator/cover-image.jpg";
                     } else {
-                      // Default fallback
                       coverImagePath = project.images[0]?.src || "";
                     }
 
-                    // Get project tags (limit to 3)
                     const projectTags = project.technologies.slice(0, 3);
 
                     return (
@@ -162,7 +156,6 @@ const visibleProjects = projects.filter((project) => !project.hidden);
 </Layout>
 
 <style>
-  /* Portfolio filters */
   .portfolio-filters {
     list-style: none;
     padding: 0;
@@ -289,7 +282,6 @@ const visibleProjects = projects.filter((project) => !project.hidden);
     font-size: 10px;
   }
 
-  /* Responsive adjustments */
   @media (max-width: 768px) {
     .portfolio-grid {
       grid-template-columns: 1fr;
@@ -349,7 +341,6 @@ const visibleProjects = projects.filter((project) => !project.hidden);
     });
   }
 
-  // Initialize on both DOMContentLoaded and astro:page-load
   document.addEventListener("DOMContentLoaded", initProjectLinks);
   document.addEventListener("astro:page-load", initProjectLinks);
 </script>
