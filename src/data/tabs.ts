@@ -61,8 +61,6 @@ export const tabItems: TabItem[] = [
     icon: "icon-chat",
     content: [
       "I believe that great products come from efficient workflows, clear communication, and a culture of accountability. I'm always looking for ways to streamline development, cut down on bottlenecks, and remove unnecessary friction so teams can focus on building. That means implementing smarter processes, not more processes, whether it's refining sprint planning, optimizing code review pipelines, or introducing automation to reduce repetitive tasks. Every change should serve one goal: speeding up development without sacrificing quality.",
-      "Work/life balance is just as important as hitting deadlines. I've seen what happens when teams get caught in project creep and endless crunch cycles—it kills morale and burns people out. A well-rested worker is a happy worker, and a happy worker is a productive worker. We're here to build great products, not save the world, so there's no need to act like we are."
-
     ],
     testimonial: {
       text: "As a manager, Jeff is incredibly hands-on and personally invested. It is clear that he cares a great deal about the quality of work that goes into his projects, and is not afraid to jump in the trenches with the development team to get things done.",
