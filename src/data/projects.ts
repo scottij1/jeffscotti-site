@@ -2,15 +2,8 @@ export interface ProjectImage {
   src: string;
   alt: string;
   caption?: string;
-}
-
-// Utility function to convert image paths to WebP
-function toWebP(imagePath: string): string {
-  // Only convert PNG files to WebP, leave other formats as is
-  if (imagePath.toLowerCase().endsWith('.png')) {
-    return imagePath.replace(/\.png$/i, '.webp');
-  }
-  return imagePath;
+  width?: number;
+  height?: number;
 }
 
 export interface Project {
@@ -23,8 +16,8 @@ export interface Project {
   rolePositions: string[];
   processVision: string;
   images: ProjectImage[];
-  liveUrl?: string; // Optional URL to the live project
-  hidden?: boolean; // Optional flag to hide project from projects page
+  liveUrl?: string;
+  hidden?: boolean;
 }
 
 export const projects: Project[] = [
@@ -41,82 +34,84 @@ export const projects: Project[] = [
     "processVision": "My approach followed an iterative delivery model that evolved into a stand-alone UI while ensuring a seamless user experience. Instead of waiting for a full overhaul, I focused on continuous enhancements that improved usability over time. By incorporating responsive design, the system adapted across desktop and mobile devices, allowing users to navigate workflows effortlessly. A dual-interface system ensured both experienced and new users could choose between power mode for flexibility and guided mode for structured step-by-step assistance.\n\nThe UI integrated status indicators and contextual help to guide users through the bill processing journey, ensuring clarity at every step. Automating data extraction and verification through OCR services and backend integrations streamlined the workflow, reducing errors and manual effort. Over time, the system transitioned from its checklist-based integration to a fully independent UI with intuitive navigation, live support access, and a cleaner, distraction-free experience. This progressive approach minimized risk, allowed adaptability based on user feedback, and built stakeholder confidence while continuously refining the experience.",
     images: [
       {
-        src: toWebP("/images/portfolio/bright/automated_cfe_bill/desktop/1-enter-rpu-form.png"),
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/1-enter-rpu-form.webp",
         alt: "Desktop RPU Form Entry",
-        caption: "Initial form for entering RPU (customer) information"
+        caption: "Initial form for entering RPU (customer) information",
+        width: 1200,
+        height: 800
       },
       {
-        src: toWebP("/images/portfolio/bright/automated_cfe_bill/desktop/2-fetching-customer-info-loading.png"),
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/2-fetching-customer-info-loading.webp",
         alt: "Desktop Loading State",
         caption: "Loading state while fetching customer information"
       },
       {
-        src: toWebP("/images/portfolio/bright/automated_cfe_bill/desktop/3-fetching-user-info-async-timeout.png"),
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/3-fetching-user-info-async-timeout.webp",
         alt: "Desktop Async Timeout",
         caption: "Asynchronous timeout handling for long-running operations"
       },
       {
-        src: toWebP("/images/portfolio/bright/automated_cfe_bill/desktop/4-confirm-customer-info.png"),
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/4-confirm-customer-info.webp",
         alt: "Desktop Customer Info Confirmation",
         caption: "Confirmation screen for customer information"
       },
       {
-        src: toWebP("/images/portfolio/bright/automated_cfe_bill/desktop/5-submission-successful.png"),
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/5-submission-successful.webp",
         alt: "Desktop Submission Success",
         caption: "Successful submission confirmation screen"
       },
       {
-        src: toWebP("/images/portfolio/bright/automated_cfe_bill/desktop/6-manual-cfe-upload.png"),
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/6-manual-cfe-upload.webp",
         alt: "Desktop Manual CFE Upload",
         caption: "Manual CFE bill upload interface"
       },
       {
-        src: toWebP("/images/portfolio/bright/automated_cfe_bill/desktop/7-manual-cfe-upload-progress.png"),
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/7-manual-cfe-upload-progress.webp",
         alt: "Desktop Upload Progress",
         caption: "Progress indicator for bill upload process"
       },
       {
-        src: toWebP("/images/portfolio/bright/automated_cfe_bill/desktop/8-confirm-populated-info.png"),
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/8-confirm-populated-info.webp",
         alt: "Desktop Populated Info Confirmation",
         caption: "Confirmation of automatically populated information from OCR"
       },
       {
-        src: toWebP("/images/portfolio/bright/automated_cfe_bill/desktop/9-confirm-populated-info-ocr-error.png"),
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/9-confirm-populated-info-ocr-error.webp",
         alt: "Desktop OCR Error Handling",
         caption: "Error handling for OCR processing issues"
       },
       {
-        src: toWebP("/images/portfolio/bright/automated_cfe_bill/desktop/10-help-inline-sidebar.png"),
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/10-help-inline-sidebar.webp",
         alt: "Desktop Inline Help Sidebar",
         caption: "Contextual help sidebar for user assistance"
       },
       {
-        src: toWebP("/images/portfolio/bright/automated_cfe_bill/desktop/11-help-glossary.png"),
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/11-help-glossary.webp",
         alt: "Desktop Help Glossary",
         caption: "Glossary of terms to assist users"
       },
       {
-        src: toWebP("/images/portfolio/bright/automated_cfe_bill/desktop/12-switch-mode-buttom.png"),
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/12-switch-mode-buttom.webp",
         alt: "Desktop Mode Switch Button",
         caption: "Button for switching between operational modes"
       },
       {
-        src: toWebP("/images/portfolio/bright/automated_cfe_bill/desktop/13-switch-mode-confirm-dialog.png"),
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/13-switch-mode-confirm-dialog.webp",
         alt: "Desktop Mode Switch Confirmation",
         caption: "Confirmation dialog for switching operational modes"
       },
       {
-        src: toWebP("/images/portfolio/bright/automated_cfe_bill/desktop/14-checklist-mode-toggle.png"),
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/14-checklist-mode-toggle.webp",
         alt: "Desktop Checklist Mode Toggle",
         caption: "Toggle for enabling checklist mode"
       },
       {
-        src: toWebP("/images/portfolio/bright/automated_cfe_bill/desktop/15-checklist-mode-toggle-dialog.png"),
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/15-checklist-mode-toggle-dialog.webp",
         alt: "Desktop Checklist Mode Dialog",
         caption: "Dialog for configuring checklist mode options"
       },
       {
-        src: toWebP("/images/portfolio/bright/automated_cfe_bill/desktop/16-guided-mode-ops-platform-integration.png"),
+        src: "/images/portfolio/bright/automated_cfe_bill/desktop/16-guided-mode-ops-platform-integration.webp",
         alt: "Desktop Ops Platform Integration",
         caption: "Integration with operations platform in guided mode"
       },
@@ -136,62 +131,64 @@ export const projects: Project[] = [
     "hidden": false,
     images: [
       {
-        src: "/images/portfolio/bright/async_wizard_ux_flow/1-wrapper-ui-min.jpg",
+        src: "/images/portfolio/bright/async_wizard_ux_flow/1-wrapper-ui-min.webp",
         alt: "Async Wizard UI Wrapper",
-        caption: "Main wrapper UI design for the asynchronous wizard interface"
+        caption: "Main wrapper UI design for the asynchronous wizard interface",
+        width: 1200,
+        height: 800
       },
       {
-        src: "/images/portfolio/bright/async_wizard_ux_flow/2-welcome-welcome-back-flow-min.jpg",
+        src: "/images/portfolio/bright/async_wizard_ux_flow/2-welcome-welcome-back-flow-min.webp",
         alt: "Welcome and Welcome Back Flow",
         caption: "User flow for new and returning users"
       },
       {
-        src: "/images/portfolio/bright/async_wizard_ux_flow/3-cfe-bill-flow-min.jpg",
+        src: "/images/portfolio/bright/async_wizard_ux_flow/3-cfe-bill-flow-min.webp",
         alt: "CFE Bill Flow",
         caption: "Process for uploading and analyzing electricity bills"
       },
       {
-        src: "/images/portfolio/bright/async_wizard_ux_flow/4-propsal-min.jpg",
+        src: "/images/portfolio/bright/async_wizard_ux_flow/4-propsal-min.webp",
         alt: "Proposal Review",
         caption: "Solar installation proposal review and customization"
       },
       {
-        src: "/images/portfolio/bright/async_wizard_ux_flow/5-id-check-min.jpg",
+        src: "/images/portfolio/bright/async_wizard_ux_flow/5-id-check-min.webp",
         alt: "ID Verification",
         caption: "Identity verification process flow"
       },
       {
-        src: "/images/portfolio/bright/async_wizard_ux_flow/6-credit-check-min.jpg",
+        src: "/images/portfolio/bright/async_wizard_ux_flow/6-credit-check-min.webp",
         alt: "Credit Check",
         caption: "Credit verification and financing options"
       },
       {
-        src: "/images/portfolio/bright/async_wizard_ux_flow/7-property-docs-min.jpg",
+        src: "/images/portfolio/bright/async_wizard_ux_flow/7-property-docs-min.webp",
         alt: "Property Documentation",
         caption: "Property documentation upload and verification"
       },
       {
-        src: "/images/portfolio/bright/async_wizard_ux_flow/8-technical-visit-min.jpg",
+        src: "/images/portfolio/bright/async_wizard_ux_flow/8-technical-visit-min.webp",
         alt: "Technical Visit",
         caption: "Technical site visit scheduling and preparation"
       },
       {
-        src: "/images/portfolio/bright/async_wizard_ux_flow/9-project-design-min.jpg",
+        src: "/images/portfolio/bright/async_wizard_ux_flow/9-project-design-min.webp",
         alt: "Project Design",
         caption: "Solar installation project design and customization"
       },
       {
-        src: "/images/portfolio/bright/async_wizard_ux_flow/10-domicillacion-min.jpg",
+        src: "/images/portfolio/bright/async_wizard_ux_flow/10-domicillacion-min.webp",
         alt: "Payment Setup",
         caption: "Payment method setup and recurring payment configuration"
       },
       {
-        src: "/images/portfolio/bright/async_wizard_ux_flow/11-customer-approval-min.jpg",
+        src: "/images/portfolio/bright/async_wizard_ux_flow/11-customer-approval-min.webp",
         alt: "Customer Approval",
         caption: "Final customer review and approval process"
       },
       {
-        src: "/images/portfolio/bright/async_wizard_ux_flow/12-tax-situation-min.jpg",
+        src: "/images/portfolio/bright/async_wizard_ux_flow/12-tax-situation-min.webp",
         alt: "Tax Situation",
         caption: "Tax information verification and documentation"
       }
@@ -211,62 +208,64 @@ export const projects: Project[] = [
     "liveUrl": "https://www.biocom.org/member-benefits-center/?id=001A000000D8SMTIA3",
     images: [
       {
-        src: toWebP("/images/portfolio/biocom/member_benefits_center/1-overview.png"),
+        src: "/images/portfolio/biocom/member_benefits_center/1-overview.webp",
         alt: "Member Benefits Dashboard Overview",
-        caption: "Main dashboard view showing key membership benefits metrics"
+        caption: "Main dashboard view showing key membership benefits metrics",
+        width: 1200,
+        height: 800
       },
       {
-        src: toWebP("/images/portfolio/biocom/member_benefits_center/4-purchasing-savings.png"),
+        src: "/images/portfolio/biocom/member_benefits_center/4-purchasing-savings.webp",
         alt: "Purchasing Savings Section",
         caption: "Detailed breakdown of purchasing savings with interactive chart"
       },
       {
-        src: toWebP("/images/portfolio/biocom/member_benefits_center/6-purchasing-savings-chart-options-dropdown.png"),
+        src: "/images/portfolio/biocom/member_benefits_center/6-purchasing-savings-chart-options-dropdown.webp",
         alt: "Chart Options Dropdown",
         caption: "Customizable chart options for different data visualizations"
       },
       {
-        src: toWebP("/images/portfolio/biocom/member_benefits_center/7-events-attended.png"),
+        src: "/images/portfolio/biocom/member_benefits_center/7-events-attended.webp",
         alt: "Events Attended Section",
         caption: "Events attendance tracking with filterable list"
       },
       {
-        src: toWebP("/images/portfolio/biocom/member_benefits_center/8-purchasing-savings-export-chart-modal.png"),
+        src: "/images/portfolio/biocom/member_benefits_center/8-purchasing-savings-export-chart-modal.webp",
         alt: "Export Chart Modal",
         caption: "Modal for exporting chart data in various formats"
       },
       {
-        src: toWebP("/images/portfolio/biocom/member_benefits_center/9-events-attended-view-attendees-modal.png"),
+        src: "/images/portfolio/biocom/member_benefits_center/9-events-attended-view-attendees-modal.webp",
         alt: "View Attendees Modal",
         caption: "Detailed view of event attendees from your organization"
       },
       {
-        src: toWebP("/images/portfolio/biocom/member_benefits_center/10-committee-memberships.png"),
+        src: "/images/portfolio/biocom/member_benefits_center/10-committee-memberships.webp",
         alt: "Committee Memberships Section",
         caption: "Overview of committee memberships and participation"
       },
       {
-        src: toWebP("/images/portfolio/biocom/member_benefits_center/11-additional-benefits.png"),
+        src: "/images/portfolio/biocom/member_benefits_center/11-additional-benefits.webp",
         alt: "Additional Benefits Section",
         caption: "Summary of additional membership benefits and resources"
       },
       {
-        src: toWebP("/images/portfolio/biocom/member_benefits_center/2-export-data-modal.png"),
+        src: "/images/portfolio/biocom/member_benefits_center/2-export-data-modal.webp",
         alt: "Export Data Modal",
         caption: "Modal for exporting membership data in various formats"
       },
       {
-        src: toWebP("/images/portfolio/biocom/member_benefits_center/3-print-data-modal.png"),
+        src: "/images/portfolio/biocom/member_benefits_center/3-print-data-modal.webp",
         alt: "Print Data Modal",
         caption: "Print-friendly view of membership data"
       },
       {
-        src: toWebP("/images/portfolio/biocom/member_benefits_center/5-purchasing-savings-export-data-modal.png"),
+        src: "/images/portfolio/biocom/member_benefits_center/5-purchasing-savings-export-data-modal.webp",
         alt: "Purchasing Savings Export Modal",
         caption: "Specialized export options for purchasing savings data"
       },
       {
-        src: toWebP("/images/portfolio/biocom/member_benefits_center/12-collapsed-menu.png"),
+        src: "/images/portfolio/biocom/member_benefits_center/12-collapsed-menu.webp",
         alt: "Collapsed Menu View",
         caption: "Responsive design with collapsed navigation menu for mobile devices"
       }
@@ -286,57 +285,59 @@ export const projects: Project[] = [
     "liveUrl": "https://www.biocom.org",
     images: [
       {
-        src: "/images/portfolio/biocom/biocom.org/1-homepage.jpg",
+        src: "/images/portfolio/biocom/biocom.org/1-homepage.webp",
         alt: "Biocom Homepage",
-        caption: "Redesigned Biocom homepage with modern UI and improved navigation"
+        caption: "Redesigned Biocom homepage with modern UI and improved navigation",
+        width: 1200,
+        height: 800
       },
       {
-        src: "/images/portfolio/biocom/biocom.org/2-events-directory.jpg",
+        src: "/images/portfolio/biocom/biocom.org/2-events-directory.webp",
         alt: "Events Directory",
         caption: "Comprehensive events directory with filtering options"
       },
       {
-        src: toWebP("/images/portfolio/biocom/biocom.org/3-biocom-event.png"),
+        src: "/images/portfolio/biocom/biocom.org/3-biocom-event.webp",
         alt: "Individual Event Page",
         caption: "Detailed event page with registration options"
       },
       {
-        src: toWebP("/images/portfolio/biocom/biocom.org/4-biocom-committee.png"),
+        src: "/images/portfolio/biocom/biocom.org/4-biocom-committee.webp",
         alt: "Committee Page",
         caption: "Committee information and membership details"
       },
       {
-        src: toWebP("/images/portfolio/biocom/biocom.org/5-member-directory.png"),
+        src: "/images/portfolio/biocom/biocom.org/5-member-directory.webp",
         alt: "Member Directory",
         caption: "Searchable member directory with filtering capabilities"
       },
       {
-        src: toWebP("/images/portfolio/biocom/biocom.org/6-member-landing-page.png"),
+        src: "/images/portfolio/biocom/biocom.org/6-member-landing-page.webp",
         alt: "Member Landing Page",
         caption: "Personalized member landing page with relevant information"
       },
       {
-        src: toWebP("/images/portfolio/biocom/biocom.org/7-event-registration-address-capture.png"),
+        src: "/images/portfolio/biocom/biocom.org/7-event-registration-address-capture.webp",
         alt: "Event Registration - Address Capture",
         caption: "Streamlined event registration process - address capture step"
       },
       {
-        src: toWebP("/images/portfolio/biocom/biocom.org/8-event-registration-enter-email.png"),
+        src: "/images/portfolio/biocom/biocom.org/8-event-registration-enter-email.webp",
         alt: "Event Registration - Email Entry",
         caption: "Event registration email verification step"
       },
       {
-        src: toWebP("/images/portfolio/biocom/biocom.org/9-event-registration-payment.png"),
+        src: "/images/portfolio/biocom/biocom.org/9-event-registration-payment.webp",
         alt: "Event Registration - Payment",
         caption: "Secure payment processing for event registration"
       },
       {
-        src: toWebP("/images/portfolio/biocom/biocom.org/12-custom-upload-page.png"),
+        src: "/images/portfolio/biocom/biocom.org/12-custom-upload-page.webp",
         alt: "Custom Upload Interface",
         caption: "Custom file upload interface for member submissions"
       },
       {
-        src: toWebP("/images/portfolio/biocom/biocom.org/13-custom-upload-page-done.png"),
+        src: "/images/portfolio/biocom/biocom.org/13-custom-upload-page-done.webp",
         alt: "Upload Confirmation",
         caption: "Confirmation screen after successful file upload"
       }
@@ -355,132 +356,134 @@ export const projects: Project[] = [
       "processVision": "Spearheaded the development of a highly interactive and scalable UI in Angular, ensuring fluid navigation and efficient media handling. Crafted an intuitive user experience that streamlined metadata tagging, bulk asset operations, and workflow automation. Focused on performance optimizations, ensuring smooth handling of large media libraries. Led the UX strategy, refining interactions, accessibility, and visual consistency for an enhanced user experience.",
       images: [
       {
-        src: toWebP("/images/portfolio/modalis/1-large-media-cards.png"),
+        src: "/images/portfolio/modalis/1-large-media-cards.webp",
         alt: "Modalis Media Cards",
-        caption: "Large media card view showing content thumbnails with metadata"
+        caption: "Large media card view showing content thumbnails with metadata",
+        width: 1200,
+        height: 800
       },
       {
-        src: toWebP("/images/portfolio/modalis/1-large-media-cards-hover1.png"),
+        src: "/images/portfolio/modalis/1-large-media-cards-hover1.webp",
         alt: "Modalis Media Cards Hover State",
         caption: "Hover state showing quick actions for media items"
       },
       {
-        src: toWebP("/images/portfolio/modalis/1-large-media-cards-hover2.png"),
+        src: "/images/portfolio/modalis/1-large-media-cards-hover2.webp",
         alt: "Modalis Media Cards Hover State Alternative",
         caption: "Alternative hover state with expanded metadata"
       },
       {
-        src: toWebP("/images/portfolio/modalis/1-large-media-cards-selected1.png"),
+        src: "/images/portfolio/modalis/1-large-media-cards-selected1.webp",
         alt: "Modalis Media Cards Selected State",
         caption: "Selected state for media items showing batch actions"
       },
       {
-        src: toWebP("/images/portfolio/modalis/1-large-media-cards-selected2.png"),
+        src: "/images/portfolio/modalis/1-large-media-cards-selected2.webp",
         alt: "Modalis Media Cards Multiple Selection",
         caption: "Multiple selection state with batch action toolbar"
       },
       {
-        src: toWebP("/images/portfolio/modalis/2-header-tooltip-admin.png"),
+        src: "/images/portfolio/modalis/2-header-tooltip-admin.webp",
         alt: "Modalis Header Admin Tooltip",
         caption: "Admin section tooltip in the header navigation"
       },
       {
-        src: toWebP("/images/portfolio/modalis/2-header-tooltip-jobs.png"),
+        src: "/images/portfolio/modalis/2-header-tooltip-jobs.webp",
         alt: "Modalis Header Jobs Tooltip",
         caption: "Jobs section tooltip showing processing status"
       },
       {
-        src: toWebP("/images/portfolio/modalis/2-header-tooltip-closemeun.png"),
+        src: "/images/portfolio/modalis/2-header-tooltip-closemeun.webp",
         alt: "Modalis Header Close Menu",
         caption: "Close menu interaction in the header"
       },
       {
-        src: toWebP("/images/portfolio/modalis/2-header-user-menu.png"),
+        src: "/images/portfolio/modalis/2-header-user-menu.webp",
         alt: "Modalis User Menu",
         caption: "User menu dropdown with account options"
       },
       {
-        src: toWebP("/images/portfolio/modalis/3-medium-media-cards.png"),
+        src: "/images/portfolio/modalis/3-medium-media-cards.webp",
         alt: "Modalis Medium Media Cards",
         caption: "Medium-sized media card view for compact browsing"
       },
       {
-        src: toWebP("/images/portfolio/modalis/4-small-media-cards.png"),
+        src: "/images/portfolio/modalis/4-small-media-cards.webp",
         alt: "Modalis Small Media Cards",
         caption: "Small media card view for high-density content browsing"
       },
       {
-        src: toWebP("/images/portfolio/modalis/5-list-media.png"),
+        src: "/images/portfolio/modalis/5-list-media.webp",
         alt: "Modalis List Media View",
         caption: "List view showing detailed metadata in tabular format"
       },
       {
-        src: toWebP("/images/portfolio/modalis/5-list-media-embed.png"),
+        src: "/images/portfolio/modalis/5-list-media-embed.webp",
         alt: "Modalis List Media Embed",
         caption: "Embed dialog for sharing media content"
       },
       {
-        src: toWebP("/images/portfolio/modalis/5-list-media-menu.png"),
+        src: "/images/portfolio/modalis/5-list-media-menu.webp",
         alt: "Modalis List Media Menu",
         caption: "Context menu for list view items"
       },
       {
-        src: toWebP("/images/portfolio/modalis/5-list-media-quick-edit.png"),
+        src: "/images/portfolio/modalis/5-list-media-quick-edit.webp",
         alt: "Modalis List Media Quick Edit",
         caption: "Quick edit panel for updating metadata"
       },
       {
-        src: toWebP("/images/portfolio/modalis/5-list-media-selected.png"),
+        src: "/images/portfolio/modalis/5-list-media-selected.webp",
         alt: "Modalis List Media Selected",
         caption: "Selected state in list view with action toolbar"
       },
       {
-        src: toWebP("/images/portfolio/modalis/5-list-media-upload.png"),
+        src: "/images/portfolio/modalis/5-list-media-upload.webp",
         alt: "Modalis List Media Upload",
         caption: "Upload button in list view"
       },
       {
-        src: toWebP("/images/portfolio/modalis/5-list-media-upload-open.png"),
+        src: "/images/portfolio/modalis/5-list-media-upload-open.webp",
         alt: "Modalis List Media Upload Open",
         caption: "Open upload dialog showing upload options"
       },
       {
-        src: toWebP("/images/portfolio/modalis/5-sidebar-embed.png"),
+        src: "/images/portfolio/modalis/5-sidebar-embed.webp",
         alt: "Modalis Sidebar Embed",
         caption: "Sidebar embed panel for content sharing"
       },
       {
-        src: toWebP("/images/portfolio/modalis/5-sidebar-jobs.png"),
+        src: "/images/portfolio/modalis/5-sidebar-jobs.webp",
         alt: "Modalis Sidebar Jobs",
         caption: "Jobs sidebar showing processing tasks"
       },
       {
-        src: toWebP("/images/portfolio/modalis/5-sidebar-notifications.png"),
+        src: "/images/portfolio/modalis/5-sidebar-notifications.webp",
         alt: "Modalis Sidebar Notifications",
         caption: "Notifications panel in sidebar"
       },
       {
-        src: toWebP("/images/portfolio/modalis/5-sidebar-notifications-menu.png"),
+        src: "/images/portfolio/modalis/5-sidebar-notifications-menu.webp",
         alt: "Modalis Sidebar Notifications Menu",
         caption: "Notifications menu with filtering options"
       },
       {
-        src: toWebP("/images/portfolio/modalis/5-sidebar-notifications-select1.png"),
+        src: "/images/portfolio/modalis/5-sidebar-notifications-select1.webp",
         alt: "Modalis Sidebar Notifications Selection",
         caption: "Selected notification with action options"
       },
       {
-        src: toWebP("/images/portfolio/modalis/5-sidebar-notifications-select2.png"),
+        src: "/images/portfolio/modalis/5-sidebar-notifications-select2.webp",
         alt: "Modalis Sidebar Notifications Multiple Selection",
         caption: "Multiple notification selection"
       },
       {
-        src: toWebP("/images/portfolio/modalis/5-sidebar-notifications-batch-edit.png"),
+        src: "/images/portfolio/modalis/5-sidebar-notifications-batch-edit.webp",
         alt: "Modalis Sidebar Notifications Batch Edit",
         caption: "Batch editing notifications"
       },
       {
-        src: toWebP("/images/portfolio/modalis/5-sidebar-quick-edit.png"),
+        src: "/images/portfolio/modalis/5-sidebar-quick-edit.webp",
         alt: "Modalis Sidebar Quick Edit",
         caption: "Quick edit panel in sidebar"
       }
@@ -499,52 +502,54 @@ export const projects: Project[] = [
       "processVision": "Engineered a timeline-based transcript editor in Angular, enabling seamless AI-assisted transcription review and real-time editing. Integrated Azure transcription services with Firebase to provide users with an efficient, AI-enhanced workflow. Designed a clean, intuitive UI that prioritized accessibility and streamlined error correction. Led user research and iterative UX improvements, refining the interaction design to make transcript editing faster and more user-friendly.",
       images: [
       {
-        src: toWebP("/images/portfolio/transcript_edit/1-transcript-edit-all.png"),
+        src: "/images/portfolio/transcript_edit/1-transcript-edit-all.webp",
         alt: "Transcript Editor Full Interface",
-        caption: "Complete interface showing transcript editing capabilities"
+        caption: "Complete interface showing transcript editing capabilities",
+        width: 1200,
+        height: 800
       },
       {
-        src: toWebP("/images/portfolio/transcript_edit/1a-transcript-edit-notes-closed.png"),
+        src: "/images/portfolio/transcript_edit/1a-transcript-edit-notes-closed.webp",
         alt: "Transcript Editor with Notes Closed",
         caption: "Interface with notes panel closed for more editing space"
       },
       {
-        src: toWebP("/images/portfolio/transcript_edit/1c-transcript-edit-colorpicker.png"),
+        src: "/images/portfolio/transcript_edit/1c-transcript-edit-colorpicker.webp",
         alt: "Transcript Editor Color Picker",
         caption: "Color picker for customizing transcript highlights"
       },
       {
-        src: toWebP("/images/portfolio/transcript_edit/1d-colorpicker-hover.png"),
+        src: "/images/portfolio/transcript_edit/1d-colorpicker-hover.webp",
         alt: "Transcript Editor Color Picker Hover",
         caption: "Color picker hover state showing color selection"
       },
       {
-        src: toWebP("/images/portfolio/transcript_edit/2-hover-2.png"),
+        src: "/images/portfolio/transcript_edit/2-hover-2.webp",
         alt: "Transcript Editor Hover State 1",
         caption: "Interactive hover state showing editing options"
       },
       {
-        src: toWebP("/images/portfolio/transcript_edit/2-hover-3.png"),
+        src: "/images/portfolio/transcript_edit/2-hover-3.webp",
         alt: "Transcript Editor Hover State 2",
         caption: "Additional hover state interactions"
       },
       {
-        src: toWebP("/images/portfolio/transcript_edit/2-hover-4.png"),
+        src: "/images/portfolio/transcript_edit/2-hover-4.webp",
         alt: "Transcript Editor Hover State 3",
         caption: "Hover state showing text selection options"
       },
       {
-        src: toWebP("/images/portfolio/transcript_edit/2-hover-5.png"),
+        src: "/images/portfolio/transcript_edit/2-hover-5.webp",
         alt: "Transcript Editor Hover State 4",
         caption: "Hover state with contextual editing tools"
       },
       {
-        src: toWebP("/images/portfolio/transcript_edit/2-hover-6.png"),
+        src: "/images/portfolio/transcript_edit/2-hover-6.webp",
         alt: "Transcript Editor Hover State 5",
         caption: "Advanced editing options on hover"
       },
       {
-        src: toWebP("/images/portfolio/transcript_edit/2-hover-7.png"),
+        src: "/images/portfolio/transcript_edit/2-hover-7.webp",
         alt: "Transcript Editor Hover State 6",
         caption: "Final hover state interaction"
       }
@@ -563,82 +568,84 @@ export const projects: Project[] = [
     "processVision": "Led the development of a dynamic, engaging quiz-building interface in Angular, making it effortless for instructors to create and embed interactive assessments. Built an instructor-focused analytics dashboard, providing rich insights into student performance. Focused on UX refinement, designing an intuitive workflow that simplified quiz configuration and improved student engagement. Ensured a smooth integration with Azure services, optimizing data flow and real-time response tracking.",
       images: [
       {
-        src: toWebP("/images/portfolio/quiz_creator/1-standard-no-quizzes.png"),
+        src: "/images/portfolio/quiz_creator/1-standard-no-quizzes.webp",
         alt: "Quiz Creator Empty State",
-        caption: "Initial view with no quizzes created"
+        caption: "Initial view with no quizzes created",
+        width: 1200,
+        height: 800
       },
       {
-        src: toWebP("/images/portfolio/quiz_creator/2-create-quiz-modal.png"),
+        src: "/images/portfolio/quiz_creator/2-create-quiz-modal.webp",
         alt: "Create Quiz Modal",
         caption: "Modal for creating a new quiz"
       },
       {
-        src: toWebP("/images/portfolio/quiz_creator/3-select-question-type.png"),
+        src: "/images/portfolio/quiz_creator/3-select-question-type.webp",
         alt: "Select Question Type",
         caption: "Interface for selecting question type"
       },
       {
-        src: toWebP("/images/portfolio/quiz_creator/3a-time-set-timeline.png"),
+        src: "/images/portfolio/quiz_creator/3a-time-set-timeline.webp",
         alt: "Timeline for Setting Question Time",
         caption: "Timeline interface for setting when questions appear"
       },
       {
-        src: toWebP("/images/portfolio/quiz_creator/4-select-question-drop-options.png"),
+        src: "/images/portfolio/quiz_creator/4-select-question-drop-options.webp",
         alt: "Question Type Dropdown",
         caption: "Dropdown menu for selecting question types"
       },
       {
-        src: toWebP("/images/portfolio/quiz_creator/5-multi-choice-selected.png"),
+        src: "/images/portfolio/quiz_creator/5-multi-choice-selected.webp",
         alt: "Multiple Choice Selected",
         caption: "Multiple choice question type selected"
       },
       {
-        src: toWebP("/images/portfolio/quiz_creator/7-config-mulit-choice.png"),
+        src: "/images/portfolio/quiz_creator/7-config-mulit-choice.webp",
         alt: "Configure Multiple Choice Question",
         caption: "Interface for configuring multiple choice questions"
       },
       {
-        src: toWebP("/images/portfolio/quiz_creator/9-config-multi-choice-response.png"),
+        src: "/images/portfolio/quiz_creator/9-config-multi-choice-response.webp",
         alt: "Configure Response Options",
         caption: "Setting up response options for multiple choice questions"
       },
       {
-        src: toWebP("/images/portfolio/quiz_creator/10-questions-overview.png"),
+        src: "/images/portfolio/quiz_creator/10-questions-overview.webp",
         alt: "Questions Overview",
         caption: "Overview of all questions in the quiz"
       },
       {
-        src: toWebP("/images/portfolio/quiz_creator/14-add-select-truefalse.png"),
+        src: "/images/portfolio/quiz_creator/14-add-select-truefalse.webp",
         alt: "Add True/False Question",
         caption: "Adding a true/false question to the quiz"
       },
       {
-        src: toWebP("/images/portfolio/quiz_creator/17-config-truefalse.png"),
+        src: "/images/portfolio/quiz_creator/17-config-truefalse.webp",
         alt: "Configure True/False Question",
         caption: "Configuring a true/false question"
       },
       {
-        src: toWebP("/images/portfolio/quiz_creator/19-reflection.png"),
+        src: "/images/portfolio/quiz_creator/19-reflection.webp",
         alt: "Reflection Question",
         caption: "Adding a reflection question to the quiz"
       },
       {
-        src: toWebP("/images/portfolio/quiz_creator/21a-overview-complete-quiz.png"),
+        src: "/images/portfolio/quiz_creator/21a-overview-complete-quiz.webp",
         alt: "Complete Quiz Overview",
         caption: "Overview of a completed quiz with all question types"
       },
       {
-        src: toWebP("/images/portfolio/quiz_creator/24-preview-quiz-1.png"),
+        src: "/images/portfolio/quiz_creator/24-preview-quiz-1.webp",
         alt: "Quiz Preview 1",
         caption: "Preview of how the quiz appears to students"
       },
       {
-        src: toWebP("/images/portfolio/quiz_creator/26-preview-quiz-3.png"),
+        src: "/images/portfolio/quiz_creator/26-preview-quiz-3.webp",
         alt: "Quiz Preview 2",
         caption: "Another view of the quiz preview"
       },
       {
-        src: toWebP("/images/portfolio/quiz_creator/32-canvas-embed-example.png"),
+        src: "/images/portfolio/quiz_creator/32-canvas-embed-example.webp",
         alt: "Canvas LMS Integration",
         caption: "Example of the quiz embedded in Canvas LMS"
       }
@@ -649,72 +656,72 @@ export const projects: Project[] = [
 // Mobile images for the automated CFE bill project
 export const automatedCfeBillMobileImages: ProjectImage[] = [
   {
-    src: toWebP("/images/portfolio/bright/automated_cfe_bill/mobile/1-enter-rpu-form.png"),
+    src: "/images/portfolio/bright/automated_cfe_bill/mobile/1-enter-rpu-form.webp",
     alt: "Mobile RPU Form Entry",
     caption: "Mobile interface for entering RPU (customer) information"
   },
   {
-    src: toWebP("/images/portfolio/bright/automated_cfe_bill/mobile/2-featching-customer-info-loading.png"),
+    src: "/images/portfolio/bright/automated_cfe_bill/mobile/2-featching-customer-info-loading.webp",
     alt: "Mobile Loading State",
     caption: "Mobile loading state while fetching customer information"
   },
   {
-    src: toWebP("/images/portfolio/bright/automated_cfe_bill/mobile/3-fetching-customer-info-async-error.png"),
+    src: "/images/portfolio/bright/automated_cfe_bill/mobile/3-fetching-customer-info-async-error.webp",
     alt: "Mobile Async Error",
     caption: "Mobile error handling for asynchronous operations"
   },
   {
-    src: toWebP("/images/portfolio/bright/automated_cfe_bill/mobile/4-confirm-customer-info.png"),
+    src: "/images/portfolio/bright/automated_cfe_bill/mobile/4-confirm-customer-info.webp",
     alt: "Mobile Customer Info Confirmation",
     caption: "Mobile confirmation screen for customer information"
   },
   {
-    src: toWebP("/images/portfolio/bright/automated_cfe_bill/mobile/5-submission-successful.png"),
+    src: "/images/portfolio/bright/automated_cfe_bill/mobile/5-submission-successful.webp",
     alt: "Mobile Submission Success",
     caption: "Mobile successful submission confirmation screen"
   },
   {
-    src: toWebP("/images/portfolio/bright/automated_cfe_bill/mobile/6-manual-cfe-upload.png"),
+    src: "/images/portfolio/bright/automated_cfe_bill/mobile/6-manual-cfe-upload.webp",
     alt: "Mobile Manual CFE Upload",
     caption: "Mobile interface for manual CFE bill upload"
   },
   {
-    src: toWebP("/images/portfolio/bright/automated_cfe_bill/mobile/7-manual-cfe-upload-accordion.png"),
+    src: "/images/portfolio/bright/automated_cfe_bill/mobile/7-manual-cfe-upload-accordion.webp",
     alt: "Mobile Upload Accordion",
     caption: "Mobile accordion interface for bill upload options"
   },
   {
-    src: toWebP("/images/portfolio/bright/automated_cfe_bill/mobile/8-manual-cfe-upload-progress.png"),
+    src: "/images/portfolio/bright/automated_cfe_bill/mobile/8-manual-cfe-upload-progress.webp",
     alt: "Mobile Upload Progress",
     caption: "Mobile progress indicator for bill upload process"
   },
   {
-    src: toWebP("/images/portfolio/bright/automated_cfe_bill/mobile/9-manual-cfe-upload-confirm.png"),
+    src: "/images/portfolio/bright/automated_cfe_bill/mobile/9-manual-cfe-upload-confirm.webp",
     alt: "Mobile Upload Confirmation",
     caption: "Mobile confirmation screen after bill upload"
   },
   {
-    src: toWebP("/images/portfolio/bright/automated_cfe_bill/mobile/10-progress-menu.png"),
+    src: "/images/portfolio/bright/automated_cfe_bill/mobile/10-progress-menu.webp",
     alt: "Mobile Progress Menu",
     caption: "Mobile progress menu showing completion status"
   },
   {
-    src: toWebP("/images/portfolio/bright/automated_cfe_bill/mobile/11-switch-modal-action-sheet.png"),
+    src: "/images/portfolio/bright/automated_cfe_bill/mobile/11-switch-modal-action-sheet.webp",
     alt: "Mobile Mode Switch Action Sheet",
     caption: "Mobile action sheet for switching operational modes"
   },
   {
-    src: toWebP("/images/portfolio/bright/automated_cfe_bill/mobile/12-help-action-sheet.png"),
+    src: "/images/portfolio/bright/automated_cfe_bill/mobile/12-help-action-sheet.webp",
     alt: "Mobile Help Action Sheet",
     caption: "Mobile action sheet for accessing help options"
   },
   {
-    src: toWebP("/images/portfolio/bright/automated_cfe_bill/mobile/13-help-contact-support-action-sheet.png"),
+    src: "/images/portfolio/bright/automated_cfe_bill/mobile/13-help-contact-support-action-sheet.webp",
     alt: "Mobile Contact Support Action Sheet",
     caption: "Mobile action sheet for contacting support"
   },
   {
-    src: toWebP("/images/portfolio/bright/automated_cfe_bill/mobile/14-help-glossary.png"),
+    src: "/images/portfolio/bright/automated_cfe_bill/mobile/14-help-glossary.webp",
     alt: "Mobile Help Glossary",
     caption: "Mobile glossary of terms to assist users"
   }

@@ -103,19 +103,19 @@ const visibleProjects = projects.filter((project) => !project.hidden);
 
                     if (project.id === "project-automated-cfe-bill") {
                       coverImagePath =
-                        "/images/portfolio/bright/automated_cfe_bill/cover-image.jpg";
+                        "/images/portfolio/bright/automated_cfe_bill/cover-image.webp";
                     } else if (project.id === "project-async-wizard") {
                       coverImagePath =
-                        "/images/portfolio/bright/async_wizard_ux_flow/cover-image.jpg";
+                        "/images/portfolio/bright/async_wizard_ux_flow/cover-image.webp";
                     } else if (project.id === "project-biocom-mbc") {
                       coverImagePath =
-                        "/images/portfolio/biocom/member_benefits_center/cover-image.jpg";
+                        "/images/portfolio/biocom/member_benefits_center/cover-image.webp";
                     } else if (project.id === "project-modalis") {
-                      coverImagePath = "/images/portfolio/modalis/cover-image.jpg";
+                      coverImagePath = "/images/portfolio/modalis/cover-image.webp";
                     } else if (project.id === "project-transcript-editor") {
-                      coverImagePath = "/images/portfolio/transcript_edit/cover-image.jpg";
+                      coverImagePath = "/images/portfolio/transcript_edit/cover-image.webp";
                     } else if (project.id === "project-quiz-creator") {
-                      coverImagePath = "/images/portfolio/quiz_creator/cover-image.jpg";
+                      coverImagePath = "/images/portfolio/quiz_creator/cover-image.webp";
                     } else {
                       coverImagePath = project.images[0]?.src || "";
                     }
@@ -125,7 +125,13 @@ const visibleProjects = projects.filter((project) => !project.hidden);
                     return (
                       <figure class="item" data-groups={JSON.stringify(groups)}>
                         <div class="portfolio-item-img">
-                          <img src={coverImagePath} alt={project.title} />
+                          <img
+                            src={coverImagePath}
+                            alt={project.title}
+                            width="600"
+                            height="400"
+                            loading="lazy"
+                          />
                           <a
                             href="#"
                             class="project-link"

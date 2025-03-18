@@ -20,11 +20,11 @@ async function convertToWebP(filePath) {
       return;
     }
 
-    if (!filePath.toLowerCase().endsWith('.png')) {
+    if (!filePath.toLowerCase().endsWith('.png') && !filePath.toLowerCase().endsWith('.jpg') && !filePath.toLowerCase().endsWith('.jpeg')) {
       return;
     }
 
-    const outputPath = filePath.replace(/\.png$/i, '.webp');
+    const outputPath = filePath.replace(/\.(png|jpg|jpeg)$/i, '.webp');
     
     if (fs.existsSync(outputPath)) {
       console.log(`WebP version already exists: ${outputPath}`);
@@ -58,7 +58,7 @@ async function processDirectory(directory) {
 }
 
 async function main() {
-  console.log('Starting PNG to WebP conversion...');
+  console.log('Starting PNG/JPG to WebP conversion...');
   await processDirectory(portfolioDir);
   console.log('Conversion complete!');
 }
