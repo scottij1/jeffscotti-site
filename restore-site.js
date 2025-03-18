@@ -19,7 +19,6 @@ const fs = require('fs');
 const path = require('path');
 const dotenv = require('dotenv');
 
-// Load environment variables
 dotenv.config();
 
 const requiredEnvVars = ['FTP_SERVER', 'FTP_USERNAME', 'FTP_PASSWORD', 'FTP_REMOTE_PATH'];
@@ -31,7 +30,6 @@ if (missingEnvVars.length > 0) {
   process.exit(1);
 }
 
-// Create temporary GitHub Actions workflow file
 const tempDir = path.join(__dirname, 'temp');
 const workflowDir = path.join(tempDir, '.github', 'workflows');
 
@@ -100,16 +98,13 @@ async function main() {
     
     // Use FTP-Deploy-Action CLI if available, otherwise use a simple FTP client
     try {
-      // Install ftp-deploy if not already installed
       if (!fs.existsSync(path.join(__dirname, 'node_modules', 'ftp-deploy'))) {
         console.log('Installing ftp-deploy...');
         execSync('npm install ftp-deploy', { stdio: 'inherit' });
       }
       
-      // Create server files
       console.log('\n📝 Creating server files...');
-      
-      // Create start.js
+    
       const startJsPath = path.join(__dirname, 'dist', 'start.js');
       fs.writeFileSync(startJsPath, `#!/usr/bin/env node
 
@@ -200,7 +195,6 @@ export HOST=0.0.0.0
 # Start the server
 node start.js`);
       
-      // Create package.json
       const packageJsonPath = path.join(__dirname, 'dist', 'package.json');
       fs.writeFileSync(packageJsonPath, JSON.stringify({
         name: "jeffscotti-site-server",
@@ -216,7 +210,6 @@ node start.js`);
         }
       }, null, 2));
       
-      // Create test.js
       const testJsPath = path.join(__dirname, 'dist', 'test.js');
       fs.writeFileSync(testJsPath, `#!/usr/bin/env node
 
@@ -270,7 +263,6 @@ req.on('timeout', () => {
 
 req.end();`);
       
-      // Make scripts executable
       try {
         fs.chmodSync(startJsPath, '755');
         fs.chmodSync(startShPath, '755');
@@ -279,11 +271,9 @@ req.end();`);
         console.warn('Warning: Could not make scripts executable. You may need to do this manually on the server.');
       }
       
-      // Verify build output before deployment
       console.log('\n🔍 Verifying build output...');
-      
-      // List build output directories
       console.log('Dist directory contents:');
+
       fs.readdirSync(path.join(__dirname, 'dist')).forEach(file => {
         console.log(`- ${file}`);
       });
@@ -293,14 +283,12 @@ req.end();`);
         console.log(`- ${file}`);
       });
       
-      // Only check for the _astro directory which should always be present
       const astroDir = path.join(__dirname, 'dist', 'client', '_astro');
       if (!fs.existsSync(astroDir)) {
         console.error(`❌ Critical directory missing: dist/client/_astro`);
         process.exit(1);
       }
       
-      // List server directory contents for debugging
       console.log('\nServer directory contents:');
       fs.readdirSync(path.join(__dirname, 'dist', 'server')).forEach(file => {
         console.log(`- ${file}`);
@@ -348,7 +336,6 @@ req.end();`);
 
     console.log('\n✅ Site restore completed successfully!');
     
-    // Clean up
     if (fs.existsSync(tempDir)) {
       fs.rmSync(tempDir, { recursive: true, force: true });
     }
