@@ -125,13 +125,7 @@ const visibleProjects = projects.filter((project) => !project.hidden);
                     return (
                       <figure class="item" data-groups={JSON.stringify(groups)}>
                         <div class="portfolio-item-img">
-                          <img
-                            src={coverImagePath}
-                            alt={project.title}
-                            width="600"
-                            height="400"
-                            loading="lazy"
-                          />
+                          <img src={coverImagePath} alt={project.title} width="600" height="400" />
                           <a
                             href="#"
                             class="project-link"
