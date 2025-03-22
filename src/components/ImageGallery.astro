@@ -28,16 +28,14 @@ const {images, projectId} = Astro.props;
             {image.caption && (
               <div class="image-caption">
                 {image.caption}
-                {projectId === "project-async-wizard" && (
-                  <a
-                    href={image.src}
-                    download
-                    class="download-button"
-                    title="Download high quality image">
-                    <i class="fas fa-download" />
-                    <span>High Quality</span>
-                  </a>
-                )}
+                <a
+                  href={image.src}
+                  download
+                  class="download-button"
+                  title="Download high quality image">
+                  <i class="fas fa-download" />
+                  <span>High Quality</span>
+                </a>
               </div>
             )}
           </div>
@@ -591,19 +589,14 @@ const {images, projectId} = Astro.props;
         );
         if (downloadButtonContainer) {
           downloadButtonContainer.innerHTML = "";
-
-          if (
-            projectId === "project-async-wizard" ||
-            projectId === "project-async-wizard-desktop"
-          ) {
-            const downloadButton = document.createElement("a");
-            downloadButton.href = images[index].src;
-            downloadButton.download = "";
-            downloadButton.className = "download-button";
-            downloadButton.title = "Download high quality image";
-            downloadButton.innerHTML = '<i class="fas fa-download"></i><span>High Quality</span>';
-            downloadButtonContainer.appendChild(downloadButton);
-          }
+          
+          const downloadButton = document.createElement("a");
+          downloadButton.href = images[index].src;
+          downloadButton.download = "";
+          downloadButton.className = "download-button";
+          downloadButton.title = "Download high quality image";
+          downloadButton.innerHTML = '<i class="fas fa-download"></i><span>High Quality</span>';
+          downloadButtonContainer.appendChild(downloadButton);
         }
 
         modalIndex = index;
