@@ -200,17 +200,21 @@ const {images, projectId} = Astro.props;
     width: 100%;
     overflow-x: auto;
     scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
   }
 
   .thumbnails-scroll {
     display: flex;
     gap: 10px;
     padding-bottom: 5px;
+    width: max-content;
+    min-width: 100%;
   }
 
   .thumbnail {
-    flex: 0 0 80px;
-    height: 60px;
+    flex: 0 0 auto;
+    width: 80px; 
+    height: auto;
     border-radius: 4px;
     overflow: hidden;
     cursor: pointer;
@@ -219,6 +223,7 @@ const {images, projectId} = Astro.props;
       opacity 0.3s ease,
       transform 0.3s ease;
     border: 2px solid transparent;
+    min-height: 45px;
   }
 
   .thumbnail:hover {
@@ -233,8 +238,9 @@ const {images, projectId} = Astro.props;
 
   .thumbnail img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    display: block;
+    object-fit: contain;
     object-position: center;
   }
 
@@ -244,8 +250,8 @@ const {images, projectId} = Astro.props;
     }
 
     .thumbnail {
-      flex: 0 0 60px;
-      height: 45px;
+      width: 60px;
+      min-height: 35px;
     }
 
     .gallery-nav {
@@ -469,20 +475,23 @@ const {images, projectId} = Astro.props;
 
             // Apply styles directly to the thumbnail
             thumbnail.style.width = "60px";
-            thumbnail.style.height = "45px";
+            thumbnail.style.height = "auto";
+            thumbnail.style.minHeight = "35px";
             thumbnail.style.borderRadius = "4px";
             thumbnail.style.overflow = "hidden";
             thumbnail.style.cursor = "pointer";
             thumbnail.style.opacity = i === 0 ? "1" : "0.6";
             thumbnail.style.transition = "all 0.3s ease";
             thumbnail.style.border = i === 0 ? "2px solid white" : "2px solid transparent";
+            thumbnail.style.flex = "0 0 auto";
 
             const thumbImg = document.createElement("img");
             thumbImg.src = image.src;
             thumbImg.alt = `Thumbnail ${i + 1}`;
             thumbImg.style.width = "100%";
-            thumbImg.style.height = "100%";
-            thumbImg.style.objectFit = "cover";
+            thumbImg.style.height = "auto";
+            thumbImg.style.display = "block";
+            thumbImg.style.objectFit = "contain";
 
             thumbnail.appendChild(thumbImg);
             modalThumbnailsContainer.appendChild(thumbnail);
