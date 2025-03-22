@@ -338,6 +338,33 @@ const {images, projectId} = Astro.props;
       showImage(newIndex);
     }
 
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const swipeThreshold = 50;
+
+    function handleTouchStart(e) {
+      touchStartX = e.changedTouches[0].screenX;
+    }
+
+    function handleTouchEnd(e) {
+      touchEndX = e.changedTouches[0].screenX;
+      const swipeDistance = touchEndX - touchStartX;
+      
+      if (Math.abs(swipeDistance) > swipeThreshold) {
+        if (swipeDistance > 0) {
+          prevImage();
+        } else {
+          nextImage();
+        }
+      }
+    }
+
+    const mainImageContainer = gallery.querySelector(".main-image-container");
+    if (mainImageContainer) {
+      mainImageContainer.addEventListener("touchstart", handleTouchStart, { passive: true });
+      mainImageContainer.addEventListener("touchend", handleTouchEnd, { passive: true });
+    }
+
     if (prevButton) {
       prevButton.addEventListener("click", prevImage);
     }
@@ -590,6 +617,33 @@ const {images, projectId} = Astro.props;
       function nextModalImage() {
         const newIndex = (modalIndex + 1) % totalImages;
         showModalImage(newIndex);
+      }
+
+      // Touch swipe support for modal
+      let modalTouchStartX = 0;
+      let modalTouchEndX = 0;
+      
+      function handleModalTouchStart(e) {
+        modalTouchStartX = e.changedTouches[0].screenX;
+      }
+      
+      function handleModalTouchEnd(e) {
+        modalTouchEndX = e.changedTouches[0].screenX;
+        const swipeDistance = modalTouchEndX - modalTouchStartX;
+        
+        if (Math.abs(swipeDistance) > swipeThreshold) {
+          if (swipeDistance > 0) {
+            prevModalImage();
+          } else {
+            nextModalImage();
+          }
+        }
+      }
+      
+      // Add touch event listeners to the modal container
+      if (modalContainer) {
+        modalContainer.addEventListener("touchstart", handleModalTouchStart, { passive: true });
+        modalContainer.addEventListener("touchend", handleModalTouchEnd, { passive: true });
       }
 
       function openModal(index) {
