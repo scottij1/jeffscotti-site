@@ -6,7 +6,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "format": "prettier --write \"src/**/*.{js,ts,astro,scss,json}\"",
+    "format:check": "prettier --check \"src/**/*.{js,ts,astro,scss,json}\""
   },
   "dependencies": {
     "@splidejs/splide": "^4.1.4",

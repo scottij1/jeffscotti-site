@@ -68,25 +68,25 @@
       margin-right: 0;
     }
 
-      a {
-        color: $heading-color;
-        text-decoration: none;
-        line-height: 50px;
-        font-size: 14px;
-        transition: all 0.3s ease-in-out;
+    a {
+      color: $heading-color;
+      text-decoration: none;
+      line-height: 50px;
+      font-size: 14px;
+      transition: all 0.3s ease-in-out;
 
-        &:hover {
-          color: $link-hover-color;
-        }
-
-        &:active {
-          color: $active-color;
-        }
+      &:hover {
+        color: $link-hover-color;
       }
 
-      &.current-menu-item > a {
+      &:active {
         color: $active-color;
       }
+    }
+
+    &.current-menu-item > a {
+      color: $active-color;
+    }
   }
 
   .sub-menu {
@@ -264,11 +264,11 @@
         padding: $spacing-sm 0;
         font-size: 20px;
         font-weight: 500;
-        
+
         &:hover {
           color: $link-hover-color;
         }
-        
+
         &:active {
           color: $active-color;
         }

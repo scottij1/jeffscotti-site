@@ -115,7 +115,7 @@ const {pdfUrl, projectId} = Astro.props;
     .pdf-wrapper {
       height: 400px;
     }
-    
+
     .pdf-controls {
       flex-wrap: wrap;
       justify-content: center;
@@ -165,7 +165,7 @@ const {pdfUrl, projectId} = Astro.props;
     function applyZoom() {
       if (pdfObject) {
         pdfObject.style.transform = `scale(${scale})`;
-        pdfObject.style.transformOrigin = 'top center';
+        pdfObject.style.transformOrigin = "top center";
       }
     }
 
@@ -179,15 +179,15 @@ const {pdfUrl, projectId} = Astro.props;
 
     // Hide page navigation controls since we're using the native PDF viewer
     if (prevPageBtn) {
-      prevPageBtn.style.display = 'none';
+      prevPageBtn.style.display = "none";
     }
-    
+
     if (nextPageBtn) {
-      nextPageBtn.style.display = 'none';
+      nextPageBtn.style.display = "none";
     }
-    
+
     if (pageCounter) {
-      pageCounter.style.display = 'none';
+      pageCounter.style.display = "none";
     }
   }
 
