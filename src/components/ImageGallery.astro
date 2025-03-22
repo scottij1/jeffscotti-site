@@ -56,7 +56,7 @@ const {images, projectId} = Astro.props;
 
   {
     images.length > 1 && (
-      <div class="thumbnails-container">
+<div class="thumbnails-container custom-scrollbar-light">
         <div class="thumbnails-scroll">
           {images.map((image, index) => (
             <div
@@ -199,8 +199,7 @@ const {images, projectId} = Astro.props;
     margin-top: 15px;
     width: 100%;
     overflow-x: auto;
-    scrollbar-width: thin;
-    -webkit-overflow-scrolling: touch;
+    @extend .custom-scrollbar-light;
   }
 
   .thumbnails-scroll {

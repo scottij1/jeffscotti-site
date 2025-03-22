@@ -39,7 +39,7 @@ const {projectId} = Astro.props;
         <div id={`download-button-container-${projectId}`} class="download-button-container"></div>
       </div>
 
-      <div class="modal-thumbnails-container">
+      <div class="modal-thumbnails-container custom-scrollbar-dark">
         <!-- Thumbnails will be dynamically added here -->
       </div>
     </div>
@@ -217,8 +217,8 @@ const {projectId} = Astro.props;
     padding: 10px 0;
     overflow-x: auto;
     max-width: 100%;
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
     width: 100%;
+    @extend .custom-scrollbar-dark;
   }
 
   .modal-thumbnail {
