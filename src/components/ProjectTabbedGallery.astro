@@ -8,29 +8,30 @@ interface Props {
   mobileImages: ProjectImage[];
   projectId: string;
   pdfUrl?: string; // Optional PDF URL
+  defaultTab?: string; // Optional default tab (desktop, mobile, pdf)
 }
 
-const {desktopImages, mobileImages, projectId, pdfUrl} = Astro.props;
+const {desktopImages, mobileImages, projectId, pdfUrl, defaultTab = "desktop"} = Astro.props;
 ---
 
 <div class="tabbed-gallery-container">
   <!-- Tabs -->
   <ul class="tab-buttons">
-    <li class="active">
+    <li class={defaultTab === "desktop" ? "active" : ""}>
       <a
         href={`#${projectId}-desktop-tab`}
         class="tab-btn"
         data-tab={`${projectId}-desktop-tab`}
-        aria-label="Desktop view">
+        aria-label="Images view">
         <div class="tab-icon">
-          <i class="fas fa-desktop"></i>
+          <i class="fas fa-images"></i>
         </div>
-        Desktop
+        Images
       </a>
     </li>
     {
       mobileImages && mobileImages.length > 0 && (
-        <li>
+        <li class={defaultTab === "mobile" ? "active" : ""}>
           <a
             href={`#${projectId}-mobile-tab`}
             class="tab-btn"
@@ -46,7 +47,7 @@ const {desktopImages, mobileImages, projectId, pdfUrl} = Astro.props;
     }
     {
       pdfUrl && (
-        <li>
+        <li class={defaultTab === "pdf" ? "active" : ""}>
           <a
             href={`#${projectId}-pdf-tab`}
             class="tab-btn"
@@ -63,19 +64,19 @@ const {desktopImages, mobileImages, projectId, pdfUrl} = Astro.props;
   </ul>
 
   <div class="tab-content-wrapper">
-    <div class="tab-content active" id={`${projectId}-desktop-tab`}>
+    <div class={`tab-content ${defaultTab === "desktop" ? "active" : ""}`} id={`${projectId}-desktop-tab`}>
       <ImageGallery images={desktopImages} projectId={`${projectId}-desktop`} />
     </div>
     {
       mobileImages && mobileImages.length > 0 && (
-        <div class="tab-content" id={`${projectId}-mobile-tab`}>
+        <div class={`tab-content ${defaultTab === "mobile" ? "active" : ""}`} id={`${projectId}-mobile-tab`}>
           <ImageGallery images={mobileImages} projectId={`${projectId}-mobile`} />
         </div>
       )
     }
     {
       pdfUrl && (
-        <div class="tab-content" id={`${projectId}-pdf-tab`}>
+        <div class={`tab-content ${defaultTab === "pdf" ? "active" : ""}`} id={`${projectId}-pdf-tab`}>
           <PdfViewer pdfUrl={pdfUrl} projectId={projectId} />
         </div>
       )
@@ -172,7 +173,7 @@ const {desktopImages, mobileImages, projectId, pdfUrl} = Astro.props;
   }
 </style>
 
-<script define:vars={{projectId}}>
+<script define:vars={{projectId, defaultTab}}>
   function initializeTabbedGallery() {
     const containers = document.querySelectorAll(".tabbed-gallery-container");
 
@@ -180,6 +181,26 @@ const {desktopImages, mobileImages, projectId, pdfUrl} = Astro.props;
       const tabLinks = container.querySelectorAll(".tab-btn");
       const tabContents = container.querySelectorAll(".tab-content");
       const tabItems = container.querySelectorAll(".tab-buttons li");
+
+      if (defaultTab && defaultTab !== "desktop") {
+        const defaultTabId = `${projectId}-${defaultTab}-tab`;
+        const defaultTabContent = document.getElementById(defaultTabId);
+        
+        if (defaultTabContent) {
+          tabItems.forEach((item) => item.classList.remove("active"));
+          tabContents.forEach((content) => content.classList.remove("active"));
+          
+          const defaultTabButton = container.querySelector(`[data-tab="${defaultTabId}"]`);
+          if (defaultTabButton) {
+            const parentLi = defaultTabButton.closest("li");
+            if (parentLi) {
+              parentLi.classList.add("active");
+            }
+          }
+          
+          defaultTabContent.classList.add("active");
+        }
+      }
 
       tabLinks.forEach((link) => {
         link.addEventListener("click", (e) => {

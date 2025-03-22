@@ -49,6 +49,14 @@ import {projects, getProjectById, automatedCfeBillMobileImages} from "../data/pr
                   projectId={project.id}
                   pdfUrl="/images/portfolio/biocom/biocom.org/site-map.pdf"
                 />
+              ) : project.id === "project-async-wizard" ? (
+                <ProjectTabbedGallery
+                  desktopImages={project.images}
+                  mobileImages={[]}
+                  projectId={project.id}
+                  pdfUrl="/images/portfolio/bright/async_wizard_ux_flow/async-wizard-documents-upload-flow.pdf"
+                  defaultTab="pdf"
+                />
               ) : (
                 <ImageGallery images={project.images} projectId={project.id} />
               )}
