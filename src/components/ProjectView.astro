@@ -41,6 +41,7 @@ import {projects, getProjectById, automatedCfeBillMobileImages} from "../data/pr
                   mobileImages={automatedCfeBillMobileImages}
                   projectId={project.id}
                   pdfUrl="/images/portfolio/bright/automated_cfe_bill/process_and_vision.pdf"
+                  defaultTab="desktop"
                 />
               ) : project.id === "project-biocom-site" ? (
                 <ProjectTabbedGallery
@@ -48,6 +49,7 @@ import {projects, getProjectById, automatedCfeBillMobileImages} from "../data/pr
                   mobileImages={[]}
                   projectId={project.id}
                   pdfUrl="/images/portfolio/biocom/biocom.org/site-map.pdf"
+                  defaultTab="desktop"
                 />
               ) : project.id === "project-async-wizard" ? (
                 <ProjectTabbedGallery
@@ -365,16 +367,110 @@ import {projects, getProjectById, automatedCfeBillMobileImages} from "../data/pr
       showProject(projectId);
       projectView.classList.add("open");
       document.body.style.overflow = "hidden";
+      
+      setTimeout(() => {
+        const containers = document.querySelectorAll(".tabbed-gallery-container");
+        containers.forEach((container) => {
+          const projectContainer = container.closest(".project-content");
+          if (projectContainer && projectContainer.id === projectId) {
+            const tabLinks = container.querySelectorAll(".tab-btn");
+            const tabContents = container.querySelectorAll(".tab-content");
+            const tabItems = container.querySelectorAll(".tab-buttons li");
+            const defaultTab = container.getAttribute("data-default-tab") || "desktop";
+            const defaultTabId = `${projectId}-${defaultTab}-tab`;
+            const defaultTabContent = document.getElementById(defaultTabId);
+            
+            if (defaultTabContent) {
+              tabItems.forEach((item) => item.classList.remove("active"));
+              tabContents.forEach((content) => content.classList.remove("active"));
+              
+              const defaultTabButton = container.querySelector(`[data-tab="${defaultTabId}"]`);
+              if (defaultTabButton) {
+                const parentLi = defaultTabButton.closest("li");
+                if (parentLi) {
+                  parentLi.classList.add("active");
+                }
+              }
+              
+               defaultTabContent.classList.add("active");
+            }
+          }
+        });
+      }, 100);
     }
 
     function goToPrevProject() {
       currentProjectIndex = (currentProjectIndex - 1 + projectIds.length) % projectIds.length;
-      showProject(projectIds[currentProjectIndex]);
+      const projectId = projectIds[currentProjectIndex];
+      showProject(projectId);
+      
+      // Reinitialize tabs for the new project
+      setTimeout(() => {
+        const containers = document.querySelectorAll(".tabbed-gallery-container");
+        containers.forEach((container) => {
+          const projectContainer = container.closest(".project-content");
+          if (projectContainer && projectContainer.id === projectId) {
+            const tabLinks = container.querySelectorAll(".tab-btn");
+            const tabContents = container.querySelectorAll(".tab-content");
+            const tabItems = container.querySelectorAll(".tab-buttons li");
+            const defaultTab = container.getAttribute("data-default-tab") || "desktop";
+            const defaultTabId = `${projectId}-${defaultTab}-tab`;
+            const defaultTabContent = document.getElementById(defaultTabId);
+            
+            if (defaultTabContent) {
+              tabItems.forEach((item) => item.classList.remove("active"));
+              tabContents.forEach((content) => content.classList.remove("active"));
+              
+              const defaultTabButton = container.querySelector(`[data-tab="${defaultTabId}"]`);
+              if (defaultTabButton) {
+                const parentLi = defaultTabButton.closest("li");
+                if (parentLi) {
+                  parentLi.classList.add("active");
+                }
+              }
+              
+              defaultTabContent.classList.add("active");
+            }
+          }
+        });
+      }, 100);
     }
 
     function goToNextProject() {
       currentProjectIndex = (currentProjectIndex + 1) % projectIds.length;
-      showProject(projectIds[currentProjectIndex]);
+      const projectId = projectIds[currentProjectIndex];
+      showProject(projectId);
+      
+      // Reinitialize tabs for the new project
+      setTimeout(() => {
+        const containers = document.querySelectorAll(".tabbed-gallery-container");
+        containers.forEach((container) => {
+          const projectContainer = container.closest(".project-content");
+          if (projectContainer && projectContainer.id === projectId) {
+            const tabLinks = container.querySelectorAll(".tab-btn");
+            const tabContents = container.querySelectorAll(".tab-content");
+            const tabItems = container.querySelectorAll(".tab-buttons li");
+            const defaultTab = container.getAttribute("data-default-tab") || "desktop";
+            const defaultTabId = `${projectId}-${defaultTab}-tab`;
+            const defaultTabContent = document.getElementById(defaultTabId);
+            
+            if (defaultTabContent) {
+              tabItems.forEach((item) => item.classList.remove("active"));
+              tabContents.forEach((content) => content.classList.remove("active"));
+              
+              const defaultTabButton = container.querySelector(`[data-tab="${defaultTabId}"]`);
+              if (defaultTabButton) {
+                const parentLi = defaultTabButton.closest("li");
+                if (parentLi) {
+                  parentLi.classList.add("active");
+                }
+              }
+              
+              defaultTabContent.classList.add("active");
+            }
+          }
+        });
+      }, 100);
     }
 
     if (closeButton) {

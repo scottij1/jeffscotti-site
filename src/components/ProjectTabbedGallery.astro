@@ -7,14 +7,14 @@ interface Props {
   desktopImages: ProjectImage[];
   mobileImages: ProjectImage[];
   projectId: string;
-  pdfUrl?: string; // Optional PDF URL
-  defaultTab?: string; // Optional default tab (desktop, mobile, pdf)
+  pdfUrl?: string;
+  defaultTab?: string;
 }
 
 const {desktopImages, mobileImages, projectId, pdfUrl, defaultTab = "desktop"} = Astro.props;
 ---
 
-<div class="tabbed-gallery-container">
+<div class="tabbed-gallery-container" data-default-tab={defaultTab}>
   <!-- Tabs -->
   <ul class="tab-buttons">
     <li class={defaultTab === "desktop" ? "active" : ""}>
@@ -26,7 +26,7 @@ const {desktopImages, mobileImages, projectId, pdfUrl, defaultTab = "desktop"} =
         <div class="tab-icon">
           <i class="fas fa-images"></i>
         </div>
-        Images
+        {projectId === "project-async-wizard" ? "Images" : "Desktop"}
       </a>
     </li>
     {
@@ -181,25 +181,23 @@ const {desktopImages, mobileImages, projectId, pdfUrl, defaultTab = "desktop"} =
       const tabLinks = container.querySelectorAll(".tab-btn");
       const tabContents = container.querySelectorAll(".tab-content");
       const tabItems = container.querySelectorAll(".tab-buttons li");
+      const defaultTabId = `${projectId}-${defaultTab}-tab`;
+      const defaultTabContent = document.getElementById(defaultTabId);
+      
+      if (defaultTabContent) {
+        // Clear all active states first
+        tabItems.forEach((item) => item.classList.remove("active"));
+        tabContents.forEach((content) => content.classList.remove("active"));
 
-      if (defaultTab && defaultTab !== "desktop") {
-        const defaultTabId = `${projectId}-${defaultTab}-tab`;
-        const defaultTabContent = document.getElementById(defaultTabId);
-        
-        if (defaultTabContent) {
-          tabItems.forEach((item) => item.classList.remove("active"));
-          tabContents.forEach((content) => content.classList.remove("active"));
-          
-          const defaultTabButton = container.querySelector(`[data-tab="${defaultTabId}"]`);
-          if (defaultTabButton) {
-            const parentLi = defaultTabButton.closest("li");
-            if (parentLi) {
-              parentLi.classList.add("active");
-            }
+        const defaultTabButton = container.querySelector(`[data-tab="${defaultTabId}"]`);
+        if (defaultTabButton) {
+          const parentLi = defaultTabButton.closest("li");
+          if (parentLi) {
+            parentLi.classList.add("active");
           }
-          
-          defaultTabContent.classList.add("active");
         }
+        
+        defaultTabContent.classList.add("active");
       }
 
       tabLinks.forEach((link) => {
