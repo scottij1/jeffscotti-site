@@ -1,0 +1,137 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import '../../styles/insights.scss';
+
+import type { CollectionEntry } from 'astro:content';
+
+const allPosts = await getCollection('insights');
+const sortedPosts = allPosts.sort((a: CollectionEntry<'insights'>, b: CollectionEntry<'insights'>) => 
+  b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const featuredPost = sortedPosts.find((post: CollectionEntry<'insights'>) => post.data.featured);
+const regularPosts = featuredPost 
+  ? sortedPosts.filter((post: CollectionEntry<'insights'>) => post.id !== featuredPost.id)
+  : sortedPosts;
+
+const categories = [...new Set(sortedPosts.map((post: CollectionEntry<'insights'>) => post.data.category))] as string[];
+
+function formatDate(date: Date): string {
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }).format(date);
+}
+---
+
+<Layout 
+  title="Insights | Jeff Scotti"
+  description="Explore case studies, tech articles, and workflow insights from Jeff Scotti, Senior Frontend Engineer and UI/UX Designer."
+  keywords={['Insights', 'Case Studies', 'Frontend Development', 'UI/UX Design', 'Web Development']}
+>
+  <main class="blog-container">
+    <div class="blog-header">
+      <h1>Insights</h1>
+      <p>Explore case studies, tech articles, and workflow insights from my experience as a Frontend Engineer and UI/UX Designer.</p>
+    </div>
+
+    {categories.length > 0 && (
+      <div class="blog-filters">
+        <button class="blog-filter active" data-filter="all">All</button>
+        {categories.map((category: string) => (
+          <button class="blog-filter" data-filter={category}>{category.replace('-', ' ')}</button>
+        ))}
+      </div>
+    )}
+
+    {featuredPost && (
+      <div class="blog-featured">
+        <a href={`/insights/${featuredPost.slug}`} class="blog-featured-card">
+          <div class="blog-featured-image">
+            {featuredPost.data.heroImage && (
+              <img 
+                src={featuredPost.data.heroImage} 
+                alt={featuredPost.data.title} 
+                width="600" 
+                height="400"
+              />
+            )}
+          </div>
+          <div class="blog-featured-content">
+            <span class="blog-featured-label">Featured</span>
+            <h2 class="blog-featured-title">{featuredPost.data.title}</h2>
+            <p class="blog-featured-description">{featuredPost.data.description}</p>
+            <div class="blog-featured-meta">
+              <span>{formatDate(featuredPost.data.pubDate)}</span>
+              <span>{featuredPost.data.category.replace('-', ' ')}</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    )}
+
+    <div class="blog-grid">
+      {regularPosts.map((post: CollectionEntry<'insights'>) => (
+        <a href={`/insights/${post.slug}`} class="blog-card" data-category={post.data.category}>
+          {post.data.heroImage && (
+            <div class="blog-card-image">
+              <img 
+                src={post.data.heroImage} 
+                alt={post.data.title} 
+                width="400" 
+                height="225"
+              />
+            </div>
+          )}
+          <div class="blog-card-content">
+            <span class="blog-card-category">{post.data.category.replace('-', ' ')}</span>
+            <h2 class="blog-card-title">{post.data.title}</h2>
+            <p class="blog-card-description">{post.data.description}</p>
+            <div class="blog-card-meta">
+              <span class="blog-card-date">
+                <i class="fas fa-calendar-alt"></i> {formatDate(post.data.pubDate)}
+              </span>
+            </div>
+            {post.data.tags.length > 0 && (
+              <div class="blog-card-tags">
+                {post.data.tags.slice(0, 3).map((tag: string) => (
+                  <span class="blog-card-tag">#{tag}</span>
+                ))}
+                {post.data.tags.length > 3 && (
+                  <span class="blog-card-tag">+{post.data.tags.length - 3} more</span>
+                )}
+              </div>
+            )}
+          </div>
+        </a>
+      ))}
+    </div>
+  </main>
+</Layout>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const filterButtons = document.querySelectorAll('.blog-filter');
+    const blogCards = document.querySelectorAll('.blog-card');
+    
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        const filter = button.getAttribute('data-filter');
+        
+        blogCards.forEach(card => {
+          const htmlCard = card as HTMLElement;
+          if (filter === 'all' || card.getAttribute('data-category') === filter) {
+            htmlCard.style.display = 'flex';
+          } else {
+            htmlCard.style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>

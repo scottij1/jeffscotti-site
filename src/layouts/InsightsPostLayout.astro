@@ -1,0 +1,92 @@
+---
+import Layout from './Layout.astro';
+import '../styles/insights.scss';
+
+function formatDate(date: Date): string {
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }).format(date);
+}
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  heroImage?: string;
+  category: string;
+  tags: string[];
+  author: string;
+}
+
+const { 
+  title, 
+  description, 
+  pubDate, 
+  updatedDate, 
+  heroImage, 
+  category,
+  tags,
+  author
+} = Astro.props;
+
+const formattedPubDate = formatDate(pubDate);
+const formattedUpdatedDate = updatedDate ? formatDate(updatedDate) : null;
+---
+
+<Layout 
+  title={`${title} | Jeff Scotti Insights`}
+  description={description}
+  image={heroImage}
+  type="article"
+  keywords={['Insights', ...tags]}
+>
+  <main class="blog-post-container">
+    <article class="blog-post">
+      <div class="blog-post-header">
+        <div class="blog-post-meta">
+          <span class="blog-post-category">{category}</span>
+          <span class="blog-post-date">
+            Published on <time datetime={pubDate.toISOString()}>{formattedPubDate}</time>
+            {updatedDate && (
+              <span class="blog-post-updated">
+                (Updated on <time datetime={updatedDate.toISOString()}>{formattedUpdatedDate}</time>)
+              </span>
+            )}
+          </span>
+          <span class="blog-post-author">By {author}</span>
+        </div>
+        <h1 class="blog-post-title">{title}</h1>
+        <p class="blog-post-description">{description}</p>
+        
+        {heroImage && (
+          <div class="blog-post-hero">
+            <img 
+              src={heroImage} 
+              alt={`Hero image for ${title}`} 
+              width="1200" 
+              height="630" 
+              class="blog-post-hero-image"
+            />
+          </div>
+        )}
+        
+        {tags.length > 0 && (
+          <div class="blog-post-tags">
+            {tags.map(tag => (
+              <a href={`/insights/tag/${tag.toLowerCase().replace(/\s+/g, '-')}`} class="blog-post-tag">
+                #{tag}
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+      
+      <div class="blog-post-content">
+        <slot />
+      </div>
+    </article>
+  </main>
+</Layout>
