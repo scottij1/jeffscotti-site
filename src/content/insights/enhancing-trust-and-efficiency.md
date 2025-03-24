@@ -9,9 +9,11 @@ author: "Jeff Scotti"
 featured: true
 ---
 
-At Bright, Inc., channel partners, often brokers with deep community ties, are vital to driving growth. However, friction in document submission and validation created avoidable trust gaps and operational drag.
+Bright, Inc. is a technology-driven solar financing company focused on making clean energy more accessible across Latin America. We provide digital tools, credit options, and operational support to help families go solar, faster and more affordably.
 
-This case study explores how we tackled these issues using iterative, user-centered UX design, resulting in a transformed experience that empowered our partners and accelerated our operations.
+A key part of our growth engine is our network of channel partners, independent brokers, often with real estate or sales backgrounds, who guide customers through the solar purchase and onboarding journey. These partners operate outside our organization, but they’re essential brand ambassadors and a vital connection point to local communities.
+
+But friction in our document submission and validation workflows created significant trust gaps and inefficiencies, both for partners and their customers.
 
 ## The Challenge: Friction That Undermines Trust
 
