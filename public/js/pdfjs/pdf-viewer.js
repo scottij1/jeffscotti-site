@@ -10,7 +10,9 @@ class PDFViewer {
     this.pageNum = 1;
     this.pageRendering = false;
     this.pageNumPending = null;
+    
     this.scale = 1.0;
+    
     this.canvas = null;
     this.ctx = null;
     this.initialized = false;

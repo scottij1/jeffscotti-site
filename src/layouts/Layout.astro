@@ -218,6 +218,14 @@ const canonicalURLObj =
     </style>
 
     <!-- Non-critical CSS is loaded in component files as needed -->
+    
+    <!-- PDF Viewer Custom Scale CSS -->
+    <style is:inline>
+      .custom-pdf-scale object {
+        transform: scale(var(--pdf-scale, 1.0));
+        transform-origin: top left;
+      }
+    </style>
   </head>
   <body>
     <VantaBackground />
@@ -250,6 +258,30 @@ const canonicalURLObj =
       }
     </script>
 
+    <!-- PDF Viewer Zoom Level Script -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Find all PDF viewer containers with data-pdf-scale attribute
+        const pdfViewers = document.querySelectorAll('.pdf-viewer-container[data-pdf-scale]');
+        
+        pdfViewers.forEach(container => {
+          // Cast to HTMLElement to access dataset and style properties
+          const containerEl = container as HTMLElement;
+          const scale = parseFloat(containerEl.dataset.pdfScale || '1.0');
+          const objectElement = containerEl.querySelector('object');
+          
+          if (objectElement) {
+            // For embedded PDFs, we need to modify the object's style
+            // We'll add a CSS variable that can be used by the PDF viewer
+            containerEl.style.setProperty('--pdf-scale', scale.toString());
+            
+            // Add a class to identify containers with custom scale
+            containerEl.classList.add('custom-pdf-scale');
+          }
+        });
+      });
+    </script>
+    
     <!-- Add content-visibility to improve rendering performance -->
     <script>
       // Defer content visibility optimization to after LCP

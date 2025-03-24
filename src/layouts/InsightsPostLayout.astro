@@ -36,6 +36,40 @@ const formattedPubDate = formatDate(pubDate);
 const formattedUpdatedDate = updatedDate ? formatDate(updatedDate) : null;
 ---
 
+<!-- Twemoji script for emoji rendering -->
+<script is:inline>
+  window.addEventListener('DOMContentLoaded', () => {
+    // Load Twemoji script dynamically
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/twemoji@14.0.2/dist/twemoji.min.js';
+    script.crossOrigin = 'anonymous';
+    
+    script.onload = () => {
+      // Initialize Twemoji once loaded
+      twemoji.parse(document.body, {
+        folder: 'svg',
+        ext: '.svg',
+        callback: (icon, options) => {
+          // Don't convert emoji in code blocks
+          const parentNode = options.attributes.src.parentNode;
+          if (parentNode && (
+              parentNode.tagName === 'PRE' || 
+              parentNode.tagName === 'CODE' ||
+              parentNode.closest('pre') || 
+              parentNode.closest('code')
+            )) {
+            return false;
+          }
+          return true;
+        }
+      });
+    };
+    
+    document.head.appendChild(script);
+  });
+</script>
+
+
 <Layout 
   title={`${title} | Jeff Scotti Insights`}
   description={description}

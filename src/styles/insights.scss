@@ -429,6 +429,57 @@
   }
 }
 
+// Twemoji styling
+.blog-post-content {
+  // General emoji styling
+  img.emoji {
+    display: inline-block;
+    height: 1.2em;
+    width: 1.2em;
+    margin: 0 0.1em;
+    vertical-align: -0.2em;
+  }
+
+  // Before/After pattern styling
+  p {
+    // Before item with red pushpin
+    img.emoji[src*="1f4cc"] {
+      height: 1.5em;
+      width: 1.5em;
+      margin-right: 0.5em;
+      vertical-align: -0.3em;
+    }
+
+    // After item with green checkmark
+    img.emoji[src*="2705"] {
+      height: 1.5em;
+      width: 1.5em;
+      margin-right: 0.5em;
+      vertical-align: -0.3em;
+    }
+  }
+
+  // Before/After section styling
+  p:has(img.emoji[src*="1f4cc"]),
+  p:has(img.emoji[src*="2705"]) {
+    margin-bottom: 0.5rem;
+    padding-left: 0.5rem;
+  }
+
+  // Before item styling
+  p:has(img.emoji[src*="1f4cc"]) {
+    color: var(--text-color);
+    font-weight: 500;
+  }
+
+  // After item styling
+  p:has(img.emoji[src*="2705"]) {
+    color: var(--text-color);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+}
+
 // Theme-specific variables
 :root {
   --tag-bg-color: #f0f0f0;
