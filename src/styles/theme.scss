@@ -1,24 +1,37 @@
-// Theme classes applied to the html element
+/* Theme classes applied to the html element */
+
 html.theme-dark {
-  --primary-color: #007ced; // Blue
-  --secondary-color: #ff9800; // Orange
-  --background-color: #222; // Dark gray
-  --container-bg-color: #333; // Slightly lighter gray for containers
-  --text-color: #d5d5d5; // Light gray for main text
-  --heading-color: #f5f5f5; // Almost white for headings
-  --border-color: #444; // Medium gray for borders
-  --link-hover-color: #007ced; // Blue for link hover
-  --active-color: #ff9800; // Orange for active states
+  --primary-color: #007ced;
+  --secondary-color: #ff9800;
+  --background-color: #222;
+  --container-bg-color: #333;
+  --text-color: #e0e0e0;
+  --heading-color: #f5f5f5;
+  --border-color: #444;
+  --link-hover-color: #007ced;
+  --active-color: #ff9800;
+  --link-color: #007ced;
+  --text-color-secondary: #b8b8b8;
+  --text-color-tertiary: #a0a0a0;
+  --code-bg-color: #2d2d2d;
+  --tag-bg-color: #444;
+  --tag-text-color: #e0e0e0;
 }
 
 html.theme-light {
-  --primary-color: #0066cc; // Darker blue
-  --secondary-color: #e67e00; // Darker orange
-  --background-color: #f5f5f5; // Light gray
-  --container-bg-color: #ffffff; // White
-  --text-color: #333333; // Dark gray
-  --heading-color: #222222; // Almost black
-  --border-color: #dddddd; // Light gray
-  --link-hover-color: #0066cc; // Blue for link hover
-  --active-color: #e67e00; // Orange for active states
+  --primary-color: #0066cc;
+  --secondary-color: #e67e00;
+  --background-color: #f5f5f5;
+  --container-bg-color: #ffffff;
+  --text-color: #333333;
+  --heading-color: #222222;
+  --border-color: #dddddd;
+  --link-hover-color: #0066cc;
+  --active-color: #e67e00;
+  --link-color: #0066cc;
+  --text-color-secondary: #555555;
+  --text-color-tertiary: #666666;
+  --code-bg-color: #f5f5f5;
+  --tag-bg-color: #f0f0f0;
+  --tag-text-color: #444444;
 }

@@ -1,4 +1,3 @@
-// Blog styles
 .blog-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -466,7 +465,6 @@
 
 // Twemoji styling
 .blog-post-content {
-  // General emoji styling
   img.emoji {
     display: inline-block;
     height: 1.2em;
@@ -475,9 +473,7 @@
     vertical-align: -0.2em;
   }
 
-  // Before/After pattern styling
   p {
-    // Before item with red pushpin
     img.emoji[src*="1f4cc"] {
       height: 1.5em;
       width: 1.5em;
@@ -485,7 +481,6 @@
       vertical-align: -0.3em;
     }
 
-    // After item with green checkmark
     img.emoji[src*="2705"] {
       height: 1.5em;
       width: 1.5em;
@@ -494,42 +489,20 @@
     }
   }
 
-  // Before/After section styling
   p:has(img.emoji[src*="1f4cc"]),
   p:has(img.emoji[src*="2705"]) {
     margin-bottom: 0.5rem;
     padding-left: 0.5rem;
   }
 
-  // Before item styling
   p:has(img.emoji[src*="1f4cc"]) {
     color: var(--text-color);
     font-weight: 500;
   }
 
-  // After item styling
   p:has(img.emoji[src*="2705"]) {
     color: var(--text-color);
     font-weight: 500;
     margin-bottom: 1.5rem;
   }
-}
-
-// Theme-specific variables
-:root {
-  --tag-bg-color: #f0f0f0;
-  --tag-text-color: #666;
-  --code-bg-color: #f5f5f5;
-  --border-color: #eaeaea;
-  --text-color-secondary: #666;
-  --text-color-tertiary: #888;
-}
-
-.theme-dark {
-  --tag-bg-color: #333;
-  --tag-text-color: #ccc;
-  --code-bg-color: #2d2d2d;
-  --border-color: #444;
-  --text-color-secondary: #aaa;
-  --text-color-tertiary: #888;
 }

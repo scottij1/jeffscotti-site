@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 import { formatDate } from '../utils/date';
 
-// Props
 interface Props {
   title?: string;
   count?: number;
@@ -13,7 +12,6 @@ const {
   count = 3 
 } = Astro.props;
 
-// Fetch insights
 const allPosts = await getCollection('insights');
 const latestPosts = allPosts
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
@@ -59,7 +57,7 @@ const latestPosts = allPosts
 <style lang="scss">
   .latest-insights {
     padding: 4rem 0;
-    background-color: var(--container-bg-color);
+    background-color: var(--background-color);
   }
 
   .container {
@@ -77,38 +75,29 @@ const latestPosts = allPosts
     h2 {
       font-size: 2rem;
       margin: 0;
+      color: var(--heading-color);
     }
 
     .view-all-link {
       color: var(--primary-color);
       font-weight: 500;
       text-decoration: none;
-      transition: color 0.2s ease;
+      transition: all 0.2s ease;
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+      border: 1px solid var(--primary-color);
 
       &:hover {
-        color: var(--primary-color-dark);
-        text-decoration: underline;
+        color: white;
+        background-color: var(--primary-color);
       }
     }
   }
 
   .insights-grid {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2rem;
-    justify-content: flex-start;
-  }
-
-  .insight-card {
-    flex: 0 0 calc(33.333% - 1.334rem);
-    max-width: calc(33.333% - 1.334rem);
-  }
-
-  @media (max-width: 1024px) {
-    .insight-card {
-      flex: 0 0 calc(50% - 1rem);
-      max-width: calc(50% - 1rem);
-    }
   }
 
   .insight-card {
@@ -120,6 +109,8 @@ const latestPosts = allPosts
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     height: 100%;
+    text-decoration: none;
+    color: var(--text-color);
 
     &:hover {
       transform: translateY(-5px);
@@ -154,6 +145,7 @@ const latestPosts = allPosts
       text-transform: uppercase;
       color: var(--primary-color);
       margin-bottom: 0.5rem;
+      font-weight: 600;
     }
 
     .insight-card-title {
@@ -161,6 +153,7 @@ const latestPosts = allPosts
       margin-bottom: 0.75rem;
       font-weight: 600;
       line-height: 1.4;
+      color: var(--heading-color);
     }
 
     .insight-card-description {
@@ -168,6 +161,7 @@ const latestPosts = allPosts
       color: var(--text-color-secondary);
       margin-bottom: 1rem;
       flex-grow: 1;
+      line-height: 1.5;
     }
 
     .insight-card-meta {
@@ -177,19 +171,14 @@ const latestPosts = allPosts
       font-size: 0.8rem;
       color: var(--text-color-tertiary);
       margin-top: auto;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border-color);
     }
 
     .insight-card-date {
       display: flex;
       align-items: center;
       gap: 0.25rem;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .insight-card {
-      flex: 0 0 100%;
-      max-width: 100%;
     }
   }
 </style>
