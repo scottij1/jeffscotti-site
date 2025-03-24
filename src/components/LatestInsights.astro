@@ -1,0 +1,195 @@
+---
+import { getCollection } from 'astro:content';
+import { formatDate } from '../utils/date';
+
+// Props
+interface Props {
+  title?: string;
+  count?: number;
+}
+
+const { 
+  title = "Latest Insights", 
+  count = 3 
+} = Astro.props;
+
+// Fetch insights
+const allPosts = await getCollection('insights');
+const latestPosts = allPosts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, count);
+---
+
+<section class="latest-insights">
+  <div class="container">
+    <div class="section-header">
+      <h2>{title}</h2>
+      <a href="/insights" class="view-all-link">View All</a>
+    </div>
+    
+    <div class="insights-grid">
+      {latestPosts.map((post) => (
+        <a href={`/insights/${post.slug}`} class="insight-card">
+          {post.data.heroImage && (
+            <div class="insight-card-image">
+              <img 
+                src={post.data.heroImage} 
+                alt={post.data.title} 
+                width="400" 
+                height="225"
+              />
+            </div>
+          )}
+          <div class="insight-card-content">
+            <span class="insight-card-category">{post.data.category.replace('-', ' ')}</span>
+            <h3 class="insight-card-title">{post.data.title}</h3>
+            <p class="insight-card-description">{post.data.description}</p>
+            <div class="insight-card-meta">
+              <span class="insight-card-date">
+                {formatDate(post.data.pubDate)}
+              </span>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  .latest-insights {
+    padding: 4rem 0;
+    background-color: var(--container-bg-color);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    h2 {
+      font-size: 2rem;
+      margin: 0;
+    }
+
+    .view-all-link {
+      color: var(--primary-color);
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: var(--primary-color-dark);
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .insights-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: flex-start;
+  }
+
+  .insight-card {
+    flex: 0 0 calc(33.333% - 1.334rem);
+    max-width: calc(33.333% - 1.334rem);
+  }
+
+  @media (max-width: 1024px) {
+    .insight-card {
+      flex: 0 0 calc(50% - 1rem);
+      max-width: calc(50% - 1rem);
+    }
+  }
+
+  .insight-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background-color: var(--container-bg-color);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .insight-card-image {
+      height: 200px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+    }
+
+    &:hover .insight-card-image img {
+      transform: scale(1.05);
+    }
+
+    .insight-card-content {
+      padding: 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .insight-card-category {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+    }
+
+    .insight-card-title {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .insight-card-description {
+      font-size: 0.9rem;
+      color: var(--text-color-secondary);
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+
+    .insight-card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--text-color-tertiary);
+      margin-top: auto;
+    }
+
+    .insight-card-date {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .insight-card {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
+</style>
