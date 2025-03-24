@@ -9,11 +9,11 @@ author: "Jeff Scotti"
 featured: true
 ---
 
-Bright, Inc. is a technology-driven solar financing company focused on making clean energy more accessible across Latin America. We provide digital tools, credit options, and operational support to help families go solar, faster and more affordably.
+Bright, Inc. is a technology-driven solar financing company focused on making clean energy more accessible across Latin America. They provide digital tools, credit options, and operational support to help families go solar, faster and more affordably.
 
-A key part of our growth engine is our network of channel partners, independent brokers, often with real estate or sales backgrounds, who guide customers through the solar purchase and onboarding journey. These partners operate outside our organization, but they’re essential brand ambassadors and a vital connection point to local communities.
+A key part of their growth engine is their network of channel partners, independent brokers, often with real estate or sales backgrounds, who guide customers through the solar purchase and onboarding journey. These partners operate outside their organization, but they’re essential brand ambassadors and a vital connection point to local communities.
 
-But friction in our document submission and validation workflows created significant trust gaps and inefficiencies, both for partners and their customers.
+But friction in their document submission and validation workflows created significant trust gaps and inefficiencies, both for partners and their customers.
 
 ## The Challenge: Friction That Undermines Trust
 
