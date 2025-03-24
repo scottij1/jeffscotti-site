@@ -182,10 +182,17 @@ By designing the rollout in manageable, testable pieces, we de-risked the transi
 <div class="pdf-viewer-container">
   <div class="pdf-wrapper">
     <object data="/images/portfolio/bright/checklists/checklist_assignments_ux_flow.pdf" type="application/pdf" width="100%" height="100%" class="pdf-object">
-      <p>
-        It appears your browser doesn't support embedded PDFs.
-        <a href="/images/portfolio/bright/checklists/checklist_assignments_ux_flow.pdf" target="_blank">Click here to download the PDF</a>.
-      </p>
+      <div class="pdf-error">
+        <p>
+          It appears your browser doesn't support embedded PDFs.
+          <a href="/images/portfolio/bright/checklists/checklist_assignments_ux_flow.pdf" target="_blank">Click here to download the PDF</a>.
+        </p>
+        <p class="plugin-notice">
+          Note: Some Chrome plugins may disable this functionality. To enable it, check 
+          Privacy and Security > Site Settings > Additional Content Settings > PDF Documents 
+          and select "Open PDFs in Chrome".
+        </p>
+      </div>
     </object>
   </div>
 </div>
@@ -214,6 +221,42 @@ By designing the rollout in manageable, testable pieces, we de-risked the transi
     border: none;
     width: 100%;
     height: 100%;
+  }
+
+  .pdf-error {
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+
+  .pdf-error p {
+    margin: 10px 0;
+    max-width: 80%;
+    line-height: 1.5;
+  }
+
+  .pdf-error a {
+    color: #4dabf7;
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+  .pdf-error a:hover {
+    text-decoration: none;
+  }
+
+  .plugin-notice {
+    font-size: 0.9em;
+    margin-top: 15px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
   }
 
   @media (max-width: 768px) {
