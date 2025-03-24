@@ -1,0 +1,52 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import {projects, getProjectById} from "../../data/projects";
+
+export async function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { id: project.id },
+    props: { project },
+  }));
+}
+
+const { id } = Astro.params;
+const { project } = Astro.props;
+const title = `${project.title} | Jeff Scotti - Frontend Engineer & UI/UX Designer`;
+const description = project.description[0];
+---
+
+<Layout
+  title={title}
+  description={description}
+  type="article"
+  keywords={[
+    "Jeff Scotti Portfolio",
+    "Web Development Projects",
+    "UI Design Portfolio",
+    project.title,
+    ...project.technologies,
+  ]}>
+<script is:inline define:vars={{ projectId: id }}>
+    (function() {
+      console.log("Redirecting to project:", projectId);
+      sessionStorage.setItem('openProjectId', projectId);
+      window.location.replace('/projects');
+    })();
+  </script>
+  
+  <!-- Meta refresh as a fallback if JavaScript fails -->
+  <meta http-equiv="refresh" content="0;url=/projects">
+
+  <div id="main" class="site-main">
+    <div id="main-content" class="single-page-content">
+      <div id="primary" class="content-area">
+        <div class="page-title">
+          <h1>Redirecting...</h1>
+          <div class="page-subtitle">
+            <h2>Loading {project.title}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
