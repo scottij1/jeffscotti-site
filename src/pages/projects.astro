@@ -339,6 +339,57 @@ const visibleProjects = projects.filter((project) => !project.hidden);
         }
       });
     });
+    
+    function checkForProjectToOpen() {
+      let projectId = null;
+      
+      if (window.location.hash) {
+        projectId = window.location.hash.substring(1); // Remove the # character
+        console.log("Found project ID in URL hash:", projectId);
+      }
+      
+      if (!projectId) {
+        const urlParams = new URLSearchParams(window.location.search);
+        projectId = urlParams.get('openProject');
+        if (projectId) {
+          console.log("Found project ID in URL query parameter:", projectId);
+        }
+      }
+      
+      if (!projectId && typeof sessionStorage !== 'undefined') {
+        projectId = sessionStorage.getItem('openProjectId');
+        // Clear from sessionStorage after reading to prevent reopening on refresh
+        if (projectId) {
+          console.log("Found project ID in sessionStorage:", projectId);
+          sessionStorage.removeItem('openProjectId');
+        }
+      }
+      
+      if (projectId) {
+        if (typeof window.initProjectView === "function") {
+          window.initProjectView();
+        } else {
+          console.error("initProjectView function not found");
+        }
+        
+        const tryOpenProject = (attempts = 0) => {
+          if (typeof window.openProjectView === "function") {
+            window.openProjectView(projectId);
+          } else if (attempts < 5) {
+            setTimeout(() => tryOpenProject(attempts + 1), 300 * (attempts + 1));
+          } else {
+            console.error("Failed to open project view after multiple attempts");
+          }
+        };
+        
+        setTimeout(tryOpenProject, 500);
+      }
+    }
+    
+    // Run on initial page load, after navigation, and when hash changes
+    checkForProjectToOpen();
+    document.addEventListener("astro:after-swap", checkForProjectToOpen);
+    window.addEventListener("hashchange", checkForProjectToOpen);
   }
 
   document.addEventListener("DOMContentLoaded", initProjectLinks);

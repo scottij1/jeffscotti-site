@@ -89,7 +89,7 @@ We focused on three core solutions and an iterative rollout approach:
 
 To address partner frustrations without disrupting current workflows, we adopted an **iterative strategy** that allowed us to introduce improvements gradually — balancing innovation with stability.
 
-### Phase 1: Co-Mode — Guided Mode Meets Power Mode
+### Phase 1: Co-Mode — <a href="/projects#project-automated-cfe-bill" target="_blank">Guided Mode</a> Meets Power Mode
 
 We launched our enhancements by introducing a **dual-mode experience**:
 
