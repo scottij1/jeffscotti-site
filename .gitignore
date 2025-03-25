@@ -22,6 +22,11 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
-
-template/
 old_site/
+
+# Cypress generated files
+cypress/videos/
+cypress/screenshots/
+cypress/accessibility/
+cypress/downloads/
+.cypress-cache/

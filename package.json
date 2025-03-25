@@ -8,7 +8,11 @@
     "preview": "astro preview",
     "astro": "astro",
     "format": "prettier --write \"src/**/*.{js,ts,astro,scss,json}\"",
-    "format:check": "prettier --check \"src/**/*.{js,ts,astro,scss,json}\""
+    "format:check": "prettier --check \"src/**/*.{js,ts,astro,scss,json}\"",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:a11y": "cypress run --spec \"cypress/e2e/*accessibility*.cy.js\"",
+    "test:a11y": "start-server-and-test dev http://localhost:4321 cy:a11y"
   },
   "dependencies": {
     "@splidejs/splide": "^4.1.4",
@@ -27,9 +31,13 @@
     "@types/animejs": "^3.1.13",
     "@types/nodemailer": "^6.4.17",
     "@types/three": "^0.174.0",
+    "cypress": "^14.2.0",
+    "cypress-axe": "^1.6.0",
     "eslint": "^9.21.0",
     "prettier": "^3.5.2",
     "prettier-plugin-astro": "^0.14.1",
-    "sass": "^1.85.1"
+    "sass": "^1.85.1",
+    "start-server-and-test": "^2.0.11",
+    "wick-a11y": "^2.0.1"
   }
 }

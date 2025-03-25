@@ -19,6 +19,16 @@ This is the source code for Jeff Scotti's personal website, built with Astro.
 │   ├── pages/           # Page components and API routes
 │   │   └── api/         # API routes
 │   └── styles/          # SCSS styles
+├── cypress/             # Cypress testing framework
+│   ├── e2e/             # End-to-end test files
+│   │   ├── accessibility.cy.js            # Home page accessibility tests
+│   │   ├── contact-accessibility.cy.js    # Contact page accessibility tests
+│   │   └── projects-accessibility.cy.js   # Projects page accessibility tests
+│   ├── support/         # Support files for Cypress
+│   │   ├── commands.js  # Custom Cypress commands
+│   │   └── e2e.js       # E2E test configuration
+│   └── accessibility/   # Generated accessibility reports (after running tests)
+├── cypress.config.js    # Cypress configuration
 └── package.json
 ```
 
@@ -34,6 +44,10 @@ All commands are run from the root of the project, from a terminal:
 | `npm run preview`         | Preview your build locally, before deploying     |
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
+| `npm run cy:open`         | Open Cypress Test Runner                         |
+| `npm run cy:run`          | Run all Cypress tests headlessly                 |
+| `npm run cy:a11y`         | Run accessibility tests headlessly               |
+| `npm run test:a11y`       | Start dev server and run accessibility tests     |
 
 ## 🔄 Static vs. Server-Side Rendering
 
@@ -142,6 +156,46 @@ node restore-site.js
 ```
 
 This script requires the same environment variables in your `.env` file that are used by the GitHub Actions workflow.
+
+## ♿ Accessibility Testing
+
+The site includes accessibility testing using [wick-a11y](https://github.com/sclavijosuero/wick-a11y), a Cypress plugin that leverages axe-core for comprehensive accessibility checks.
+
+### Running Accessibility Tests
+
+1. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+2. In a separate terminal, run the accessibility tests:
+   ```bash
+   # Open Cypress UI (recommended for development)
+   npm run cy:open
+   
+   # Or run headless tests
+   npm run cy:a11y
+   
+   # Or start the dev server and run tests in one command
+   npm run test:a11y
+   ```
+
+### Test Structure
+
+The accessibility tests are organized by page/component:
+- `accessibility.cy.js` - General accessibility tests for the home page
+- `contact-accessibility.cy.js` - Tests for the contact page and form
+- `projects-accessibility.cy.js` - Tests for the projects page and individual project pages
+
+### Accessibility Reports
+
+After running the tests, HTML reports with screenshots of accessibility violations will be generated in the `cypress/accessibility` folder. These reports provide detailed information about each violation, including:
+- Severity level (critical, serious, moderate, minor)
+- Description of the issue
+- Affected DOM elements
+- Suggestions for fixing the issue
+
+For more details, see the [cypress/README.md](cypress/README.md) file.
 
 ## 📝 Notes
 
