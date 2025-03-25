@@ -131,7 +131,7 @@ To address partner frustrations without disrupting current workflows, we adopted
 We launched our enhancements by introducing a **dual-mode experience**:
 
 * **Power Mode**: The original checklist interface that gives advanced users full control and flexibility  
-![Power Mode UI Example](/images/portfolio/bright/automated_cfe_bill/desktop/14-checklist-mode-toggle.png)
+![Power Mode UI Example](/images/portfolio/bright/automated_cfe_bill/desktop/1-enter-rpu-form.png)
 
 * **Guided Mode**: A simplified, step-by-step wizard ideal for newer or less tech-savvy users
 ![Guided Mode UI Example](/images/portfolio/bright/automated_cfe_bill/desktop/1-enter-rpu-form.png)
