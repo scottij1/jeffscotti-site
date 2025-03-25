@@ -19,38 +19,38 @@ const isPathActive = (path: string) => {
       </a>
     </div>
 
-    <div class="site-nav">
-      <ul class="site-main-menu" role="menu">
-        <li class={`menu-item ${isPathActive("/") ? "current-menu-item" : ""}`}>
-          <a href="/">Home</a>
+    <nav id="site-nav" class="site-nav" aria-label="Main Navigation">
+      <ul class="site-main-menu" role="menubar" aria-label="Main Menu">
+        <li class={`menu-item ${isPathActive("/") ? "current-menu-item" : ""}`} role="none">
+          <a href="/" role="menuitem" aria-current={isPathActive("/") ? "page" : undefined}>Home</a>
         </li>
 
-        <li class={`menu-item ${isPathActive("/about") ? "current-menu-item" : ""}`}>
-          <a href="/about">About</a>
+        <li class={`menu-item ${isPathActive("/about") ? "current-menu-item" : ""}`} role="none">
+          <a href="/about" role="menuitem" aria-current={isPathActive("/about") ? "page" : undefined}>About</a>
         </li>
 
-        <li class={`menu-item ${isPathActive("/skills") ? "current-menu-item" : ""}`}>
-          <a href="/skills">Skills</a>
+        <li class={`menu-item ${isPathActive("/skills") ? "current-menu-item" : ""}`} role="none">
+          <a href="/skills" role="menuitem" aria-current={isPathActive("/skills") ? "page" : undefined}>Skills</a>
         </li>
 
-        <li class={`menu-item ${isPathActive("/projects") ? "current-menu-item" : ""}`}>
-          <a href="/projects">Projects</a>
+        <li class={`menu-item ${isPathActive("/projects") ? "current-menu-item" : ""}`} role="none">
+          <a href="/projects" role="menuitem" aria-current={isPathActive("/projects") ? "page" : undefined}>Projects</a>
         </li>
 
-        <li class={`menu-item ${isPathActive("/insights") ? "current-menu-item" : ""}`}>
-          <a href="/insights">Insights</a>
+        <li class={`menu-item ${isPathActive("/insights") ? "current-menu-item" : ""}`} role="none">
+          <a href="/insights" role="menuitem" aria-current={isPathActive("/insights") ? "page" : undefined}>Insights</a>
         </li>
 
-        <li class={`menu-item ${isPathActive("/contact") ? "current-menu-item" : ""}`}>
-          <a href="/contact">Contact</a>
+        <li class={`menu-item ${isPathActive("/contact") ? "current-menu-item" : ""}`} role="none">
+          <a href="/contact" role="menuitem" aria-current={isPathActive("/contact") ? "page" : undefined}>Contact</a>
         </li>
       </ul>
-    </div>
+    </nav>
 
     <div class="header-actions">
       <ThemeToggle />
 
-      <a class="menu-toggle">
+      <a class="menu-toggle" aria-label="Toggle Menu" aria-expanded="false" aria-controls="site-nav">
         <span class="hamburger-line line-1"></span>
         <span class="hamburger-line line-2"></span>
         <span class="hamburger-line line-3"></span>
@@ -61,19 +61,10 @@ const isPathActive = (path: string) => {
 
 <script>
   function handleMenuToggleClick(siteNav: HTMLElement, menuToggle: HTMLElement) {
+    const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
     siteNav.classList.toggle("open");
     menuToggle.classList.toggle("open");
-  }
-
-  function handleSubmenuToggleClick(e: Event) {
-    if (window.innerWidth <= 991) {
-      e.preventDefault();
-      const item = e.currentTarget as HTMLElement;
-      const subMenu = item.parentElement?.querySelector(".sub-menu");
-      if (subMenu) {
-        subMenu.classList.toggle("open");
-      }
-    }
+    menuToggle.setAttribute('aria-expanded', (!isExpanded).toString());
   }
 
   function setupResizeHandler(siteNav: HTMLElement, menuToggle: HTMLElement) {
@@ -85,6 +76,7 @@ const isPathActive = (path: string) => {
       menuToggle.style.transition = "none";
       siteNav.classList.remove("open");
       menuToggle.classList.remove("open");
+      menuToggle.setAttribute('aria-expanded', 'false');
 
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
@@ -107,19 +99,14 @@ const isPathActive = (path: string) => {
     // Remove existing event listeners to prevent duplicates
     const newMenuToggle = menuToggle.cloneNode(true) as HTMLElement;
     menuToggle.parentNode?.replaceChild(newMenuToggle, menuToggle);
+    
+    // Set the aria-controls attribute to point to the site-nav element
+    newMenuToggle.setAttribute('aria-controls', 'site-nav');
+    newMenuToggle.setAttribute('aria-expanded', 'false');
 
     newMenuToggle.addEventListener("click", () => handleMenuToggleClick(siteNav, newMenuToggle));
 
     setupResizeHandler(siteNav, newMenuToggle);
-
-    const menuItemsWithChildren = document.querySelectorAll(".menu-item-has-children > a");
-    menuItemsWithChildren.forEach((item) => {
-      // Clone and replace to remove existing listeners
-      const newItem = item.cloneNode(true) as HTMLElement;
-      item.parentNode?.replaceChild(newItem, item);
-
-      newItem.addEventListener("click", handleSubmenuToggleClick);
-    });
   }
 
   // Initialize on page load and after view transitions
@@ -214,55 +201,6 @@ const isPathActive = (path: string) => {
     color: var(--active-color);
   }
 
-  .site-main-menu .sub-menu {
-    display: none;
-    position: absolute;
-    background-color: var(--container-bg-color);
-    left: -23px;
-    top: 100%;
-    width: auto;
-    margin: 0;
-    padding: 20px 13px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.25s ease-in-out;
-  }
-
-  .site-main-menu .sub-menu li {
-    display: block;
-    margin: 0 0 12px;
-    padding: 0;
-  }
-
-  .site-main-menu .sub-menu li:last-child {
-    margin-bottom: 0;
-  }
-
-  .site-main-menu .sub-menu li a {
-    display: block;
-    line-height: 1.6em;
-  }
-
-  .site-main-menu .sub-menu li a:hover {
-    color: var(--link-hover-color);
-  }
-
-  .site-main-menu li:hover > .sub-menu {
-    visibility: visible;
-    opacity: 1;
-  }
-
-  .site-main-menu .menu-item-has-children > a:after {
-    content: "\f107";
-    display: inline-block;
-    font-family: "Font Awesome 6 Free";
-    font-style: normal;
-    font-weight: 900;
-    margin-left: 5px;
-    opacity: 0.3;
-  }
 
   /* Header actions */
   .header-actions {
@@ -387,20 +325,6 @@ const isPathActive = (path: string) => {
 
     .site-main-menu li a:hover {
       color: var(--link-hover-color);
-    }
-
-    .site-main-menu .sub-menu {
-      position: relative;
-      left: 0;
-      top: 0;
-      background-color: transparent;
-      box-shadow: none;
-      padding: 0 0 0 20px;
-      display: none;
-    }
-
-    .site-main-menu .sub-menu.open {
-      display: block;
     }
   }
 </style>
