@@ -100,7 +100,7 @@ We focused on three core solutions and an iterative rollout approach:
 * Real-time validation for each checklist item
 * "Help Needed?" tooltips and a guided tour offering clear document rules and submission examples
 * Deep linking to each item step with state-saving
-* Clear role indicators (who does what: partner vs. Solar Company)
+* Clear role indicators (who does what: partner vs. Bright)
 
 🎯 **Outcome:** Fewer rejections, faster submissions, reduced partner frustration
 
@@ -131,7 +131,7 @@ To address partner frustrations without disrupting current workflows, we adopted
 We launched our enhancements by introducing a **dual-mode experience**:
 
 * **Power Mode**: The original checklist interface that gives advanced users full control and flexibility  
-![Power Mode UI Example](/images/portfolio/bright/automated_cfe_bill/desktop/1-enter-rpu-form.png)
+![Power Mode UI Example](/images/portfolio/bright/automated_cfe_bill/desktop/14-checklist-mode-toggle.png)
 
 * **Guided Mode**: A simplified, step-by-step wizard ideal for newer or less tech-savvy users
 ![Guided Mode UI Example](/images/portfolio/bright/automated_cfe_bill/desktop/1-enter-rpu-form.png)
@@ -175,7 +175,7 @@ The standalone UI will not inherit global navigation or headers (like the "Ops" 
 * It creates a focused, distraction-free environment specifically designed for document workflows  
 * Visual clutter is reduced, creating a cleaner experience with a singular purpose
 
-By designing the rollout in manageable, testable pieces, we de-risked the transition while maximizing value delivery. Each improvement was astep toward a more scalable, partner-friendly future, deeply informed by real-world usage patterns and partner feedback.
+By designing the rollout in manageable, testable pieces, we de-risked the transition while maximizing value delivery. Each improvement was a step toward a more scalable, partner-friendly future, deeply informed by real-world usage patterns and partner feedback.
 
 ## Detailed UX Flow: Assignment Lifecycle
 
@@ -310,10 +310,10 @@ Through a deeply user-centered, iterative UX strategy, we:
 * Rebuilt trust and transparency
 * Positioned Bright, Inc. as a partner-focused market leader
 
-What made this transformation particularly impactful wasn’t just the features we delivered, it was how we delivered them. By prioritizing incremental, iterative design, we were able to test concepts early, gather feedback continuously, and avoid costly missteps. This approach ensured that our engineering investments were tightly aligned with real-world partner needs, delivering tangible improvements with every release.
+What made this transformation particularly impactful wasn’t just the features we delivered, it was how we delivered them. By prioritizing incremental, iterative design, we were able to test concepts early, gather feedback continuously, and avoid costly missteps. This approach ensured that their engineering investments were tightly aligned with real-world partner needs, delivering tangible improvements with every release.
 
-At the same time, we kept a clear eye on the long-term vision: a fully reimagined partner experience that could scale with our business. Rather than rushing toward that end-state, we used strategic waypoints, like the Guided vs. Power Mode toggle,  to ease the transition. This reduced change resistance, respected our partners' existing workflows, and gave our internal teams space to learn and adapt as we built.
+At the same time, we kept a clear eye on the long-term vision: a fully reimagined partner experience that could scale with their business. Rather than rushing toward that end-state, we used strategic waypoints, like the Guided vs. Power Mode toggle, to ease the transition. This reduced change resistance, respected our partners' existing workflows, and gave their internal teams space to learn and adapt as we built.
 
-For money-conscious startups, this kind of design discipline is critical. Good UX isn't just a nice-to-have — it's a force multiplier. It minimizes waste, accelerates adoption, reduces support load, and .builds trust faster than any marketing campaign. Enhancing trust was at the heart of this project. Every hour spent understanding user pain points and validating ideas paid dividends in engineering efficiency and business results. We don't want to become a feature factory, we want to deliver impactful experiences that help our company achieve its growth goals.
+For money-conscious startups, this kind of design discipline is critical. Good UX isn't just a nice-to-have — it's a force multiplier. It minimizes waste, accelerates adoption, reduces support load, and builds trust faster than any marketing campaign. Enhancing trust was at the heart of this project. Every hour spent understanding user pain points and validating ideas paid dividends in engineering efficiency and business results. We don't want to become a feature factory, we want to deliver impactful experiences that help our company achieve its growth goals.
 
 Ultimately, this case study shows that investing in UX is one of the smartest bets a startup can make, not just to improve usability, but to unlock sustainable growth through stronger relationships and smarter operations.
