@@ -25,7 +25,7 @@ Partners like **Rafa**, a former real estate agent turned solar broker, rely on 
 * Communication gaps that **damaged client trust**
 * No clear visibility into who owns each step of the process
 
-The result? Delays, anxiety, and lost deals — for both our partners and our company.
+The result? Delays, anxiety, and lost deals — for both our partners and our company. We believed that by simplifying the document experience, clarifying ownership, and embedding real-time support, we could reduce friction, improve submission success rates, and rebuild trust with our partner network.
 
 ## Meet Rafa: The Channel Partner Persona
 
