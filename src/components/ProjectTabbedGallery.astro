@@ -16,7 +16,7 @@ const {desktopImages, mobileImages, projectId, pdfUrl, defaultTab = "desktop"} =
 
 <div class="tabbed-gallery-container" data-default-tab={defaultTab}>
   <!-- Tabs -->
-  <ul class="tab-buttons">
+  <ul class="tab-buttons list-unstyled">
     <li class={defaultTab === "desktop" ? "active" : ""}>
       <a
         href={`#${projectId}-desktop-tab`}
@@ -64,19 +64,25 @@ const {desktopImages, mobileImages, projectId, pdfUrl, defaultTab = "desktop"} =
   </ul>
 
   <div class="tab-content-wrapper">
-    <div class={`tab-content ${defaultTab === "desktop" ? "active" : ""}`} id={`${projectId}-desktop-tab`}>
+    <div
+      class={`tab-content ${defaultTab === "desktop" ? "active" : ""}`}
+      id={`${projectId}-desktop-tab`}>
       <ImageGallery images={desktopImages} projectId={`${projectId}-desktop`} />
     </div>
     {
       mobileImages && mobileImages.length > 0 && (
-        <div class={`tab-content ${defaultTab === "mobile" ? "active" : ""}`} id={`${projectId}-mobile-tab`}>
+        <div
+          class={`tab-content ${defaultTab === "mobile" ? "active" : ""}`}
+          id={`${projectId}-mobile-tab`}>
           <ImageGallery images={mobileImages} projectId={`${projectId}-mobile`} />
         </div>
       )
     }
     {
       pdfUrl && (
-        <div class={`tab-content ${defaultTab === "pdf" ? "active" : ""}`} id={`${projectId}-pdf-tab`}>
+        <div
+          class={`tab-content ${defaultTab === "pdf" ? "active" : ""}`}
+          id={`${projectId}-pdf-tab`}>
           <PdfViewer pdfUrl={pdfUrl} projectId={projectId} />
         </div>
       )
@@ -183,7 +189,7 @@ const {desktopImages, mobileImages, projectId, pdfUrl, defaultTab = "desktop"} =
       const tabItems = container.querySelectorAll(".tab-buttons li");
       const defaultTabId = `${projectId}-${defaultTab}-tab`;
       const defaultTabContent = document.getElementById(defaultTabId);
-      
+
       if (defaultTabContent) {
         // Clear all active states first
         tabItems.forEach((item) => item.classList.remove("active"));
@@ -196,7 +202,7 @@ const {desktopImages, mobileImages, projectId, pdfUrl, defaultTab = "desktop"} =
             parentLi.classList.add("active");
           }
         }
-        
+
         defaultTabContent.classList.add("active");
       }
 

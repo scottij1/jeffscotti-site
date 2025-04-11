@@ -13,7 +13,7 @@ const currentYear = new Date().getFullYear();
     </div>
 
     <div class="footer-links">
-      <ul>
+      <ul class="list-unstyled">
         <li class="dropdown">
           <button
             type="button"
@@ -107,8 +107,6 @@ const currentYear = new Date().getFullYear();
     if (dropdownToggle) {
       // Use click for mobile
       dropdownToggle.addEventListener("click", toggleMenu);
-
-      // Handle keyboard events
       dropdownToggle.addEventListener("keydown", (e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();

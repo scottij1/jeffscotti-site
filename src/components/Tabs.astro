@@ -17,7 +17,7 @@ const firstTabId = tabItems.length > 0 ? tabItems[0].id : "";
 
 <div class="tabs-container">
   <!-- Desktop Tabs -->
-  <ul class="tab-buttons nav nav-tabs tpl-alt-tabs desktop-tabs">
+  <ul class="tab-buttons nav nav-tabs tpl-alt-tabs desktop-tabs list-unstyled">
     {
       tabItems.map((tab, index) => (
         <li class={index === 0 ? "active" : ""}>
@@ -154,7 +154,6 @@ const firstTabId = tabItems.length > 0 ? tabItems[0].id : "";
     });
   }
 
-  // Run initialization immediately
   initTabsAndAccordion();
 
   // Also run after Astro view transitions
@@ -308,13 +307,11 @@ const firstTabId = tabItems.length > 0 ? tabItems[0].id : "";
     padding: 0 20px;
   }
 
-  /* When checkbox is checked, show the content */
   .accordion-toggle-checkbox:checked ~ .accordion-content {
-    max-height: 2000px; /* Large enough to show all content */
+    max-height: 2000px;
     padding: 20px;
   }
 
-  /* Hide border when accordion is open */
   .accordion-toggle-checkbox:checked + .accordion-header {
     color: var(--active-color);
   }
@@ -323,12 +320,10 @@ const firstTabId = tabItems.length > 0 ? tabItems[0].id : "";
     transform: rotate(180deg);
   }
 
-  /* Make the parent wrapper borderless when open */
   .accordion-toggle-checkbox:checked ~ .accordion-content {
     border-top: none;
   }
 
-  /* Hide the border of the wrapper when open */
   .accordion-wrapper:has(.accordion-toggle-checkbox:checked) {
     border-color: transparent;
   }

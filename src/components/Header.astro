@@ -20,29 +20,54 @@ const isPathActive = (path: string) => {
     </div>
 
     <nav id="site-nav" class="site-nav" aria-label="Main Navigation">
-      <ul class="site-main-menu" role="menubar" aria-label="Main Menu">
+      <ul class="site-main-menu list-unstyled" role="menubar" aria-label="Main Menu">
         <li class={`menu-item ${isPathActive("/") ? "current-menu-item" : ""}`} role="none">
           <a href="/" role="menuitem" aria-current={isPathActive("/") ? "page" : undefined}>Home</a>
         </li>
 
         <li class={`menu-item ${isPathActive("/about") ? "current-menu-item" : ""}`} role="none">
-          <a href="/about" role="menuitem" aria-current={isPathActive("/about") ? "page" : undefined}>About</a>
+          <a
+            href="/about"
+            role="menuitem"
+            aria-current={isPathActive("/about") ? "page" : undefined}>
+            About
+          </a>
         </li>
 
         <li class={`menu-item ${isPathActive("/skills") ? "current-menu-item" : ""}`} role="none">
-          <a href="/skills" role="menuitem" aria-current={isPathActive("/skills") ? "page" : undefined}>Skills</a>
+          <a
+            href="/skills"
+            role="menuitem"
+            aria-current={isPathActive("/skills") ? "page" : undefined}>
+            Skills
+          </a>
         </li>
 
         <li class={`menu-item ${isPathActive("/projects") ? "current-menu-item" : ""}`} role="none">
-          <a href="/projects" role="menuitem" aria-current={isPathActive("/projects") ? "page" : undefined}>Projects</a>
+          <a
+            href="/projects"
+            role="menuitem"
+            aria-current={isPathActive("/projects") ? "page" : undefined}>
+            Projects
+          </a>
         </li>
 
         <li class={`menu-item ${isPathActive("/insights") ? "current-menu-item" : ""}`} role="none">
-          <a href="/insights" role="menuitem" aria-current={isPathActive("/insights") ? "page" : undefined}>Insights</a>
+          <a
+            href="/insights"
+            role="menuitem"
+            aria-current={isPathActive("/insights") ? "page" : undefined}>
+            Insights
+          </a>
         </li>
 
         <li class={`menu-item ${isPathActive("/contact") ? "current-menu-item" : ""}`} role="none">
-          <a href="/contact" role="menuitem" aria-current={isPathActive("/contact") ? "page" : undefined}>Contact</a>
+          <a
+            href="/contact"
+            role="menuitem"
+            aria-current={isPathActive("/contact") ? "page" : undefined}>
+            Contact
+          </a>
         </li>
       </ul>
     </nav>
@@ -50,7 +75,11 @@ const isPathActive = (path: string) => {
     <div class="header-actions">
       <ThemeToggle />
 
-      <a class="menu-toggle" aria-label="Toggle Menu" aria-expanded="false" aria-controls="site-nav">
+      <a
+        class="menu-toggle"
+        aria-label="Toggle Menu"
+        aria-expanded="false"
+        aria-controls="site-nav">
         <span class="hamburger-line line-1"></span>
         <span class="hamburger-line line-2"></span>
         <span class="hamburger-line line-3"></span>
@@ -61,10 +90,10 @@ const isPathActive = (path: string) => {
 
 <script>
   function handleMenuToggleClick(siteNav: HTMLElement, menuToggle: HTMLElement) {
-    const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+    const isExpanded = menuToggle.getAttribute("aria-expanded") === "true";
     siteNav.classList.toggle("open");
     menuToggle.classList.toggle("open");
-    menuToggle.setAttribute('aria-expanded', (!isExpanded).toString());
+    menuToggle.setAttribute("aria-expanded", (!isExpanded).toString());
   }
 
   function setupResizeHandler(siteNav: HTMLElement, menuToggle: HTMLElement) {
@@ -76,7 +105,7 @@ const isPathActive = (path: string) => {
       menuToggle.style.transition = "none";
       siteNav.classList.remove("open");
       menuToggle.classList.remove("open");
-      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute("aria-expanded", "false");
 
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
@@ -99,11 +128,9 @@ const isPathActive = (path: string) => {
     // Remove existing event listeners to prevent duplicates
     const newMenuToggle = menuToggle.cloneNode(true) as HTMLElement;
     menuToggle.parentNode?.replaceChild(newMenuToggle, menuToggle);
-    
-    // Set the aria-controls attribute to point to the site-nav element
-    newMenuToggle.setAttribute('aria-controls', 'site-nav');
-    newMenuToggle.setAttribute('aria-expanded', 'false');
 
+    newMenuToggle.setAttribute("aria-controls", "site-nav");
+    newMenuToggle.setAttribute("aria-expanded", "false");
     newMenuToggle.addEventListener("click", () => handleMenuToggleClick(siteNav, newMenuToggle));
 
     setupResizeHandler(siteNav, newMenuToggle);
@@ -200,7 +227,6 @@ const isPathActive = (path: string) => {
   .site-main-menu li.current-menu-item > a {
     color: var(--active-color);
   }
-
 
   /* Header actions */
   .header-actions {

@@ -1,12 +1,12 @@
 ---
-import Layout from './Layout.astro';
-import '../styles/insights.scss';
+import Layout from "./Layout.astro";
+import "../styles/insights.scss";
 
 function formatDate(date: Date): string {
-  return new Intl.DateTimeFormat('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
+  return new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   }).format(date);
 }
 
@@ -21,16 +21,7 @@ interface Props {
   author: string;
 }
 
-const { 
-  title, 
-  description, 
-  pubDate, 
-  updatedDate, 
-  heroImage, 
-  category,
-  tags,
-  author
-} = Astro.props;
+const {title, description, pubDate, updatedDate, heroImage, category, tags, author} = Astro.props;
 
 const formattedPubDate = formatDate(pubDate);
 const formattedUpdatedDate = updatedDate ? formatDate(updatedDate) : null;
@@ -38,45 +29,42 @@ const formattedUpdatedDate = updatedDate ? formatDate(updatedDate) : null;
 
 <!-- Twemoji script for emoji rendering -->
 <script is:inline>
-  window.addEventListener('DOMContentLoaded', () => {
-    // Load Twemoji script dynamically
-    const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/twemoji@14.0.2/dist/twemoji.min.js';
-    script.crossOrigin = 'anonymous';
-    
+  window.addEventListener("DOMContentLoaded", () => {
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/twemoji@14.0.2/dist/twemoji.min.js";
+    script.crossOrigin = "anonymous";
+
     script.onload = () => {
-      // Initialize Twemoji once loaded
       twemoji.parse(document.body, {
-        folder: 'svg',
-        ext: '.svg',
-        callback: (icon, options) => {
+        folder: "svg",
+        ext: ".svg",
+        callback: (options) => {
           // Don't convert emoji in code blocks
           const parentNode = options.attributes.src.parentNode;
-          if (parentNode && (
-              parentNode.tagName === 'PRE' || 
-              parentNode.tagName === 'CODE' ||
-              parentNode.closest('pre') || 
-              parentNode.closest('code')
-            )) {
+          if (
+            parentNode &&
+            (parentNode.tagName === "PRE" ||
+              parentNode.tagName === "CODE" ||
+              parentNode.closest("pre") ||
+              parentNode.closest("code"))
+          ) {
             return false;
           }
           return true;
-        }
+        },
       });
     };
-    
+
     document.head.appendChild(script);
   });
 </script>
 
-
-<Layout 
+<Layout
   title={`${title} | Jeff Scotti Insights`}
   description={description}
   image={heroImage}
   type="article"
-  keywords={['Insights', ...tags]}
->
+  keywords={["Insights", ...tags]}>
   <main class="blog-post-container">
     <article class="blog-post">
       <div class="blog-post-header">
@@ -84,40 +72,49 @@ const formattedUpdatedDate = updatedDate ? formatDate(updatedDate) : null;
           <span class="blog-post-category">{category}</span>
           <span class="blog-post-date">
             Published on <time datetime={pubDate.toISOString()}>{formattedPubDate}</time>
-            {updatedDate && (
-              <span class="blog-post-updated">
-                (Updated on <time datetime={updatedDate.toISOString()}>{formattedUpdatedDate}</time>)
-              </span>
-            )}
+            {
+              updatedDate && (
+                <span class="blog-post-updated">
+                  (Updated on{" "}
+                  <time datetime={updatedDate.toISOString()}>{formattedUpdatedDate}</time>)
+                </span>
+              )
+            }
           </span>
           <span class="blog-post-author">By {author}</span>
         </div>
         <h1 class="blog-post-title">{title}</h1>
         <p class="blog-post-description">{description}</p>
-        
-        {heroImage && (
-          <div class="blog-post-hero">
-            <img 
-              src={heroImage} 
-              alt={`Hero image for ${title}`} 
-              width="1200" 
-              height="630" 
-              class="blog-post-hero-image"
-            />
-          </div>
-        )}
-        
-        {tags.length > 0 && (
-          <div class="blog-post-tags">
-            {tags.map(tag => (
-              <a href={`/insights/tag/${tag.toLowerCase().replace(/\s+/g, '-')}`} class="blog-post-tag">
-                #{tag}
-              </a>
-            ))}
-          </div>
-        )}
+
+        {
+          heroImage && (
+            <div class="blog-post-hero">
+              <img
+                src={heroImage}
+                alt={`Hero image for ${title}`}
+                width="1200"
+                height="630"
+                class="blog-post-hero-image"
+              />
+            </div>
+          )
+        }
+
+        {
+          tags.length > 0 && (
+            <div class="blog-post-tags">
+              {tags.map((tag) => (
+                <a
+                  href={`/insights/tag/${tag.toLowerCase().replace(/\s+/g, "-")}`}
+                  class="blog-post-tag">
+                  #{tag}
+                </a>
+              ))}
+            </div>
+          )
+        }
       </div>
-      
+
       <div class="blog-post-content">
         <slot />
       </div>
