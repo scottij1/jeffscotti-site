@@ -47,11 +47,11 @@ Understanding the real-world challenges our channel partners faced was the corne
 
 To surface friction points and identify opportunities, we conducted:
 
-* 🧠 **Heuristic Evaluations** — We audited their current document flows to flag usability issues, focusing on visibility of system status, error prevention, and user feedback.
-* 🗣️ **In-Depth Partner Interviews** — We interviewed 12 active channel partners from a range of experience levels (new brokers to power users) to uncover unmet needs and emotional friction.
-* 🧪 **Usability Testing** — Live task-based testing sessions helped us observe how users navigated the checklist and document upload flows.
-* 🔄 **Workflow Analysis** — We mapped out the assignment and document lifecycle from start to finish, identifying communication breakdowns and process redundancies.
-* 📊 **Behavioral Metrics Review** — We analyzed support ticket themes, bounce rates, average task durations, and checklist completion rates to highlight measurable gaps.
+* **Heuristic Evaluations** — We audited their current document flows to flag usability issues, focusing on visibility of system status, error prevention, and user feedback.
+* **In-Depth Partner Interviews** — We interviewed 12 active channel partners from a range of experience levels (new brokers to power users) to uncover unmet needs and emotional friction.
+* **Usability Testing** — Live task-based testing sessions helped us observe how users navigated the checklist and document upload flows.
+* **Workflow Analysis** — We mapped out the assignment and document lifecycle from start to finish, identifying communication breakdowns and process redundancies.
+* **Behavioral Metrics Review** — We analyzed support ticket themes, bounce rates, average task durations, and checklist completion rates to highlight measurable gaps.
 
 ### Key Themes & Insights
 
