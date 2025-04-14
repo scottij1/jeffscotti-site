@@ -1,10 +1,6 @@
 @use "variables" as *;
 
 // Common styles that are used across multiple pages but aren't already in layout.scss
-// This file should only contain styles that are repeated in multiple pages
-// Note: Typography styles have been moved to typography.scss
-
-// These classes are now defined in typography.scss
 
 // Buttons
 .btn {
@@ -136,8 +132,7 @@
   margin-top: $spacing-xl;
 }
 
-// Custom scrollbar styles
-// Light scrollbar for light backgrounds
+// Light scrollbar
 .custom-scrollbar-light {
   scrollbar-width: thin;
   scrollbar-color: var(--border-color) transparent;
@@ -165,7 +160,7 @@
   }
 }
 
-// Dark scrollbar for dark backgrounds (like modals)
+// Dark scrollbar
 .custom-scrollbar-dark {
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.5) transparent;

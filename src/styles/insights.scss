@@ -317,18 +317,12 @@
   @media (max-width: 768px) {
     padding: 1.5rem;
   }
-
-  // Note: Basic typography styles (headings, paragraphs, lists) are now in typography.scss
-  // Only blog-post specific styles remain here
-
-  // Blog-specific image styling
   img {
     max-width: 100%;
     border-radius: 0.5rem;
     margin: 1.5rem 0;
   }
 
-  // Blog-specific link styling that overrides the global link style
   a {
     color: var(--link-color);
     text-decoration: underline;
@@ -341,7 +335,6 @@
     }
   }
 
-  // Table styling
   table {
     width: 100%;
     border-collapse: collapse;
