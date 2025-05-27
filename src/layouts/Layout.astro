@@ -3,7 +3,7 @@ import "../styles/main.scss";
 import {ClientRouter} from "astro:transitions";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import VantaBackground from "../components/VantaBackground.astro";
+import CircularBackground from "../components/CircularBackground.astro";
 import ravenLogoWhite from "../assets/raven-logo-sm.png";
 import ravenLogoBlack from "../assets/raven-logo-sm-blk.png";
 import {ENV} from "../env.server";
@@ -222,7 +222,7 @@ const canonicalURLObj =
     </style>
   </head>
   <body>
-    <VantaBackground />
+    <CircularBackground />
     <div class="page-container">
       <Header transition:persist="header" />
       <slot />
