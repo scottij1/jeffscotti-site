@@ -147,8 +147,10 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
 
   .testimonial-content {
     position: relative;
-    padding: 30px 20px 20px 60px;
-    background-color: var(--container-bg-color);
+    padding: 10px 20px 30px 60px;
+    background-color: rgba(var(--container-bg-color-rgb, 255, 255, 255), 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-radius: var(--border-radius-md);
     border: 2px solid var(--border-color);
     transition: all 0.25s ease-in-out;
@@ -173,7 +175,6 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
   }
 
   .testimonial-text p {
-    font-style: italic;
     color: var(--text-color);
   }
 

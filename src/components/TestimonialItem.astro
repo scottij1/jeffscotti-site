@@ -7,21 +7,25 @@ interface Props {
 
 const {testimonial} = Astro.props;
 
-function limitWords(text: string, wordLimit: number) {
-  const words = text.split(/\s+/);
-  const needsReadMore = words.length > wordLimit;
+function limitCharacters(text: string, charLimit: number) {
+  const needsReadMore = text.length > charLimit;
 
   if (!needsReadMore) {
     return {displayText: text, hiddenText: "", needsReadMore};
   }
 
-  const displayText = words.slice(0, wordLimit).join(" ");
-  const hiddenText = words.slice(wordLimit).join(" ");
+  let cutIndex = text.lastIndexOf(' ', charLimit);
+  if (cutIndex === -1) {
+    cutIndex = charLimit;
+  }
+
+  const displayText = text.substring(0, cutIndex);
+  const hiddenText = text.substring(cutIndex);
 
   return {displayText, hiddenText, needsReadMore};
 }
 
-const {displayText, hiddenText, needsReadMore} = limitWords(testimonial.text, 60);
+const {displayText, hiddenText, needsReadMore} = limitCharacters(testimonial.text, 240);
 ---
 
 <div class="testimonial-item">
