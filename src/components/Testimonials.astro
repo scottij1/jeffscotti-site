@@ -501,6 +501,8 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
                   button.setAttribute("aria-selected", "false");
                 }
               });
+              
+              closeAllExpandedTestimonials();
             });
 
             return {
@@ -536,12 +538,14 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
 
             if (prevButton) {
               prevButton.addEventListener("click", () => {
+                closeAllExpandedTestimonials();
                 splide.go("<");
               });
 
               prevButton.addEventListener("keydown", (e) => {
                 if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();
+                  closeAllExpandedTestimonials();
                   splide.go("<");
                 }
               });
@@ -549,12 +553,14 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
 
             if (nextButton) {
               nextButton.addEventListener("click", () => {
+                closeAllExpandedTestimonials();
                 splide.go(">");
               });
 
               nextButton.addEventListener("keydown", (e) => {
                 if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();
+                  closeAllExpandedTestimonials();
                   splide.go(">");
                 }
               });
@@ -647,6 +653,30 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
         }
       }
     });
+
+    function closeAllExpandedTestimonials() {
+      const slides = document.querySelectorAll('.splide__slide');
+      
+      slides.forEach(slide => {
+        const hiddenText = slide.querySelector('.hidden-text');
+        if (!hiddenText) return;
+        
+        const testimonialText = hiddenText.closest('.testimonial-text');
+        if (!testimonialText) return;
+        
+        hiddenText.style.display = 'none';
+        
+        const readMoreContainer = testimonialText.querySelector('.read-more-container');
+        if (readMoreContainer) {
+          readMoreContainer.style.display = 'inline';
+        }
+        
+        const showLessContainer = testimonialText.querySelector('.show-less-container');
+        if (showLessContainer) {
+          showLessContainer.style.display = 'none';
+        }
+      });
+    }
 
     function setupReadMoreLinks() {
       document.body.addEventListener("click", function (e) {
