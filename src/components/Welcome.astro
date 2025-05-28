@@ -324,6 +324,19 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
     box-shadow: 0 1rem 2rem -0.5rem rgba(0, 0, 0, 0.3);
   }
 
+  /* Media query for tablets */
+  @media screen and (max-width: 992px) {
+    .name {
+      font-size: 48px;
+      line-height: 56px;
+    }
+    
+    .bio {
+      font-size: 17px;
+    }
+  }
+
+  /* Media query for mobile devices */
   @media screen and (max-width: 768px) {
     .two-column-layout {
       flex-direction: column;
@@ -358,22 +371,32 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
 
     .bio {
       padding-right: 0;
+      font-size: 16px;
+      line-height: 1.6;
     }
 
-    .name,
+    .intro-text {
+      font-size: 16px;
+    }
+
+    .name {
+      font-size: 36px;
+      line-height: 44px;
+      margin-bottom: 10px;
+      text-align: center;
+      width: 100%;
+    }
+    
     .job-title {
       text-align: center;
       width: 100%;
+      font-size: 18px;
     }
 
     .job-title-line {
       display: block;
       text-align: center;
       width: 100%;
-    }
-
-    .name {
-      margin-bottom: 10px;
     }
 
     .dropdown {
@@ -447,6 +470,27 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
     }
 
     .main-content {
+      padding: 0;
+    }
+  }
+  
+  /* Media query for very small screens */
+  @media screen and (max-width: 480px) {
+    .name {
+      font-size: 28px;
+      line-height: 36px;
+    }
+    
+    .bio {
+      font-size: 15px;
+      line-height: 1.5;
+    }
+    
+    .intro-text {
+      font-size: 15px;
+    }
+    
+    .text-column {
       padding: 0;
     }
   }
