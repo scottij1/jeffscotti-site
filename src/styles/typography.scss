@@ -5,20 +5,20 @@
 
 // Base typography
 body {
-  font-family: $font-family;
-  font-size: 1rem; // Base font size standardized to 1rem (16px)
-  font-weight: $font-weight-normal;
+  font-family: var(--font-family);
+  font-size: 1rem; // 16px
+  font-weight: var(--font-weight-normal);
   line-height: 1.7;
-  color: $text-color;
+  color: var(--text-color);
 }
 
 // Heading hierarchy
 h1, h2, h3, h4, h5, h6 {
-  font-family: $font-family;
-  color: $heading-color;
+  font-family: var(--font-family);
+  color: var(--heading-color);
   line-height: 1.2;
   margin-top: 0;
-  font-weight: $font-weight-bold;
+  font-weight: var(--font-weight-bold);
 }
 
 h1 {
@@ -54,7 +54,7 @@ h2 {
       position: absolute;
       content: "";
       width: 1.875rem; // 30px
-      background-color: $primary-color;
+      background-color: var(--primary-color);
       height: 0.125rem; // 2px
       bottom: 0;
     }
@@ -64,7 +64,7 @@ h2 {
       position: absolute;
       content: "";
       width: 100%;
-      background-color: $border-color;
+      background-color: var(--border-color);
       height: 0.125rem; // 2px
       bottom: 0;
     }
@@ -123,7 +123,7 @@ p {
   margin-bottom: 1.5rem;
   font-size: 1rem;
   line-height: 1.7;
-  color: $text-color;
+  color: var(--text-color);
 }
 
 // Enhanced list styling
@@ -209,18 +209,18 @@ ul, ol {
 
 // Link styles
 a {
-  color: $primary-color;
+  color: var(--primary-color);
   text-decoration: none;
   outline: none;
   transition: all 0.3s ease-in-out;
 
   &:hover {
-    color: $link-hover-color;
+    color: var(--link-hover-color);
     text-decoration: none;
   }
 
   &:active {
-    color: $active-color;
+    color: var(--active-color);
   }
 
   &:focus {
@@ -231,7 +231,7 @@ a {
 
 // Blockquote styling
 blockquote {
-  border-left: 4px solid $primary-color;
+  border-left: 4px solid var(--primary-color);
   padding-left: 1rem;
   margin: 1.5rem 0;
   font-style: italic;
@@ -266,7 +266,7 @@ pre {
 
   p {
     margin-bottom: 0.9375rem; // 15px
-    color: $text-color;
+    color: var(--text-color);
     font-size: 1rem;
     line-height: 1.75;
   }
@@ -284,7 +284,7 @@ pre {
   h1 {
     font-size: 2rem; // 32px
     font-weight: 600;
-    color: $heading-color;
+    color: var(--heading-color);
     margin: 0;
   }
 }
@@ -292,7 +292,7 @@ pre {
 .page-subtitle h2 {
   font-size: 1rem; // 16px
   font-weight: 400;
-  color: $text-color;
+    color: var(--text-color);
   margin: 0;
 
   &:before,
@@ -308,7 +308,7 @@ pre {
   
   h2 {
     font-size: 1.5rem; // 24px
-    color: $heading-color;
+    color: var(--heading-color);
     margin: 0 0 0.625rem 0; // 10px
   }
 }

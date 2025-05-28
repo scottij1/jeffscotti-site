@@ -180,7 +180,7 @@ const visibleProjects = projects.filter((project) => !project.hidden);
 
   .portfolio-filters li.active a,
   .portfolio-filters li a:hover {
-    color: #fff;
+    color: var(--button-text-color);
     background-color: var(--primary-color);
   }
 
@@ -206,7 +206,6 @@ const visibleProjects = projects.filter((project) => !project.hidden);
 
   .item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   }
 
   .portfolio-item-img {

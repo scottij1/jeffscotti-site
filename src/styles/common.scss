@@ -17,13 +17,12 @@
   cursor: pointer;
   border-radius: 1.875rem; // 30px
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  box-shadow: 0 0.625rem 0.625rem -0.5rem rgba(0, 0, 0, 0.22); // 10px 10px -8px
   text-decoration: none;
   color: var(--button-text-color);
   border: 0.125rem solid; // 2px
-  background-color: $container-bg-color;
-  border-color: $container-bg-color;
-  font-family: $font-family;
+  background-color: var(--container-bg-color);
+  border-color: var(--container-bg-color);
+  font-family: var(--font-family);
   overflow: hidden;
   z-index: 1;
 
@@ -41,15 +40,14 @@
 
   &:hover {
     color: var(--button-hover-text-color);
-    box-shadow: 0 1rem 2rem -0.5rem var(--shadow-color);
 
     &::before {
       transform: translateX(0);
     }
   }
-
+  
   &:active {
-    box-shadow: 0 0.5rem 1rem -0.25rem rgba(0, 0, 0, 0.25);
+    color: var(--button-hover-text-color);
   }
 }
 
@@ -85,49 +83,54 @@
 
 .btn-primary {
   @extend .btn;
-  background-color: $primary-color;
-  border-color: $primary-color;
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
 
   &:hover {
-    background-color: $primary-color;
+    background-color: var(--primary-color);
     color: var(--button-text-color);
-    border-color: $primary-color;
+    border-color: var(--primary-color);
   }
-
+  
   &:active {
-    background-color: $active-color;
+    background-color: var(--active-color);
     color: var(--button-text-color);
-    border-color: $active-color;
+    border-color: var(--active-color);
   }
 }
 
 .btn-secondary {
   @extend .btn;
-  background-color: $text-color;
-  border-color: $text-color;
+  background-color: var(--text-color);
+  border-color: var(--text-color);
 
   &:hover {
-    background-color: $primary-color;
+    background-color: var(--primary-color);
     color: var(--button-text-color);
-    border-color: $primary-color;
+    border-color: var(--primary-color);
+  }
+  
+  &:active {
+    background-color: var(--active-color);
+    color: var(--button-text-color);
+    border-color: var(--active-color);
   }
 }
 
 // Form elements
 .form-control {
   height: 2.625rem; // 42px
-  border: 0.125rem solid $border-color; // 2px
-  border-radius: $border-radius-sm;
+  border: 0.125rem solid var(--border-color); // 2px
+  border-radius: var(--border-radius-sm);
   padding: 0.625rem 1.5625rem 0.625rem 0.75rem; // 10px 25px 10px 12px
-  color: $text-color;
+  color: var(--text-color);
   background: transparent;
-  box-shadow: none;
   outline: none;
-  font-family: $font-family;
+  font-family: var(--font-family);
   transition: all 0.3s ease-in-out;
 
   &:focus {
-    border-color: $primary-color;
+    border-color: var(--primary-color);
   }
 }
 
@@ -141,19 +144,19 @@
 }
 
 .mb-1 {
-  margin-bottom: $spacing-sm;
+  margin-bottom: var(--spacing-sm);
 }
 
 .mb-2 {
-  margin-bottom: $spacing-md;
+  margin-bottom: var(--spacing-md);
 }
 
 .mb-3 {
-  margin-bottom: $spacing-lg;
+  margin-bottom: var(--spacing-lg);
 }
 
 .mb-4 {
-  margin-bottom: $spacing-xl;
+  margin-bottom: var(--spacing-xl);
 }
 
 .mt-0 {
@@ -161,19 +164,19 @@
 }
 
 .mt-1 {
-  margin-top: $spacing-sm;
+  margin-top: var(--spacing-sm);
 }
 
 .mt-2 {
-  margin-top: $spacing-md;
+  margin-top: var(--spacing-md);
 }
 
 .mt-3 {
-  margin-top: $spacing-lg;
+  margin-top: var(--spacing-lg);
 }
 
 .mt-4 {
-  margin-top: $spacing-xl;
+  margin-top: var(--spacing-xl);
 }
 
 // Light scrollbar

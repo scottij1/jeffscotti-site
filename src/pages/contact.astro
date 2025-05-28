@@ -189,7 +189,7 @@ import Layout from "../layouts/Layout.astro";
     justify-content: center;
     width: 40px;
     height: 40px;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(var(--container-bg-color-rgb), 0.3);
     color: var(--text-color);
     text-align: center;
     font-size: 18px;
@@ -256,7 +256,7 @@ import Layout from "../layouts/Layout.astro";
     display: block;
     width: 100%;
     box-sizing: border-box;
-    border: 2px solid #555;
+    border: 2px solid var(--border-color);
     border-radius: 5px;
     padding: 10px 25px 10px 12px;
     background: transparent;
@@ -268,7 +268,7 @@ import Layout from "../layouts/Layout.astro";
 
   /* Placeholder styling */
   .form-control::placeholder {
-    color: #888;
+    color: var(--text-color-tertiary);
     opacity: 1;
   }
 
@@ -293,13 +293,13 @@ import Layout from "../layouts/Layout.astro";
 
   .form-status.success {
     background-color: rgba(25, 135, 84, 0.2);
-    color: #20c997;
+    color: var(--primary-color);
     border: 1px solid rgba(25, 135, 84, 0.4);
   }
 
   .form-status.error {
     background-color: rgba(220, 53, 69, 0.2);
-    color: #ff6b6b;
+    color: var(--active-color);
     border: 1px solid rgba(220, 53, 69, 0.4);
   }
 
