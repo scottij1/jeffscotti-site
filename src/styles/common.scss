@@ -19,7 +19,7 @@
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   box-shadow: 0 0.625rem 0.625rem -0.5rem rgba(0, 0, 0, 0.22); // 10px 10px -8px
   text-decoration: none;
-  color: #ffffff;
+  color: var(--button-text-color);
   border: 0.125rem solid; // 2px
   background-color: $container-bg-color;
   border-color: $container-bg-color;
@@ -40,8 +40,8 @@
   }
 
   &:hover {
-    color: #1a1a1a;
-    box-shadow: 0 1rem 2rem -0.5rem rgba(0, 0, 0, 0.3);
+    color: var(--button-hover-text-color);
+    box-shadow: 0 1rem 2rem -0.5rem var(--shadow-color);
 
     &::before {
       transform: translateX(0);
@@ -63,14 +63,14 @@
     width: 0;
     height: 0;
     border-radius: 50%;
-    background-color: #ffffff;
+    background-color: var(--button-hover-bg-color);
     transition: width 0.4s ease-in-out, height 0.2s ease-in-out;
     transform: translate(-50%, -50%);
     z-index: -1;
   }
 
   &:hover {
-    color: #1a1a1a;
+    color: var(--button-hover-text-color);
     
     span {
       width: 225%;
@@ -79,7 +79,7 @@
   }
 
   &:active {
-    color: #1a1a1a;
+    color: var(--button-hover-text-color);
   }
 }
 
@@ -90,13 +90,13 @@
 
   &:hover {
     background-color: $primary-color;
-    color: #fff;
+    color: var(--button-text-color);
     border-color: $primary-color;
   }
 
   &:active {
     background-color: $active-color;
-    color: #fff;
+    color: var(--button-text-color);
     border-color: $active-color;
   }
 }
@@ -108,7 +108,7 @@
 
   &:hover {
     background-color: $primary-color;
-    color: #fff;
+    color: var(--button-text-color);
     border-color: $primary-color;
   }
 }
@@ -207,7 +207,7 @@
 // Dark scrollbar
 .custom-scrollbar-dark {
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
+  scrollbar-color: var(--scrollbar-thumb-color) transparent;
   -webkit-overflow-scrolling: touch;
 
   &::-webkit-scrollbar {
@@ -221,7 +221,7 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: var(--scrollbar-thumb-color);
     border-radius: 4px;
     border: 2px solid transparent;
     background-clip: padding-box;

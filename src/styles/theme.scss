@@ -17,6 +17,30 @@ html.theme-dark {
   --code-bg-color: #2d2d2d;
   --tag-bg-color: #444;
   --tag-text-color: #e0e0e0;
+  
+  /* Button and interactive element colors */
+  --button-text-color: #ffffff;
+  --button-hover-text-color: #1a1a1a;
+  --button-hover-bg-color: #ffffff;
+  
+  /* Pagination colors */
+  --pagination-color: #ffffff;
+  --pagination-active-color: #ff9800;
+  --pagination-hover-color: #38bdf8;
+  
+  /* Scrollbar colors */
+  --scrollbar-thumb-color: rgba(255, 255, 255, 0.5);
+  
+  /* Shadow colors */
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --shadow-color-light: rgba(0, 0, 0, 0.08);
+  
+  /* Background element opacities */
+  --bg-element-opacity: 0.075;
+  
+  /* Vanta background colors */
+  --vanta-dot-color: 0xd5d5d5;
+  --vanta-bg-color: 0x000000;
 }
 
 html.theme-light {
@@ -36,4 +60,28 @@ html.theme-light {
   --code-bg-color: #f5f5f5;
   --tag-bg-color: #f0f0f0;
   --tag-text-color: #444444;
+  
+  /* Button and interactive element colors */
+  --button-text-color: #ffffff;
+  --button-hover-text-color: #1a1a1a;
+  --button-hover-bg-color: #ffffff;
+  
+  /* Pagination colors */
+  --pagination-color: #444444;
+  --pagination-active-color: #e67e00;
+  --pagination-hover-color: #0066cc;
+  
+  /* Scrollbar colors */
+  --scrollbar-thumb-color: rgba(0, 0, 0, 0.3);
+  
+  /* Shadow colors */
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --shadow-color-light: rgba(0, 0, 0, 0.08);
+  
+  /* Background element opacities */
+  --bg-element-opacity: 0.08;
+  
+  /* Vanta background colors */
+  --vanta-dot-color: 0x333333;
+  --vanta-bg-color: 0xf5f5f5;
 }

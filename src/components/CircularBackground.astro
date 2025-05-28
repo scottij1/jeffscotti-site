@@ -24,7 +24,7 @@
     height: 100vmax;
     width: 100vmax;
     object-fit: cover;
-    opacity: 0.05;
+    opacity: var(--bg-element-opacity);
   }
 
   .hero-bg .circle-1 {
@@ -65,12 +65,12 @@
 
   .theme-dark .hero-bg .circle-1,
   .theme-dark .hero-bg .circle-2 {
-    opacity: 0.075;
+    opacity: var(--bg-element-opacity);
   }
 
   .theme-light .hero-bg .circle-1,
   .theme-light .hero-bg .circle-2 {
-    opacity: 0.08;
+    opacity: var(--bg-element-opacity);
   }
 
   @media (prefers-reduced-motion: reduce) {

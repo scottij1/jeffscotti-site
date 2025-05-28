@@ -377,11 +377,11 @@ const testimonialsToShow = testimonials.filter((testimonial) => {
         const computedStyle = getComputedStyle(document.documentElement);
         const paginationColor =
           computedStyle.getPropertyValue("--pagination-color") ||
-          (document.documentElement.classList.contains("theme-light") ? "#444" : "white");
+          (document.documentElement.classList.contains("theme-light") ? "var(--pagination-color)" : "var(--pagination-color)");
         const activeColor =
           computedStyle.getPropertyValue("--pagination-active-color") ||
           computedStyle.getPropertyValue("--secondary-color") ||
-          "#ff9800";
+          "var(--pagination-active-color)";
 
         paginationButtons.forEach((button) => {
           if (button.classList.contains("is-active")) {

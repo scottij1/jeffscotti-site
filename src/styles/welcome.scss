@@ -5,11 +5,10 @@
   color: $text-color;
 }
 
-// Variables for the welcome component that can be themed
 :root {
-  --accent-color: #38bdf8;
+  --accent-color: var(--primary-color);
 }
 
 [data-theme="dark"] {
-  --accent-color: #38bdf8;
+  --accent-color: var(--primary-color);
 }

@@ -11,6 +11,33 @@
   --border-color: #444; // Medium gray for borders
   --link-hover-color: #38bdf8; // Blue for link hover
   --active-color: #ff9800; // Orange for active states
+  --link-color: #38bdf8; // Blue for links
+  --text-color-secondary: #b8b8b8; // Secondary text color
+  --text-color-tertiary: #a0a0a0; // Tertiary text color
+  
+  // Button and interactive element colors
+  --button-text-color: #ffffff; // White text for buttons
+  --button-hover-text-color: #1a1a1a; // Dark text for button hover
+  --button-hover-bg-color: #ffffff; // White background for button hover
+  
+  // Pagination colors
+  --pagination-color: #ffffff; // Default pagination color
+  --pagination-active-color: #ff9800; // Active pagination color
+  --pagination-hover-color: #38bdf8; // Hover pagination color
+  
+  // Scrollbar colors
+  --scrollbar-thumb-color: rgba(255, 255, 255, 0.5); // Scrollbar thumb color
+  
+  // Shadow colors
+  --shadow-color: rgba(0, 0, 0, 0.1); // Shadow color
+  --shadow-color-light: rgba(0, 0, 0, 0.08); // Light shadow color
+  
+  // Background element opacities
+  --bg-element-opacity: 0.075; // Background element opacity
+  
+  // Vanta background colors
+  --vanta-dot-color: 0xd5d5d5; // Vanta dots color
+  --vanta-bg-color: 0x000000; // Vanta background color
 
   // Fonts
   --font-family: "Poppins", Helvetica, sans-serif;
@@ -42,6 +69,33 @@ $heading-color: var(--heading-color);
 $border-color: var(--border-color);
 $link-hover-color: var(--link-hover-color);
 $active-color: var(--active-color);
+$link-color: var(--link-color);
+$text-color-secondary: var(--text-color-secondary);
+$text-color-tertiary: var(--text-color-tertiary);
+
+// Button and interactive element colors
+$button-text-color: var(--button-text-color);
+$button-hover-text-color: var(--button-hover-text-color);
+$button-hover-bg-color: var(--button-hover-bg-color);
+
+// Pagination colors
+$pagination-color: var(--pagination-color);
+$pagination-active-color: var(--pagination-active-color);
+$pagination-hover-color: var(--pagination-hover-color);
+
+// Scrollbar colors
+$scrollbar-thumb-color: var(--scrollbar-thumb-color);
+
+// Shadow colors
+$shadow-color: var(--shadow-color);
+$shadow-color-light: var(--shadow-color-light);
+
+// Background element opacities
+$bg-element-opacity: var(--bg-element-opacity);
+
+// Vanta background colors
+$vanta-dot-color: var(--vanta-dot-color);
+$vanta-bg-color: var(--vanta-bg-color);
 
 $font-family: var(--font-family);
 $font-size-base: var(--font-size-base);
