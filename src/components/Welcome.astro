@@ -10,8 +10,8 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
     <div class="home-content">
       <div class="single-column-layout">
         <div class="text-column">
-          <span class="intro-text">Hello! I'm Jeff.</span>
-          <h1 class="name section-title">
+          <span class="name">Hello! I'm Jeff.</span>
+          <h1 class="intro-text section-title">
             I create intuitive, high-performance web applications by blending <span class="highlight">thoughtful design</span> with clean code
           </h1>
           <p class="bio">
@@ -113,7 +113,7 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
 
   .text-column {
     width: 100%;
-    padding: 40px 20px;
+    padding: 40px 10px;
     text-align: left;
   }
 
@@ -144,9 +144,9 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
     display: inline-block;
   }
 
-  .intro-text {
+  .name {
     display: block;
-    font-size: 18px;
+    font-size: 1.5rem;
     color: var(--primary-color);
     margin-bottom: 15px;
     font-weight: 500;
@@ -154,19 +154,19 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
     animation: fadeInUp 0.8s ease-out 0.2s forwards;
   }
 
-  .name {
-    font-size: 56px;
-    line-height: 64px;
+  .intro-text {
+    font-size: 50px;
+    line-height: 56px;
     margin-top: 15px;
     margin-bottom: 25px;
-    font-weight: 600;
+    font-weight: 300;
     color: var(--heading-color);
   }
 
   .highlight {
     color: var(--primary-color);
     position: relative;
-    font-weight: 700;
+    font-weight: 500;
   }
 
   .highlight::after {
@@ -375,11 +375,13 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
       line-height: 1.6;
     }
 
-    .intro-text {
-      font-size: 16px;
+    .name {
+      font-size: 17px;
+      text-align: center;
+      width: 100%;
     }
 
-    .name {
+    .intro-text {
       font-size: 36px;
       line-height: 44px;
       margin-bottom: 10px;
@@ -476,7 +478,7 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
   
   /* Media query for very small screens */
   @media screen and (max-width: 480px) {
-    .name {
+    .intro-text {
       font-size: 28px;
       line-height: 36px;
     }
@@ -486,8 +488,8 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
       line-height: 1.5;
     }
     
-    .intro-text {
-      font-size: 15px;
+    .name {
+      font-size: 16px;
     }
     
     .text-column {
