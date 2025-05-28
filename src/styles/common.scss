@@ -19,7 +19,7 @@
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   box-shadow: 0 0.625rem 0.625rem -0.5rem rgba(0, 0, 0, 0.22); // 10px 10px -8px
   text-decoration: none;
-  color: $heading-color;
+  color: #ffffff;
   border: 0.125rem solid; // 2px
   background-color: $container-bg-color;
   border-color: $container-bg-color;
@@ -40,23 +40,13 @@
     z-index: -1;
   }
 
-  // Icon animation
-  i {
-    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
   &:hover {
-    color: #fff;
-    border-color: $primary-color;
+    color: #1a1a1a;
     transform: translateY(-2px);
     box-shadow: 0 1rem 2rem -0.5rem rgba(0, 0, 0, 0.3);
 
     &::before {
       transform: translateX(0);
-    }
-
-    i {
-      transform: translateX(3px);
     }
   }
 
