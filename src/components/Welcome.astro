@@ -20,6 +20,7 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
           <div class="button-container">
             <div class="dropdown">
               <button class="btn dropdown-toggle">
+                <span class="circle-effect"></span>
                 <i class="fa-solid fa-file-invoice"></i>
                 <span>Resume</span>
                 <i class="fa-solid fa-chevron-down"></i>
@@ -219,6 +220,35 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
     display: flex;
     align-items: center;
     gap: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dropdown-toggle .circle-effect {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background-color: #ffffff;
+    transition: width 0.4s ease-in-out, height 0.4s ease-in-out;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+  }
+
+  .dropdown-toggle:hover {
+    color: #1a1a1a;
+    transform: translateY(-2px);
+    box-shadow: 0 1rem 2rem -0.5rem rgba(0, 0, 0, 0.3);
+  }
+
+  .dropdown-toggle:hover .circle-effect {
+    width: 225%;
+    height: 562.5px;
+  }
+
+  .dropdown-toggle:active {
+    transform: translateY(0);
+    box-shadow: 0 0.5rem 1rem -0.25rem rgba(0, 0, 0, 0.25);
   }
 
   .dropdown-menu {
@@ -286,13 +316,15 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
     padding: 8px 16px;
     color: var(--heading-color);
     text-decoration: none;
-    transition: background-color 0.2s;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     font-size: 15px;
   }
 
   .dropdown-item:hover {
     background-color: var(--primary-color);
-    color: #fff;
+    color: #1a1a1a;
+    transform: translateY(-2px);
+    box-shadow: 0 1rem 2rem -0.5rem rgba(0, 0, 0, 0.3);
   }
 
   @media screen and (max-width: 768px) {
@@ -473,9 +505,23 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
       window.addEventListener("load", initAnimations);
     }
 
+    // Handle circle effect for dropdown toggle
+    const dropdownToggle = document.querySelector(".dropdown-toggle") as HTMLButtonElement | null;
+    const circleEffect = document.querySelector(".circle-effect") as HTMLSpanElement | null;
+    
+    if (dropdownToggle && circleEffect) {
+      dropdownToggle.addEventListener("mouseenter", (e) => {
+        const rect = dropdownToggle.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        circleEffect.style.left = `${x}px`;
+        circleEffect.style.top = `${y}px`;
+      });
+    }
+
     // Mobile menu functionality
     const isMobile = (): boolean => window.innerWidth <= 768;
-    const dropdownToggle = document.querySelector(".dropdown-toggle") as HTMLButtonElement | null;
     const dropdownMenu = document.querySelector(".dropdown-menu") as HTMLDivElement | null;
     const closeButton = document.querySelector(".mobile-close-btn") as HTMLButtonElement | null;
     const menuItems = document.querySelectorAll(".dropdown-item");
@@ -511,7 +557,12 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
     };
 
     if (dropdownToggle && dropdownMenu && closeButton) {
-      dropdownToggle.addEventListener("click", openMobileMenu);
+      // Only add click event for mobile menu on mobile
+      dropdownToggle.addEventListener("click", (e) => {
+        if (isMobile()) {
+          openMobileMenu(e);
+        }
+      });
       closeButton.addEventListener("click", closeMobileMenu);
 
       menuItems.forEach((item) => {
