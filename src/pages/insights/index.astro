@@ -31,19 +31,33 @@ function formatDate(date: Date): string {
   description="Explore case studies, tech articles, and workflow insights from Jeff Scotti, Senior Frontend Engineer and UI/UX Designer."
   keywords={['Insights', 'Case Studies', 'Frontend Development', 'UI/UX Design', 'Web Development']}
 >
-  <main class="blog-container">
-    <div class="blog-header">
-      <h1>Insights</h1>
-      <p>Explore case studies, tech articles, and workflow insights from my experience as a Frontend Engineer and UI/UX Designer.</p>
-    </div>
+  <div id="main" class="site-main">
+    <div id="main-content" class="single-page-content">
+      <div id="primary" class="content-area">
+        <div class="page-title">
+          <h1>Insights</h1>
+          <div class="page-subtitle">
+            <h2>Explore case studies, tech articles, and workflow insights</h2>
+          </div>
+        </div>
+
+        <div id="content" class="page-content site-content single-post" role="main">
 
     {categories.length > 0 && (
-      <div class="blog-filters">
-        <button class="blog-filter active" data-filter="all">All</button>
+      <ul class="content-filters list-unstyled">
+        <li class="active">
+          <a class="filter btn btn-sm btn-link" data-filter="all">
+            All
+          </a>
+        </li>
         {categories.map((category: string) => (
-          <button class="blog-filter" data-filter={category}>{category.replace('-', ' ')}</button>
+          <li>
+            <a class="filter btn btn-sm btn-link" data-filter={category}>
+              {category.replace('-', ' ')}
+            </a>
+          </li>
         ))}
-      </div>
+      </ul>
     )}
 
     {featuredPost && (
@@ -108,18 +122,23 @@ function formatDate(date: Date): string {
         </a>
       ))}
     </div>
-  </main>
+        </div>
+      </div>
+    </div>
+  </div>
 </Layout>
 
 <script>
   document.addEventListener('astro:page-load', () => {
-    const filterButtons = document.querySelectorAll('.blog-filter');
+    const filterButtons = document.querySelectorAll('.filter');
     const blogCards = document.querySelectorAll('.blog-card');
     
     filterButtons.forEach(button => {
       button.addEventListener('click', () => {
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
+
+        document.querySelectorAll('.content-filters li').forEach(li => li.classList.remove('active'));
+
+        button.closest('li')?.classList.add('active');
 
         const filter = button.getAttribute('data-filter');
         

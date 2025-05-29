@@ -21,26 +21,46 @@
   }
 }
 
-.blog-filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  justify-content: center;
+.content-filters {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 30px;
+  text-align: center;
 
-  .blog-filter {
-    padding: 0.5rem 1rem;
-    border-radius: 2rem;
-    background-color: var(--container-bg-color);
-    color: var(--text-color);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    border: 1px solid var(--border-color);
+  li {
+    display: inline-block;
+    margin: 0 2px;
+  }
 
-    &:hover, &.active {
-      background-color: var(--primary-color);
-      color: white;
-    }
+  li a {
+    display: inline-block;
+    color: var(--button-text-color);
+    padding: 5px 12px;
+    font-size: 14px;
+    text-decoration: none;
+    border-radius: 30px;
+    border: 0.125rem solid transparent;
+    font-family: var(--font-family);
+    transition: all 0.3s ease-in-out;
+    text-transform: capitalize;
+  }
+
+  li.active a {
+    color: var(--button-hover-text-color);
+    background-color: var(--button-hover-bg-color);
+    border-color: var(--button-hover-bg-color);
+  }
+
+  li a:hover {
+    color: var(--button-hover-text-color);
+    background-color: var(--button-bg-color);
+    border-color: var(--button-hover-bg-color);
+  }
+
+  li a:active {
+    color: var(--button-hover-text-color);
+    background-color: var(--button-hover-bg-color);
+    border-color: var(--button-hover-bg-color);
   }
 }
 

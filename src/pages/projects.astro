@@ -37,7 +37,7 @@ const visibleProjects = projects.filter((project) => !project.hidden);
             <div class="col-xs-12 col-sm-12">
               {
                 SHOW_FILTER_MENU && (
-                  <ul class="portfolio-filters list-unstyled">
+                  <ul class="content-filters list-unstyled">
                     <li class="active">
                       <a class="filter btn btn-sm btn-link" data-group="all">
                         All
@@ -156,36 +156,43 @@ const visibleProjects = projects.filter((project) => !project.hidden);
 </Layout>
 
 <style>
-  .portfolio-filters {
+  .content-filters {
     list-style: none;
     padding: 0;
     margin: 0 0 30px;
     text-align: center;
   }
 
-  .portfolio-filters li {
+  .content-filters li {
     display: inline-block;
     margin: 0 2px;
   }
 
-  .portfolio-filters li a {
+  .content-filters li a {
     display: inline-block;
-    color: var(--text-color);
+    color: var(--button-text-color);
     padding: 5px 12px;
-    font-size: 12px;
+    font-size: 14px;
     text-decoration: none;
     border-radius: 30px;
+    border: 0.125rem solid transparent;
+    font-family: var(--font-family);
     transition: all 0.3s ease-in-out;
   }
 
-.portfolio-filters li.active a,
-.portfolio-filters li a:hover {
-  color: var(--button-text-color);
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
+.content-filters li.active a {
+  color: var(--button-hover-text-color);
+  background-color: var(--button-hover-bg-color);
+  border-color: var(--button-hover-bg-color);
 }
 
-.portfolio-filters li a:active {
+.content-filters li a:hover {
+  color: var(--button-hover-text-color);
+  background-color: var(--button-bg-color);
+  border-color: var(--button-hover-bg-color);
+}
+
+.content-filters li a:active {
   color: var(--button-hover-text-color);
   background-color: var(--button-hover-bg-color);
   border-color: var(--button-hover-bg-color);

@@ -3,7 +3,7 @@ title: "Enhancing Trust and Efficiency: A UX Case Study for Solar Channel Partne
 description: "How iterative, user-centered UX design streamlined document submission processes, significantly boosting trust and efficiency among channel partners."
 pubDate: 2025-03-24T00:00:00.000Z
 heroImage: "/images/insights/cover-trust.webp"
-category: "case-study"
+category: "Case Study"
 tags: ["UX Design", "User-Centered Design", "Case Study", "User Flows"]
 author: "Jeff Scotti"
 featured: true
