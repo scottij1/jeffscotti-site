@@ -1,0 +1,12 @@
+.welcome-container {
+  font-family: var(--font-family);
+  color: var(--text-color);
+}
+
+:root {
+  --accent-color: var(--primary-color);
+}
+
+[data-theme="dark"] {
+  --accent-color: var(--primary-color);
+}

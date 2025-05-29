@@ -1,8 +1,8 @@
+// Keep using SCSS for files that need @extend or complex SCSS features
 @use "variables" as *;
-@use "base";
 @use "typography";
 @use "utilities";
 @use "layout";
 @use "common";
-@use "theme";
 @use "footer";
+

@@ -229,7 +229,15 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
     height: 562.5px;
   }
 
+  .dropdown-toggle:hover {
+    color: var(--button-hover-text-color);
+    border-color: var(--button-hover-bg-color);
+  }
+
   .dropdown-toggle:active {
+    color: var(--button-hover-text-color);
+    background-color: var(--button-hover-bg-color);
+    border-color: var(--button-hover-bg-color);
   }
 
   .dropdown-menu {
@@ -301,7 +309,7 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
   }
 
   .dropdown-item:hover {
-    background-color: var(--primary-color);
+    background-color: var(--button-hover-bg-color);
     color: var(--button-hover-text-color);
   }
 
@@ -438,8 +446,8 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
     }
 
     .dropdown-item:hover {
-      background-color: var(--primary-color);
-      color: var(--button-text-color);
+      background-color: var(--button-hover-bg-color);
+      color: var(--button-hover-text-color);
     }
 
     /* Override hover behavior on mobile */

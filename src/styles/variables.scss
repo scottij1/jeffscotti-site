@@ -1,35 +1,32 @@
-// Define CSS custom properties for global use
 :root {
-  // Colors
-  --primary-color: #38bdf8; // Blue
-  --secondary-color: #ff9800; // Orange
-  --background-color: #000; // Black
-  --background-color-rgb: 0, 0, 0; // RGB values for background
-  --container-bg-color: #333; // Slightly lighter gray for containers
-  --container-bg-color-rgb: 51, 51, 51; // RGB values for container background
-  --text-color: #d5d5d5; // Light gray for main text
-  --heading-color: #f5f5f5; // Almost white for headings
-  --border-color: #444; // Medium gray for borders
-  --link-hover-color: #38bdf8; // Blue for link hover
-  --active-color: #ff9800; // Orange for active states
-  --link-color: #38bdf8; // Blue for links
-  --text-color-secondary: #b8b8b8; // Secondary text color
-  --text-color-tertiary: #a0a0a0; // Tertiary text color
+  --primary-color: #38bdf8;
+  --secondary-color: #ff9800; 
+  --background-color: #000; 
+  --background-color-rgb: 0, 0, 0; 
+  --container-bg-color: #333; 
+  --container-bg-color-rgb: 51, 51, 51; 
+  --text-color: #d5d5d5; 
+  --heading-color: #f5f5f5; 
+  --border-color: #444;
+  --link-hover-color: #38bdf8; 
+  --active-color: #ff9800; 
+  --link-color: #38bdf8;
+  --text-color-secondary: #b8b8b8;
+  --text-color-tertiary: #a0a0a0;
 
-  --button-text-color: #ffffff; // White text for buttons
-  --button-hover-text-color: #1a1a1a; // Dark text for button hover
-  --button-hover-bg-color: #ffffff; // White background for button hover
-
-  --pagination-color: #ffffff; // Default pagination color
-  --pagination-active-color: #ff9800; // Active pagination color
-  --pagination-hover-color: #38bdf8; // Hover pagination color
+  --button-text-color: #ffffff; 
+  --button-hover-text-color: #222; 
+  --button-hover-bg-color: #38bdf8;
+  --button-bg-color: var(--container-bg-color);
+  --button-border-color: var(--container-bg-color);
+  --pagination-color: #ffffff; 
+  --pagination-active-color: #ff9800; 
+  --pagination-hover-color: #38bdf8;
 
   --scrollbar-thumb-color: rgba(255, 255, 255, 0.5); 
 
   --shadow-color: rgba(0, 0, 0, 0.1); 
   --shadow-color-light: rgba(0, 0, 0, 0.08); 
-  
-  --bg-element-opacity: 0.075; 
   
   --vanta-dot-color: 0xd5d5d5; 
   --vanta-bg-color: 0x000000; 
@@ -70,6 +67,8 @@ $text-color-tertiary: var(--text-color-tertiary);
 $button-text-color: var(--button-text-color);
 $button-hover-text-color: var(--button-hover-text-color);
 $button-hover-bg-color: var(--button-hover-bg-color);
+$button-bg-color: var(--button-bg-color);
+$button-border-color: var(--button-border-color);
 
 // Pagination colors
 $pagination-color: var(--pagination-color);
@@ -82,9 +81,6 @@ $scrollbar-thumb-color: var(--scrollbar-thumb-color);
 // Shadow colors
 $shadow-color: var(--shadow-color);
 $shadow-color-light: var(--shadow-color-light);
-
-// Background element opacities
-$bg-element-opacity: var(--bg-element-opacity);
 
 // Vanta background colors
 $vanta-dot-color: var(--vanta-dot-color);

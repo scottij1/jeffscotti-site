@@ -178,11 +178,18 @@ const visibleProjects = projects.filter((project) => !project.hidden);
     transition: all 0.3s ease-in-out;
   }
 
-  .portfolio-filters li.active a,
-  .portfolio-filters li a:hover {
-    color: var(--button-text-color);
-    background-color: var(--primary-color);
-  }
+.portfolio-filters li.active a,
+.portfolio-filters li a:hover {
+  color: var(--button-text-color);
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.portfolio-filters li a:active {
+  color: var(--button-hover-text-color);
+  background-color: var(--button-hover-bg-color);
+  border-color: var(--button-hover-bg-color);
+}
 
   /* Portfolio grid */
   .portfolio-grid {
