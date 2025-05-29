@@ -244,12 +244,14 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
     display: none;
     position: absolute;
     top: calc(100% + 8px);
-    left: 0;
-    min-width: 200px;
-    background-color: var(--container-bg-color);
-    border-radius: 8px;
-    padding: 8px 0;
+    left: 2px;
+    width: 95%;
+    background-color: var(--button-bg-color);
+    border: 0.125rem solid var(--button-border-color);
+    border-radius: 0.9375rem;
+    padding: 0;
     z-index: 1000;
+    color: var(--button-text-color);
   }
 
   .mobile-menu-header {
@@ -302,15 +304,29 @@ import resumeDocx from "../assets/jeffscotti_resume.docx?url";
     align-items: center;
     gap: 8px;
     padding: 8px 16px;
-    color: var(--heading-color);
+    color: var(--button-text-color);
     text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     font-size: 15px;
   }
 
-  .dropdown-item:hover {
+  .dropdown-menu .dropdown-item:hover {
     background-color: var(--button-hover-bg-color);
     color: var(--button-hover-text-color);
+  }
+
+  .dropdown-menu .dropdown-item:first-of-type:hover {
+    border-top-left-radius: 0.9375rem;
+    border-top-right-radius: 0.9375rem;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .dropdown-menu .dropdown-item:last-child:hover {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0.9375rem;
+    border-bottom-left-radius: 0.9375rem;
   }
 
   /* Media query for tablets */

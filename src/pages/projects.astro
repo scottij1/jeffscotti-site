@@ -177,7 +177,7 @@ const visibleProjects = projects.filter((project) => !project.hidden);
     border-radius: 30px;
     border: 0.125rem solid transparent;
     font-family: var(--font-family);
-    transition: all 0.3s ease-in-out;
+    transition: all 0.15s ease-in-out;
   }
 
 .content-filters li.active a {
@@ -214,8 +214,11 @@ const visibleProjects = projects.filter((project) => !project.hidden);
     border-radius: 8px;
     overflow: hidden;
     transition:
-      transform 0.3s ease,
-      box-shadow 0.3s ease;
+      transform 0.15s ease,
+      box-shadow 0.15s ease;
+    display: flex;
+    flex-direction: column;
+    min-height: 350px;
   }
 
   .item:hover {
@@ -267,7 +270,7 @@ const visibleProjects = projects.filter((project) => !project.hidden);
 
   .item h3.name {
     padding: 15px 15px 5px;
-    font-size: 16px;
+    font-size: 18px;
     color: var(--heading-color);
     margin: 0;
   }
@@ -275,7 +278,7 @@ const visibleProjects = projects.filter((project) => !project.hidden);
   .item span.category {
     display: block;
     padding: 0 15px 15px;
-    font-size: 12px;
+    font-size: 13px;
     color: var(--text-color);
   }
 
@@ -284,15 +287,24 @@ const visibleProjects = projects.filter((project) => !project.hidden);
     flex-wrap: wrap;
     gap: 5px;
     padding: 0 15px 15px;
+    margin-top: auto;
   }
 
   .project-tags span {
     background-color: var(--container-bg-color);
     color: var(--text-color);
     opacity: 0.7;
-    padding: 3px 8px;
+    padding: 4px 8px;
     border-radius: 4px;
-    font-size: 10px;
+    font-size: 12px;
+  }
+
+  html.theme-light .item {
+    background-color: #f0f0f0;
+  }
+
+  html.theme-dark .project-tags span {
+    background-color: #555;
   }
 
   @media (max-width: 768px) {
