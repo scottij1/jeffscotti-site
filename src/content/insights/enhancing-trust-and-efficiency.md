@@ -102,7 +102,7 @@ We focused on three core solutions and an iterative rollout approach:
 * Deep linking to each item step with state-saving
 * Clear role indicators (who does what: partner vs. Bright)
 
-🎯 **Outcome:** Fewer rejections, faster submissions, reduced partner frustration
+**Outcome:** Fewer rejections, faster submissions, reduced partner frustration
 
 ### 2. Centralized Document Collection Portal
 
@@ -111,7 +111,7 @@ We focused on three core solutions and an iterative rollout approach:
 * Option for partners to delegate uploads to customers
 * Compatible with both web and mobile
 
-🎯 **Outcome:** Empowered partners and end-users, accelerated collection timelines
+**Outcome:** Empowered partners and end-users, accelerated collection timelines
 
 ### 3. Async Upload Wizard with Progress Control
 
@@ -120,7 +120,7 @@ We focused on three core solutions and an iterative rollout approach:
 * Back/forward navigation with persistent input states
 * Discrete URLs per step (deep-linkable for follow-ups)
 
-🎯 **Outcome:** Simplified navigation for long processes, preserved context, reduced dropout
+**Outcome:** Simplified navigation for long processes, preserved context, reduced dropout
 
 ## Iterative Design: From Co-Mode to Standalone
 
@@ -138,7 +138,7 @@ We launched our enhancements by introducing a **dual-mode experience**:
 
 This side-by-side model allowed us to gather live feedback while minimizing resistance to change. It also ensured continued productivity for experienced partners who preferred the flexibility of Power Mode.
 
-🎯 **Short-term vision:** Deliver **incremental improvements** by building individual Guided Mode steps and embedding them within their corresponding checklist items. This meant:
+**Short-term vision:** Deliver **incremental improvements** by building individual Guided Mode steps and embedding them within their corresponding checklist items. This meant:
 
 * Partners could complete tasks in a structured way without leaving the familiar UI  
 * Engineering and design teams could test new flows in real usage conditions  
@@ -148,7 +148,7 @@ This side-by-side model allowed us to gather live feedback while minimizing resi
 
 Our long-term goal is to evolve Guided Mode into a fully independent, standalone UI. This reimagined interface departs from the traditional checklist framework and includes:
 
-#### ✅ Right Sidebar Navigation
+#### Right Sidebar Navigation
 
 A persistent sidebar highlights each step of the process, clearly showing progress and allowing users to navigate intuitively. Steps feature:
 
@@ -159,7 +159,7 @@ A persistent sidebar highlights each step of the process, clearly showing progre
   * ⚠️ Error  
   * 🟢 Active  
 
-#### ✅ Integrated Support Resources
+#### Integrated Support Resources
 
 Each step contains easily accessible help content:
 
@@ -167,7 +167,7 @@ Each step contains easily accessible help content:
 * **Live support options** like in-app chat or WhatsApp integration  
 * Eliminates the need to switch platforms or rely on email threads
 
-#### ✅ Self-Contained Experience
+#### Self-Contained Experience
 
 The standalone UI will not inherit global navigation or headers (like the "Ops" header) from the main app. Instead:
 
@@ -275,21 +275,20 @@ As part of our effort we bolstered internal and external communication channels 
 4. Assigner reviews and approves (or reassigns with feedback)
 5. Checklist item status updates automatically
 
-🎯 **Result:** Clear ownership, reduced miscommunication, smoother workflow
+**Result:** Clear ownership, reduced miscommunication, smoother workflow
 
 ## Real-World Pain Points We Solved
+**Before:** Partners uploading expired or blurry documents, unsure why they were rejected  
+**After:** Immediate feedback ("This CFE bill is over 120 days old. Please upload a recent one.")
 
-📌 **Before:** Partners uploading expired or blurry documents, unsure why they were rejected  
-✅ **After:** Immediate feedback ("This CFE bill is over 120 days old. Please upload a recent one.")
+**Before:** Confusion over who owns which part of the process  
+**After:** Owners are notified when they need to take action. A comprehensive activity dashboard improves transparency and speeds up turnaround times.
 
-📌 **Before:** Confusion over who owns which part of the process  
-✅ **After:** Owners are notified when they need to take action. A comprehensive activity dashboard improves transparency and speeds up turnaround times.
+**Before:** Rework after submitting mismatched addresses or incomplete IDs  
+**After:** Auto-checks with contextual popups: "Reminder: Property address must match CFE bill."
 
-📌 **Before:** Rework after submitting mismatched addresses or incomplete IDs  
-✅ **After:** Auto-checks with contextual popups: "Reminder: Property address must match CFE bill."
-
-📌 **Before:** High-friction support via email/Slack threads  
-✅ **After:** Always-available support line + checklist-integrated guidance​
+**Before:** High-friction support via email/Slack threads  
+**After:** Always-available support line + checklist-integrated guidance​
 
 ## Results & Outcomes
 

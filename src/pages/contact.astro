@@ -185,6 +185,7 @@ import Layout from "../layouts/Layout.astro";
 
   .social-link {
     display: inline-flex;
+    position: relative;
     align-items: center;
     justify-content: center;
     width: 40px;
@@ -194,13 +195,39 @@ import Layout from "../layouts/Layout.astro";
     text-align: center;
     font-size: 18px;
     border-radius: 50%;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border: 0.125rem solid transparent;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .social-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--button-hover-bg-color);
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: -1;
+    border-radius: 50%;
   }
 
   .social-link:hover {
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    transform: translateY(-3px);
+    color: var(--button-hover-text-color);
+    border-color: var(--button-hover-bg-color);
+  }
+
+  .social-link:hover::before {
+    transform: translateX(0);
+  }
+  
+  .social-link:active {
+    color: var(--button-hover-text-color);
+    background-color: var(--button-hover-bg-color);
+    border-color: var(--button-hover-bg-color);
   }
 
   .ci-text h4 {
