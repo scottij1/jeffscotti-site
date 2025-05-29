@@ -1,38 +1,39 @@
-<button
+<div
   id="theme-toggle"
   class="theme-toggle"
   aria-label="Toggle theme"
+  role="switch"
+  aria-checked="false"
+  tabindex="0"
   transition:persist="theme-toggle">
-  <span class="theme-toggle-icon">
-    <i class="fas fa-sun light-icon"></i>
-    <i class="fas fa-moon dark-icon"></i>
-  </span>
-  <span class="theme-toggle-text">Theme</span>
-</button>
+  <div class="theme-toggle-track">
+    <div class="theme-toggle-thumb">
+      <i class="fas fa-sun light-icon"></i>
+      <i class="fas fa-moon dark-icon"></i>
+    </div>
+  </div>
+</div>
 
 <script is:inline>
-  function updateToggleIcon(theme) {
-    const lightIcon = document.querySelector(".light-icon");
-    const darkIcon = document.querySelector(".dark-icon");
-
-    if (!lightIcon || !darkIcon) {
-      return;
-    }
-
+  function updateToggleState(theme) {
+    const themeToggle = document.getElementById("theme-toggle");
+    
+    if (!themeToggle) return;
+    
     if (theme === "theme-light") {
-      lightIcon.style.display = "none";
-      darkIcon.style.display = "inline-block";
+      themeToggle.classList.remove("theme-dark");
+      themeToggle.classList.add("theme-light");
+      themeToggle.setAttribute("aria-checked", "false");
     } else {
-      lightIcon.style.display = "inline-block";
-      darkIcon.style.display = "none";
+      themeToggle.classList.remove("theme-light");
+      themeToggle.classList.add("theme-dark");
+      themeToggle.setAttribute("aria-checked", "true");
     }
   }
 
   function saveTheme(theme) {
     localStorage.setItem("theme", theme);
-    updateToggleIcon(theme);
-
-    // Dispatch a custom event for other components to listen for theme changes
+    updateToggleState(theme);
     document.dispatchEvent(new CustomEvent("themeChanged", {detail: {theme}}));
   }
 
@@ -50,98 +51,130 @@
     }
   }
 
+  function handleThemeToggleKeydown(event) {
+    if (event.key === " " || event.key === "Enter") {
+      event.preventDefault();
+      handleThemeToggleClick();
+    }
+  }
+
   function initializeThemeToggle() {
     const themeToggle = document.getElementById("theme-toggle");
     const html = document.documentElement;
 
     if (!themeToggle) return;
 
-    // Remove any existing event listeners to prevent duplicates
-    themeToggle.removeEventListener("click", handleThemeToggleClick);
+    const newThemeToggle = themeToggle.cloneNode(true);
+    themeToggle.parentNode?.replaceChild(newThemeToggle, themeToggle);
 
-    themeToggle.addEventListener("click", handleThemeToggleClick);
+    newThemeToggle.addEventListener("click", handleThemeToggleClick);
+    newThemeToggle.addEventListener("keydown", handleThemeToggleKeydown);
 
-    updateToggleIcon(html.classList.contains("theme-light") ? "theme-light" : "theme-dark");
+    const currentTheme = html.classList.contains("theme-light") ? "theme-light" : "theme-dark";
+    updateToggleState(currentTheme);
   }
 
-  // Initialize on page load
-  document.addEventListener("astro:page-load", initializeThemeToggle);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      const html = document.documentElement;
+      const currentTheme = html.classList.contains("theme-light") ? "theme-light" : "theme-dark";
+      updateToggleState(currentTheme);
+    });
+  } else {
+    const html = document.documentElement;
+    const currentTheme = html.classList.contains("theme-light") ? "theme-light" : "theme-dark";
+    updateToggleState(currentTheme);
+  }
 
-  // Also initialize after view transitions
+  document.addEventListener("astro:page-load", initializeThemeToggle);
   document.addEventListener("astro:after-swap", initializeThemeToggle);
 </script>
 
 <style>
   .theme-toggle {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 15px;
+    width: 60px;
+    height: 30px;
+  }
+
+  .theme-toggle-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    background-color: #f0e3c0;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+
+  .theme-toggle-thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #e67e00;
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: transparent;
-    border: none;
-    color: var(--heading-color);
-    padding: 8px 12px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    margin-left: 15px;
-    font-size: 16px;
-    line-height: 50px;
-    font-family: var(--font-family);
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
 
-  .theme-toggle:hover {
-    color: var(--link-hover-color);
+  .theme-toggle.theme-dark .theme-toggle-track {
+    background-color: #1a365d;
   }
 
-  .theme-toggle:active {
-    color: var(--active-color);
+  .theme-toggle.theme-dark .theme-toggle-thumb {
+    left: calc(100% - 27px);
+    background-color: #38bdf8;
   }
 
-  .theme-toggle-icon {
-    margin-right: 6px;
-    font-size: 16px;
-  }
-
-  .theme-toggle-text {
-    font-size: 16px;
-    font-weight: 500;
+  .light-icon, .dark-icon {
+    font-size: 14px;
+    transition: opacity 0.3s ease;
   }
 
   .light-icon {
-    display: inline-block;
+    opacity: 1;
   }
 
   .dark-icon {
-    display: none;
+    opacity: 0;
+    position: absolute;
   }
 
-  /* Theme-specific styles */
-  .theme-light .theme-toggle,
-  .theme-dark .theme-toggle {
-    color: var(--heading-color);
+  .theme-toggle.theme-dark .light-icon {
+    opacity: 0;
+  }
+
+  .theme-toggle.theme-dark .dark-icon {
+    opacity: 1;
   }
 
   @media (max-width: 768px) {
-    .theme-toggle-text {
-      display: none;
-    }
-
     .theme-toggle {
       margin: 5px 0 0 0;
-      height: 48px;
-      width: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 50px;
+      height: 26px;
     }
 
-    .theme-toggle-icon {
-      margin-right: 0;
-      font-size: 20px;
+    .theme-toggle-thumb {
+      width: 20px;
+      height: 20px;
     }
 
-    .light-icon,
-    .dark-icon {
-      font-size: 20px;
+    .theme-toggle.theme-dark .theme-toggle-thumb {
+      left: calc(100% - 23px);
+    }
+
+    .light-icon, .dark-icon {
+      font-size: 12px;
     }
   }
 </style>
