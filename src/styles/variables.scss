@@ -15,30 +15,24 @@
   --link-color: #38bdf8; // Blue for links
   --text-color-secondary: #b8b8b8; // Secondary text color
   --text-color-tertiary: #a0a0a0; // Tertiary text color
-  
-  // Button and interactive element colors
+
   --button-text-color: #ffffff; // White text for buttons
   --button-hover-text-color: #1a1a1a; // Dark text for button hover
   --button-hover-bg-color: #ffffff; // White background for button hover
-  
-  // Pagination colors
+
   --pagination-color: #ffffff; // Default pagination color
   --pagination-active-color: #ff9800; // Active pagination color
   --pagination-hover-color: #38bdf8; // Hover pagination color
+
+  --scrollbar-thumb-color: rgba(255, 255, 255, 0.5); 
+
+  --shadow-color: rgba(0, 0, 0, 0.1); 
+  --shadow-color-light: rgba(0, 0, 0, 0.08); 
   
-  // Scrollbar colors
-  --scrollbar-thumb-color: rgba(255, 255, 255, 0.5); // Scrollbar thumb color
+  --bg-element-opacity: 0.075; 
   
-  // Shadow colors
-  --shadow-color: rgba(0, 0, 0, 0.1); // Shadow color
-  --shadow-color-light: rgba(0, 0, 0, 0.08); // Light shadow color
-  
-  // Background element opacities
-  --bg-element-opacity: 0.075; // Background element opacity
-  
-  // Vanta background colors
-  --vanta-dot-color: 0xd5d5d5; // Vanta dots color
-  --vanta-bg-color: 0x000000; // Vanta background color
+  --vanta-dot-color: 0xd5d5d5; 
+  --vanta-bg-color: 0x000000; 
 
   // Fonts
   --font-family: "Poppins", Helvetica, sans-serif;
@@ -59,8 +53,6 @@
   --border-radius-xl: 40px;
 }
 
-// SCSS variables that map to CSS custom properties for use in SCSS files
-// This provides backward compatibility with existing SCSS
 $primary-color: var(--primary-color);
 $secondary-color: var(--secondary-color);
 $background-color: var(--background-color);

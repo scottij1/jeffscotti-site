@@ -24,7 +24,8 @@
     height: 100vmax;
     width: 100vmax;
     object-fit: cover;
-    opacity: var(--bg-element-opacity);
+    opacity: var(--hero-bg-opacity);
+    filter: var(--hero-bg-filter);
   }
 
   .hero-bg .circle-1 {
@@ -63,14 +64,11 @@
     }
   }
 
-  .theme-dark .hero-bg .circle-1,
-  .theme-dark .hero-bg .circle-2 {
-    opacity: var(--bg-element-opacity);
-  }
-
-  .theme-light .hero-bg .circle-1,
-  .theme-light .hero-bg .circle-2 {
-    opacity: var(--bg-element-opacity);
+  .hero-bg .circle-1,
+  .hero-bg .circle-2 {
+    will-change: transform;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -78,12 +76,5 @@
     .hero-bg .circle-2 {
       animation-duration: 120s;
     }
-  }
-
-  .hero-bg .circle-1,
-  .hero-bg .circle-2 {
-    will-change: transform;
-    backface-visibility: hidden;
-    transform-style: preserve-3d;
   }
 </style>

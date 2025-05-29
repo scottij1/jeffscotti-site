@@ -1,5 +1,3 @@
-/* Theme classes applied to the html element */
-
 html.theme-dark {
   --primary-color: #38bdf8;
   --secondary-color: #ff9800;
@@ -19,27 +17,23 @@ html.theme-dark {
   --tag-bg-color: #444;
   --tag-text-color: #e0e0e0;
   
-  /* Button and interactive element colors */
   --button-text-color: #ffffff;
   --button-hover-text-color: #1a1a1a;
   --button-hover-bg-color: #ffffff;
   
-  /* Pagination colors */
   --pagination-color: #ffffff;
   --pagination-active-color: #ff9800;
   --pagination-hover-color: #38bdf8;
-  
-  /* Scrollbar colors */
+
   --scrollbar-thumb-color: rgba(255, 255, 255, 0.5);
-  
-  /* Shadow colors */
+
   --shadow-color: rgba(0, 0, 0, 0.1);
   --shadow-color-light: rgba(0, 0, 0, 0.08);
   
-  /* Background element opacities */
-  --bg-element-opacity: 0.075;
+  --bg-element-opacity: 0.01;
+  --hero-bg-opacity: 0.15;
+  --hero-bg-filter: brightness(0.7);
   
-  /* Vanta background colors */
   --vanta-dot-color: 0xd5d5d5;
   --vanta-bg-color: 0x000000;
 }
@@ -63,27 +57,23 @@ html.theme-light {
   --tag-bg-color: #f0f0f0;
   --tag-text-color: #444444;
   
-  /* Button and interactive element colors */
   --button-text-color: #ffffff;
   --button-hover-text-color: #1a1a1a;
   --button-hover-bg-color: #ffffff;
   
-  /* Pagination colors */
   --pagination-color: #444444;
   --pagination-active-color: #e67e00;
   --pagination-hover-color: #0066cc;
   
-  /* Scrollbar colors */
   --scrollbar-thumb-color: rgba(0, 0, 0, 0.3);
   
-  /* Shadow colors */
   --shadow-color: rgba(0, 0, 0, 0.1);
   --shadow-color-light: rgba(0, 0, 0, 0.08);
   
-  /* Background element opacities */
   --bg-element-opacity: 0.08;
+  --hero-bg-opacity: 0.1;
+  --hero-bg-filter: invert(1) brightness(0.2);
   
-  /* Vanta background colors */
   --vanta-dot-color: 0x333333;
   --vanta-bg-color: 0xf5f5f5;
 }
