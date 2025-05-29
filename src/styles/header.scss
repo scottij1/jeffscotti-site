@@ -37,6 +37,7 @@
     align-items: center;
     text-decoration: none;
     outline: 0;
+    transition: all 0.3s ease-in-out;
 
     &:focus {
       outline: 0;

@@ -16,6 +16,7 @@ import ravenLogoBlack from "../assets/raven-logo-sm-blk.png";
     display: flex;
     align-items: center;
     gap: 20px;
+    transition: all 0.3s ease-in-out;
   }
 
   .logo-container {
@@ -27,11 +28,13 @@ import ravenLogoBlack from "../assets/raven-logo-sm-blk.png";
   .raven-logo {
     height: 45px;
     width: auto;
+    transition: all 0.3s ease-in-out;
   }
 
   .logo-text {
     font-size: 17pt;
     color: var(--heading-color);
+    transition: color 0.3s ease-in-out;
   }
 
   .white-logo {
@@ -48,5 +51,17 @@ import ravenLogoBlack from "../assets/raven-logo-sm-blk.png";
 
   html.theme-light .black-logo {
     display: block;
+  }
+
+  :global(.site-logo a:hover) .logo-text {
+    color: var(--link-hover-color);
+  }
+
+  :global(.site-logo a:hover) .white-logo {
+    filter: brightness(0) saturate(100%) invert(54%) sepia(86%) saturate(1881%) hue-rotate(185deg) brightness(100%) contrast(98%);
+  }
+  
+  :global(.site-logo a:hover) .black-logo {
+    filter: brightness(0) saturate(100%) invert(54%) sepia(86%) saturate(1881%) hue-rotate(185deg) brightness(100%) contrast(98%);
   }
 </style>
